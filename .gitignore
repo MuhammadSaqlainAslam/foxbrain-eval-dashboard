@@ -1,0 +1,23 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+
+# Monitor outputs (generated at runtime, not committed)
+monitor_output.json
+validate_output.json
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+
+# Secrets — never commit these
+*.env
+.env
+secrets.json
