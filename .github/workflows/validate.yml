@@ -1,0 +1,33 @@
+name: Validate benchmark.csv
+
+on:
+  pull_request:
+    paths:
+      - 'results/benchmark.csv'
+      - 'docs/benchmark_registry.json'
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install pandas
+      - run: python scripts/validate_csv.py
+      - if: always()
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const fs = require('fs');
+            if (!fs.existsSync('validate_output.json')) return;
+            const result = JSON.parse(fs.readFileSync('validate_output.json', 'utf8'));
+            const icon = result.passed ? '✅' : '❌';
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: `${icon} **CSV Validation ${result.passed ? 'passed' : 'failed'}**\n\n${result.summary}`
+            });

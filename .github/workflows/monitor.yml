@@ -1,0 +1,51 @@
+name: Frontier Model & Benchmark Monitor
+
+on:
+  schedule:
+    - cron: '0 1 * * 1'
+  workflow_dispatch:
+    inputs:
+      lookback_days:
+        description: 'How many days back to scan (default: 7)'
+        required: false
+        default: '7'
+      dry_run:
+        description: 'Dry run — print findings without opening issues'
+        required: false
+        default: 'false'
+
+jobs:
+  monitor:
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install requests anthropic huggingface_hub feedparser python-dateutil
+      - name: Run frontier monitor
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+          LOOKBACK_DAYS: ${{ github.event.inputs.lookback_days || '7' }}
+          DRY_RUN: ${{ github.event.inputs.dry_run || 'false' }}
+        run: python scripts/monitor_models.py
+      - name: Open GitHub Issue if findings exist
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GH_TOKEN || secrets.GITHUB_TOKEN }}
+          script: |
+            const fs = require('fs');
+            if (!fs.existsSync('monitor_output.json')) return;
+            const output = JSON.parse(fs.readFileSync('monitor_output.json', 'utf8'));
+            if (!output.has_findings) return;
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: output.issue_title,
+              body: output.issue_body,
+              labels: ['monitor', 'frontier-update']
+            });
