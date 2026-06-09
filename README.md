@@ -2,6 +2,8 @@
 
 **Private internal evaluation tracking for FoxBrain models at HHRI/Foxconn.**
 
+🔗 **Live dashboard:** [https://muhammadsaqlainaslam.github.io/foxbrain-eval-dashboard/](https://muhammadsaqlainaslam.github.io/foxbrain-eval-dashboard/)
+
 Tracks FoxBrain model versions against frontier baselines across 9 capability domains and 47+ benchmarks, as used by leading frontier labs (MAI-Thinking-1, Gemini 2.5, Qwen3, Llama 4, Claude Sonnet 4.6).
 
 ---
