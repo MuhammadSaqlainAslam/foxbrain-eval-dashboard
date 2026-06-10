@@ -94,12 +94,12 @@ tbody td{padding:10px 14px;vertical-align:top}
   <h1>Frontier Benchmark & Model Reference</h1>
   <p>A curated, up-to-date reference of benchmarks and frontier models used by leading AI labs. Use this to select evaluation targets for FoxBrain model assessments across 9 capability domains.</p>
   <div class="hero-stats">
-    <div class="hstat"><div class="hstat-val">50</div><div class="hstat-lbl">Benchmarks</div></div>
+    <div class="hstat"><div class="hstat-val">56</div><div class="hstat-lbl">Benchmarks</div></div>
     <div class="hstat"><div class="hstat-val">9</div><div class="hstat-lbl">Domains</div></div>
-    <div class="hstat"><div class="hstat-val">20</div><div class="hstat-lbl">Frontier models</div></div>
-    <div class="hstat"><div class="hstat-val">10</div><div class="hstat-lbl">Sources</div></div>
+    <div class="hstat"><div class="hstat-val">22</div><div class="hstat-lbl">Frontier models</div></div>
+    <div class="hstat"><div class="hstat-val">11</div><div class="hstat-lbl">Sources</div></div>
   </div>
-  <div class="updated-badge">🕐 Last updated: June 2026 &nbsp;·&nbsp; Sources: MAI-Thinking-1, Gemini 3.1, Qwen3, Llama 4, DeepSeek V4, Scale AI, Artificial Analysis</div>
+  <div class="updated-badge">🕐 Last updated: June 9, 2026 &nbsp;·&nbsp; Latest: Claude Fable 5 &amp; Mythos 5 (Anthropic) &nbsp;·&nbsp; Sources: Anthropic, MAI-Thinking-1, Gemini 3.1, Qwen3, DeepSeek V4, Scale AI</div>
 </div>
 
 <div class="container">
@@ -234,12 +234,22 @@ const BENCHMARKS=[
   {name:'API-Bank',domain:'tool',pri:'medium',metric:'accuracy',labs:['Microsoft','OpenAI'],desc:'Multi-step real API tool use. Chained function calls across 73 real-world APIs.',tags:['real-world-APIs','multi-step'],isNew:true},
 ];
 
+  // New benchmarks from Claude Fable 5 / Mythos 5 launch — June 9, 2026
+  {name:'FrontierCode Diamond',domain:'agentic',pri:'high',metric:'pass@1',labs:['Anthropic','OpenAI','Google'],desc:'Cognition\'s production-grade coding benchmark. Tests mergeability, correctness, scope discipline, style. Diamond = hardest 50 tasks. Fable 5: 29.3%, Opus 4.8: 13.4%, GPT-5.5: 5.7%. Scales strongly with reasoning effort.',tags:['coding','production-grade','long-horizon'],isNew:true},
+  {name:'Terminal-Bench 2.1',domain:'agentic',pri:'high',metric:'success_rate',labs:['Anthropic','OpenAI','Google'],desc:'Agentic terminal task completion benchmark. Fable 5: 88.0%, Opus 4.8: 82.7%, GPT-5.5: 83.4%, Gemini 3.1 Pro: 70.7%.',tags:['agentic','terminal','cli'],isNew:true},
+  {name:'CursorBench 3.1',domain:'agentic',pri:'medium',metric:'pass@1',labs:['Anthropic','OpenAI'],desc:'Cursor\'s real-world IDE coding benchmark. Fable 5: 72.9% at max effort. Tests long-horizon problems in real dev environments.',tags:['coding','real-world','IDE'],isNew:true},
+  {name:'ExploitBench',domain:'safety',pri:'medium',metric:'success_rate',labs:['Anthropic'],desc:'Cybersecurity exploit capability benchmark. Mythos 5: 78.0%. Fable 5 safeguards block progress entirely. Used to evaluate offensive cyber risk.',tags:['cybersecurity','exploit','red-team'],isNew:true},
+  {name:'HealthBench Professional',domain:'health',pri:'high',metric:'accuracy',labs:['Anthropic','OpenAI','Google'],desc:'Professional-level health and medical reasoning. Fable 5: 66.0%. Introduced in Fable 5 system card. Covers clinical decision-making and medical reasoning.',tags:['health','medical','professional'],isNew:true},
+  {name:'GDPval-AA',domain:'knowledge',pri:'medium',metric:'score',labs:['Anthropic','OpenAI','Google'],desc:'Advanced analytical knowledge work. Fable 5: 1932, Opus 4.8: 1890, GPT-5.5: 1769. Document reasoning, chart/table interpretation, finance-grade analysis.',tags:['knowledge-work','analytical','finance'],isNew:true},
+
 const MODELS=[
   // Anthropic
-  {name:'Claude Opus 4.8',org:'Anthropic',weight:'closed',released:'May 2026',desc:'Current Anthropic flagship. Leads Artificial Analysis Intelligence Index as of June 2026. HLE: 45.7% (highest published). Strong agentic and coding performance.',runnable:false,benchmarks:'SWE-Bench, HLE, GPQA, IFEval, MMLU-Pro'},
-  {name:'Claude Opus 4.7',org:'Anthropic',weight:'closed',released:'May 2026',desc:'Previous Anthropic flagship. Strong across agentic coding and long-context tasks.',runnable:false,benchmarks:'SWE-Bench, GPQA, IFEval'},
-  {name:'Claude Opus 4.6',org:'Anthropic',weight:'closed',released:'Feb 2026',desc:'SWE-Bench Verified: 80.8%. MAI-T1 primary comparison model. Strong on complex agentic tasks.',runnable:false,benchmarks:'SWE-Bench, GPQA, IFEval, MMLU-Pro, MRCR'},
-  {name:'Claude Sonnet 4.6',org:'Anthropic',weight:'closed',released:'Feb 2026',desc:'SWE-Bench: 79.6%. Efficient frontier model. Used in MAI-T1 Tables 11 & 12. Available via Vertex AI.',runnable:false,benchmarks:'SWE-Bench, GPQA, IFEval, MMLU-Pro'},
+  {name:'Claude Fable 5',org:'Anthropic',weight:'closed',released:'Jun 9, 2026',desc:'Anthropic\'s first Mythos-class model for general use. SWE-Bench Pro: 80.3% (highest published). HLE: 59.0%. FrontierCode Diamond: 29.3% (2× Opus 4.8). Terminal-Bench: 88.0%. 1M token context. $10/$50 per M tokens. API: claude-fable-5.',runnable:false,benchmarks:'SWE-Bench Pro, FrontierCode Diamond, HLE, Terminal-Bench 2.1, CursorBench 3.1, HealthBench',isNew:true},
+  {name:'Claude Mythos 5',org:'Anthropic',weight:'closed',released:'Jun 9, 2026',desc:'Same model as Fable 5 with cyber/bio safeguards lifted. Restricted to Project Glasswing partners and select biology researchers. ExploitBench: 78.0%. Strongest cybersecurity capabilities of any published model.',runnable:false,benchmarks:'SWE-Bench Pro, FrontierCode Diamond, HLE, ExploitBench, Terminal-Bench 2.1',isNew:true},
+  {name:'Claude Opus 4.8',org:'Anthropic',weight:'closed',released:'May 2026',desc:'Previous flagship. HLE: 45.7%. SWE-Bench Pro: 69.2%. GPQA: ~94%. Used as Fable 5 safety fallback (triggers in <5% of sessions).',runnable:false,benchmarks:'SWE-Bench, HLE, GPQA, IFEval, MMLU-Pro'},
+  {name:'Claude Opus 4.7',org:'Anthropic',weight:'closed',released:'May 2026',desc:'GPQA: 94.2%. Strong across agentic coding and long-context tasks.',runnable:false,benchmarks:'SWE-Bench, GPQA, IFEval'},
+  {name:'Claude Opus 4.6',org:'Anthropic',weight:'closed',released:'Feb 2026',desc:'SWE-Bench Verified: 80.8%. MAI-T1 primary comparison model.',runnable:false,benchmarks:'SWE-Bench, GPQA, IFEval, MMLU-Pro, MRCR'},
+  {name:'Claude Sonnet 4.6',org:'Anthropic',weight:'closed',released:'Feb 2026',desc:'SWE-Bench: 79.6%. Efficient frontier model. Available via Vertex AI.',runnable:false,benchmarks:'SWE-Bench, GPQA, IFEval, MMLU-Pro'},
   // OpenAI
   {name:'GPT-5.5',org:'OpenAI',weight:'closed',released:'Apr 2026',desc:'Latest OpenAI flagship. Strong all-rounder with largest ecosystem. Computer use: 75% OSWorld.',runnable:false,benchmarks:'AIME, GPQA, SWE-Bench, IFEval, MMLU-Pro, HLE'},
   {name:'GPT-5.4',org:'OpenAI',weight:'closed',released:'Mar 2026',desc:'GPQA: 92.8%. Structured reasoning and computer use specialist. MAI-T1 comparison baseline.',runnable:false,benchmarks:'AIME, GPQA, SWE-Bench, MMLU-Pro, HumanEval'},
@@ -269,6 +279,7 @@ const MODELS=[
 ];
 
 const SOURCES=[
+  {title:'Claude Fable 5 & Mythos 5 — Launch Announcement',org:'Anthropic',date:'Jun 9, 2026',url:'https://www.anthropic.com/news/claude-fable-5-mythos-5',desc:'Launch of Anthropic\'s first publicly available Mythos-class model. Benchmarks: SWE-Bench Pro (80.3%), FrontierCode Diamond (29.3%), HLE (59.0%), Terminal-Bench 2.1 (88.0%), HealthBench Professional (66.0%), ExploitBench (78.0% — Mythos 5). $10/$50 per M tokens. API: claude-fable-5.'},
   {title:'MAI-Thinking-1 Technical Report',org:'Microsoft AI',date:'June 2026',url:'https://microsoft.ai/pdf/mai-thinking-1.pdf',desc:'Primary source for benchmark taxonomy (Tables 11 & 12). 9 capability domains, 47+ benchmarks, 8 frontier model comparisons.'},
   {title:'Gemini 3.1 Technical Report',org:'Google DeepMind',date:'2026',url:'https://deepmind.google/technologies/gemini/',desc:'Benchmark coverage: GPQA (94.3%), ARC-AGI-2 (77.1%), HLE (41%), LOFT, RULER, MMLU-Pro, SWE-Bench.'},
   {title:'Qwen3 Technical Report',org:'Alibaba / Qwen Team',date:'2025',url:'https://qwenlm.github.io/',desc:'Covers MMLU-Pro, GPQA, LiveCodeBench, IFEval, AIME, AlpacaEval across MoE and dense model variants.'},
