@@ -109,16 +109,7 @@ foxbrain-eval-dashboard/
 
 ---
 
-## Team
-
-| Person | Role |
-|---|---|
-| Muhammad Saqlain | Lead — benchmark research, dashboard maintenance |
-| Kenny | Reviewer |
-| Harry | Reviewer |
-| Julia | Reviewer |
-
----
+*Curated by [Muhammad Saqlain](https://github.com/MuhammadSaqlainAslam) · HHRI / Foxconn AI Research Center*
 
 *Benchmark taxonomy based on MAI-Thinking-1 Technical Report §4.1 (Microsoft AI, June 2026) and additional sources listed in the Sources tab.*
 *Last updated: June 2026*
