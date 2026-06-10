@@ -1,4 +1,5 @@
-# FoxBrain Benchmark & Frontier Model Reference
+# FoxBrain EvalHub
+### Frontier Benchmark & Model Intelligence — HHRI-AI Research
 
 **A curated, up-to-date reference of benchmarks and frontier models used by leading AI labs.**
 
