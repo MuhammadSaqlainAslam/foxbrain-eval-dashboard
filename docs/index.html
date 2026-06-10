@@ -261,7 +261,7 @@ const MODELS=[
   {name:'Llama 4 Maverick',org:'Meta',weight:'open',released:'2025',desc:'Open-weight MoE. Apache 2.0 license. MAI-T1 Table 12 comparison. vLLM-compatible on H100s.',runnable:true,benchmarks:'MMLU-Pro, GPQA, IFEval, SWE-Bench'},
   // DeepSeek
   {name:'DeepSeek V4 Pro',org:'DeepSeek',weight:'open',released:'Apr 2026',desc:'MIT license. 75% cost reduction vs V3. SWE-Bench Verified: 80.6%. Matches closed frontier on coding. vLLM-compatible.',runnable:true,benchmarks:'SWE-Bench, AIME, GPQA, MMLU-Pro, LiveCodeBench'},
-  {name:'DeepSeek R1',org:'DeepSeek',weight:'open',released:'2025',desc:'Open-weight 671B MoE reasoning model. Strong STEM. MAI-T1 Table 11 & 12 baseline. vLLM-compatible.',runnable:true,benchmarks:'AIME, MATH-500, GPQA, LiveCodeBench, MMLU-Pro'},
+  {name:'DeepSeek R1',org:'DeepSeek',weight:'open',released:'2025',desc:'Open-weight 671B MoE reasoning model. Strong STEM. MAI-T1 Table 11 \u0026 12 baseline. vLLM-compatible.',runnable:true,benchmarks:'AIME, MATH-500, GPQA, LiveCodeBench, MMLU-Pro'},
   {name:'DeepSeek V3',org:'DeepSeek',weight:'open',released:'2024',desc:'Non-reasoning general capability baseline. Widely cited in frontier comparisons. vLLM-compatible.',runnable:true,benchmarks:'MMLU-Pro, SWE-Bench, IFEval'},
   // Alibaba
   {name:'Qwen3-235B-A22B',org:'Alibaba',weight:'open',released:'2025',desc:'Open-weight MoE. Strongest open model on most general benchmarks. MAI-T1 comparison. vLLM-compatible.',runnable:true,benchmarks:'MMLU-Pro, GPQA, IFEval, LiveCodeBench, AIME'},
@@ -284,8 +284,8 @@ const MODELS=[
 ];
 
 const SOURCES=[
-  {title:'Claude Fable 5 & Mythos 5 — Launch Announcement',org:'Anthropic',date:'Jun 9, 2026',url:'https://www.anthropic.com/news/claude-fable-5-mythos-5',desc:'Launch of Anthropic\'s first publicly available Mythos-class model. Benchmarks: SWE-Bench Pro (80.3%), FrontierCode Diamond (29.3%), HLE (59.0%), Terminal-Bench 2.1 (88.0%), HealthBench Professional (66.0%), ExploitBench (78.0% — Mythos 5). $10/$50 per M tokens. API: claude-fable-5.'},
-  {title:'MAI-Thinking-1 Technical Report',org:'Microsoft AI',date:'June 2026',url:'https://microsoft.ai/pdf/mai-thinking-1.pdf',desc:'Primary source for benchmark taxonomy (Tables 11 & 12). 9 capability domains, 47+ benchmarks, 8 frontier model comparisons.'},
+  {title:'Claude Fable 5 \u0026 Mythos 5 — Launch Announcement',org:'Anthropic',date:'Jun 9, 2026',url:'https://www.anthropic.com/news/claude-fable-5-mythos-5',desc:'Launch of Anthropic\'s first publicly available Mythos-class model. Benchmarks: SWE-Bench Pro (80.3%), FrontierCode Diamond (29.3%), HLE (59.0%), Terminal-Bench 2.1 (88.0%), HealthBench Professional (66.0%), ExploitBench (78.0% — Mythos 5). $10/$50 per M tokens. API: claude-fable-5.'},
+  {title:'MAI-Thinking-1 Technical Report',org:'Microsoft AI',date:'June 2026',url:'https://microsoft.ai/pdf/mai-thinking-1.pdf',desc:'Primary source for benchmark taxonomy (Tables 11 \u0026 12). 9 capability domains, 47+ benchmarks, 8 frontier model comparisons.'},
   {title:'Gemini 3.1 Technical Report',org:'Google DeepMind',date:'2026',url:'https://deepmind.google/technologies/gemini/',desc:'Benchmark coverage: GPQA (94.3%), ARC-AGI-2 (77.1%), HLE (41%), LOFT, RULER, MMLU-Pro, SWE-Bench.'},
   {title:'Qwen3 Technical Report',org:'Alibaba / Qwen Team',date:'2025',url:'https://qwenlm.github.io/',desc:'Covers MMLU-Pro, GPQA, LiveCodeBench, IFEval, AIME, AlpacaEval across MoE and dense model variants.'},
   {title:'Llama 4 Technical Report',org:'Meta AI',date:'2025',url:'https://ai.meta.com/research/',desc:'Open-weight frontier evaluation. MMLU-Pro, GPQA, IFEval, SWE-Bench across Maverick and Scout variants.'},
