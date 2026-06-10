@@ -232,15 +232,13 @@ const BENCHMARKS=[
   {name:'BFCL v3',domain:'tool',pri:'high',metric:'accuracy',labs:['OpenAI','Anthropic','Google','Meta','Mistral','Cohere'],desc:'Berkeley Function Calling Leaderboard v3. Multi-turn + parallel tool calls. The standard tool-calling leaderboard.',tags:['function-call','JSON','multi-turn']},
   {name:'τ-bench tool',domain:'tool',pri:'high',metric:'success_rate',labs:['Anthropic','OpenAI'],desc:'Tool-use sub-dimension of τ-bench. Planning + tool selection in realistic multi-step environments.',tags:['multi-step','real-APIs']},
   {name:'API-Bank',domain:'tool',pri:'medium',metric:'accuracy',labs:['Microsoft','OpenAI'],desc:'Multi-step real API tool use. Chained function calls across 73 real-world APIs.',tags:['real-world-APIs','multi-step'],isNew:true},
-];
-
-  // New benchmarks from Claude Fable 5 / Mythos 5 launch — June 9, 2026
   {name:'FrontierCode Diamond',domain:'agentic',pri:'high',metric:'pass@1',labs:['Anthropic','OpenAI','Google'],desc:'Cognition\'s production-grade coding benchmark. Tests mergeability, correctness, scope discipline, style. Diamond = hardest 50 tasks. Fable 5: 29.3%, Opus 4.8: 13.4%, GPT-5.5: 5.7%. Scales strongly with reasoning effort.',tags:['coding','production-grade','long-horizon'],isNew:true},
   {name:'Terminal-Bench 2.1',domain:'agentic',pri:'high',metric:'success_rate',labs:['Anthropic','OpenAI','Google'],desc:'Agentic terminal task completion benchmark. Fable 5: 88.0%, Opus 4.8: 82.7%, GPT-5.5: 83.4%, Gemini 3.1 Pro: 70.7%.',tags:['agentic','terminal','cli'],isNew:true},
   {name:'CursorBench 3.1',domain:'agentic',pri:'medium',metric:'pass@1',labs:['Anthropic','OpenAI'],desc:'Cursor\'s real-world IDE coding benchmark. Fable 5: 72.9% at max effort. Tests long-horizon problems in real dev environments.',tags:['coding','real-world','IDE'],isNew:true},
-  {name:'ExploitBench',domain:'safety',pri:'medium',metric:'success_rate',labs:['Anthropic'],desc:'Cybersecurity exploit capability benchmark. Mythos 5: 78.0%. Fable 5 safeguards block progress entirely. Used to evaluate offensive cyber risk.',tags:['cybersecurity','exploit','red-team'],isNew:true},
-  {name:'HealthBench Professional',domain:'health',pri:'high',metric:'accuracy',labs:['Anthropic','OpenAI','Google'],desc:'Professional-level health and medical reasoning. Fable 5: 66.0%. Introduced in Fable 5 system card. Covers clinical decision-making and medical reasoning.',tags:['health','medical','professional'],isNew:true},
-  {name:'GDPval-AA',domain:'knowledge',pri:'medium',metric:'score',labs:['Anthropic','OpenAI','Google'],desc:'Advanced analytical knowledge work. Fable 5: 1932, Opus 4.8: 1890, GPT-5.5: 1769. Document reasoning, chart/table interpretation, finance-grade analysis.',tags:['knowledge-work','analytical','finance'],isNew:true},
+  {name:'ExploitBench',domain:'safety',pri:'medium',metric:'success_rate',labs:['Anthropic'],desc:'Cybersecurity exploit capability benchmark. Mythos 5: 78.0%. Fable 5 safeguards block progress entirely.',tags:['cybersecurity','exploit','red-team'],isNew:true},
+  {name:'HealthBench Professional',domain:'health',pri:'high',metric:'accuracy',labs:['Anthropic','OpenAI','Google'],desc:'Professional-level health and medical reasoning. Fable 5: 66.0%. Introduced in Fable 5 system card.',tags:['health','medical','professional'],isNew:true},
+  {name:'GDPval-AA',domain:'knowledge',pri:'medium',metric:'score',labs:['Anthropic','OpenAI','Google'],desc:'Advanced analytical knowledge work. Fable 5: 1932, Opus 4.8: 1890, GPT-5.5: 1769. Document reasoning, chart/table interpretation, finance analysis.',tags:['knowledge-work','analytical','finance'],isNew:true},
+];
 
 const MODELS=[
   // Anthropic
@@ -276,6 +274,13 @@ const MODELS=[
   {name:'GLM-5',org:'Zhipu AI (Z.AI)',weight:'open',released:'2026',desc:'SWE-Bench: 77.8%. Matches Claude Opus 4.5 on SWE-bench. Strong Chinese-language capabilities — relevant for HHRI.',runnable:true,benchmarks:'SWE-Bench, HLE, MMLU-Pro, MedBench'},
   // Moonshot
   {name:'Kimi K2.5',org:'Moonshot AI',weight:'open',released:'2026',desc:'SWE-Bench: 76.8%. Strong agentic coding. Chinese-origin open-weight frontier model.',runnable:true,benchmarks:'SWE-Bench, MMLU-Pro, MedBench, IFEval'},
+  // New benchmarks from Claude Fable 5 / Mythos 5 launch — June 9, 2026
+  {name:'FrontierCode Diamond',domain:'agentic',pri:'high',metric:'pass@1',labs:['Anthropic','OpenAI','Google'],desc:'Cognition\'s production-grade coding benchmark. Tests mergeability, correctness, scope discipline, style. Diamond = hardest 50 tasks. Fable 5: 29.3%, Opus 4.8: 13.4%, GPT-5.5: 5.7%. Scales strongly with reasoning effort.',tags:['coding','production-grade','long-horizon'],isNew:true},
+  {name:'Terminal-Bench 2.1',domain:'agentic',pri:'high',metric:'success_rate',labs:['Anthropic','OpenAI','Google'],desc:'Agentic terminal task completion benchmark. Fable 5: 88.0%, Opus 4.8: 82.7%, GPT-5.5: 83.4%, Gemini 3.1 Pro: 70.7%.',tags:['agentic','terminal','cli'],isNew:true},
+  {name:'CursorBench 3.1',domain:'agentic',pri:'medium',metric:'pass@1',labs:['Anthropic','OpenAI'],desc:'Cursor\'s real-world IDE coding benchmark. Fable 5: 72.9% at max effort. Tests long-horizon problems in real dev environments.',tags:['coding','real-world','IDE'],isNew:true},
+  {name:'ExploitBench',domain:'safety',pri:'medium',metric:'success_rate',labs:['Anthropic'],desc:'Cybersecurity exploit capability benchmark. Mythos 5: 78.0%. Fable 5 safeguards block progress entirely. Used to evaluate offensive cyber risk.',tags:['cybersecurity','exploit','red-team'],isNew:true},
+  {name:'HealthBench Professional',domain:'health',pri:'high',metric:'accuracy',labs:['Anthropic','OpenAI','Google'],desc:'Professional-level health and medical reasoning. Fable 5: 66.0%. Introduced in Fable 5 system card.',tags:['health','medical','professional'],isNew:true},
+  {name:'GDPval-AA',domain:'knowledge',pri:'medium',metric:'score',labs:['Anthropic','OpenAI','Google'],desc:'Advanced analytical knowledge work. Fable 5: 1932, Opus 4.8: 1890, GPT-5.5: 1769. Document reasoning, chart/table interpretation, finance-grade analysis.',tags:['knowledge-work','analytical','finance'],isNew:true},
 ];
 
 const SOURCES=[
