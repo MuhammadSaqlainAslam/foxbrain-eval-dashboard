@@ -40,7 +40,7 @@ Each benchmark shows:
 
 | Lab | Models |
 |---|---|
-| Anthropic | Claude Opus 4.8, 4.7, 4.6 · Sonnet 4.6 |
+| Anthropic | Claude **Fable 5**, **Mythos 5**, Opus 4.8, 4.7, 4.6 · Sonnet 4.6 |
 | OpenAI | GPT-5.5, GPT-5.4, o3 |
 | Google DeepMind | Gemini 3.1 Pro, Gemini 2.5 Pro |
 | xAI | Grok 4.3 |
@@ -112,4 +112,4 @@ foxbrain-eval-dashboard/
 *Curated by [Muhammad Saqlain](https://github.com/MuhammadSaqlainAslam) · HHRI / Foxconn AI Research Center*
 
 *Benchmark taxonomy based on MAI-Thinking-1 Technical Report §4.1 (Microsoft AI, June 2026) and additional sources listed in the Sources tab.*
-*Last updated: June 2026*
+*Last updated: June 9, 2026 — added Claude Fable 5 & Mythos 5, FrontierCode Diamond, Terminal-Bench 2.1, HealthBench Professional, ExploitBench, GDPval-AA, CursorBench 3.1*
