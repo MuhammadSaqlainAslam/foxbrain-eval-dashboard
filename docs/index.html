@@ -5,120 +5,79 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>FoxBrain Benchmark & Frontier Model Reference — HHRI</title>
 <style>
-:root {
-  --bg: #0f1117;
-  --surface: #1a1d27;
-  --surface2: #22263a;
-  --border: rgba(255,255,255,0.08);
-  --border2: rgba(255,255,255,0.15);
-  --text: #e8eaf0;
-  --text2: #8b91a8;
-  --text3: #555c78;
-  --accent: #4f8ef7;
-  --green: #2dd4a0;
-  --amber: #f5a623;
-  --red: #f05050;
-  --radius: 8px;
-  --radius-lg: 12px;
-}
-* { box-sizing: border-box; margin: 0; padding: 0; }
-body { background: var(--bg); color: var(--text); font-family: 'Inter', system-ui, sans-serif; font-size: 14px; line-height: 1.6; }
-a { color: var(--accent); text-decoration: none; }
-a:hover { text-decoration: underline; }
-
-/* Topbar */
-.topbar { background: var(--surface); border-bottom: 1px solid var(--border); padding: 0 28px; height: 54px; display: flex; align-items: center; gap: 12px; position: sticky; top: 0; z-index: 100; }
-.topbar-logo { font-size: 15px; font-weight: 600; color: var(--text); letter-spacing: -0.3px; }
-.topbar-logo span { color: var(--accent); }
-.topbar-sub { font-size: 12px; color: var(--text3); }
-.topbar-right { margin-left: auto; display: flex; align-items: center; gap: 16px; font-size: 12px; color: var(--text3); }
-.topbar-right a { color: var(--text2); font-size: 12px; }
-
-/* Hero */
-.hero { padding: 40px 28px 28px; max-width: 1200px; margin: 0 auto; }
-.hero h1 { font-size: 26px; font-weight: 600; color: var(--text); letter-spacing: -0.5px; margin-bottom: 8px; }
-.hero p { font-size: 14px; color: var(--text2); max-width: 680px; line-height: 1.7; }
-.hero-meta { display: flex; gap: 20px; margin-top: 16px; flex-wrap: wrap; }
-.hero-stat { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 12px 20px; text-align: center; min-width: 110px; }
-.hero-stat-val { font-size: 24px; font-weight: 600; color: var(--accent); }
-.hero-stat-lbl { font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: .05em; margin-top: 2px; }
-.source-badge { display: inline-flex; align-items: center; gap: 6px; background: var(--surface2); border: 1px solid var(--border2); border-radius: 99px; padding: 4px 12px; font-size: 11px; color: var(--text2); margin-top: 14px; }
-
-/* Container */
-.container { max-width: 1200px; margin: 0 auto; padding: 0 28px 60px; }
-
-/* Tabs */
-.tabs { display: flex; gap: 2px; border-bottom: 1px solid var(--border); margin-bottom: 24px; }
-.tab-btn { padding: 9px 20px; font-size: 13px; font-weight: 500; color: var(--text2); background: transparent; border: none; cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -1px; transition: all .15s; }
-.tab-btn:hover { color: var(--text); }
-.tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
-
-/* Filter bar */
-.filter-bar { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 18px; align-items: center; }
-.filter-label { font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: .05em; margin-right: 2px; }
-.filter-btn { padding: 4px 13px; border-radius: 99px; border: 1px solid var(--border2); font-size: 12px; cursor: pointer; color: var(--text2); background: transparent; transition: all .15s; }
-.filter-btn:hover { border-color: var(--accent); color: var(--text); }
-.filter-btn.active { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 500; }
-.search-input { padding: 6px 14px; background: var(--surface2); border: 1px solid var(--border); border-radius: var(--radius); font-size: 12px; color: var(--text); outline: none; width: 220px; margin-left: auto; }
-.search-input::placeholder { color: var(--text3); }
-.search-input:focus { border-color: var(--accent); }
-
-/* Table */
-.table-wrap { overflow-x: auto; border-radius: var(--radius-lg); border: 1px solid var(--border); }
-table { width: 100%; border-collapse: collapse; font-size: 13px; }
-thead th { background: var(--surface2); padding: 10px 16px; text-align: left; font-size: 11px; font-weight: 500; color: var(--text3); text-transform: uppercase; letter-spacing: .05em; border-bottom: 1px solid var(--border); white-space: nowrap; }
-tbody tr { border-bottom: 1px solid var(--border); transition: background .1s; }
-tbody tr:last-child { border-bottom: none; }
-tbody tr:hover { background: var(--surface2); }
-tbody td { padding: 11px 16px; vertical-align: top; }
-.section-row td { background: var(--surface); font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .07em; color: var(--text3); padding: 7px 16px; border-bottom: 1px solid var(--border); }
-
-/* Badges */
-.bname { font-weight: 500; color: var(--text); font-size: 13px; }
-.bdesc { font-size: 12px; color: var(--text2); margin-top: 3px; line-height: 1.5; }
-.tag { display: inline-block; padding: 1px 7px; border-radius: 99px; font-size: 10px; border: 1px solid var(--border2); color: var(--text3); margin: 2px 1px 0 0; }
-.domain-pill { display: inline-flex; align-items: center; gap: 4px; padding: 3px 10px; border-radius: 99px; font-size: 11px; font-weight: 500; white-space: nowrap; }
-.pri { display: inline-block; padding: 2px 9px; border-radius: 99px; font-size: 11px; font-weight: 500; }
-.pri-h { background: #f0505018; color: #f05050; border: 1px solid #f0505030; }
-.pri-m { background: #f5a62318; color: #f5a623; border: 1px solid #f5a62330; }
-.pri-l { background: #55557818; color: #8b91a8; border: 1px solid #55557830; }
-.mai-badge { display: inline-block; padding: 2px 7px; border-radius: 99px; font-size: 10px; font-weight: 500; background: #4f8ef718; color: #4f8ef7; border: 1px solid #4f8ef730; }
-
-/* Domain colors */
-.dom-stem        { background:#185FA514; color:#4f8ef7; }
-.dom-agentic     { background:#0F6E5614; color:#2dd4a0; }
-.dom-knowledge   { background:#534AB714; color:#9c88ff; }
-.dom-instruction { background:#99231814; color:#f87171; }
-.dom-longctx     { background:#854F0B14; color:#f5a623; }
-.dom-safety      { background:#A32D2D14; color:#ff6b6b; }
-.dom-honesty     { background:#99355614; color:#ff88aa; }
-.dom-health      { background:#3B6D1114; color:#7bc67e; }
-.dom-tool        { background:#63992214; color:#a8d672; }
-
-/* Model cards */
-.models-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px; }
-.mcard { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 16px 18px; transition: border-color .15s; }
-.mcard:hover { border-color: var(--border2); }
-.mcard-header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 8px; gap: 8px; }
-.mcard-name { font-size: 14px; font-weight: 600; color: var(--text); }
-.mcard-org { font-size: 11px; color: var(--text3); margin-top: 1px; }
-.mcard-type { display: inline-block; padding: 2px 8px; border-radius: 99px; font-size: 10px; font-weight: 500; white-space: nowrap; }
-.open   { background: #2dd4a018; color: #2dd4a0; border: 1px solid #2dd4a030; }
-.closed { background: #4f8ef718; color: #4f8ef7; border: 1px solid #4f8ef730; }
-.mcard-desc { font-size: 12px; color: var(--text2); line-height: 1.6; margin-bottom: 10px; }
-.mcard-tags { display: flex; gap: 5px; flex-wrap: wrap; }
-.mcard-tag { font-size: 10px; padding: 2px 7px; border-radius: 99px; background: var(--surface2); color: var(--text3); border: 1px solid var(--border); }
-.mcard-tables { font-size: 11px; color: var(--text3); margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--border); }
-.mcard-tables span { color: var(--accent); }
-
-/* Empty */
-.empty { text-align: center; padding: 48px; color: var(--text3); font-size: 13px; }
-
-/* Count */
-.result-count { font-size: 12px; color: var(--text3); margin-bottom: 10px; }
-
-/* Footer */
-.footer { margin-top: 48px; padding: 20px 28px; border-top: 1px solid var(--border); font-size: 11px; color: var(--text3); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; max-width: 1200px; margin-left: auto; margin-right: auto; }
+:root{--bg:#0f1117;--surface:#1a1d27;--surface2:#22263a;--border:rgba(255,255,255,0.08);--border2:rgba(255,255,255,0.15);--text:#e8eaf0;--text2:#8b91a8;--text3:#555c78;--accent:#4f8ef7;--green:#2dd4a0;--amber:#f5a623;--red:#f05050;--radius:8px;--radius-lg:12px}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-serif;font-size:14px;line-height:1.6}
+a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
+.topbar{background:var(--surface);border-bottom:1px solid var(--border);padding:0 28px;height:54px;display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:100}
+.topbar-logo{font-size:15px;font-weight:600;color:var(--text);letter-spacing:-.3px}
+.topbar-logo span{color:var(--accent)}
+.topbar-sub{font-size:12px;color:var(--text3)}
+.topbar-right{margin-left:auto;display:flex;align-items:center;gap:16px;font-size:12px}
+.topbar-right a{color:var(--text2)}
+.hero{padding:36px 28px 24px;max-width:1200px;margin:0 auto}
+.hero h1{font-size:24px;font-weight:600;color:var(--text);letter-spacing:-.5px;margin-bottom:6px}
+.hero p{font-size:13px;color:var(--text2);max-width:700px;line-height:1.7}
+.hero-stats{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap}
+.hstat{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:10px 18px;text-align:center;min-width:100px}
+.hstat-val{font-size:22px;font-weight:600;color:var(--accent)}
+.hstat-lbl{font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;margin-top:1px}
+.updated-badge{display:inline-flex;align-items:center;gap:6px;background:var(--surface2);border:1px solid var(--border2);border-radius:99px;padding:3px 12px;font-size:11px;color:var(--text2);margin-top:12px}
+.container{max-width:1200px;margin:0 auto;padding:0 28px 60px}
+.tabs{display:flex;gap:2px;border-bottom:1px solid var(--border);margin-bottom:22px}
+.tab-btn{padding:9px 20px;font-size:13px;font-weight:500;color:var(--text2);background:transparent;border:none;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;transition:all .15s}
+.tab-btn:hover{color:var(--text)}.tab-btn.active{color:var(--accent);border-bottom-color:var(--accent)}
+.filter-bar{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px;align-items:center}
+.filter-label{font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;margin-right:2px}
+.fbtn{padding:4px 12px;border-radius:99px;border:1px solid var(--border2);font-size:12px;cursor:pointer;color:var(--text2);background:transparent;transition:all .15s}
+.fbtn:hover{border-color:var(--accent);color:var(--text)}.fbtn.active{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:500}
+.search-input{padding:6px 14px;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);font-size:12px;color:var(--text);outline:none;width:220px;margin-left:auto}
+.search-input::placeholder{color:var(--text3)}.search-input:focus{border-color:var(--accent)}
+.result-count{font-size:11px;color:var(--text3);margin-bottom:10px}
+.table-wrap{overflow-x:auto;border-radius:var(--radius-lg);border:1px solid var(--border)}
+table{width:100%;border-collapse:collapse;font-size:13px}
+thead th{background:var(--surface2);padding:10px 14px;text-align:left;font-size:11px;font-weight:500;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;border-bottom:1px solid var(--border);white-space:nowrap}
+tbody tr{border-bottom:1px solid var(--border);transition:background .1s}
+tbody tr:last-child{border-bottom:none}tbody tr:hover{background:var(--surface2)}
+tbody td{padding:10px 14px;vertical-align:top}
+.sec-row td{background:var(--surface);font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;color:var(--text3);padding:7px 14px;border-bottom:1px solid var(--border)}
+.bname{font-weight:500;color:var(--text);font-size:13px}
+.bdesc{font-size:12px;color:var(--text2);margin-top:3px;line-height:1.5}
+.tag{display:inline-block;padding:1px 6px;border-radius:99px;font-size:10px;border:1px solid var(--border2);color:var(--text3);margin:2px 1px 0 0}
+.dpill{display:inline-flex;align-items:center;gap:3px;padding:3px 9px;border-radius:99px;font-size:11px;font-weight:500;white-space:nowrap}
+.pri{display:inline-block;padding:2px 8px;border-radius:99px;font-size:10px;font-weight:500}
+.pri-h{background:#f0505018;color:#f05050;border:1px solid #f0505030}
+.pri-m{background:#f5a62318;color:#f5a623;border:1px solid #f5a62330}
+.pri-l{background:#55557818;color:#8b91a8;border:1px solid #55557830}
+.new-pill{display:inline-block;padding:1px 7px;border-radius:99px;font-size:10px;font-weight:500;background:#2dd4a018;color:#2dd4a0;border:1px solid #2dd4a030;margin-left:4px}
+.used-by{display:flex;flex-wrap:wrap;gap:3px}
+.lab-tag{font-size:10px;padding:1px 7px;border-radius:99px;background:var(--surface2);color:var(--text2);border:1px solid var(--border2)}
+.dom-stem{background:#185FA514;color:#4f8ef7}.dom-agentic{background:#0F6E5614;color:#2dd4a0}
+.dom-knowledge{background:#534AB714;color:#9c88ff}.dom-instruction{background:#99231814;color:#f87171}
+.dom-longctx{background:#854F0B14;color:#f5a623}.dom-safety{background:#A32D2D14;color:#ff6b6b}
+.dom-honesty{background:#99355614;color:#ff88aa}.dom-health{background:#3B6D1114;color:#7bc67e}
+.dom-tool{background:#63992214;color:#a8d672}
+.models-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:12px}
+.mcard{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:16px 18px;transition:border-color .15s}
+.mcard:hover{border-color:var(--border2)}
+.mcard-top{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:8px}
+.mcard-name{font-size:14px;font-weight:600;color:var(--text)}
+.mcard-org{font-size:11px;color:var(--text3);margin-top:1px}
+.mtype{display:inline-block;padding:2px 8px;border-radius:99px;font-size:10px;font-weight:500;white-space:nowrap}
+.open{background:#2dd4a018;color:#2dd4a0;border:1px solid #2dd4a030}
+.closed{background:#4f8ef718;color:#4f8ef7;border:1px solid #4f8ef730}
+.mcard-desc{font-size:12px;color:var(--text2);line-height:1.6;margin-bottom:10px}
+.mcard-meta{font-size:11px;color:var(--text3);padding-top:8px;border-top:1px solid var(--border);display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.mcard-meta span{color:var(--text2)}
+.sources-section{margin-top:36px;padding-top:24px;border-top:1px solid var(--border)}
+.sources-section h3{font-size:13px;font-weight:500;color:var(--text2);margin-bottom:14px;text-transform:uppercase;letter-spacing:.05em}
+.sources-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:10px}
+.source-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:14px 16px}
+.source-card a{font-size:13px;font-weight:500;color:var(--accent)}
+.source-card p{font-size:12px;color:var(--text2);margin-top:4px;line-height:1.5}
+.source-card .smeta{font-size:11px;color:var(--text3);margin-top:6px}
+.empty{text-align:center;padding:48px;color:var(--text3);font-size:13px}
+.footer{margin-top:48px;padding:16px 28px;border-top:1px solid var(--border);font-size:11px;color:var(--text3);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;max-width:1200px;margin-left:auto;margin-right:auto}
 </style>
 </head>
 <body>
@@ -133,234 +92,273 @@ tbody td { padding: 11px 16px; vertical-align: top; }
 
 <div class="hero">
   <h1>Frontier Benchmark & Model Reference</h1>
-  <p>A curated reference of benchmarks used by frontier AI labs to evaluate large language models, organized by capability domain. Use this to select evaluation targets for FoxBrain model assessments.</p>
-  <div class="hero-meta">
-    <div class="hero-stat"><div class="hero-stat-val" id="stat-benchmarks">47</div><div class="hero-stat-lbl">Benchmarks</div></div>
-    <div class="hero-stat"><div class="hero-stat-val">9</div><div class="hero-stat-lbl">Domains</div></div>
-    <div class="hero-stat"><div class="hero-stat-val">8</div><div class="hero-stat-lbl">Frontier models</div></div>
-    <div class="hero-stat"><div class="hero-stat-val" id="stat-high">—</div><div class="hero-stat-lbl">High priority</div></div>
+  <p>A curated, up-to-date reference of benchmarks and frontier models used by leading AI labs. Use this to select evaluation targets for FoxBrain model assessments across 9 capability domains.</p>
+  <div class="hero-stats">
+    <div class="hstat"><div class="hstat-val">50</div><div class="hstat-lbl">Benchmarks</div></div>
+    <div class="hstat"><div class="hstat-val">9</div><div class="hstat-lbl">Domains</div></div>
+    <div class="hstat"><div class="hstat-val">20</div><div class="hstat-lbl">Frontier models</div></div>
+    <div class="hstat"><div class="hstat-val">10</div><div class="hstat-lbl">Sources</div></div>
   </div>
-  <div class="source-badge">📄 Source: MAI-Thinking-1 Technical Report §4.1, Tables 11 & 12 — Microsoft AI, June 2026</div>
+  <div class="updated-badge">🕐 Last updated: June 2026 &nbsp;·&nbsp; Sources: MAI-Thinking-1, Gemini 3.1, Qwen3, Llama 4, DeepSeek V4, Scale AI, Artificial Analysis</div>
 </div>
 
 <div class="container">
   <div class="tabs">
-    <button class="tab-btn active" onclick="setTab('benchmarks', this)">Benchmarks</button>
-    <button class="tab-btn" onclick="setTab('models', this)">Frontier models</button>
+    <button class="tab-btn active" onclick="setTab('benchmarks',this)">Benchmarks</button>
+    <button class="tab-btn" onclick="setTab('models',this)">Frontier models</button>
+    <button class="tab-btn" onclick="setTab('sources',this)">Sources</button>
   </div>
 
-  <!-- ── Benchmarks tab ── -->
+  <!-- BENCHMARKS TAB -->
   <div id="tab-benchmarks">
     <div class="filter-bar">
       <span class="filter-label">Domain:</span>
-      <button class="filter-btn active" onclick="setDomain('all',this)">All</button>
-      <button class="filter-btn" onclick="setDomain('stem',this)">STEM</button>
-      <button class="filter-btn" onclick="setDomain('agentic',this)">Agentic</button>
-      <button class="filter-btn" onclick="setDomain('knowledge',this)">Knowledge</button>
-      <button class="filter-btn" onclick="setDomain('instruction',this)">Instruction</button>
-      <button class="filter-btn" onclick="setDomain('longctx',this)">Long context</button>
-      <button class="filter-btn" onclick="setDomain('safety',this)">Safety</button>
-      <button class="filter-btn" onclick="setDomain('honesty',this)">Honesty</button>
-      <button class="filter-btn" onclick="setDomain('health',this)">Health</button>
-      <button class="filter-btn" onclick="setDomain('tool',this)">Tool calling</button>
+      <button class="fbtn active" onclick="setDomain('all',this)">All</button>
+      <button class="fbtn" onclick="setDomain('stem',this)">STEM</button>
+      <button class="fbtn" onclick="setDomain('agentic',this)">Agentic</button>
+      <button class="fbtn" onclick="setDomain('knowledge',this)">Knowledge</button>
+      <button class="fbtn" onclick="setDomain('instruction',this)">Instruction</button>
+      <button class="fbtn" onclick="setDomain('longctx',this)">Long context</button>
+      <button class="fbtn" onclick="setDomain('safety',this)">Safety</button>
+      <button class="fbtn" onclick="setDomain('honesty',this)">Honesty</button>
+      <button class="fbtn" onclick="setDomain('health',this)">Health</button>
+      <button class="fbtn" onclick="setDomain('tool',this)">Tool calling</button>
       <input class="search-input" id="bench-search" placeholder="🔍  Search benchmarks..." oninput="renderBenchmarks()">
     </div>
     <div class="result-count" id="bench-count"></div>
     <div class="table-wrap">
       <table>
-        <thead>
-          <tr>
-            <th style="width:20%">Benchmark</th>
-            <th style="width:12%">Domain</th>
-            <th style="width:9%">Priority</th>
-            <th style="width:11%">Metric</th>
-            <th style="width:9%">In MAI-T1</th>
-            <th style="width:39%">Description & relevance</th>
-          </tr>
-        </thead>
+        <thead><tr>
+          <th style="width:19%">Benchmark</th>
+          <th style="width:12%">Domain</th>
+          <th style="width:8%">Priority</th>
+          <th style="width:10%">Metric</th>
+          <th style="width:23%">Used by labs</th>
+          <th style="width:28%">Description</th>
+        </tr></thead>
         <tbody id="bench-tbody"></tbody>
       </table>
     </div>
   </div>
 
-  <!-- ── Models tab ── -->
+  <!-- MODELS TAB -->
   <div id="tab-models" style="display:none">
     <div class="filter-bar">
       <span class="filter-label">Weight:</span>
-      <button class="filter-btn active" onclick="setModelFilter('all',this)">All</button>
-      <button class="filter-btn" onclick="setModelFilter('open',this)">Open-weight</button>
-      <button class="filter-btn" onclick="setModelFilter('closed',this)">Closed-weight</button>
+      <button class="fbtn active" onclick="setModelFilter('all',this)">All</button>
+      <button class="fbtn" onclick="setModelFilter('open',this)">Open-weight</button>
+      <button class="fbtn" onclick="setModelFilter('closed',this)">Closed-weight</button>
+      <span class="filter-label" style="margin-left:12px">Lab:</span>
+      <button class="fbtn" onclick="setLabFilter('all',this)">All</button>
+      <button class="fbtn" onclick="setLabFilter('Anthropic',this)">Anthropic</button>
+      <button class="fbtn" onclick="setLabFilter('OpenAI',this)">OpenAI</button>
+      <button class="fbtn" onclick="setLabFilter('Google',this)">Google</button>
+      <button class="fbtn" onclick="setLabFilter('Meta',this)">Meta</button>
+      <button class="fbtn" onclick="setLabFilter('DeepSeek',this)">DeepSeek</button>
+      <button class="fbtn" onclick="setLabFilter('Alibaba',this)">Alibaba</button>
+      <button class="fbtn" onclick="setLabFilter('Other',this)">Other</button>
     </div>
     <div class="models-grid" id="models-grid"></div>
+  </div>
+
+  <!-- SOURCES TAB -->
+  <div id="tab-sources" style="display:none">
+    <div class="sources-grid" id="sources-grid"></div>
   </div>
 </div>
 
 <div class="footer">
   <span>FoxBrain Benchmark Reference · HHRI / Foxconn AI Research Center · <a href="https://muhammadsaqlainaslam.github.io/foxbrain-eval-dashboard/">muhammadsaqlainaslam.github.io/foxbrain-eval-dashboard</a></span>
-  <span>MAI-Thinking-1 §4.1 Tables 11 & 12 · Microsoft AI, June 2026</span>
+  <span>Updated June 2026 · For internal research use</span>
 </div>
 
 <script>
-const DOMAIN_MAP = {
-  stem:        { label:'STEM',             cls:'dom-stem'        },
-  agentic:     { label:'Agentic coding',   cls:'dom-agentic'     },
-  knowledge:   { label:'Knowledge',        cls:'dom-knowledge'   },
-  instruction: { label:'Instruction',      cls:'dom-instruction' },
-  longctx:     { label:'Long context',     cls:'dom-longctx'     },
-  safety:      { label:'Safety',           cls:'dom-safety'      },
-  honesty:     { label:'Honesty',          cls:'dom-honesty'     },
-  health:      { label:'Health',           cls:'dom-health'      },
-  tool:        { label:'Tool calling',     cls:'dom-tool'        },
-};
+const DOMAIN_MAP={stem:{label:'STEM',cls:'dom-stem'},agentic:{label:'Agentic coding',cls:'dom-agentic'},knowledge:{label:'Knowledge',cls:'dom-knowledge'},instruction:{label:'Instruction',cls:'dom-instruction'},longctx:{label:'Long context',cls:'dom-longctx'},safety:{label:'Safety',cls:'dom-safety'},honesty:{label:'Honesty',cls:'dom-honesty'},health:{label:'Health',cls:'dom-health'},tool:{label:'Tool calling',cls:'dom-tool'}};
+const DOMAIN_ORDER=['stem','agentic','knowledge','instruction','longctx','safety','honesty','health','tool'];
 
-const DOMAIN_ORDER = ['stem','agentic','knowledge','instruction','longctx','safety','honesty','health','tool'];
+const BENCHMARKS=[
+  // STEM
+  {name:'AIME 2025',domain:'stem',pri:'high',metric:'pass@1',labs:['OpenAI','Anthropic','Google','Microsoft','Alibaba','DeepSeek'],desc:'30 AMC competition math problems. Primary frontier math signal. Scores now 94–97% at frontier.',tags:['math','reasoning']},
+  {name:'AIME 2026',domain:'stem',pri:'high',metric:'pass@1',labs:['OpenAI','Microsoft','Google'],desc:'2026 edition — contamination-safe replacement as AIME 2025 saturates. MAI-T1: 94.5%.',tags:['math','contamination-safe'],isNew:true},
+  {name:'HLE',domain:'stem',pri:'high',metric:'accuracy',labs:['OpenAI','Google','Anthropic','xAI','Scale AI'],desc:'Humanity\'s Last Exam — 2,500 expert-vetted questions across 100+ subjects. Hardest available benchmark. Frontier range: 20–41%. Gemini 3.1 Pro leads at 41%.',tags:['expert-level','multi-domain','hard'],isNew:true},
+  {name:'MATH-500',domain:'stem',pri:'high',metric:'accuracy',labs:['OpenAI','Anthropic','Google','Microsoft','Meta','Alibaba'],desc:'500 Hendrycks MATH problems. Algebra, calculus, number theory. Standard across all frontier reports.',tags:['math','reasoning']},
+  {name:'GPQA Diamond',domain:'stem',pri:'high',metric:'accuracy',labs:['OpenAI','Anthropic','Google','Microsoft','Meta','DeepSeek'],desc:'198 PhD-level biology, chemistry, physics MCQs. Graduate-level ceiling. Gemini 3.1 Pro leads at 94.3%.',tags:['science','expert-level']},
+  {name:'FrontierMath',domain:'stem',pri:'high',metric:'accuracy',labs:['OpenAI','Anthropic','Google'],desc:'Expert-verified novel math problems not findable on the internet. Tests genuine reasoning vs memorisation. Most frontier models score <2%.',tags:['math','novel','anti-saturation'],isNew:true},
+  {name:'LiveCodeBench v6',domain:'stem',pri:'high',metric:'pass@1',labs:['OpenAI','Anthropic','Google','Microsoft','DeepSeek','Alibaba'],desc:'Monthly-updated competitive programming. Contamination-resistant. MAI-T1: 87.7%. Best anti-saturation coding benchmark.',tags:['coding','contamination-safe']},
+  {name:'OlympiadBench',domain:'stem',pri:'medium',metric:'accuracy',labs:['Microsoft','Alibaba','Google'],desc:'International olympiad problems across physics, chemistry, biology. Multi-step, multi-domain.',tags:['science','math','multi-step']},
+  {name:'HumanEval+',domain:'stem',pri:'medium',metric:'pass@1',labs:['OpenAI','Anthropic','Google','Meta','Alibaba'],desc:'Enhanced HumanEval with stricter test cases. Near-saturating at frontier but still widely reported.',tags:['coding','function-level']},
+  {name:'MBPP+',domain:'stem',pri:'medium',metric:'pass@1',labs:['Google','Meta','Microsoft','Alibaba'],desc:'Broader Python coding tasks. Used alongside LiveCodeBench in most frontier reports.',tags:['coding','python']},
+  {name:'AMC 2023',domain:'stem',pri:'medium',metric:'accuracy',labs:['Microsoft','Alibaba'],desc:'American Mathematics Competitions 2023. 40 problems. Supplemental math benchmark.',tags:['math','multiple-choice']},
+  // Agentic
+  {name:'SWE-Bench Verified',domain:'agentic',pri:'high',metric:'resolve_rate',labs:['OpenAI','Anthropic','Google','Microsoft','DeepSeek','xAI'],desc:'500 real GitHub issue resolutions. Gold standard for agentic coding. Frontier range 74–81%. OpenAI flagging contamination — SWE-Bench Pro emerging as successor.',tags:['agentic','real-world']},
+  {name:'SWE-Bench Pro',domain:'agentic',pri:'high',metric:'resolve_rate',labs:['OpenAI','Microsoft','Anthropic'],desc:'Harder multi-language SWE-Bench with standardised scaffold. Emerging as contamination-resistant successor. MAI-T1: 52.8%.',tags:['agentic','harder','multi-lang'],isNew:true},
+  {name:'Aider Polyglot',domain:'agentic',pri:'high',metric:'pass@1',labs:['Anthropic','OpenAI','Google','Microsoft'],desc:'Code editing across C++, Go, Java, JS, Python, Rust. Tests editing existing code, not just generation.',tags:['code-editing','multi-lang']},
+  {name:'τ-bench',domain:'agentic',pri:'high',metric:'success_rate',labs:['Anthropic','OpenAI','Meta'],desc:'Multi-turn tool use in retail + airline domains. Tests long-horizon decision-making. Already in your eval suite.',tags:['multi-turn','tool-use']},
+  {name:'τ²-bench',domain:'agentic',pri:'high',metric:'success_rate',labs:['Anthropic','HHRI'],desc:'Harder sequel to τ-bench. Retail domain. Already in your eval suite.',tags:['agentic','harder']},
+  {name:'Cybench',domain:'agentic',pri:'medium',metric:'accuracy',labs:['Microsoft','OpenAI'],desc:'CTF cybersecurity challenges requiring multi-step agentic reasoning.',tags:['cybersecurity','agentic']},
+  // Knowledge
+  {name:'MMLU-Pro',domain:'knowledge',pri:'high',metric:'accuracy',labs:['OpenAI','Anthropic','Google','Microsoft','Meta','DeepSeek','Alibaba','xAI'],desc:'Harder MMLU with 10-choice answers. 14 domains. Reported in virtually every frontier technical report. Near-saturating (83–90%).',tags:['knowledge','multi-domain','10-choice']},
+  {name:'MMLU',domain:'knowledge',pri:'medium',metric:'accuracy',labs:['OpenAI','Anthropic','Google','Meta','DeepSeek','Alibaba'],desc:'Original 57-subject MCQ. >90% at frontier, largely saturated — reported for historical comparability only.',tags:['knowledge','57-subjects']},
+  {name:'SimpleQA',domain:'knowledge',pri:'medium',metric:'accuracy',labs:['OpenAI','Anthropic','Google','Microsoft'],desc:'Unambiguous factual short-answer QA. Tests factual precision without hallucination.',tags:['factuality','short-answer']},
+  {name:'FRAMES',domain:'knowledge',pri:'medium',metric:'accuracy',labs:['Google','Microsoft'],desc:'Long-context-dependent QA requiring document analysis. Knowledge × long-context overlap.',tags:['long-context-QA','multi-hop']},
+  {name:'DROP',domain:'knowledge',pri:'medium',metric:'f1',labs:['OpenAI','Anthropic','Google','Meta'],desc:'Discrete reasoning over paragraphs — numerical ops, counting, sorting.',tags:['reading-comprehension','numerical']},
+  {name:'TMMLU+',domain:'knowledge',pri:'high',metric:'accuracy',labs:['HHRI'],desc:'Traditional Chinese + Taiwan-specific knowledge benchmark. HHRI flagship eval. Unique differentiation — no Western frontier lab benchmarks against this.',tags:['chinese','taiwan','multilingual']},
+  {name:'BigBenchHard',domain:'knowledge',pri:'medium',metric:'accuracy',labs:['Google','Anthropic','OpenAI'],desc:'Hard BIG-Bench subset requiring multi-step reasoning. Already in your eval suite.',tags:['reasoning','multi-step']},
+  // Instruction following
+  {name:'IFEval',domain:'instruction',pri:'high',metric:'accuracy',labs:['OpenAI','Anthropic','Google','Microsoft','Meta','DeepSeek','Alibaba'],desc:'Verifiable instruction constraints — word count, format, structure. Most universally reported IF benchmark.',tags:['verifiable','format-constraint']},
+  {name:'Multi-IF',domain:'instruction',pri:'high',metric:'accuracy',labs:['Microsoft','OpenAI'],desc:'Multiple simultaneous constraints. Harder than IFEval. Used in MAI-T1.',tags:['multi-constraint'],isNew:true},
+  {name:'AlpacaEval 2.0',domain:'instruction',pri:'medium',metric:'win_rate',labs:['OpenAI','Anthropic','Google','Meta','Mistral'],desc:'Length-controlled win-rate vs GPT-4. Captures IF quality via human preference signal.',tags:['preference','win-rate']},
+  {name:'MT-Bench',domain:'instruction',pri:'low',metric:'score',labs:['OpenAI','Anthropic','Google','Meta','Mistral'],desc:'Multi-turn conversation quality scored by GPT-4. Still widely cited for conversational quality.',tags:['multi-turn','chat']},
+  // Long context
+  {name:'MRCR v2',domain:'longctx',pri:'high',metric:'mrcr_ratio',labs:['Anthropic','Google','HHRI'],desc:'Multi-turn retrieval in long context. 2/4/8 needle variants. Already in your eval suite.',tags:['retrieval','multi-turn','2/4/8-needle']},
+  {name:'RULER',domain:'longctx',pri:'high',metric:'accuracy',labs:['NVIDIA','Microsoft','Anthropic','Google'],desc:'Comprehensive long-context eval: retrieval, QA, summarization at 4K–128K.',tags:['4K-128K','multi-task']},
+  {name:'LOFT',domain:'longctx',pri:'high',metric:'accuracy',labs:['Google','Microsoft'],desc:'Long context multi-hop + multi-needle retrieval, 300 queries. Gemini 2.5 Pro and MAI-T1 both report this.',tags:['multi-hop','multi-needle'],isNew:true},
+  {name:'LongBench v2',domain:'longctx',pri:'medium',metric:'accuracy',labs:['DeepSeek','Alibaba','Microsoft'],desc:'Real-world long document tasks — multi-doc QA, summarization. Less synthetic than RULER.',tags:['real-world','multi-doc']},
+  // Safety
+  {name:'WildGuard',domain:'safety',pri:'high',metric:'accuracy',labs:['Microsoft','Allen AI','Meta'],desc:'Adversarial jailbreak + benign prompt safety. Tests both over-refusal and under-refusal.',tags:['jailbreak','refusal-accuracy']},
+  {name:'HarmBench',domain:'safety',pri:'high',metric:'attack_success_rate',labs:['OpenAI','Anthropic','Google','Microsoft'],desc:'Standardised red-teaming. Attack success rate across diverse harmful categories.',tags:['red-teaming','attack-success'],isNew:true},
+  {name:'StrongREJECT',domain:'safety',pri:'medium',metric:'score',labs:['Anthropic','Microsoft'],desc:'Automated jailbreak eval with LLM-as-judge. Measures real harmful output rate, not just keyword refusal.',tags:['jailbreak','llm-judge'],isNew:true},
+  {name:'XSTest',domain:'safety',pri:'medium',metric:'accuracy',labs:['Anthropic','OpenAI','Google'],desc:'Exaggerated safety — benign prompts. Measures over-refusal false positive rate.',tags:['over-refusal','false-positive']},
+  {name:'AIEC',domain:'safety',pri:'high',metric:'accuracy',labs:['HHRI'],desc:'AI Ethics and Capability evaluation. Already in your eval suite. Covers Chinese-language safety contexts.',tags:['ethics','safety','chinese']},
+  // Honesty
+  {name:'SycophancyEval',domain:'honesty',pri:'high',metric:'accuracy',labs:['Anthropic','OpenAI','Microsoft','Scale AI'],desc:'Tests whether model agrees with incorrect user assertions. Key honesty signal.',tags:['sycophancy','agreement-bias'],isNew:true},
+  {name:'TruthfulQA',domain:'honesty',pri:'medium',metric:'accuracy',labs:['OpenAI','Anthropic','Google','Meta','Mistral'],desc:'Questions designed to elicit human misconceptions. Measures calibration and honesty.',tags:['calibration','misconceptions']},
+  // Health
+  {name:'MedQA (USMLE)',domain:'health',pri:'high',metric:'accuracy',labs:['OpenAI','Anthropic','Google','Microsoft','xAI'],desc:'US Medical Licensing Exam. Widely reported by all frontier labs. 4-choice MCQ.',tags:['medical','4-choice']},
+  {name:'MedBench',domain:'health',pri:'high',metric:'accuracy',labs:['HHRI','Baidu','Alibaba'],desc:'Chinese medical QA — highly relevant for HHRI market. Clinical, pharmacology, nursing. No Western frontier lab evaluates this.',tags:['medical','chinese']},
+  {name:'JAMA Clinical',domain:'health',pri:'medium',metric:'accuracy',labs:['Microsoft','OpenAI'],desc:'Real clinical cases from JAMA journal. Multi-step diagnostic reasoning.',tags:['clinical-reasoning','case-based'],isNew:true},
+  {name:'ClinConsensus',domain:'health',pri:'medium',metric:'accuracy',labs:['Google','Anthropic','DeepSeek','Alibaba','xAI'],desc:'Chinese medical benchmark evaluated by 22 frontier models. Covers proprietary + open-weight models. Directly relevant to HHRI.',tags:['medical','chinese','22-models'],isNew:true},
+  // Tool calling
+  {name:'BFCL v3',domain:'tool',pri:'high',metric:'accuracy',labs:['OpenAI','Anthropic','Google','Meta','Mistral','Cohere'],desc:'Berkeley Function Calling Leaderboard v3. Multi-turn + parallel tool calls. The standard tool-calling leaderboard.',tags:['function-call','JSON','multi-turn']},
+  {name:'τ-bench tool',domain:'tool',pri:'high',metric:'success_rate',labs:['Anthropic','OpenAI'],desc:'Tool-use sub-dimension of τ-bench. Planning + tool selection in realistic multi-step environments.',tags:['multi-step','real-APIs']},
+  {name:'API-Bank',domain:'tool',pri:'medium',metric:'accuracy',labs:['Microsoft','OpenAI'],desc:'Multi-step real API tool use. Chained function calls across 73 real-world APIs.',tags:['real-world-APIs','multi-step'],isNew:true},
+];
 
-let registry = { benchmarks: [], frontier_models: [] };
-let currentDomain = 'all';
-let modelFilter = 'all';
+const MODELS=[
+  // Anthropic
+  {name:'Claude Opus 4.8',org:'Anthropic',weight:'closed',released:'May 2026',desc:'Current Anthropic flagship. Leads Artificial Analysis Intelligence Index as of June 2026. HLE: 45.7% (highest published). Strong agentic and coding performance.',runnable:false,benchmarks:'SWE-Bench, HLE, GPQA, IFEval, MMLU-Pro'},
+  {name:'Claude Opus 4.7',org:'Anthropic',weight:'closed',released:'May 2026',desc:'Previous Anthropic flagship. Strong across agentic coding and long-context tasks.',runnable:false,benchmarks:'SWE-Bench, GPQA, IFEval'},
+  {name:'Claude Opus 4.6',org:'Anthropic',weight:'closed',released:'Feb 2026',desc:'SWE-Bench Verified: 80.8%. MAI-T1 primary comparison model. Strong on complex agentic tasks.',runnable:false,benchmarks:'SWE-Bench, GPQA, IFEval, MMLU-Pro, MRCR'},
+  {name:'Claude Sonnet 4.6',org:'Anthropic',weight:'closed',released:'Feb 2026',desc:'SWE-Bench: 79.6%. Efficient frontier model. Used in MAI-T1 Tables 11 & 12. Available via Vertex AI.',runnable:false,benchmarks:'SWE-Bench, GPQA, IFEval, MMLU-Pro'},
+  // OpenAI
+  {name:'GPT-5.5',org:'OpenAI',weight:'closed',released:'Apr 2026',desc:'Latest OpenAI flagship. Strong all-rounder with largest ecosystem. Computer use: 75% OSWorld.',runnable:false,benchmarks:'AIME, GPQA, SWE-Bench, IFEval, MMLU-Pro, HLE'},
+  {name:'GPT-5.4',org:'OpenAI',weight:'closed',released:'Mar 2026',desc:'GPQA: 92.8%. Structured reasoning and computer use specialist. MAI-T1 comparison baseline.',runnable:false,benchmarks:'AIME, GPQA, SWE-Bench, MMLU-Pro, HumanEval'},
+  {name:'o3',org:'OpenAI',weight:'closed',released:'2025',desc:'Frontier reasoning model. Used for STEM-heavy evaluations. Strong on AIME and MATH-500.',runnable:false,benchmarks:'AIME, MATH-500, GPQA, LiveCodeBench'},
+  // Google DeepMind
+  {name:'Gemini 3.1 Pro',org:'Google DeepMind',weight:'closed',released:'Feb 2026',desc:'GPQA: 94.3%. ARC-AGI-2: 77.1% (2× previous gen). HLE: 41% (best published). Leads abstract reasoning and multimodal benchmarks.',runnable:false,benchmarks:'GPQA, HLE, ARC-AGI-2, LOFT, RULER, MMLU-Pro'},
+  {name:'Gemini 2.5 Pro',org:'Google DeepMind',weight:'closed',released:'2025',desc:'Strongest long-context model (1M token window). Dominates LOFT and RULER. MAI-T1 comparison baseline.',runnable:false,benchmarks:'LOFT, RULER, MRCR, GPQA, MMLU-Pro'},
+  // xAI
+  {name:'Grok 4.3',org:'xAI',weight:'closed',released:'Apr 2026',desc:'Latest xAI flagship. HLE: leads at 50.7%. 2M token context window. Strong STEM and coding.',runnable:false,benchmarks:'HLE, SWE-Bench, GPQA, MMLU-Pro'},
+  // Meta
+  {name:'Llama 4 Maverick',org:'Meta',weight:'open',released:'2025',desc:'Open-weight MoE. Apache 2.0 license. MAI-T1 Table 12 comparison. vLLM-compatible on H100s.',runnable:true,benchmarks:'MMLU-Pro, GPQA, IFEval, SWE-Bench'},
+  // DeepSeek
+  {name:'DeepSeek V4 Pro',org:'DeepSeek',weight:'open',released:'Apr 2026',desc:'MIT license. 75% cost reduction vs V3. SWE-Bench Verified: 80.6%. Matches closed frontier on coding. vLLM-compatible.',runnable:true,benchmarks:'SWE-Bench, AIME, GPQA, MMLU-Pro, LiveCodeBench'},
+  {name:'DeepSeek R1',org:'DeepSeek',weight:'open',released:'2025',desc:'Open-weight 671B MoE reasoning model. Strong STEM. MAI-T1 Table 11 & 12 baseline. vLLM-compatible.',runnable:true,benchmarks:'AIME, MATH-500, GPQA, LiveCodeBench, MMLU-Pro'},
+  {name:'DeepSeek V3',org:'DeepSeek',weight:'open',released:'2024',desc:'Non-reasoning general capability baseline. Widely cited in frontier comparisons. vLLM-compatible.',runnable:true,benchmarks:'MMLU-Pro, SWE-Bench, IFEval'},
+  // Alibaba
+  {name:'Qwen3-235B-A22B',org:'Alibaba',weight:'open',released:'2025',desc:'Open-weight MoE. Strongest open model on most general benchmarks. MAI-T1 comparison. vLLM-compatible.',runnable:true,benchmarks:'MMLU-Pro, GPQA, IFEval, LiveCodeBench, AIME'},
+  {name:'Qwen3.7 Max',org:'Alibaba',weight:'closed',released:'Apr 2026',desc:'Latest Qwen flagship. Benchmark wins across GPQA and MMLU-Pro. Most affordable model in top-10 GPQA at $1.25/M tokens.',runnable:false,benchmarks:'GPQA, MMLU-Pro, LiveCodeBench, IFEval'},
+  // Mistral
+  {name:'Mistral Large 3',org:'Mistral AI',weight:'open',released:'2026',desc:'#2 on open-source LMArena. Strong instruction following. European open-weight frontier model.',runnable:true,benchmarks:'MMLU-Pro, IFEval, AlpacaEval, MT-Bench'},
+  // MiniMax
+  {name:'MiniMax M2.5',org:'MiniMax',weight:'open',released:'2026',desc:'SWE-Bench Verified: 80.2% — matches proprietary frontier. Strong open-weight agentic coding model.',runnable:true,benchmarks:'SWE-Bench, MMLU-Pro, LiveCodeBench'},
+  // Zhipu AI
+  {name:'GLM-5',org:'Zhipu AI (Z.AI)',weight:'open',released:'2026',desc:'SWE-Bench: 77.8%. Matches Claude Opus 4.5 on SWE-bench. Strong Chinese-language capabilities — relevant for HHRI.',runnable:true,benchmarks:'SWE-Bench, HLE, MMLU-Pro, MedBench'},
+  // Moonshot
+  {name:'Kimi K2.5',org:'Moonshot AI',weight:'open',released:'2026',desc:'SWE-Bench: 76.8%. Strong agentic coding. Chinese-origin open-weight frontier model.',runnable:true,benchmarks:'SWE-Bench, MMLU-Pro, MedBench, IFEval'},
+];
 
-async function loadRegistry() {
-  try {
-    const r = await fetch('benchmark_registry.json');
-    registry = await r.json();
-    document.getElementById('stat-benchmarks').textContent = registry.benchmarks.length;
-    document.getElementById('stat-high').textContent = registry.benchmarks.filter(b => b.priority === 'high').length;
-    renderBenchmarks();
-    renderModels();
-  } catch(e) {
-    document.getElementById('bench-tbody').innerHTML =
-      '<tr><td colspan="6" class="empty">Could not load benchmark_registry.json</td></tr>';
-  }
+const SOURCES=[
+  {title:'MAI-Thinking-1 Technical Report',org:'Microsoft AI',date:'June 2026',url:'https://microsoft.ai/pdf/mai-thinking-1.pdf',desc:'Primary source for benchmark taxonomy (Tables 11 & 12). 9 capability domains, 47+ benchmarks, 8 frontier model comparisons.'},
+  {title:'Gemini 3.1 Technical Report',org:'Google DeepMind',date:'2026',url:'https://deepmind.google/technologies/gemini/',desc:'Benchmark coverage: GPQA (94.3%), ARC-AGI-2 (77.1%), HLE (41%), LOFT, RULER, MMLU-Pro, SWE-Bench.'},
+  {title:'Qwen3 Technical Report',org:'Alibaba / Qwen Team',date:'2025',url:'https://qwenlm.github.io/',desc:'Covers MMLU-Pro, GPQA, LiveCodeBench, IFEval, AIME, AlpacaEval across MoE and dense model variants.'},
+  {title:'Llama 4 Technical Report',org:'Meta AI',date:'2025',url:'https://ai.meta.com/research/',desc:'Open-weight frontier evaluation. MMLU-Pro, GPQA, IFEval, SWE-Bench across Maverick and Scout variants.'},
+  {title:'DeepSeek V3 / R1 Technical Report',org:'DeepSeek',date:'2024–2025',url:'https://github.com/deepseek-ai/DeepSeek-V3',desc:'Open-weight baseline. AIME, MATH-500, GPQA, LiveCodeBench, SWE-Bench, MMLU-Pro.'},
+  {title:'ClinConsensus Benchmark',org:'arXiv (2603.02097)',date:'2026',url:'https://arxiv.org/abs/2603.02097',desc:'22 frontier models on Chinese medical QA. Covers GPT-5.2, Gemini 3.1, Claude Opus 4.5/4.6, Qwen3, DeepSeek V3.2, Kimi, GLM, Doubao, Grok.'},
+  {title:'Humanity\'s Last Exam (HLE)',org:'Center for AI Safety',date:'2025',url:'https://agi.safe.ai/',desc:'2,500 expert-vetted questions across 100+ academic domains. The hardest closed-ended benchmark available. Frontier range: 20–50%.'},
+  {title:'Scale AI Leaderboard',org:'Scale AI',date:'Updated continuously',url:'https://labs.scale.com/leaderboard',desc:'Live benchmark scores across frontier models. Covers SWE-Bench, HLE, IFEval, SycophancyEval, safety evaluations.'},
+  {title:'Artificial Analysis Intelligence Index',org:'Artificial Analysis',date:'Updated continuously',url:'https://artificialanalysis.ai/',desc:'Cross-lab intelligence index. Aggregates benchmark scores for comparability across frontier models.'},
+  {title:'Vellum LLM Leaderboard',org:'Vellum AI',date:'Updated continuously',url:'https://www.vellum.ai/llm-leaderboard',desc:'Post-April 2024 models. GPQA Diamond, AIME 2025, SWE-Bench Verified, IFEval, MMLU-Pro. Non-saturated benchmarks only.'},
+];
+
+let curDomain='all', modelFilter='all', labFilter='all';
+
+function setDomain(d,el){curDomain=d;document.querySelectorAll('#tab-benchmarks .fbtn').forEach(b=>b.classList.remove('active'));el&&el.classList.add('active');renderBenchmarks()}
+function setModelFilter(f,el){modelFilter=f;document.querySelectorAll('#tab-models .fbtn').forEach(b=>b.classList.remove('active'));el&&el.classList.add('active');renderModels()}
+function setLabFilter(f,el){labFilter=f;renderModels()}
+
+function renderBenchmarks(){
+  const q=(document.getElementById('bench-search')?.value||'').toLowerCase();
+  let items=BENCHMARKS.filter(b=>{
+    if(curDomain!=='all'&&b.domain!==curDomain)return false;
+    if(q){const h=(b.name+' '+b.desc+' '+(b.tags||[]).join(' ')).toLowerCase();if(!h.includes(q))return false}
+    return true;
+  });
+  const priOrder={high:0,medium:1,low:2};
+  items.sort((a,b)=>{ const di=DOMAIN_ORDER.indexOf(a.domain)-DOMAIN_ORDER.indexOf(b.domain); return di!==0?di:(priOrder[a.pri]||9)-(priOrder[b.pri]||9);});
+  document.getElementById('bench-count').textContent=`Showing ${items.length} of ${BENCHMARKS.length} benchmarks`;
+  let html='',lastDom=null;
+  items.forEach(b=>{
+    if(curDomain==='all'&&b.domain!==lastDom){lastDom=b.domain;const dm=DOMAIN_MAP[b.domain]||{};html+=`<tr class="sec-row"><td colspan="6">${dm.label||b.domain}</td></tr>`;}
+    const dm=DOMAIN_MAP[b.domain]||{};
+    const priCls=b.pri==='high'?'pri-h':b.pri==='medium'?'pri-m':'pri-l';
+    const tags=(b.tags||[]).map(t=>`<span class="tag">${t}</span>`).join('');
+    const labsHtml=(b.labs||[]).map(l=>`<span class="lab-tag">${l}</span>`).join('');
+    const newBadge=b.isNew?`<span class="new-pill">new</span>`:'';
+    html+=`<tr>
+      <td><div class="bname">${b.name}${newBadge}</div><div style="margin-top:3px">${tags}</div></td>
+      <td><span class="dpill ${dm.cls}">${dm.label||b.domain}</span></td>
+      <td><span class="pri ${priCls}">${b.pri}</span></td>
+      <td style="font-size:12px;color:var(--text2);font-family:monospace">${b.metric||'accuracy'}</td>
+      <td><div class="used-by">${labsHtml}</div></td>
+      <td><span class="bdesc">${b.desc}</span></td>
+    </tr>`;
+  });
+  document.getElementById('bench-tbody').innerHTML=html;
 }
 
-function setDomain(d, el) {
-  currentDomain = d;
-  document.querySelectorAll('#tab-benchmarks .filter-btn').forEach(b => b.classList.remove('active'));
-  if (el) el.classList.add('active');
-  renderBenchmarks();
-}
-
-function renderBenchmarks() {
-  const query = (document.getElementById('bench-search')?.value || '').toLowerCase();
-  const tbody = document.getElementById('bench-tbody');
-
-  let items = registry.benchmarks.filter(b => {
-    if (currentDomain !== 'all' && b.domain !== currentDomain) return false;
-    if (query) {
-      const haystack = (b.name + ' ' + b.description + ' ' + (b.tags||[]).join(' ')).toLowerCase();
-      if (!haystack.includes(query)) return false;
+function renderModels(){
+  const items=MODELS.filter(m=>{
+    if(modelFilter!=='all'&&m.weight!==modelFilter)return false;
+    if(labFilter!=='all'){
+      const majorLabs=['Anthropic','OpenAI','Google','Meta','DeepSeek','Alibaba'];
+      if(labFilter==='Other'&&majorLabs.includes(m.org))return false;
+      if(labFilter!=='Other'&&!m.org.includes(labFilter))return false;
     }
     return true;
   });
-
-  // Sort by domain order then priority
-  const priOrder = {high:0, medium:1, low:2};
-  items.sort((a,b) => {
-    const di = DOMAIN_ORDER.indexOf(a.domain) - DOMAIN_ORDER.indexOf(b.domain);
-    if (di !== 0) return di;
-    return (priOrder[a.priority]||9) - (priOrder[b.priority]||9);
-  });
-
-  document.getElementById('bench-count').textContent =
-    `Showing ${items.length} of ${registry.benchmarks.length} benchmarks`;
-
-  if (!items.length) {
-    tbody.innerHTML = '<tr><td colspan="6" class="empty">No benchmarks match your filter.</td></tr>';
-    return;
-  }
-
-  let html = '';
-  let lastDomain = null;
-
-  items.forEach(b => {
-    if (currentDomain === 'all' && b.domain !== lastDomain) {
-      lastDomain = b.domain;
-      const dm = DOMAIN_MAP[b.domain] || {};
-      html += `<tr class="section-row"><td colspan="6">${dm.label || b.domain}</td></tr>`;
-    }
-    const dm = DOMAIN_MAP[b.domain] || {};
-    const priCls = b.priority === 'high' ? 'pri-h' : b.priority === 'medium' ? 'pri-m' : 'pri-l';
-    const tags = (b.tags||[]).map(t => `<span class="tag">${t}</span>`).join('');
-    const maiLabel = b.in_mai_thinking_1
-      ? `<span class="mai-badge">Table 11/12</span>`
-      : `<span style="font-size:11px;color:var(--text3)">—</span>`;
-
-    html += `<tr>
-      <td>
-        <div class="bname">${b.name}</div>
-        <div style="margin-top:4px">${tags}</div>
-      </td>
-      <td><span class="domain-pill ${dm.cls}">${dm.label||b.domain}</span></td>
-      <td><span class="pri ${priCls}">${b.priority}</span></td>
-      <td style="font-size:12px;color:var(--text2);font-family:monospace">${b.primary_metric||'accuracy'}</td>
-      <td>${maiLabel}</td>
-      <td><span class="bdesc">${b.description||''}</span></td>
-    </tr>`;
-  });
-
-  tbody.innerHTML = html;
-}
-
-function setModelFilter(f, el) {
-  modelFilter = f;
-  document.querySelectorAll('#tab-models .filter-btn').forEach(b => b.classList.remove('active'));
-  if (el) el.classList.add('active');
-  renderModels();
-}
-
-function renderModels() {
-  const grid = document.getElementById('models-grid');
-  if (!grid) return;
-
-  const items = registry.frontier_models.filter(m =>
-    modelFilter === 'all' || m.weight === modelFilter
-  );
-
-  const MODEL_NOTES = {
-    'Claude Sonnet 4.6': 'Primary comparison in MAI-T1 Tables 11 & 12. Competitive across all 9 domains. API access via Anthropic or Vertex AI.',
-    'Claude Opus 4.6':   'Compared specifically on SWE-Bench Pro. Heavier but stronger on complex agentic tasks. API access via Anthropic.',
-    'GPT-5.4 / o3':      'Frontier reasoning from OpenAI. o3 used for STEM-heavy benchmarks; GPT-5.4 for general capabilities. API access via OpenAI.',
-    'Gemini 2.5 Pro':    'Strongest long-context model (1M token window). Dominates LOFT and RULER. API access via Google AI Studio or Vertex AI.',
-    'DeepSeek-R1':       'Open-weight 671B MoE. Strong STEM reasoning. Can run locally on your H100s via vLLM.',
-    'DeepSeek-V3':       'Open-weight non-reasoning variant. General capability baseline. vLLM-compatible.',
-    'Qwen3-235B-A22B':   'Open-weight MoE from Alibaba. Strongest open model on most general benchmarks. vLLM-compatible.',
-    'Llama 4 Maverick':  'Open-weight MoE from Meta. Apache 2.0 license. Used in general capability tables. vLLM-compatible.',
-  };
-
-  grid.innerHTML = items.map(m => {
-    const tables = [
-      m.in_mai_table_11 ? 'Table 11' : null,
-      m.in_mai_table_12 ? 'Table 12' : null,
-    ].filter(Boolean).join(', ') || '—';
-    const notes = MODEL_NOTES[m.name] || '';
-    const runnable = m.weight === 'open'
-      ? '<span class="mcard-tag" style="color:#2dd4a0;border-color:#2dd4a030">Runs on H100</span>'
-      : '<span class="mcard-tag">API access</span>';
-
-    return `<div class="mcard">
-      <div class="mcard-header">
-        <div>
-          <div class="mcard-name">${m.name}</div>
-          <div class="mcard-org">${m.org}</div>
-        </div>
-        <span class="mcard-type ${m.weight}">${m.weight === 'open' ? 'Open-weight' : 'Closed-weight'}</span>
+  const grid=document.getElementById('models-grid');
+  grid.innerHTML=items.map(m=>{
+    const runTag=m.runnable?`<span class="lab-tag" style="color:#2dd4a0;border-color:#2dd4a030">✓ Runs on H100</span>`:`<span class="lab-tag">API access required</span>`;
+    return`<div class="mcard">
+      <div class="mcard-top">
+        <div><div class="mcard-name">${m.name}</div><div class="mcard-org">${m.org} · ${m.released}</div></div>
+        <span class="mtype ${m.weight}">${m.weight==='open'?'Open-weight':'Closed-weight'}</span>
       </div>
-      <div class="mcard-desc">${notes}</div>
-      <div class="mcard-tags">${runnable}</div>
-      <div class="mcard-tables">MAI-Thinking-1: <span>${tables}</span></div>
+      <div class="mcard-desc">${m.desc}</div>
+      <div class="mcard-meta">${runTag}<span style="color:var(--text3)">Benchmarks: <span>${m.benchmarks}</span></span></div>
     </div>`;
   }).join('');
 }
 
-function setTab(tab, el) {
-  ['benchmarks','models'].forEach(t => {
-    document.getElementById(`tab-${t}`).style.display = t === tab ? 'block' : 'none';
-  });
-  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-  if (el) el.classList.add('active');
+function renderSources(){
+  document.getElementById('sources-grid').innerHTML=SOURCES.map(s=>`
+    <div class="source-card">
+      <a href="${s.url}" target="_blank">${s.title} ↗</a>
+      <p>${s.desc}</p>
+      <div class="smeta">${s.org} · ${s.date}</div>
+    </div>`).join('');
 }
 
-loadRegistry();
+function setTab(tab,el){
+  ['benchmarks','models','sources'].forEach(t=>document.getElementById(`tab-${t}`).style.display=t===tab?'block':'none');
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  el&&el.classList.add('active');
+  if(tab==='sources')renderSources();
+}
+
+renderBenchmarks();
+renderModels();
 </script>
 </body>
 </html>
