@@ -509,7 +509,7 @@ tbody td { padding: 12px 16px; vertical-align: top; }
       <p class="hero-desc">Frontier Benchmark &amp; Model Intelligence — HHRI-AI Research<br><span style="font-size:12px;color:var(--text3)">A curated, up-to-date reference of benchmarks and frontier models used by leading AI labs. Use this to select evaluation targets for FoxBrain model assessments across 9 capability domains.</span></p>
       <div class="hero-updated">
         <span class="dot"></span>
-        Last updated June 9, 2026 &nbsp;&bull;&nbsp; Latest: Gemma 4 12B (Google DeepMind, Jun 3) &nbsp;&bull;&nbsp; Claude Fable 5 &amp; Mythos 5 (Anthropic)
+        Last updated: <span id="last-updated-date">June 11, 2026</span> &nbsp;&bull;&nbsp; Latest: Gemma 4 12B &amp; Claude Fable 5
       </div>
     </div>
     <div class="hero-stats">
@@ -592,7 +592,7 @@ tbody td { padding: 12px 16px; vertical-align: top; }
 
 <div class="footer">
   <span>FoxBrain EvalHub &nbsp;&bull;&nbsp; HHRI-AI / Foxconn AI Research Center &nbsp;&bull;&nbsp; <a href="https://muhammadsaqlainaslam.github.io/foxbrain-eval-dashboard/">muhammadsaqlainaslam.github.io/foxbrain-eval-dashboard</a></span>
-  <span>Updated June 9, 2026 &nbsp;&bull;&nbsp; Sources: MAI-Thinking-1, Anthropic, Google DeepMind, Qwen, DeepSeek</span>
+  <span>Updated June 11, 2026 &nbsp;&bull;&nbsp; Sources: MAI-Thinking-1, Anthropic, Google DeepMind, Qwen, DeepSeek</span>
 </div>
 
 <script>
@@ -855,6 +855,22 @@ function setTab(tab, el) {
 // ── Init ───────────────────────────────────────────────────────────────────
 renderBenchmarks();
 renderModels();
+
+// Auto-update "last updated" badge from GitHub API
+(function() {
+  fetch('https://api.github.com/repos/MuhammadSaqlainAslam/foxbrain-eval-dashboard/commits/main')
+    .then(r => r.json())
+    .then(data => {
+      const dateStr = data?.commit?.committer?.date;
+      if (!dateStr) return;
+      const d = new Date(dateStr);
+      const fmt = d.toLocaleDateString('en-US', {year:'numeric', month:'long', day:'numeric'});
+      const el = document.getElementById('last-updated-date');
+      if (el) el.textContent = fmt;
+    })
+    .catch(() => {}); // silently fail — static fallback stays
+})();
+
 </script>
 </body>
 </html>
