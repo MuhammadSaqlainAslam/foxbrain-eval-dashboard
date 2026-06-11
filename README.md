@@ -1,49 +1,41 @@
 # FoxBrain EvalHub
 ### Frontier Benchmark & Model Intelligence — HHRI-AI Research
 
-**A curated, up-to-date reference of benchmarks and frontier models used by leading AI labs.**
-
-Maintained by the AI/ML Research team at [Hon Hai Research Institute (HHRI) / Foxconn](https://hhri.foxconn.com). Use this to select evaluation targets for FoxBrain model assessments across 9 capability domains.
+**A curated, up-to-date reference of benchmarks and frontier models used by leading AI labs. Use this to select evaluation targets for FoxBrain model assessments across 9 capability domains.**
 
 ---
 
 ## 🔗 Live reference page
 
-👉 **[https://muhammadsaqlainaslam.github.io/foxbrain-eval-dashboard/](https://muhammadsaqlainaslam.github.io/foxbrain-eval-dashboard/)**
+👉 **[https://muhammadsaqlainaslam.github.io/foxbrain-eval-dashboard/](https://muhammadsaqlainaslam.github.io/foxbrain-eval-dashboard/)** — *FoxBrain EvalHub*
 
 ---
 
 ## What's inside
 
-### Benchmarks tab
-50 benchmarks across 9 capability domains, filterable and searchable.
+### 📊 Benchmarks tab — 60 benchmarks across 9 domains
 
 | Domain | Key benchmarks |
 |---|---|
-| STEM | AIME 2025/2026, HLE, GPQA Diamond, LiveCodeBench v6, MATH-500, FrontierMath |
-| Agentic coding | SWE-Bench Verified/Pro, Aider Polyglot, τ-bench, τ²-bench, Cybench |
-| Knowledge | MMLU-Pro, MMLU, SimpleQA, FRAMES, DROP, TMMLU+, BigBenchHard |
-| Instruction following | IFEval, Multi-IF, AlpacaEval 2.0, MT-Bench |
+| STEM | AIME 2025/2026, HLE, GPQA Diamond, LiveCodeBench v6, MATH-500, FrontierMath, OlympiadBench, MathVista |
+| Agentic coding | SWE-Bench Verified/Pro, FrontierCode Diamond, Terminal-Bench 2.1, Aider Polyglot, CursorBench 3.1, τ-bench, τ²-bench |
+| Knowledge | MMLU-Pro, MMLU, MMMLU, MMMU Pro, SimpleQA, FRAMES, DROP, GDPval-AA, TMMLU+, BigBenchHard |
+| Instruction following | IFEval, Multi-IF, AlpacaEval 2.0, MT-Bench, Arena ELO |
 | Long context | MRCR v2, RULER, LOFT, LongBench v2 |
-| Safety | WildGuard, HarmBench, StrongREJECT, XSTest, AIEC |
+| Safety | WildGuard, HarmBench, ExploitBench, StrongREJECT, XSTest, AIEC |
 | Honesty | SycophancyEval, TruthfulQA |
-| Health | MedQA (USMLE), MedBench, JAMA Clinical, ClinConsensus |
+| Health | MedQA (USMLE), HealthBench Professional, MedBench, JAMA Clinical, ClinConsensus |
 | Tool calling | BFCL v3, τ-bench tool, API-Bank |
 
-Each benchmark shows:
-- Capability domain and evaluation priority
-- Primary metric (accuracy, pass@1, resolve_rate, etc.)
-- Which frontier labs use it
-- Description and relevance notes
+Each benchmark shows domain, priority, metric, which frontier labs use it, and description.
 
-### Frontier models tab
-20 frontier models (open + closed weight), filterable by lab and weight type.
+### 🤖 Frontier models tab — 28 models across 11 labs
 
 | Lab | Models |
 |---|---|
 | Anthropic | Claude **Fable 5**, **Mythos 5**, Opus 4.8, 4.7, 4.6 · Sonnet 4.6 |
 | OpenAI | GPT-5.5, GPT-5.4, o3 |
-| Google DeepMind | Gemini 3.1 Pro, Gemini 2.5 Pro |
+| Google DeepMind | Gemini 3.1 Pro, Gemini 2.5 Pro, **Gemma 4 31B**, **Gemma 4 31B Thinking**, **Gemma 4 26B MoE**, **Gemma 4 12B**, **Gemma 4 E4B**, **Gemma 4 E2B** |
 | xAI | Grok 4.3 |
 | Meta | Llama 4 Maverick |
 | DeepSeek | DeepSeek V4 Pro, R1, V3 |
@@ -53,10 +45,11 @@ Each benchmark shows:
 | Zhipu AI | GLM-5 |
 | Moonshot AI | Kimi K2.5 |
 
-Each model card shows weight type, release date, key benchmark scores, and whether it can run locally on H100s.
+Open-weight models (Gemma 4, DeepSeek, Qwen3, Llama 4, Mistral, MiniMax, GLM-5, Kimi) can run directly on HHRI-AI H100s via vLLM.
 
-### Sources tab
-10 reference sources with links — technical reports, live leaderboards, and benchmark papers.
+### 📖 Sources tab — 12 reference links
+
+Technical reports, live leaderboards, and benchmark papers including Gemma 4 model card, MAI-Thinking-1, Gemini 3.1, Qwen3, DeepSeek, Llama 4, HLE, ClinConsensus, Scale AI, Artificial Analysis, and Vellum leaderboards.
 
 ---
 
@@ -110,7 +103,7 @@ foxbrain-eval-dashboard/
 
 ---
 
-*Curated by [Muhammad Saqlain](https://github.com/MuhammadSaqlainAslam) · HHRI / Foxconn AI Research Center*
+*Curated by [Muhammad Saqlain](https://github.com/MuhammadSaqlainAslam) · HHRI-AI / Foxconn AI Research Center*
 
 *Benchmark taxonomy based on MAI-Thinking-1 Technical Report §4.1 (Microsoft AI, June 2026) and additional sources listed in the Sources tab.*
-*Last updated: June 9, 2026 — added Claude Fable 5 & Mythos 5, FrontierCode Diamond, Terminal-Bench 2.1, HealthBench Professional, ExploitBench, GDPval-AA, CursorBench 3.1*
+*Last updated: June 9, 2026 — added Gemma 4 full family (6 models), Claude Fable 5 & Mythos 5, FrontierCode Diamond, Terminal-Bench 2.1, HealthBench Professional, MMMLU, Arena ELO, MathVista*
