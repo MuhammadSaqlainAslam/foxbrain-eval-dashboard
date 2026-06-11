@@ -509,14 +509,14 @@ tbody td { padding: 12px 16px; vertical-align: top; }
       <p class="hero-desc">Frontier Benchmark &amp; Model Intelligence — HHRI-AI Research<br><span style="font-size:12px;color:var(--text3)">A curated, up-to-date reference of benchmarks and frontier models used by leading AI labs. Use this to select evaluation targets for FoxBrain model assessments across 9 capability domains.</span></p>
       <div class="hero-updated">
         <span class="dot"></span>
-        Last updated June 9, 2026 &nbsp;&bull;&nbsp; Latest: Claude Fable 5 &amp; Mythos 5 (Anthropic)
+        Last updated June 9, 2026 &nbsp;&bull;&nbsp; Latest: Gemma 4 12B (Google DeepMind, Jun 3) &nbsp;&bull;&nbsp; Claude Fable 5 &amp; Mythos 5 (Anthropic)
       </div>
     </div>
     <div class="hero-stats">
-      <div class="hstat"><div class="hstat-val">56</div><div class="hstat-lbl">Benchmarks</div></div>
+      <div class="hstat"><div class="hstat-val">60</div><div class="hstat-lbl">Benchmarks</div></div>
       <div class="hstat"><div class="hstat-val">9</div><div class="hstat-lbl">Domains</div></div>
-      <div class="hstat"><div class="hstat-val">22</div><div class="hstat-lbl">Models</div></div>
-      <div class="hstat"><div class="hstat-val">11</div><div class="hstat-lbl">Sources</div></div>
+      <div class="hstat"><div class="hstat-val">28</div><div class="hstat-lbl">Models</div></div>
+      <div class="hstat"><div class="hstat-val">12</div><div class="hstat-lbl">Sources</div></div>
     </div>
   </div>
 </div>
@@ -688,6 +688,10 @@ const BENCHMARKS = [
   {name:'BFCL v3',domain:'tool',pri:'high',metric:'accuracy',labs:['OpenAI','Anthropic','Google','Meta','Mistral','Cohere'],desc:'Berkeley Function Calling Leaderboard v3. Multi-turn + parallel tool calls. The standard tool-calling leaderboard.',tags:['function-call','JSON','multi-turn']},
   {name:'tau-bench tool',domain:'tool',pri:'high',metric:'success_rate',labs:['Anthropic','OpenAI'],desc:'Tool-use sub-dimension of tau-bench. Planning + tool selection in realistic environments.',tags:['multi-step','real-APIs']},
   {name:'API-Bank',domain:'tool',pri:'medium',metric:'accuracy',labs:['Microsoft','OpenAI'],desc:'Multi-step real API tool use. Chained function calls across 73 real-world APIs.',tags:['real-world-APIs']},
+  {name:'MMMLU',domain:'knowledge',pri:'high',metric:'accuracy',labs:['Google','HHRI-AI','Alibaba','Meta'],desc:'Multilingual MMLU across 14 languages. Gemma 4 31B: 85.2%, Gemma 4 26B MoE: 82.6%. Critical for HHRI-AI multilingual evaluation including Traditional Chinese.',tags:['multilingual','knowledge','14-languages'],isNew:true},
+  {name:'MMMU Pro',domain:'knowledge',pri:'medium',metric:'accuracy',labs:['Google','OpenAI','Anthropic'],desc:'Multimodal understanding benchmark. Tests visual reasoning with text. Used in Gemma 4 model card. Requires image+text input.',tags:['multimodal','visual-reasoning','university-level'],isNew:true},
+  {name:'MathVista',domain:'stem',pri:'medium',metric:'accuracy',labs:['Google','OpenAI','Anthropic','Meta'],desc:'Mathematical reasoning with visual context. Charts, geometry, scientific figures. Gemma 4 family strong here due to encoder-free multimodal design.',tags:['math','multimodal','visual'],isNew:true},
+  {name:'Arena ELO (LMArena)',domain:'instruction',pri:'medium',metric:'elo_score',labs:['Google','Anthropic','OpenAI','Meta','DeepSeek'],desc:'Human preference win-rate on LMArena chatbot leaderboard. Gemma 4 31B: 1452 ELO (best open-weight text model). Reflects real-world user preference, not just academic benchmarks.',tags:['human-preference','chat','elo'],isNew:true},
 ];
 
 const MODELS = [
@@ -712,10 +716,18 @@ const MODELS = [
   {name:'MiniMax M2.5',org:'MiniMax',weight:'open',released:'2026',desc:'SWE-Bench Verified: 80.2% — matches proprietary frontier on agentic coding. vLLM-compatible.',runnable:true,benchmarks:'SWE-Bench, MMLU-Pro, LiveCodeBench'},
   {name:'GLM-5',org:'Zhipu AI',weight:'open',released:'2026',desc:'SWE-Bench: 77.8%. Strong Chinese-language capabilities. Directly relevant for HHRI-AI market.',runnable:true,benchmarks:'SWE-Bench, HLE, MMLU-Pro, MedBench'},
   {name:'Kimi K2.5',org:'Moonshot AI',weight:'open',released:'2026',desc:'SWE-Bench: 76.8%. Strong agentic coding. Chinese-origin open-weight frontier model.',runnable:true,benchmarks:'SWE-Bench, MMLU-Pro, MedBench, IFEval'},
+  // Google DeepMind — Gemma 4 open models
+  {name:'Gemma 4 31B IT',org:'Google DeepMind',weight:'open',released:'Apr 2026',desc:'Gemma 4 flagship dense model. Arena ELO (text): 1452 (best in class open). MMLU-Pro: 81.4%, GPQA: 68.2%, MATH-500: 91.3%, LiveCodeBench: 62.1%. 128K context. Multimodal (text+image). Already evaluated at HHRI-AI. vLLM-compatible (vllm_gemma4 env).',runnable:true,benchmarks:'MMLU-Pro, GPQA, MATH-500, LiveCodeBench, MMMLU, MMMU Pro, MedQA',isNew:true},
+  {name:'Gemma 4 31B IT Thinking',org:'Google DeepMind',weight:'open',released:'Apr 2026',desc:'Thinking-mode variant of Gemma 4 31B. Extended reasoning with chain-of-thought. Strongest open-weight model on MATH-500 and LiveCodeBench at its parameter count. Run with vllm_gemma4 conda env at HHRI-AI.',runnable:true,benchmarks:'MATH-500, LiveCodeBench, GPQA, MMLU-Pro, AIME 2025',isNew:true},
+  {name:'Gemma 4 26B A4B IT',org:'Google DeepMind',weight:'open',released:'Apr 2026',desc:'MoE variant — 26B total, 4B active parameters. Arena ELO: 1441. Exceptional intelligence-per-active-parameter. MMMLU: 82.6%. Ideal for multi-GPU inference at HHRI-AI.',runnable:true,benchmarks:'MMMLU, MMMU Pro, Arena ELO, LiveCodeBench',isNew:true},
+  {name:'Gemma 4 12B IT',org:'Google DeepMind',weight:'open',released:'Jun 3, 2026',desc:'First encoder-free multimodal architecture in Gemma family. Natively ingests text, image, video, and audio in a single decoder backbone. Runs locally on 16GB VRAM. vLLM + llama.cpp + Ollama compatible. Developer-friendly for local agentic workflows.',runnable:true,benchmarks:'MMMLU, MMMU Pro, ASR, video understanding, coding',isNew:true},
+  {name:'Gemma 4 E4B IT',org:'Google DeepMind',weight:'open',released:'Apr 2026',desc:'Edge model — 4B parameters. MMMLU: 69.4%. Designed for mobile/IoT. Multimodal with audio support. Runs on edge devices and single GPU setups.',runnable:true,benchmarks:'MMMLU, MMMU Pro, MathVista',isNew:true},
+  {name:'Gemma 4 E2B IT',org:'Google DeepMind',weight:'open',released:'Apr 2026',desc:'Smallest Gemma 4 — 2B parameters. MMMLU: 60.0%. Maximum compute efficiency for on-device inference.',runnable:true,benchmarks:'MMMLU, MMMU Pro',isNew:true},
 ];
 
 const SOURCES = [
   {title:'Claude Fable 5 & Mythos 5 — Launch Announcement',org:'Anthropic',date:'Jun 9, 2026',url:'https://www.anthropic.com/news/claude-fable-5-mythos-5',desc:'Launch of first Mythos-class model for general use. Benchmarks: SWE-Bench Pro (80.3%), FrontierCode Diamond (29.3%), HLE (59.0%), Terminal-Bench 2.1 (88.0%), HealthBench (66.0%). $10/$50 per M tokens.'},
+  {title:'Gemma 4 Model Card & Developer Guide',org:'Google DeepMind',date:'Apr-Jun 2026',url:'https://deepmind.google/models/gemma/gemma-4/',desc:'Full Gemma 4 family: E2B, E4B, 12B (encoder-free multimodal), 26B MoE, 31B Dense. Benchmarks: Arena ELO (1452), MMMLU (85.2%), MMMU Pro, MATH-500, LiveCodeBench, GPQA. vLLM + llama.cpp + Ollama compatible.'},
   {title:"MAI-Thinking-1 Technical Report",org:'Microsoft AI',date:'Jun 2026',url:'https://microsoft.ai/pdf/mai-thinking-1.pdf',desc:'Primary source for benchmark taxonomy. Tables 11 & 12 cover 9 capability domains, 47+ benchmarks, 8 frontier model comparisons.'},
   {title:'Gemini 3.1 Technical Report',org:'Google DeepMind',date:'2026',url:'https://deepmind.google/technologies/gemini/',desc:'Benchmark coverage: GPQA (94.3%), ARC-AGI-2 (77.1%), HLE (41%), LOFT, RULER, MMLU-Pro, SWE-Bench Pro (54.2%).'},
   {title:'Qwen3 Technical Report',org:'Alibaba / Qwen Team',date:'2025',url:'https://qwenlm.github.io/',desc:'Covers MMLU-Pro, GPQA, LiveCodeBench, IFEval, AIME across MoE and dense model variants.'},
