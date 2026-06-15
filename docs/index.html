@@ -574,6 +574,8 @@ tbody td { padding: 12px 16px; vertical-align: top; }
     <button class="tab-btn active" onclick="setTab('benchmarks',this)">&#128202; Benchmarks</button>
     <button class="tab-btn" onclick="setTab('models',this)">&#129302; Frontier models</button>
     <button class="tab-btn" onclick="setTab('sources',this)">&#128216; Sources</button>
+    <button class="tab-btn" onclick="setTab('bylabs',this)">&#127981; By Lab</button>
+    <button class="tab-btn" onclick="setTab('bybench',this)">&#128202; By Benchmark</button>
   </div>
 
   <!-- BENCHMARKS -->
@@ -639,6 +641,38 @@ tbody td { padding: 12px 16px; vertical-align: top; }
     <div class="sources-grid" id="sources-grid"></div>
   </div>
 </div>
+
+  <!-- BY LAB TAB -->
+  <div id="tab-bylabs" style="display:none">
+    <div class="xref-filter-bar">
+      <span class="filter-label">Filter by lab:</span>
+      <button class="fbtn active" onclick="setLabXref('all',this)">All</button>
+      <button class="fbtn" onclick="setLabXref('Anthropic',this)">Anthropic</button>
+      <button class="fbtn" onclick="setLabXref('OpenAI',this)">OpenAI</button>
+      <button class="fbtn" onclick="setLabXref('Google DeepMind',this)">Google</button>
+      <button class="fbtn" onclick="setLabXref('Microsoft',this)">Microsoft</button>
+      <button class="fbtn" onclick="setLabXref('DeepSeek',this)">DeepSeek</button>
+      <button class="fbtn" onclick="setLabXref('Alibaba',this)">Alibaba</button>
+      <button class="fbtn" onclick="setLabXref('HHRI-AI',this)">HHRI-AI</button>
+    </div>
+    <div class="xref-grid" id="bylabs-grid"></div>
+  </div>
+
+  <!-- BY BENCHMARK TAB -->
+  <div id="tab-bybench" style="display:none">
+    <div class="xref-filter-bar">
+      <span class="filter-label">Filter by domain:</span>
+      <button class="fbtn active" onclick="setBenchXref('all',this)">All</button>
+      <button class="fbtn" onclick="setBenchXref('stem',this)">STEM</button>
+      <button class="fbtn" onclick="setBenchXref('agentic',this)">Agentic</button>
+      <button class="fbtn" onclick="setBenchXref('knowledge',this)">Knowledge</button>
+      <button class="fbtn" onclick="setBenchXref('longctx',this)">Long context</button>
+      <button class="fbtn" onclick="setBenchXref('safety',this)">Safety</button>
+      <button class="fbtn" onclick="setBenchXref('health',this)">Health</button>
+      <button class="fbtn" onclick="setBenchXref('tool',this)">Tool calling</button>
+    </div>
+    <div class="xref-grid" id="bybench-grid"></div>
+  </div>
 
 <div class="footer">
   <span>FoxBrain EvalHub &nbsp;&bull;&nbsp; HHRI-AI / Foxconn AI Research Center &nbsp;&bull;&nbsp; <a href="https://muhammadsaqlainaslam.github.io/foxbrain-eval-dashboard/">muhammadsaqlainaslam.github.io/foxbrain-eval-dashboard</a></span>
@@ -980,6 +1014,225 @@ function setTab(tab, el) {
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
   if (el) el.classList.add('active');
   if (tab === 'sources') renderSources();
+}
+
+
+// ── Cross-reference data: Lab → Benchmarks + exact model versions ──────────
+const LAB_DATA = [
+  {
+    lab: 'Anthropic', color: '#cc4b00', emoji: '🔶',
+    entries: [
+      {bench:'MRCR v2',       domain:'longctx',    model:'claude-opus-4-6',               api:'claude-opus-4-6',               score:'76.0%', notes:'8-needle, 1M context, max thinking mode'},
+      {bench:'MRCR v2',       domain:'longctx',    model:'claude-sonnet-4-6',             api:'claude-sonnet-4-6',             score:'84.9%', notes:'128K context'},
+      {bench:'SWE-Bench Verified', domain:'agentic', model:'claude-fable-5',             api:'claude-fable-5',                score:'95.0%', notes:'Anthropic scaffold'},
+      {bench:'SWE-Bench Pro', domain:'agentic',    model:'claude-fable-5',               api:'claude-fable-5',                score:'80.3%', notes:'Anthropic scaffold'},
+      {bench:'SWE-Bench Pro', domain:'agentic',    model:'claude-opus-4-8',              api:'claude-opus-4-8',               score:'69.2%', notes:'Anthropic scaffold'},
+      {bench:'GPQA Diamond',  domain:'stem',        model:'claude-opus-4-7',             api:'claude-opus-4-7',               score:'94.2%', notes:''},
+      {bench:'HLE',           domain:'stem',        model:'claude-fable-5',              api:'claude-fable-5',                score:'59.0%', notes:''},
+      {bench:'HLE',           domain:'stem',        model:'claude-opus-4-8',             api:'claude-opus-4-8',               score:'45.7%', notes:''},
+      {bench:'IFEval',        domain:'instruction', model:'claude-sonnet-4-6',           api:'claude-sonnet-4-6',             score:'~90%',  notes:''},
+      {bench:'FrontierCode Diamond', domain:'agentic', model:'claude-fable-5',           api:'claude-fable-5',                score:'29.3%', notes:'Max effort setting'},
+      {bench:'Terminal-Bench 2.1',   domain:'agentic', model:'claude-fable-5',           api:'claude-fable-5',                score:'88.0%', notes:''},
+      {bench:'HealthBench Professional', domain:'health', model:'claude-fable-5',        api:'claude-fable-5',                score:'66.0%', notes:''},
+      {bench:'SycophancyEval',domain:'honesty',     model:'claude-opus-4-6',             api:'claude-opus-4-6',               score:'N/A',   notes:'System card'},
+      {bench:'ExploitBench',  domain:'safety',      model:'claude-mythos-5',             api:'claude-mythos-5',               score:'78.0%', notes:'Safeguards lifted'},
+    ]
+  },
+  {
+    lab: 'OpenAI', color: '#10a37f', emoji: '🟢',
+    entries: [
+      {bench:'AIME 2025',     domain:'stem',        model:'o3',                           api:'o3',                           score:'96.7%', notes:'High compute setting'},
+      {bench:'AIME 2026',     domain:'stem',        model:'o3',                           api:'o3',                           score:'~91%',  notes:''},
+      {bench:'GPQA Diamond',  domain:'stem',        model:'gpt-5.4',                      api:'gpt-5-4',                      score:'92.8%', notes:''},
+      {bench:'HLE',           domain:'stem',        model:'gpt-5.5',                      api:'gpt-5-5',                      score:'~35%',  notes:''},
+      {bench:'SWE-Bench Verified', domain:'agentic', model:'gpt-5.4',                    api:'gpt-5-4',                      score:'~72%',  notes:'Scale SEAL scaffold'},
+      {bench:'SWE-Bench Pro', domain:'agentic',     model:'gpt-5.5',                     api:'gpt-5-5',                      score:'58.6%', notes:'Scale SEAL scaffold'},
+      {bench:'FrontierCode Diamond', domain:'agentic', model:'gpt-5.5',                  api:'gpt-5-5',                      score:'5.7%',  notes:''},
+      {bench:'Terminal-Bench 2.1',   domain:'agentic', model:'gpt-5.5',                  api:'gpt-5-5',                      score:'83.4%', notes:''},
+      {bench:'MMLU-Pro',      domain:'knowledge',   model:'gpt-5.4',                     api:'gpt-5-4',                      score:'~88%',  notes:''},
+      {bench:'IFEval',        domain:'instruction', model:'gpt-5.4',                     api:'gpt-5-4',                      score:'~92%',  notes:''},
+      {bench:'SimpleQA',      domain:'knowledge',   model:'gpt-5.4',                     api:'gpt-5-4',                      score:'N/A',   notes:''},
+      {bench:'MedQA (USMLE)', domain:'health',      model:'gpt-5.4',                     api:'gpt-5-4',                      score:'~93%',  notes:''},
+      {bench:'BFCL v3',       domain:'tool',        model:'gpt-5.4',                     api:'gpt-5-4',                      score:'N/A',   notes:''},
+    ]
+  },
+  {
+    lab: 'Google DeepMind', color: '#4285f4', emoji: '🔵',
+    entries: [
+      {bench:'GPQA Diamond',  domain:'stem',        model:'gemini-3.1-pro',              api:'gemini-3.1-pro',               score:'94.3%', notes:''},
+      {bench:'HLE',           domain:'stem',        model:'gemini-3.1-pro',              api:'gemini-3.1-pro',               score:'41.0%', notes:''},
+      {bench:'MRCR v2',       domain:'longctx',     model:'gemma-4-31b-it',              api:'gemma-4-31b-it',               score:'66.4%', notes:'Official Gemma 4 card'},
+      {bench:'MRCR v2',       domain:'longctx',     model:'gemini-2.5-pro',              api:'gemini-2.5-pro',               score:'N/A',   notes:''},
+      {bench:'LOFT',          domain:'longctx',     model:'gemini-3.1-pro',              api:'gemini-3.1-pro',               score:'N/A',   notes:'300-query multi-needle'},
+      {bench:'RULER',         domain:'longctx',     model:'gemini-2.5-pro',              api:'gemini-2.5-pro',               score:'N/A',   notes:'4K–128K'},
+      {bench:'MMLU-Pro',      domain:'knowledge',   model:'gemini-3.1-pro',              api:'gemini-3.1-pro',               score:'~89%',  notes:''},
+      {bench:'MMMLU',         domain:'knowledge',   model:'gemma-4-31b-it',              api:'gemma-4-31b-it',               score:'85.2%', notes:'14 languages'},
+      {bench:'MMMU Pro',      domain:'knowledge',   model:'gemma-4-31b-it',              api:'gemma-4-31b-it',               score:'N/A',   notes:''},
+      {bench:'SWE-Bench Pro', domain:'agentic',     model:'gemini-3.1-pro',              api:'gemini-3.1-pro',               score:'54.2%', notes:''},
+      {bench:'IFEval',        domain:'instruction', model:'gemini-3.1-pro',              api:'gemini-3.1-pro',               score:'N/A',   notes:''},
+      {bench:'MedQA (USMLE)', domain:'health',      model:'gemini-3.1-pro',              api:'gemini-3.1-pro',               score:'N/A',   notes:''},
+    ]
+  },
+  {
+    lab: 'Microsoft', color: '#00a4ef', emoji: '🪟',
+    entries: [
+      {bench:'AIME 2025',     domain:'stem',        model:'MAI-Thinking-1',              api:'N/A (internal)',               score:'97.0%', notes:'MAI-T1 Table 11'},
+      {bench:'AIME 2026',     domain:'stem',        model:'MAI-Thinking-1',              api:'N/A (internal)',               score:'94.5%', notes:'MAI-T1 Table 11'},
+      {bench:'GPQA Diamond',  domain:'stem',        model:'MAI-Thinking-1',              api:'N/A (internal)',               score:'N/A',   notes:'MAI-T1 Table 11'},
+      {bench:'LiveCodeBench v6', domain:'stem',     model:'MAI-Thinking-1',              api:'N/A (internal)',               score:'87.7%', notes:'MAI-T1 Table 11'},
+      {bench:'SWE-Bench Pro', domain:'agentic',     model:'MAI-Thinking-1',              api:'N/A (internal)',               score:'52.8%', notes:'MAI-T1 Table 11'},
+      {bench:'MMLU-Pro',      domain:'knowledge',   model:'MAI-Thinking-1',              api:'N/A (internal)',               score:'N/A',   notes:'MAI-T1 Table 12'},
+      {bench:'IFEval',        domain:'instruction', model:'MAI-Thinking-1',              api:'N/A (internal)',               score:'N/A',   notes:'MAI-T1 Table 12'},
+      {bench:'Multi-IF',      domain:'instruction', model:'MAI-Thinking-1',              api:'N/A (internal)',               score:'N/A',   notes:'MAI-T1 Table 12'},
+      {bench:'MRCR v2',       domain:'longctx',     model:'MAI-Thinking-1',              api:'N/A (internal)',               score:'N/A',   notes:'MAI-T1 Table 12'},
+      {bench:'LOFT',          domain:'longctx',     model:'MAI-Thinking-1',              api:'N/A (internal)',               score:'N/A',   notes:'MAI-T1 Table 12'},
+      {bench:'WildGuard',     domain:'safety',      model:'MAI-Thinking-1',              api:'N/A (internal)',               score:'N/A',   notes:'MAI-T1 Table 12'},
+      {bench:'SycophancyEval',domain:'honesty',     model:'MAI-Thinking-1',              api:'N/A (internal)',               score:'N/A',   notes:'MAI-T1 Table 12 §J.5'},
+    ]
+  },
+  {
+    lab: 'DeepSeek', color: '#1a5fb4', emoji: '🔷',
+    entries: [
+      {bench:'AIME 2025',     domain:'stem',        model:'deepseek-r1',                 api:'deepseek-r1',                  score:'79.8%', notes:''},
+      {bench:'MATH-500',      domain:'stem',        model:'deepseek-r1',                 api:'deepseek-r1',                  score:'97.3%', notes:''},
+      {bench:'GPQA Diamond',  domain:'stem',        model:'deepseek-r1',                 api:'deepseek-r1',                  score:'71.5%', notes:''},
+      {bench:'LiveCodeBench v6', domain:'stem',     model:'deepseek-r1',                 api:'deepseek-r1',                  score:'65.9%', notes:''},
+      {bench:'SWE-Bench Verified', domain:'agentic', model:'deepseek-v4-pro',            api:'deepseek-v4-pro',              score:'80.6%', notes:'MIT license'},
+      {bench:'MMLU-Pro',      domain:'knowledge',   model:'deepseek-r1',                 api:'deepseek-r1',                  score:'84.0%', notes:''},
+      {bench:'IFEval',        domain:'instruction', model:'deepseek-v3',                 api:'deepseek-v3',                  score:'N/A',   notes:''},
+      {bench:'LongBench v2',  domain:'longctx',     model:'deepseek-v3',                 api:'deepseek-v3',                  score:'N/A',   notes:''},
+    ]
+  },
+  {
+    lab: 'Alibaba', color: '#ff6900', emoji: '🟠',
+    entries: [
+      {bench:'AIME 2025',     domain:'stem',        model:'qwen3-235b-a22b',             api:'qwen3-235b-a22b',              score:'85.7%', notes:'Thinking mode'},
+      {bench:'GPQA Diamond',  domain:'stem',        model:'qwen3-235b-a22b',             api:'qwen3-235b-a22b',              score:'71.7%', notes:''},
+      {bench:'LiveCodeBench v6', domain:'stem',     model:'qwen3-235b-a22b',             api:'qwen3-235b-a22b',              score:'70.7%', notes:''},
+      {bench:'MMLU-Pro',      domain:'knowledge',   model:'qwen3-235b-a22b',             api:'qwen3-235b-a22b',              score:'79.3%', notes:''},
+      {bench:'MMMLU',         domain:'knowledge',   model:'gemma-4-26b-a4b-it',          api:'gemma-4-26b-a4b-it',           score:'82.6%', notes:'MoE 4B active'},
+      {bench:'IFEval',        domain:'instruction', model:'qwen3-235b-a22b',             api:'qwen3-235b-a22b',              score:'N/A',   notes:''},
+    ]
+  },
+  {
+    lab: 'Meta', color: '#0866ff', emoji: '🔹',
+    entries: [
+      {bench:'MMLU-Pro',      domain:'knowledge',   model:'llama-4-maverick',            api:'meta-llama/Llama-4-Maverick-17B-128E-Instruct', score:'N/A', notes:'MAI-T1 Table 12'},
+      {bench:'GPQA Diamond',  domain:'stem',        model:'llama-4-maverick',            api:'meta-llama/Llama-4-Maverick-17B-128E-Instruct', score:'N/A', notes:''},
+      {bench:'IFEval',        domain:'instruction', model:'llama-4-maverick',            api:'meta-llama/Llama-4-Maverick-17B-128E-Instruct', score:'N/A', notes:''},
+      {bench:'SWE-Bench Verified', domain:'agentic', model:'llama-4-maverick',           api:'meta-llama/Llama-4-Maverick-17B-128E-Instruct', score:'N/A', notes:''},
+    ]
+  },
+  {
+    lab: 'HHRI-AI', color: '#7c3aed', emoji: '🦊',
+    entries: [
+      {bench:'TMMLU+',        domain:'knowledge',   model:'FoxBrain_v1.2_70B_0630',      api:'N/A (internal)',               score:'N/A',   notes:'Internal eval pipeline'},
+      {bench:'TMMLU+',        domain:'knowledge',   model:'FoxBrain_v1.5_20251203',      api:'N/A (internal)',               score:'N/A',   notes:'Internal eval pipeline'},
+      {bench:'MRCR v2',       domain:'longctx',     model:'gemma-4-31b-it',              api:'gemma-4-31b-it',               score:'66.4%', notes:'256K tokens, vllm_gemma4 env, H100'},
+      {bench:'tau-bench',     domain:'agentic',     model:'FoxBrain models',             api:'N/A (internal)',               score:'N/A',   notes:'retail + airline domains'},
+      {bench:'tau2-bench',    domain:'agentic',     model:'FoxBrain models',             api:'N/A (internal)',               score:'N/A',   notes:'retail domain, claude-haiku-4-5 simulator'},
+      {bench:'AIEC',          domain:'safety',      model:'FoxBrain models',             api:'N/A (internal)',               score:'N/A',   notes:'Chinese AI ethics eval'},
+      {bench:'BigBenchHard',  domain:'knowledge',   model:'FoxBrain models',             api:'N/A (internal)',               score:'N/A',   notes:'Internal eval pipeline'},
+      {bench:'MedBench',      domain:'health',      model:'FoxBrain models',             api:'N/A (internal)',               score:'N/A',   notes:'Chinese medical QA'},
+    ]
+  },
+];
+
+// Build reverse index: bench → [labs + models]
+function buildBenchIndex() {
+  const idx = {};
+  LAB_DATA.forEach(lab => {
+    lab.entries.forEach(e => {
+      if (!idx[e.bench]) idx[e.bench] = {bench: e.bench, domain: e.domain, labs: []};
+      idx[e.bench].labs.push({lab: lab.lab, color: lab.color, emoji: lab.emoji, model: e.model, api: e.api, score: e.score, notes: e.notes});
+    });
+  });
+  return Object.values(idx);
+}
+
+let labXrefFilter = 'all', benchXrefFilter = 'all';
+
+function setLabXref(f, el) {
+  labXrefFilter = f;
+  document.querySelectorAll('#tab-bylabs .fbtn').forEach(b => b.classList.remove('active'));
+  if (el) el.classList.add('active');
+  renderByLabs();
+}
+
+function setBenchXref(f, el) {
+  benchXrefFilter = f;
+  document.querySelectorAll('#tab-bybench .fbtn').forEach(b => b.classList.remove('active'));
+  if (el) el.classList.add('active');
+  renderByBench();
+}
+
+function renderByLabs() {
+  const labs = labXrefFilter === 'all' ? LAB_DATA : LAB_DATA.filter(l => l.lab === labXrefFilter);
+  const grid = document.getElementById('bylabs-grid');
+  grid.innerHTML = labs.map(lab => {
+    const rows = lab.entries.map(e => {
+      const dm = DM[e.domain] || {};
+      return `<div class="xref-row xref-row-2col">
+        <div>
+          <div class="xref-bench-name">${e.bench}</div>
+          <span class="xref-domain-tag">${dm.label || e.domain}</span>
+          <div class="xref-models-list">
+            <span class="xref-model" title="API model string">${e.api}</span>
+            ${e.notes ? `<span style="font-size:11px;color:var(--text3)">${e.notes}</span>` : ''}
+          </div>
+        </div>
+        <div style="text-align:right">
+          <div class="xref-score">${e.score}</div>
+          <div style="font-size:11px;color:var(--text3);margin-top:2px">${e.model !== e.api ? e.model : ''}</div>
+        </div>
+      </div>`;
+    }).join('');
+
+    return `<div class="xref-card">
+      <div class="xref-card-header">
+        <div>
+          <div class="xref-card-title">${lab.emoji} ${lab.lab}</div>
+          <div class="xref-card-sub">Evaluated benchmarks with exact model versions</div>
+        </div>
+        <span class="xref-count">${lab.entries.length} benchmarks</span>
+      </div>
+      <div class="xref-body">${rows}</div>
+    </div>`;
+  }).join('');
+}
+
+function renderByBench() {
+  const idx = buildBenchIndex();
+  const items = benchXrefFilter === 'all' ? idx : idx.filter(b => b.domain === benchXrefFilter);
+  items.sort((a,b) => {
+    const dOrder = DO.indexOf(a.domain) - DO.indexOf(b.domain);
+    return dOrder !== 0 ? dOrder : a.bench.localeCompare(b.bench);
+  });
+  const grid = document.getElementById('bybench-grid');
+  grid.innerHTML = items.map(item => {
+    const dm = DM[item.domain] || {};
+    const rows = item.labs.map(entry => {
+      return `<div class="xref-row xref-row-2col">
+        <div>
+          <div style="font-weight:600;font-size:13px;color:var(--text)">${entry.emoji} ${entry.lab}</div>
+          <span class="xref-model" title="API model string">${entry.api}</span>
+          ${entry.notes ? `<div style="font-size:11px;color:var(--text3);margin-top:2px">${entry.notes}</div>` : ''}
+        </div>
+        <div class="xref-score">${entry.score}</div>
+      </div>`;
+    }).join('');
+
+    return `<div class="xref-card">
+      <div class="xref-card-header">
+        <div>
+          <div class="xref-card-title">${item.bench}</div>
+          <div class="xref-card-sub"><span class="dpill ${dm.cls}" style="font-size:10px;padding:2px 8px">${dm.label || item.domain}</span></div>
+        </div>
+        <span class="xref-count">${item.labs.length} labs</span>
+      </div>
+      <div class="xref-body">${rows}</div>
+    </div>`;
+  }).join('');
 }
 
 // ── Init ───────────────────────────────────────────────────────────────────
