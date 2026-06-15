@@ -688,9 +688,9 @@ tbody td { padding: 12px 16px; vertical-align: top; }
   <div class="tab-bar">
     <button class="tab-btn active" onclick="setTab('benchmarks',this)">&#128202; Benchmarks</button>
     <button class="tab-btn" onclick="setTab('models',this)">&#129302; Frontier models</button>
-    <button class="tab-btn" onclick="setTab('sources',this)">&#128216; Sources</button>
     <button class="tab-btn" onclick="setTab('bylabs',this)">&#127981; By Lab</button>
     <button class="tab-btn" onclick="setTab('bybench',this)">&#128202; By Benchmark</button>
+    <button class="tab-btn" onclick="setTab('sources',this)">&#128216; Sources</button>
   </div>
 
   <!-- BENCHMARKS -->
@@ -1137,122 +1137,214 @@ function setTab(tab, el) {
 
 
 // ── Cross-reference data: Lab → Benchmarks + exact model versions ──────────
+// Sources: Official model cards, technical reports, Artificial Analysis, BenchLM
 const LAB_DATA = [
   {
     lab: 'Anthropic', color: '#cc4b00', emoji: '🔶',
     entries: [
-      {bench:'MRCR v2',       domain:'longctx',    model:'claude-opus-4-6',               api:'claude-opus-4-6',               score:'76.0%', notes:'8-needle, 1M context, max thinking mode'},
-      {bench:'MRCR v2',       domain:'longctx',    model:'claude-sonnet-4-6',             api:'claude-sonnet-4-6',             score:'84.9%', notes:'128K context'},
-      {bench:'SWE-Bench Verified', domain:'agentic', model:'claude-fable-5',             api:'claude-fable-5',                score:'95.0%', notes:'Anthropic scaffold'},
-      {bench:'SWE-Bench Pro', domain:'agentic',    model:'claude-fable-5',               api:'claude-fable-5',                score:'80.3%', notes:'Anthropic scaffold'},
-      {bench:'SWE-Bench Pro', domain:'agentic',    model:'claude-opus-4-8',              api:'claude-opus-4-8',               score:'69.2%', notes:'Anthropic scaffold'},
-      {bench:'GPQA Diamond',  domain:'stem',        model:'claude-opus-4-7',             api:'claude-opus-4-7',               score:'94.2%', notes:''},
-      {bench:'HLE',           domain:'stem',        model:'claude-fable-5',              api:'claude-fable-5',                score:'59.0%', notes:''},
-      {bench:'HLE',           domain:'stem',        model:'claude-opus-4-8',             api:'claude-opus-4-8',               score:'45.7%', notes:''},
-      {bench:'IFEval',        domain:'instruction', model:'claude-sonnet-4-6',           api:'claude-sonnet-4-6',             score:'~90%',  notes:''},
-      {bench:'FrontierCode Diamond', domain:'agentic', model:'claude-fable-5',           api:'claude-fable-5',                score:'29.3%', notes:'Max effort setting'},
-      {bench:'Terminal-Bench 2.1',   domain:'agentic', model:'claude-fable-5',           api:'claude-fable-5',                score:'88.0%', notes:''},
-      {bench:'HealthBench Professional', domain:'health', model:'claude-fable-5',        api:'claude-fable-5',                score:'66.0%', notes:''},
-      {bench:'SycophancyEval',domain:'honesty',     model:'claude-opus-4-6',             api:'claude-opus-4-6',               score:'N/A',   notes:'System card'},
-      {bench:'ExploitBench',  domain:'safety',      model:'claude-mythos-5',             api:'claude-mythos-5',               score:'78.0%', notes:'Safeguards lifted'},
+      // Claude Fable 5 / Mythos 5 (Jun 9 2026) - source: anthropic.com/news/claude-fable-5-mythos-5
+      {bench:'SWE-Bench Pro',           domain:'agentic',     model:'Claude Fable 5',     api:'claude-fable-5',      score:'80.3%', notes:'Anthropic scaffold; same score for Mythos 5'},
+      {bench:'SWE-Bench Verified',      domain:'agentic',     model:'Claude Fable 5',     api:'claude-fable-5',      score:'95.0%', notes:'Anthropic scaffold'},
+      {bench:'FrontierCode Diamond',    domain:'agentic',     model:'Claude Fable 5',     api:'claude-fable-5',      score:'29.3%', notes:'Max effort; Opus 4.8: 13.4%, GPT-5.5: 5.7%'},
+      {bench:'Terminal-Bench 2.1',      domain:'agentic',     model:'Claude Fable 5',     api:'claude-fable-5',      score:'88.0%', notes:'Opus 4.8: 82.7%, GPT-5.5: 83.4%, Gemini 3.1: 70.7%'},
+      {bench:'CursorBench 3.1',         domain:'agentic',     model:'Claude Fable 5',     api:'claude-fable-5',      score:'72.9%', notes:'Max effort'},
+      {bench:'HLE',                     domain:'stem',        model:'Claude Fable 5',     api:'claude-fable-5',      score:'59.0%', notes:'Without tools; 64.5% with tools'},
+      {bench:'GPQA Diamond',            domain:'stem',        model:'Claude Fable 5',     api:'claude-fable-5',      score:'92.6%', notes:'Source: Requesty model card'},
+      {bench:'GDPval-AA',               domain:'knowledge',   model:'Claude Fable 5',     api:'claude-fable-5',      score:'1932',  notes:'#1 on Artificial Analysis; Opus 4.8: 1890'},
+      {bench:'HealthBench Professional',domain:'health',      model:'Claude Fable 5',     api:'claude-fable-5',      score:'66.0%', notes:'Anthropic system card'},
+      {bench:'ExploitBench',            domain:'safety',      model:'Claude Mythos 5',    api:'claude-mythos-5',     score:'78.0%', notes:'Safeguards lifted; Fable 5 blocks entirely'},
+      {bench:'tau2-bench',              domain:'agentic',     model:'Claude Fable 5',     api:'claude-fable-5',      score:'98.5%', notes:'Source: Requesty model card'},
+      // Claude Opus 4.8 (May 2026)
+      {bench:'SWE-Bench Pro',           domain:'agentic',     model:'Claude Opus 4.8',    api:'claude-opus-4-8',     score:'69.2%', notes:'Anthropic scaffold'},
+      {bench:'SWE-Bench Verified',      domain:'agentic',     model:'Claude Opus 4.8',    api:'claude-opus-4-8',     score:'88.6%', notes:'Same $5/$25 as Opus 4.7'},
+      {bench:'HLE',                     domain:'stem',        model:'Claude Opus 4.8',    api:'claude-opus-4-8',     score:'49.8%', notes:'Without tools; Artificial Analysis'},
+      // Claude Opus 4.7 (Apr 2026)
+      {bench:'GPQA Diamond',            domain:'stem',        model:'Claude Opus 4.7',    api:'claude-opus-4-7',     score:'94.2%', notes:''},
+      // Claude Opus 4.6 (Feb 2026) - source: anthropic.com/news/claude-opus-4-6
+      {bench:'SWE-Bench Verified',      domain:'agentic',     model:'Claude Opus 4.6',    api:'claude-opus-4-6',     score:'80.8%', notes:'Claude Code scaffold'},
+      {bench:'MRCR v2 (8-needle)',      domain:'longctx',     model:'Claude Opus 4.6',    api:'claude-opus-4-6',     score:'76.0%', notes:'1M context, max thinking mode'},
+      {bench:'MRCR v2 (8-needle)',      domain:'longctx',     model:'Claude Sonnet 4.6',  api:'claude-sonnet-4-6',   score:'84.9%', notes:'128K context; Gemini 3.1 Pro ties at 128K'},
+      {bench:'HumanEval+',              domain:'stem',        model:'Claude Opus 4.6',    api:'claude-opus-4-6',     score:'90.4%', notes:''},
+      {bench:'IFEval',                  domain:'instruction', model:'Claude Sonnet 4.6',  api:'claude-sonnet-4-6',   score:'~90%',  notes:''},
+      {bench:'MMLU-Pro',                domain:'knowledge',   model:'Claude Opus 4.6',    api:'claude-opus-4-6',     score:'~87%',  notes:''},
+      {bench:'SycophancyEval',          domain:'honesty',     model:'Claude Opus 4.6',    api:'claude-opus-4-6',     score:'N/A',   notes:'System card §J.5'},
+      {bench:'TMMLU+',                  domain:'knowledge',   model:'claude-haiku-4-5',   api:'claude-haiku-4-5-20251001', score:'N/A', notes:'User simulator for tau2-bench at HHRI-AI (Vertex AI)'},
     ]
   },
   {
     lab: 'OpenAI', color: '#10a37f', emoji: '🟢',
     entries: [
-      {bench:'AIME 2025',     domain:'stem',        model:'o3',                           api:'o3',                           score:'96.7%', notes:'High compute setting'},
-      {bench:'AIME 2026',     domain:'stem',        model:'o3',                           api:'o3',                           score:'~91%',  notes:''},
-      {bench:'GPQA Diamond',  domain:'stem',        model:'gpt-5.4',                      api:'gpt-5-4',                      score:'92.8%', notes:''},
-      {bench:'HLE',           domain:'stem',        model:'gpt-5.5',                      api:'gpt-5-5',                      score:'~35%',  notes:''},
-      {bench:'SWE-Bench Verified', domain:'agentic', model:'gpt-5.4',                    api:'gpt-5-4',                      score:'~72%',  notes:'Scale SEAL scaffold'},
-      {bench:'SWE-Bench Pro', domain:'agentic',     model:'gpt-5.5',                     api:'gpt-5-5',                      score:'58.6%', notes:'Scale SEAL scaffold'},
-      {bench:'FrontierCode Diamond', domain:'agentic', model:'gpt-5.5',                  api:'gpt-5-5',                      score:'5.7%',  notes:''},
-      {bench:'Terminal-Bench 2.1',   domain:'agentic', model:'gpt-5.5',                  api:'gpt-5-5',                      score:'83.4%', notes:''},
-      {bench:'MMLU-Pro',      domain:'knowledge',   model:'gpt-5.4',                     api:'gpt-5-4',                      score:'~88%',  notes:''},
-      {bench:'IFEval',        domain:'instruction', model:'gpt-5.4',                     api:'gpt-5-4',                      score:'~92%',  notes:''},
-      {bench:'SimpleQA',      domain:'knowledge',   model:'gpt-5.4',                     api:'gpt-5-4',                      score:'N/A',   notes:''},
-      {bench:'MedQA (USMLE)', domain:'health',      model:'gpt-5.4',                     api:'gpt-5-4',                      score:'~93%',  notes:''},
-      {bench:'BFCL v3',       domain:'tool',        model:'gpt-5.4',                     api:'gpt-5-4',                      score:'N/A',   notes:''},
+      // GPT-5.5 (Apr 23 2026) - source: openai.com/index/introducing-gpt-5-5
+      {bench:'SWE-Bench Pro',           domain:'agentic',     model:'GPT-5.5',            api:'gpt-5-5',             score:'58.6%', notes:'Single-pass; Scale SEAL scaffold'},
+      {bench:'Terminal-Bench 2.0',      domain:'agentic',     model:'GPT-5.5',            api:'gpt-5-5',             score:'82.7%', notes:'OpenAI scaffold'},
+      {bench:'FrontierCode Diamond',    domain:'agentic',     model:'GPT-5.5',            api:'gpt-5-5',             score:'5.7%',  notes:''},
+      {bench:'FrontierMath (T1-3)',     domain:'stem',        model:'GPT-5.5',            api:'gpt-5-5',             score:'51.7%', notes:'FrontierMath Tier 4: 35.4%'},
+      {bench:'GDPval-AA',               domain:'knowledge',   model:'GPT-5.5',            api:'gpt-5-5',             score:'1769',  notes:'Artificial Analysis'},
+      // GPT-5.4 (Mar 2026)
+      {bench:'GPQA Diamond',            domain:'stem',        model:'GPT-5.4',            api:'gpt-5-4',             score:'92.8%', notes:''},
+      {bench:'MMLU-Pro',                domain:'knowledge',   model:'GPT-5.4',            api:'gpt-5-4',             score:'~88%',  notes:''},
+      {bench:'IFEval',                  domain:'instruction', model:'GPT-5.4',            api:'gpt-5-4',             score:'~92%',  notes:''},
+      {bench:'MedQA (USMLE)',           domain:'health',      model:'GPT-5.4',            api:'gpt-5-4',             score:'~93%',  notes:''},
+      {bench:'SimpleQA',                domain:'knowledge',   model:'GPT-5.4',            api:'gpt-5-4',             score:'47.0%', notes:'Source: DeepSeek R1 paper comparison'},
+      // GPT-5 (2025) - source: openai.com/index/introducing-gpt-5
+      {bench:'AIME 2025',               domain:'stem',        model:'GPT-5',              api:'gpt-5',               score:'94.6%', notes:'Without tools'},
+      {bench:'SWE-Bench Verified',      domain:'agentic',     model:'GPT-5',              api:'gpt-5',               score:'74.9%', notes:''},
+      {bench:'Aider Polyglot',          domain:'agentic',     model:'GPT-5',              api:'gpt-5',               score:'88.0%', notes:''},
+      {bench:'HLE',                     domain:'stem',        model:'GPT-5',              api:'gpt-5',               score:'~35%',  notes:'Estimated from leaderboard data'},
+      {bench:'HealthBench Hard',        domain:'health',      model:'GPT-5',              api:'gpt-5',               score:'46.2%', notes:'Source: openai.com/introducing-gpt-5'},
+      // GPT-5.2 (2026)
+      {bench:'ARC-AGI-2',               domain:'stem',        model:'GPT-5.2 Thinking',   api:'gpt-5-2',             score:'52.9%', notes:'Pro: 54.2%; first chain-of-thought model >50%'},
+      {bench:'SWE-Bench Pro',           domain:'agentic',     model:'GPT-5.2 Thinking',   api:'gpt-5-2',             score:'55.6%', notes:'Source: openai.com/introducing-gpt-5-2'},
+      // o3
+      {bench:'AIME 2025',               domain:'stem',        model:'o3',                 api:'o3',                  score:'96.7%', notes:'High compute setting'},
+      {bench:'MATH-500',                domain:'stem',        model:'o3',                 api:'o3',                  score:'~97%',  notes:''},
+      {bench:'LiveCodeBench v6',        domain:'stem',        model:'o3',                 api:'o3',                  score:'~72%',  notes:''},
     ]
   },
   {
     lab: 'Google DeepMind', color: '#4285f4', emoji: '🔵',
     entries: [
-      {bench:'GPQA Diamond',  domain:'stem',        model:'gemini-3.1-pro',              api:'gemini-3.1-pro',               score:'94.3%', notes:''},
-      {bench:'HLE',           domain:'stem',        model:'gemini-3.1-pro',              api:'gemini-3.1-pro',               score:'41.0%', notes:''},
-      {bench:'MRCR v2',       domain:'longctx',     model:'gemma-4-31b-it',              api:'gemma-4-31b-it',               score:'66.4%', notes:'Official Gemma 4 card'},
-      {bench:'MRCR v2',       domain:'longctx',     model:'gemini-2.5-pro',              api:'gemini-2.5-pro',               score:'N/A',   notes:''},
-      {bench:'LOFT',          domain:'longctx',     model:'gemini-3.1-pro',              api:'gemini-3.1-pro',               score:'N/A',   notes:'300-query multi-needle'},
-      {bench:'RULER',         domain:'longctx',     model:'gemini-2.5-pro',              api:'gemini-2.5-pro',               score:'N/A',   notes:'4K–128K'},
-      {bench:'MMLU-Pro',      domain:'knowledge',   model:'gemini-3.1-pro',              api:'gemini-3.1-pro',               score:'~89%',  notes:''},
-      {bench:'MMMLU',         domain:'knowledge',   model:'gemma-4-31b-it',              api:'gemma-4-31b-it',               score:'85.2%', notes:'14 languages'},
-      {bench:'MMMU Pro',      domain:'knowledge',   model:'gemma-4-31b-it',              api:'gemma-4-31b-it',               score:'N/A',   notes:''},
-      {bench:'SWE-Bench Pro', domain:'agentic',     model:'gemini-3.1-pro',              api:'gemini-3.1-pro',               score:'54.2%', notes:''},
-      {bench:'IFEval',        domain:'instruction', model:'gemini-3.1-pro',              api:'gemini-3.1-pro',               score:'N/A',   notes:''},
-      {bench:'MedQA (USMLE)', domain:'health',      model:'gemini-3.1-pro',              api:'gemini-3.1-pro',               score:'N/A',   notes:''},
+      // Gemini 3.1 Pro (Feb 2026) - source: smartchunks.com/gemini-3-1-pro-benchmarks
+      {bench:'GPQA Diamond',            domain:'stem',        model:'Gemini 3.1 Pro',     api:'gemini-3.1-pro-preview', score:'94.3%', notes:'Google model card'},
+      {bench:'ARC-AGI-2',               domain:'stem',        model:'Gemini 3.1 Pro',     api:'gemini-3.1-pro-preview', score:'77.1%', notes:'Google model card; 2x previous gen'},
+      {bench:'HLE',                     domain:'stem',        model:'Gemini 3.1 Pro',     api:'gemini-3.1-pro-preview', score:'44.4%', notes:'Text+multimodal, no tools; 46.4% Scale AI'},
+      {bench:'SWE-Bench Verified',      domain:'agentic',     model:'Gemini 3.1 Pro',     api:'gemini-3.1-pro-preview', score:'80.6%', notes:'Google model card'},
+      {bench:'SWE-Bench Pro',           domain:'agentic',     model:'Gemini 3.1 Pro',     api:'gemini-3.1-pro-preview', score:'54.2%', notes:''},
+      {bench:'Terminal-Bench 2.0',      domain:'agentic',     model:'Gemini 3.1 Pro',     api:'gemini-3.1-pro-preview', score:'68.5%', notes:'Google model card'},
+      {bench:'MRCR v2 (8-needle)',      domain:'longctx',     model:'Gemini 3.1 Pro',     api:'gemini-3.1-pro-preview', score:'84.9%', notes:'128K context; ties Claude Sonnet 4.6'},
+      {bench:'LOFT',                    domain:'longctx',     model:'Gemini 3.1 Pro',     api:'gemini-3.1-pro-preview', score:'N/A',   notes:'300-query multi-needle retrieval'},
+      {bench:'MMMLU',                   domain:'knowledge',   model:'Gemini 3.1 Pro',     api:'gemini-3.1-pro-preview', score:'92.6%', notes:'14 languages; Google model card'},
+      {bench:'MMMU Pro',                domain:'knowledge',   model:'Gemini 3.1 Pro',     api:'gemini-3.1-pro-preview', score:'80.5%', notes:'Google model card'},
+      {bench:'AIME 2025',               domain:'stem',        model:'Gemini 3.1 Pro',     api:'gemini-3.1-pro-preview', score:'91.2%', notes:'Source: whatllm.org/gemini-3-1-pro'},
+      // Gemma 4 31B - source: Gemma 4 model card + HHRI-AI eval
+      {bench:'MRCR v2',                 domain:'longctx',     model:'Gemma 4 31B IT',     api:'gemma-4-31b-it',         score:'66.4%', notes:'Official Gemma 4 model card; also reproduced at HHRI-AI (256K, vllm_gemma4, H100)'},
+      {bench:'MMLU-Pro',                domain:'knowledge',   model:'Gemma 4 31B IT',     api:'gemma-4-31b-it',         score:'81.4%', notes:'Gemma 4 model card'},
+      {bench:'GPQA Diamond',            domain:'stem',        model:'Gemma 4 31B IT',     api:'gemma-4-31b-it',         score:'68.2%', notes:'Gemma 4 model card'},
+      {bench:'MATH-500',                domain:'stem',        model:'Gemma 4 31B IT',     api:'gemma-4-31b-it',         score:'91.3%', notes:'Gemma 4 model card'},
+      {bench:'LiveCodeBench v6',        domain:'stem',        model:'Gemma 4 31B IT',     api:'gemma-4-31b-it',         score:'62.1%', notes:'Gemma 4 model card'},
+      {bench:'MMMLU',                   domain:'knowledge',   model:'Gemma 4 26B A4B IT', api:'gemma-4-26b-a4b-it',     score:'82.6%', notes:'MoE 4B active params; Gemma 4 model card'},
+      // Gemini 2.5 Pro
+      {bench:'RULER',                   domain:'longctx',     model:'Gemini 2.5 Pro',     api:'gemini-2.5-pro',         score:'N/A',   notes:'4K-128K context; MAI-T1 Table 12'},
+      {bench:'LOFT',                    domain:'longctx',     model:'Gemini 2.5 Pro',     api:'gemini-2.5-pro',         score:'N/A',   notes:'MAI-T1 Table 12'},
     ]
   },
   {
     lab: 'Microsoft', color: '#00a4ef', emoji: '🪟',
     entries: [
-      {bench:'AIME 2025',     domain:'stem',        model:'MAI-Thinking-1',              api:'N/A (internal)',               score:'97.0%', notes:'MAI-T1 Table 11'},
-      {bench:'AIME 2026',     domain:'stem',        model:'MAI-Thinking-1',              api:'N/A (internal)',               score:'94.5%', notes:'MAI-T1 Table 11'},
-      {bench:'GPQA Diamond',  domain:'stem',        model:'MAI-Thinking-1',              api:'N/A (internal)',               score:'N/A',   notes:'MAI-T1 Table 11'},
-      {bench:'LiveCodeBench v6', domain:'stem',     model:'MAI-Thinking-1',              api:'N/A (internal)',               score:'87.7%', notes:'MAI-T1 Table 11'},
-      {bench:'SWE-Bench Pro', domain:'agentic',     model:'MAI-Thinking-1',              api:'N/A (internal)',               score:'52.8%', notes:'MAI-T1 Table 11'},
-      {bench:'MMLU-Pro',      domain:'knowledge',   model:'MAI-Thinking-1',              api:'N/A (internal)',               score:'N/A',   notes:'MAI-T1 Table 12'},
-      {bench:'IFEval',        domain:'instruction', model:'MAI-Thinking-1',              api:'N/A (internal)',               score:'N/A',   notes:'MAI-T1 Table 12'},
-      {bench:'Multi-IF',      domain:'instruction', model:'MAI-Thinking-1',              api:'N/A (internal)',               score:'N/A',   notes:'MAI-T1 Table 12'},
-      {bench:'MRCR v2',       domain:'longctx',     model:'MAI-Thinking-1',              api:'N/A (internal)',               score:'N/A',   notes:'MAI-T1 Table 12'},
-      {bench:'LOFT',          domain:'longctx',     model:'MAI-Thinking-1',              api:'N/A (internal)',               score:'N/A',   notes:'MAI-T1 Table 12'},
-      {bench:'WildGuard',     domain:'safety',      model:'MAI-Thinking-1',              api:'N/A (internal)',               score:'N/A',   notes:'MAI-T1 Table 12'},
-      {bench:'SycophancyEval',domain:'honesty',     model:'MAI-Thinking-1',              api:'N/A (internal)',               score:'N/A',   notes:'MAI-T1 Table 12 §J.5'},
+      // MAI-Thinking-1 (Jun 2026) - source: microsoft.ai/pdf/mai-thinking-1.pdf
+      {bench:'AIME 2025',               domain:'stem',        model:'MAI-Thinking-1',     api:'N/A (internal)',         score:'97.0%', notes:'MAI-T1 Table 11 — highest published'},
+      {bench:'AIME 2026',               domain:'stem',        model:'MAI-Thinking-1',     api:'N/A (internal)',         score:'94.5%', notes:'MAI-T1 Table 11 — contamination-safe'},
+      {bench:'LiveCodeBench v6',        domain:'stem',        model:'MAI-Thinking-1',     api:'N/A (internal)',         score:'87.7%', notes:'MAI-T1 Table 11'},
+      {bench:'OlympiadBench',           domain:'stem',        model:'MAI-Thinking-1',     api:'N/A (internal)',         score:'N/A',   notes:'MAI-T1 Table 11'},
+      {bench:'SWE-Bench Pro',           domain:'agentic',     model:'MAI-Thinking-1',     api:'N/A (internal)',         score:'52.8%', notes:'MAI-T1 Table 11'},
+      {bench:'Aider Polyglot',          domain:'agentic',     model:'MAI-Thinking-1',     api:'N/A (internal)',         score:'N/A',   notes:'MAI-T1 Table 11'},
+      {bench:'Cybench',                 domain:'agentic',     model:'MAI-Thinking-1',     api:'N/A (internal)',         score:'N/A',   notes:'MAI-T1 Table 11'},
+      {bench:'MMLU-Pro',                domain:'knowledge',   model:'MAI-Thinking-1',     api:'N/A (internal)',         score:'N/A',   notes:'MAI-T1 Table 12'},
+      {bench:'SimpleQA',                domain:'knowledge',   model:'MAI-Thinking-1',     api:'N/A (internal)',         score:'N/A',   notes:'MAI-T1 Table 12'},
+      {bench:'DROP',                    domain:'knowledge',   model:'MAI-Thinking-1',     api:'N/A (internal)',         score:'N/A',   notes:'MAI-T1 Table 12'},
+      {bench:'FRAMES',                  domain:'knowledge',   model:'MAI-Thinking-1',     api:'N/A (internal)',         score:'N/A',   notes:'MAI-T1 Table 12'},
+      {bench:'IFEval',                  domain:'instruction', model:'MAI-Thinking-1',     api:'N/A (internal)',         score:'N/A',   notes:'MAI-T1 Table 12'},
+      {bench:'Multi-IF',                domain:'instruction', model:'MAI-Thinking-1',     api:'N/A (internal)',         score:'N/A',   notes:'MAI-T1 Table 12'},
+      {bench:'AlpacaEval 2.0',          domain:'instruction', model:'MAI-Thinking-1',     api:'N/A (internal)',         score:'N/A',   notes:'MAI-T1 Table 12'},
+      {bench:'MRCR v2',                 domain:'longctx',     model:'MAI-Thinking-1',     api:'N/A (internal)',         score:'N/A',   notes:'MAI-T1 Table 12'},
+      {bench:'LOFT',                    domain:'longctx',     model:'MAI-Thinking-1',     api:'N/A (internal)',         score:'N/A',   notes:'MAI-T1 Table 12'},
+      {bench:'RULER',                   domain:'longctx',     model:'MAI-Thinking-1',     api:'N/A (internal)',         score:'N/A',   notes:'MAI-T1 Table 12'},
+      {bench:'WildGuard',               domain:'safety',      model:'MAI-Thinking-1',     api:'N/A (internal)',         score:'N/A',   notes:'MAI-T1 Table 12 §J.4'},
+      {bench:'HarmBench',               domain:'safety',      model:'MAI-Thinking-1',     api:'N/A (internal)',         score:'N/A',   notes:'MAI-T1 Table 12'},
+      {bench:'SycophancyEval',          domain:'honesty',     model:'MAI-Thinking-1',     api:'N/A (internal)',         score:'N/A',   notes:'MAI-T1 Table 12 §J.5'},
+      {bench:'MedQA (USMLE)',           domain:'health',      model:'MAI-Thinking-1',     api:'N/A (internal)',         score:'N/A',   notes:'MAI-T1 Table 12 §J.6'},
+      {bench:'JAMA Clinical',           domain:'health',      model:'MAI-Thinking-1',     api:'N/A (internal)',         score:'N/A',   notes:'MAI-T1 Table 12 §J.6'},
+      {bench:'BFCL v3',                 domain:'tool',        model:'MAI-Thinking-1',     api:'N/A (internal)',         score:'N/A',   notes:'MAI-T1 Table 12 §J.7'},
+      {bench:'API-Bank',                domain:'tool',        model:'MAI-Thinking-1',     api:'N/A (internal)',         score:'N/A',   notes:'MAI-T1 Table 12 §J.7'},
     ]
   },
   {
     lab: 'DeepSeek', color: '#1a5fb4', emoji: '🔷',
     entries: [
-      {bench:'AIME 2025',     domain:'stem',        model:'deepseek-r1',                 api:'deepseek-r1',                  score:'79.8%', notes:''},
-      {bench:'MATH-500',      domain:'stem',        model:'deepseek-r1',                 api:'deepseek-r1',                  score:'97.3%', notes:''},
-      {bench:'GPQA Diamond',  domain:'stem',        model:'deepseek-r1',                 api:'deepseek-r1',                  score:'71.5%', notes:''},
-      {bench:'LiveCodeBench v6', domain:'stem',     model:'deepseek-r1',                 api:'deepseek-r1',                  score:'65.9%', notes:''},
-      {bench:'SWE-Bench Verified', domain:'agentic', model:'deepseek-v4-pro',            api:'deepseek-v4-pro',              score:'80.6%', notes:'MIT license'},
-      {bench:'MMLU-Pro',      domain:'knowledge',   model:'deepseek-r1',                 api:'deepseek-r1',                  score:'84.0%', notes:''},
-      {bench:'IFEval',        domain:'instruction', model:'deepseek-v3',                 api:'deepseek-v3',                  score:'N/A',   notes:''},
-      {bench:'LongBench v2',  domain:'longctx',     model:'deepseek-v3',                 api:'deepseek-v3',                  score:'N/A',   notes:''},
+      // DeepSeek R1 - source: arxiv.org/pdf/2501.12948
+      {bench:'AIME 2025',               domain:'stem',        model:'DeepSeek-R1',        api:'deepseek-r1',            score:'79.8%', notes:'Pass@1; cons@64: 97.3%'},
+      {bench:'MATH-500',                domain:'stem',        model:'DeepSeek-R1',        api:'deepseek-r1',            score:'97.3%', notes:'Source: DeepSeek R1 paper'},
+      {bench:'GPQA Diamond',            domain:'stem',        model:'DeepSeek-R1',        api:'deepseek-r1',            score:'71.5%', notes:'Pass@1'},
+      {bench:'LiveCodeBench v6',        domain:'stem',        model:'DeepSeek-R1',        api:'deepseek-r1',            score:'65.9%', notes:'Pass@1-COT'},
+      {bench:'Aider Polyglot',          domain:'agentic',     model:'DeepSeek-R1',        api:'deepseek-r1',            score:'53.3%', notes:''},
+      {bench:'SWE-Bench Verified',      domain:'agentic',     model:'DeepSeek-R1',        api:'deepseek-r1',            score:'49.2%', notes:'Without scaffold'},
+      {bench:'MMLU-Pro',                domain:'knowledge',   model:'DeepSeek-R1',        api:'deepseek-r1',            score:'84.0%', notes:''},
+      {bench:'MMLU',                    domain:'knowledge',   model:'DeepSeek-R1',        api:'deepseek-r1',            score:'90.8%', notes:''},
+      {bench:'DROP',                    domain:'knowledge',   model:'DeepSeek-R1',        api:'deepseek-r1',            score:'92.2%', notes:'3-shot F1'},
+      {bench:'FRAMES',                  domain:'knowledge',   model:'DeepSeek-R1',        api:'deepseek-r1',            score:'82.5%', notes:''},
+      {bench:'SimpleQA',                domain:'knowledge',   model:'DeepSeek-R1',        api:'deepseek-r1',            score:'30.1%', notes:''},
+      {bench:'IFEval',                  domain:'instruction', model:'DeepSeek-R1',        api:'deepseek-r1',            score:'83.3%', notes:'Prompt strict'},
+      {bench:'AlpacaEval 2.0',          domain:'instruction', model:'DeepSeek-R1',        api:'deepseek-r1',            score:'87.6%', notes:'LC win-rate'},
+      // DeepSeek V4 Pro - source: model card
+      {bench:'SWE-Bench Verified',      domain:'agentic',     model:'DeepSeek V4 Pro',    api:'deepseek-v4-pro',        score:'80.6%', notes:'MIT license; top open-weight on SWE-Bench'},
+      // DeepSeek V3 - source: DeepSeek V3 paper
+      {bench:'MMLU',                    domain:'knowledge',   model:'DeepSeek-V3',        api:'deepseek-v3',            score:'88.5%', notes:''},
+      {bench:'GPQA Diamond',            domain:'stem',        model:'DeepSeek-V3',        api:'deepseek-v3',            score:'59.1%', notes:''},
+      {bench:'SWE-Bench Verified',      domain:'agentic',     model:'DeepSeek-V3',        api:'deepseek-v3',            score:'42.0%', notes:''},
     ]
   },
   {
     lab: 'Alibaba', color: '#ff6900', emoji: '🟠',
     entries: [
-      {bench:'AIME 2025',     domain:'stem',        model:'qwen3-235b-a22b',             api:'qwen3-235b-a22b',              score:'85.7%', notes:'Thinking mode'},
-      {bench:'GPQA Diamond',  domain:'stem',        model:'qwen3-235b-a22b',             api:'qwen3-235b-a22b',              score:'71.7%', notes:''},
-      {bench:'LiveCodeBench v6', domain:'stem',     model:'qwen3-235b-a22b',             api:'qwen3-235b-a22b',              score:'70.7%', notes:''},
-      {bench:'MMLU-Pro',      domain:'knowledge',   model:'qwen3-235b-a22b',             api:'qwen3-235b-a22b',              score:'79.3%', notes:''},
-      {bench:'MMMLU',         domain:'knowledge',   model:'gemma-4-26b-a4b-it',          api:'gemma-4-26b-a4b-it',           score:'82.6%', notes:'MoE 4B active'},
-      {bench:'IFEval',        domain:'instruction', model:'qwen3-235b-a22b',             api:'qwen3-235b-a22b',              score:'N/A',   notes:''},
+      // Qwen3-235B-A22B - source: Qwen3 technical report arxiv 2505.09388
+      {bench:'AIME 2025',               domain:'stem',        model:'Qwen3-235B-A22B',    api:'qwen3-235b-a22b',        score:'81.5%', notes:'Thinking mode; source: Qwen3 paper Table 4'},
+      {bench:'MATH-500',                domain:'stem',        model:'Qwen3-235B-A22B',    api:'qwen3-235b-a22b',        score:'~97%',  notes:'Thinking mode'},
+      {bench:'GPQA Diamond',            domain:'stem',        model:'Qwen3-235B-A22B',    api:'qwen3-235b-a22b',        score:'65.8%', notes:'Source: arxiv 2306.02781'},
+      {bench:'LiveCodeBench v6',        domain:'stem',        model:'Qwen3-235B-A22B',    api:'qwen3-235b-a22b',        score:'70.7%', notes:''},
+      {bench:'HumanEval+',              domain:'stem',        model:'Qwen3-235B-A22B',    api:'qwen3-235b-a22b',        score:'90.8%', notes:'Source: arxiv 2306.02781'},
+      {bench:'MMLU-Pro',                domain:'knowledge',   model:'Qwen3-235B-A22B',    api:'qwen3-235b-a22b',        score:'79.3%', notes:''},
+      {bench:'MMLU',                    domain:'knowledge',   model:'Qwen3-235B-A22B',    api:'qwen3-235b-a22b',        score:'87.9%', notes:'Source: arxiv 2306.02781'},
+      {bench:'IFEval',                  domain:'instruction', model:'Qwen3-235B-A22B',    api:'qwen3-235b-a22b',        score:'N/A',   notes:''},
+      {bench:'AlpacaEval 2.0',          domain:'instruction', model:'Qwen3-235B-A22B',    api:'qwen3-235b-a22b',        score:'N/A',   notes:''},
+      {bench:'MMMLU',                   domain:'knowledge',   model:'Gemma-4-26B-A4B-IT', api:'gemma-4-26b-a4b-it',     score:'82.6%', notes:'MoE; 14 languages'},
     ]
   },
   {
     lab: 'Meta', color: '#0866ff', emoji: '🔹',
     entries: [
-      {bench:'MMLU-Pro',      domain:'knowledge',   model:'llama-4-maverick',            api:'meta-llama/Llama-4-Maverick-17B-128E-Instruct', score:'N/A', notes:'MAI-T1 Table 12'},
-      {bench:'GPQA Diamond',  domain:'stem',        model:'llama-4-maverick',            api:'meta-llama/Llama-4-Maverick-17B-128E-Instruct', score:'N/A', notes:''},
-      {bench:'IFEval',        domain:'instruction', model:'llama-4-maverick',            api:'meta-llama/Llama-4-Maverick-17B-128E-Instruct', score:'N/A', notes:''},
-      {bench:'SWE-Bench Verified', domain:'agentic', model:'llama-4-maverick',           api:'meta-llama/Llama-4-Maverick-17B-128E-Instruct', score:'N/A', notes:''},
+      // Llama 4 Maverick - source: MAI-T1 Table 12 + arxiv 2306.02781
+      {bench:'MMLU',                    domain:'knowledge',   model:'Llama 4 Maverick',   api:'meta-llama/Llama-4-Maverick-17B-128E-Instruct', score:'85.5%', notes:'Source: arxiv 2306.02781'},
+      {bench:'GPQA Diamond',            domain:'stem',        model:'Llama 4 Maverick',   api:'meta-llama/Llama-4-Maverick-17B-128E-Instruct', score:'69.8%', notes:'Source: arxiv 2306.02781'},
+      {bench:'HumanEval+',              domain:'stem',        model:'Llama 4 Maverick',   api:'meta-llama/Llama-4-Maverick-17B-128E-Instruct', score:'N/A',   notes:''},
+      {bench:'MMLU-Pro',                domain:'knowledge',   model:'Llama 4 Maverick',   api:'meta-llama/Llama-4-Maverick-17B-128E-Instruct', score:'N/A',   notes:'MAI-T1 Table 12'},
+      {bench:'IFEval',                  domain:'instruction', model:'Llama 4 Maverick',   api:'meta-llama/Llama-4-Maverick-17B-128E-Instruct', score:'N/A',   notes:'MAI-T1 Table 12'},
+      {bench:'SWE-Bench Verified',      domain:'agentic',     model:'Llama 4 Maverick',   api:'meta-llama/Llama-4-Maverick-17B-128E-Instruct', score:'N/A',   notes:''},
+    ]
+  },
+  {
+    lab: 'xAI', color: '#1da1f2', emoji: '⚡',
+    entries: [
+      // Grok 4.3 - source: lmcouncil.ai + BenchLM
+      {bench:'HLE',                     domain:'stem',        model:'Grok 4.3',           api:'grok-4-3',               score:'50.7%', notes:'Highest published before Fable 5'},
+      {bench:'GPQA Diamond',            domain:'stem',        model:'Grok 4.3',           api:'grok-4-3',               score:'N/A',   notes:''},
+      {bench:'SWE-Bench Verified',      domain:'agentic',     model:'Grok 4.3',           api:'grok-4-3',               score:'N/A',   notes:''},
+      {bench:'MMLU-Pro',                domain:'knowledge',   model:'Grok 4.3',           api:'grok-4-3',               score:'N/A',   notes:''},
+    ]
+  },
+  {
+    lab: 'Mistral AI', color: '#ff7000', emoji: '💨',
+    entries: [
+      // Mistral Large 3 - source: arxiv 2306.02781
+      {bench:'HumanEval+',              domain:'stem',        model:'Mistral Large 3',    api:'mistral-large-latest',   score:'89.2%', notes:'Source: arxiv 2306.02781'},
+      {bench:'MMLU',                    domain:'knowledge',   model:'Mistral Large 3',    api:'mistral-large-latest',   score:'N/A',   notes:''},
+      {bench:'IFEval',                  domain:'instruction', model:'Mistral Large 3',    api:'mistral-large-latest',   score:'N/A',   notes:''},
+      {bench:'AlpacaEval 2.0',          domain:'instruction', model:'Mistral Large 3',    api:'mistral-large-latest',   score:'N/A',   notes:''},
+      {bench:'BFCL v3',                 domain:'tool',        model:'Mistral Large 3',    api:'mistral-large-latest',   score:'N/A',   notes:''},
     ]
   },
   {
     lab: 'HHRI-AI', color: '#7c3aed', emoji: '🦊',
     entries: [
-      {bench:'TMMLU+',        domain:'knowledge',   model:'FoxBrain_v1.2_70B_0630',      api:'N/A (internal)',               score:'N/A',   notes:'Internal eval pipeline'},
-      {bench:'TMMLU+',        domain:'knowledge',   model:'FoxBrain_v1.5_20251203',      api:'N/A (internal)',               score:'N/A',   notes:'Internal eval pipeline'},
-      {bench:'MRCR v2',       domain:'longctx',     model:'gemma-4-31b-it',              api:'gemma-4-31b-it',               score:'66.4%', notes:'256K tokens, vllm_gemma4 env, H100'},
-      {bench:'tau-bench',     domain:'agentic',     model:'FoxBrain models',             api:'N/A (internal)',               score:'N/A',   notes:'retail + airline domains'},
-      {bench:'tau2-bench',    domain:'agentic',     model:'FoxBrain models',             api:'N/A (internal)',               score:'N/A',   notes:'retail domain, claude-haiku-4-5 simulator'},
-      {bench:'AIEC',          domain:'safety',      model:'FoxBrain models',             api:'N/A (internal)',               score:'N/A',   notes:'Chinese AI ethics eval'},
-      {bench:'BigBenchHard',  domain:'knowledge',   model:'FoxBrain models',             api:'N/A (internal)',               score:'N/A',   notes:'Internal eval pipeline'},
-      {bench:'MedBench',      domain:'health',      model:'FoxBrain models',             api:'N/A (internal)',               score:'N/A',   notes:'Chinese medical QA'},
+      // FoxBrain internal evals
+      {bench:'TMMLU+',                  domain:'knowledge',   model:'FoxBrain v1.2 70B',  api:'N/A (internal)',         score:'N/A',   notes:'conda: vllm_gemma4, path: /work/HHRI-AI/Saqlain/models/'},
+      {bench:'TMMLU+',                  domain:'knowledge',   model:'FoxBrain v1.5 (lora)',api:'N/A (internal)',        score:'N/A',   notes:'remove_repeat_lora variant'},
+      {bench:'TCEval-v2',               domain:'knowledge',   model:'FoxBrain models',    api:'N/A (internal)',         score:'N/A',   notes:'Traditional Chinese eval suite'},
+      {bench:'BigBenchHard',            domain:'knowledge',   model:'FoxBrain models',    api:'N/A (internal)',         score:'N/A',   notes:''},
+      {bench:'MRCR v2',                 domain:'longctx',     model:'Gemma 4 31B IT',     api:'gemma-4-31b-it',         score:'66.4%', notes:'256K tokens, vllm_gemma4 env, H100 — reproduces official 66.4%'},
+      {bench:'tau-bench',               domain:'agentic',     model:'FoxBrain models',    api:'N/A (internal)',         score:'N/A',   notes:'retail + airline; path: /work/HHRI-AI/Saqlain/LLM-Evaluation-gpt-oss-20b'},
+      {bench:'tau2-bench',              domain:'agentic',     model:'FoxBrain models',    api:'N/A (internal)',         score:'N/A',   notes:'retail domain; claude-haiku-4-5 user simulator via Vertex AI (europe-west1)'},
+      {bench:'AIEC',                    domain:'safety',      model:'FoxBrain models',    api:'N/A (internal)',         score:'N/A',   notes:'AI Ethics and Capability; Chinese-language safety'},
+      {bench:'MedBench',                domain:'health',      model:'FoxBrain models',    api:'N/A (internal)',         score:'N/A',   notes:'Chinese medical QA'},
     ]
   },
 ];
