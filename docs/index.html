@@ -688,7 +688,7 @@ tbody td { padding: 12px 16px; vertical-align: top; }
       <div class="hstat"><div class="hstat-val">55</div><div class="hstat-lbl">Benchmarks</div></div>
       <div class="hstat"><div class="hstat-val">9</div><div class="hstat-lbl">Domains</div></div>
       <div class="hstat"><div class="hstat-val">72</div><div class="hstat-lbl">Models</div></div>
-      <div class="hstat"><div class="hstat-val">12</div><div class="hstat-lbl">Sources</div></div>
+      <div class="hstat"><div class="hstat-val">17</div><div class="hstat-lbl">Sources</div></div>
     </div>
   </div>
 </div>
@@ -992,16 +992,21 @@ const MODELS = [
 const SOURCES = [
   {title:'Claude Fable 5 & Mythos 5 — Launch Announcement',org:'Anthropic',date:'Jun 9, 2026',url:'https://www.anthropic.com/news/claude-fable-5-mythos-5',desc:'Launch of first Mythos-class model for general use. Benchmarks: SWE-Bench Pro (80.3%), FrontierCode Diamond (29.3%), HLE (59.0%), Terminal-Bench 2.1 (88.0%), HealthBench (66.0%). $10/$50 per M tokens.'},
   {title:'Gemma 4 Model Card & Developer Guide',org:'Google DeepMind',date:'Apr-Jun 2026',url:'https://deepmind.google/models/gemma/gemma-4/',desc:'Full Gemma 4 family: E2B, E4B, 12B (encoder-free multimodal), 26B MoE, 31B Dense. Benchmarks: Arena ELO (1452), MMMLU (85.2%), MMMU Pro, MATH-500, LiveCodeBench, GPQA. vLLM + llama.cpp + Ollama compatible.'},
-  {title:"MAI-Thinking-1 Technical Report",org:'Microsoft AI',date:'Jun 2026',url:'https://microsoft.ai/pdf/mai-thinking-1.pdf',desc:'Primary source for benchmark taxonomy. Tables 11 & 12 cover 9 capability domains, 47+ benchmarks, 8 frontier model comparisons.'},
+  {title:"MAI-Thinking-1 Technical Report",org:'Microsoft AI',date:'Jun 2026',url:'https://microsoft.ai/pdf/mai-thinking-1.pdf',desc:'Primary source for benchmark taxonomy. Tables 11 & 12 cover 9 capability domains, 47+ benchmarks, 8 frontier model comparisons. AIME 2025: 97.0%, LiveCodeBench: 87.7%, SWE-Bench Pro: 52.8%.'},
   {title:'Gemini 3.1 Technical Report',org:'Google DeepMind',date:'2026',url:'https://deepmind.google/technologies/gemini/',desc:'Benchmark coverage: GPQA (94.3%), ARC-AGI-2 (77.1%), HLE (41%), LOFT, RULER, MMLU-Pro, SWE-Bench Pro (54.2%).'},
   {title:'Qwen3 Technical Report',org:'Alibaba / Qwen Team',date:'2025',url:'https://qwenlm.github.io/',desc:'Covers MMLU-Pro, GPQA, LiveCodeBench, IFEval, AIME across MoE and dense model variants.'},
   {title:'DeepSeek V3 / R1 Technical Report',org:'DeepSeek',date:'2024-2025',url:'https://github.com/deepseek-ai/DeepSeek-V3',desc:'Open-weight baseline. AIME, MATH-500, GPQA, LiveCodeBench, SWE-Bench, MMLU-Pro.'},
   {title:'Llama 4 Technical Report',org:'Meta AI',date:'2025',url:'https://ai.meta.com/research/',desc:'Open-weight frontier evaluation. MMLU-Pro, GPQA, IFEval, SWE-Bench across Maverick and Scout.'},
-  {title:"Humanity's Last Exam (HLE)",org:'Center for AI Safety',date:'2025',url:'https://agi.safe.ai/',desc:'2,500 expert-vetted questions across 100+ academic domains. Hardest closed-ended benchmark available. Range: 20-59%.'},
+  {title:"Humanity's Last Exam (HLE)",org:'Center for AI Safety / Scale AI',date:'2025',url:'https://agi.safe.ai/',desc:'2,500 expert-vetted questions across 100+ academic domains. Hardest closed-ended benchmark. Frontier range: Claude Fable 5 59.0%, Grok 4.3 35.0%, Gemini 3.1 Pro 44.4%, GPT-5.4 44.3%.'},
   {title:'ClinConsensus Benchmark',org:'arXiv (2603.02097)',date:'2026',url:'https://arxiv.org/abs/2603.02097',desc:'22 frontier models on Chinese medical QA. Covers GPT-5.2, Gemini 3.1, Claude Opus 4.5/4.6, Qwen3, DeepSeek V3.2, Kimi, GLM, Grok.'},
   {title:'Scale AI Leaderboard',org:'Scale AI',date:'Updated continuously',url:'https://labs.scale.com/leaderboard',desc:'Live benchmark scores. Covers SWE-Bench, HLE, IFEval, SycophancyEval, safety evaluations.'},
   {title:'Artificial Analysis Intelligence Index',org:'Artificial Analysis',date:'Updated continuously',url:'https://artificialanalysis.ai/',desc:'Cross-lab intelligence index. Aggregates benchmark scores for comparability across frontier models.'},
   {title:'Vellum LLM Leaderboard',org:'Vellum AI',date:'Updated continuously',url:'https://www.vellum.ai/llm-leaderboard',desc:'Post-April 2024 models. GPQA Diamond, AIME 2025, SWE-Bench Verified, IFEval, MMLU-Pro. Non-saturated benchmarks only.'},
+  {title:'OpenAI Model Release Notes & API Changelog',org:'OpenAI',date:'Updated continuously',url:'https://platform.openai.com/docs/changelog',desc:'Official changelog for all GPT-5.x and o-series releases. Covers GPT-5.5 (May 5 2026), GPT-5.4 variants, GPT-5.2, o3 retirement (Aug 26 2026), o4-mini retirement (Feb 13 2026), gpt-oss open weights.'},
+  {title:'Gemini API Release Notes',org:'Google DeepMind',date:'Updated continuously',url:'https://ai.google.dev/gemini-api/docs/changelog',desc:'Official changelog for Gemini model family. Covers Gemini 3.5 Flash (May 19 2026), Gemini 3.1 Pro (Feb 19 2026), 3.1 Flash Lite (Mar 3 2026), deprecation schedule, and API model string conventions.'},
+  {title:'xAI Grok 4 & Grok 4.3 Release',org:'xAI',date:'Jul 2025 / Apr 2026',url:'https://x.ai/blog/grok-4',desc:'Grok 4 (Jul 9 2025): MATH-500 99.0%, AIME 91.7%, GPQA 87.7%, LiveCodeBench 81.9%. Grok 4.3 (Apr 30 2026): GPQA 90.1%, HLE 35.0%, tau2-bench 97.7%, 1M context, $1.25/$2.50 per MTok.'},
+  {title:'Magistral & Mistral Large 3 Release',org:'Mistral AI',date:'2026',url:'https://mistral.ai/news/',desc:'Mistral Large 3: 123B, 128K context, 80+ languages, #2 open LMArena. Magistral Medium and Small: reasoning models with extended thinking. Codestral: code specialist. Apache 2.0 / open licenses.'},
+  {title:'DeepSeek V4 Pro & R1-0528 Release',org:'DeepSeek',date:'Apr-May 2026',url:'https://github.com/deepseek-ai/DeepSeek-V3',desc:'DeepSeek V4 Pro (Apr 2026): MIT license, SWE-Bench 80.6%, 75% cost reduction vs V3. R1-0528 (May 28 2026): latest R1 update with Qwen3-8B distillation. V3.2 Speciale: gold at IMO, IOI, ICPC 2026.'},
 ];
 
 // ── State ──────────────────────────────────────────────────────────────────
