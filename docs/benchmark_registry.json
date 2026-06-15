@@ -1,64 +1,1281 @@
 {
-  "version": "1.0",
-  "last_updated": "2026-06-09T00:00:00Z",
-  "source": "MAI-Thinking-1 Technical Report §4.1, Tables 11 & 12 (Microsoft AI, June 2026)",
+  "version": "2.0",
+  "last_updated": "2026-06-15T02:53:34Z",
+  "description": "FoxBrain EvalHub — Frontier Benchmark & Model Registry. Maintained by HHRI-AI Research.",
+  "source": "MAI-Thinking-1 §4.1 Tables 11 & 12 (Microsoft AI, June 2026) + Anthropic Fable 5 system card + Google Gemini 3.1 model card + xAI Grok 4.3 + Gemma 4 model card",
+  "stats": {
+    "total_benchmarks": 55,
+    "total_frontier_models": 28,
+    "domains": 9,
+    "labs": 10
+  },
+  "domain_labels": {
+    "stem": "STEM",
+    "agentic": "Agentic coding",
+    "knowledge": "Knowledge",
+    "instruction": "Instruction following",
+    "longctx": "Long context",
+    "safety": "Safety",
+    "honesty": "Honesty",
+    "health": "Health",
+    "tool": "Tool calling"
+  },
   "benchmarks": [
-    {"name": "AIME2025",          "domain": "stem",        "priority": "high",   "primary_metric": "pass@1",       "description": "30 AMC competition math problems from 2025. MAI-T1: 97.0%.", "tags": ["math","reasoning","pass@1"], "in_mai_thinking_1": true},
-    {"name": "AIME2026",          "domain": "stem",        "priority": "high",   "primary_metric": "pass@1",       "description": "2026 edition — contamination-safe replacement for AIME 2025. MAI-T1: 94.5%.", "tags": ["math","reasoning","contamination-safe"], "in_mai_thinking_1": true},
-    {"name": "MATH-500",          "domain": "stem",        "priority": "high",   "primary_metric": "accuracy",     "description": "500 Hendrycks MATH problems. Algebra, calculus, number theory.", "tags": ["math","reasoning"], "in_mai_thinking_1": true},
-    {"name": "GPQA-Diamond",      "domain": "stem",        "priority": "high",   "primary_metric": "accuracy",     "description": "198 PhD-level biology, chemistry, physics MCQs. Graduate-level ceiling.", "tags": ["science","expert-level"], "in_mai_thinking_1": true},
-    {"name": "LiveCodeBench-v6",  "domain": "stem",        "priority": "high",   "primary_metric": "pass@1",       "description": "Monthly-updated competitive programming. MAI-T1: 87.7%. Anti-saturation.", "tags": ["coding","contamination-safe"], "in_mai_thinking_1": true},
-    {"name": "OlympiadBench",     "domain": "stem",        "priority": "medium", "primary_metric": "accuracy",     "description": "International olympiad problems across physics, chemistry, biology.", "tags": ["science","math","multi-step"], "in_mai_thinking_1": true},
-    {"name": "HumanEval+",        "domain": "stem",        "priority": "medium", "primary_metric": "pass@1",       "description": "Enhanced HumanEval with stricter test cases. Table 11.", "tags": ["coding","function-level"], "in_mai_thinking_1": true},
-    {"name": "MBPP+",             "domain": "stem",        "priority": "medium", "primary_metric": "pass@1",       "description": "Broader Python coding. Beware Windows newline inconsistencies.", "tags": ["coding","python"], "in_mai_thinking_1": true},
-    {"name": "AMC2023",           "domain": "stem",        "priority": "medium", "primary_metric": "accuracy",     "description": "American Mathematics Competitions 2023. 40 problems.", "tags": ["math","multiple-choice"], "in_mai_thinking_1": true},
-    {"name": "SWE-Bench-Verified","domain": "agentic",     "priority": "high",   "primary_metric": "resolve_rate", "description": "Real GitHub issue resolution. Gold standard for agentic coding. Table 11.", "tags": ["agentic","real-world","tool-use"], "in_mai_thinking_1": true},
-    {"name": "SWE-Bench-Pro",     "domain": "agentic",     "priority": "high",   "primary_metric": "resolve_rate", "description": "Harder SWE-Bench with complex multi-file issues. MAI-T1: 52.8%. Table 11.", "tags": ["agentic","harder","tool-use"], "in_mai_thinking_1": true},
-    {"name": "Aider-Polyglot",    "domain": "agentic",     "priority": "high",   "primary_metric": "pass@1",       "description": "Code editing in C++, Go, Java, JS, Python, Rust. Table 11.", "tags": ["code-editing","multi-lang"], "in_mai_thinking_1": true},
-    {"name": "tau-bench",         "domain": "agentic",     "priority": "high",   "primary_metric": "success_rate", "description": "Multi-turn tool use. Retail + airline domains. Already in your eval suite.", "tags": ["multi-turn","tool-use"], "in_mai_thinking_1": false},
-    {"name": "tau2-bench",        "domain": "agentic",     "priority": "high",   "primary_metric": "success_rate", "description": "Harder sequel to tau-bench. Retail domain. Already in your eval suite.", "tags": ["agentic","harder"], "in_mai_thinking_1": false},
-    {"name": "Cybench",           "domain": "agentic",     "priority": "medium", "primary_metric": "accuracy",     "description": "CTF cybersecurity challenges requiring multi-step agentic reasoning. Table 11.", "tags": ["cybersecurity","agentic"], "in_mai_thinking_1": true},
-    {"name": "MMLU-Pro",          "domain": "knowledge",   "priority": "high",   "primary_metric": "accuracy",     "description": "Harder MMLU with 10 answer choices. 14 domains. Standard across all frontier reports.", "tags": ["knowledge","multi-domain","10-choice"], "in_mai_thinking_1": true},
-    {"name": "MMLU",              "domain": "knowledge",   "priority": "medium", "primary_metric": "accuracy",     "description": "57-subject MCQ. Saturating at frontier but reported for comparability.", "tags": ["knowledge","57-subjects"], "in_mai_thinking_1": true},
-    {"name": "MMLU-Redux",        "domain": "knowledge",   "priority": "low",    "primary_metric": "accuracy",     "description": "Label-corrected MMLU. Preferred by some labs. Table 12.", "tags": ["knowledge","decontaminated"], "in_mai_thinking_1": true},
-    {"name": "SimpleQA",          "domain": "knowledge",   "priority": "medium", "primary_metric": "accuracy",     "description": "Unambiguous factual QA. Tests factual precision without hallucination.", "tags": ["factuality","short-answer"], "in_mai_thinking_1": true},
-    {"name": "FRAMES",            "domain": "knowledge",   "priority": "medium", "primary_metric": "accuracy",     "description": "Long-context-dependent QA requiring document analysis. Table 12.", "tags": ["long-context-QA","multi-hop"], "in_mai_thinking_1": true},
-    {"name": "DROP",              "domain": "knowledge",   "priority": "medium", "primary_metric": "f1",           "description": "Discrete reasoning over paragraphs — numerical ops, counting, sorting.", "tags": ["reading-comprehension","numerical"], "in_mai_thinking_1": true},
-    {"name": "ARC-Challenge",     "domain": "knowledge",   "priority": "low",    "primary_metric": "accuracy",     "description": "Grade-school science MCQ. Near-saturation at frontier but reported.", "tags": ["science","MCQ"], "in_mai_thinking_1": true},
-    {"name": "IFEval",            "domain": "instruction", "priority": "high",   "primary_metric": "accuracy",     "description": "Verifiable instruction constraints — word count, format, structure. Table 12.", "tags": ["verifiable","format-constraint"], "in_mai_thinking_1": true},
-    {"name": "Multi-IF",          "domain": "instruction", "priority": "high",   "primary_metric": "accuracy",     "description": "Multiple simultaneous constraints. Harder than IFEval. Table 12 §J.2.", "tags": ["multi-constraint"], "in_mai_thinking_1": true},
-    {"name": "AlpacaEval-2.0",    "domain": "instruction", "priority": "medium", "primary_metric": "win_rate",     "description": "LC win-rate vs GPT-4. Captures IF quality via human preference.", "tags": ["preference","win-rate","length-controlled"], "in_mai_thinking_1": true},
-    {"name": "MT-Bench",          "domain": "instruction", "priority": "low",    "primary_metric": "score",        "description": "Multi-turn conversation quality scored by GPT-4. Table 12 comparisons.", "tags": ["multi-turn","chat"], "in_mai_thinking_1": true},
-    {"name": "MRCR-v2",           "domain": "longctx",     "priority": "high",   "primary_metric": "mrcr_ratio",   "description": "Multi-turn retrieval in long context. 2/4/8 needle variants. Already in your eval suite.", "tags": ["retrieval","multi-turn","2/4/8-needle"], "in_mai_thinking_1": true},
-    {"name": "RULER",             "domain": "longctx",     "priority": "high",   "primary_metric": "accuracy",     "description": "Comprehensive long-context: retrieval, QA, summarization at 4K–128K.", "tags": ["4K-128K","multi-task"], "in_mai_thinking_1": true},
-    {"name": "LOFT-hard",         "domain": "longctx",     "priority": "high",   "primary_metric": "accuracy",     "description": "Long context multi-hop + multi-needle retrieval, 300 queries. Used by Gemini 2.5 and MAI-T1.", "tags": ["multi-hop","multi-needle","300-queries"], "in_mai_thinking_1": true},
-    {"name": "LongBench-v2",      "domain": "longctx",     "priority": "medium", "primary_metric": "accuracy",     "description": "Real-world long document tasks — multi-doc QA, summarization.", "tags": ["real-world","multi-doc"], "in_mai_thinking_1": false},
-    {"name": "WildGuard",         "domain": "safety",      "priority": "high",   "primary_metric": "accuracy",     "description": "Adversarial jailbreak + benign prompt safety. Both over- and under-refusal.", "tags": ["jailbreak","refusal-accuracy"], "in_mai_thinking_1": true},
-    {"name": "HarmBench",         "domain": "safety",      "priority": "high",   "primary_metric": "attack_success_rate", "description": "Standardized red-teaming. Attack success rate across diverse harmful categories.", "tags": ["red-teaming","attack-success"], "in_mai_thinking_1": true},
-    {"name": "StrongREJECT",      "domain": "safety",      "priority": "medium", "primary_metric": "score",        "description": "Automated jailbreak eval with LLM-as-judge. Measures real harmful output rate.", "tags": ["jailbreak","automated"], "in_mai_thinking_1": true},
-    {"name": "XSTest",            "domain": "safety",      "priority": "medium", "primary_metric": "accuracy",     "description": "Exaggerated safety — benign prompts. Measures over-refusal rate.", "tags": ["over-refusal","false-positive"], "in_mai_thinking_1": true},
-    {"name": "TruthfulQA",        "domain": "honesty",     "priority": "medium", "primary_metric": "accuracy",     "description": "Questions designed to elicit human misconceptions. Honesty/calibration.", "tags": ["calibration","misconceptions"], "in_mai_thinking_1": true},
-    {"name": "SycophancyEval",    "domain": "honesty",     "priority": "high",   "primary_metric": "accuracy",     "description": "Tests whether model agrees with incorrect user assertions. Table 12 §J.5.", "tags": ["sycophancy","agreement-bias"], "in_mai_thinking_1": true},
-    {"name": "FrontierMath",      "domain": "honesty",     "priority": "medium", "primary_metric": "accuracy",     "description": "Expert-verified novel math problems not on the internet. Tests genuine reasoning.", "tags": ["math","novel","expert-verified"], "in_mai_thinking_1": true},
-    {"name": "MedQA-USMLE",       "domain": "health",      "priority": "high",   "primary_metric": "accuracy",     "description": "US Medical Licensing Exam. Widely reported by frontier models. Table 12 §J.6.", "tags": ["medical","4-choice"], "in_mai_thinking_1": true},
-    {"name": "MedBench",          "domain": "health",      "priority": "high",   "primary_metric": "accuracy",     "description": "Chinese medical QA — highly relevant for HHRI market. Clinical, pharmacology, nursing.", "tags": ["medical","chinese"], "in_mai_thinking_1": false},
-    {"name": "JAMA-Clinical",     "domain": "health",      "priority": "medium", "primary_metric": "accuracy",     "description": "Real clinical cases from JAMA. Multi-step diagnostic reasoning. Table 12 §J.6.", "tags": ["clinical-reasoning","case-based"], "in_mai_thinking_1": true},
-    {"name": "MedMCQA",           "domain": "health",      "priority": "low",    "primary_metric": "accuracy",     "description": "Indian medical entrance MCQ. Broader geographic medical knowledge.", "tags": ["medical","mcq"], "in_mai_thinking_1": true},
-    {"name": "BFCL-v3",           "domain": "tool",        "priority": "high",   "primary_metric": "accuracy",     "description": "Berkeley Function Calling Leaderboard v3. Multi-turn + parallel tool calls. Table 12.", "tags": ["function-call","JSON","multi-turn"], "in_mai_thinking_1": true},
-    {"name": "tau-bench-tool",    "domain": "tool",        "priority": "high",   "primary_metric": "success_rate", "description": "Tool-use sub-dimension of tau-bench. Planning + tool selection in realistic environments.", "tags": ["multi-step","real-APIs"], "in_mai_thinking_1": true},
-    {"name": "API-Bank",          "domain": "tool",        "priority": "medium", "primary_metric": "accuracy",     "description": "Multi-step real API tool use. Chained function calls across 73 real APIs. Table 12.", "tags": ["real-world-APIs","multi-step"], "in_mai_thinking_1": true},
-    {"name": "TMMLU+",            "domain": "knowledge",   "priority": "high",   "primary_metric": "accuracy",     "description": "Traditional Chinese + Taiwan-specific knowledge benchmark. HHRI flagship eval.", "tags": ["chinese","taiwan","multilingual"], "in_mai_thinking_1": false},
-    {"name": "AIEC",              "domain": "safety",      "priority": "high",   "primary_metric": "accuracy",     "description": "AI Ethics and Capability evaluation. Already in your eval suite.", "tags": ["ethics","safety","chinese"], "in_mai_thinking_1": false},
-    {"name": "BigBenchHard",      "domain": "knowledge",   "priority": "medium", "primary_metric": "accuracy",     "description": "Hard subset of BIG-Bench requiring multi-step reasoning. Already in your eval suite.", "tags": ["reasoning","multi-step"], "in_mai_thinking_1": false}
+    {
+      "name": "AIME 2025",
+      "domain": "stem",
+      "priority": "high",
+      "primary_metric": "pass@1",
+      "description": "30 AMC competition math problems. Primary frontier math signal. Scores now 94-97% at frontier.",
+      "tags": [
+        "math",
+        "reasoning"
+      ],
+      "labs": [
+        "OpenAI",
+        "Anthropic",
+        "Google",
+        "Microsoft",
+        "Alibaba",
+        "DeepSeek"
+      ],
+      "in_mai_thinking_1": true
+    },
+    {
+      "name": "AIME 2026",
+      "domain": "stem",
+      "priority": "high",
+      "primary_metric": "pass@1",
+      "description": "2026 edition — contamination-safe replacement as AIME 2025 saturates. MAI-T1: 94.5%.",
+      "tags": [
+        "math",
+        "contamination-safe"
+      ],
+      "labs": [
+        "OpenAI",
+        "Microsoft",
+        "Google"
+      ],
+      "in_mai_thinking_1": true,
+      "is_new": true
+    },
+    {
+      "name": "HLE",
+      "domain": "stem",
+      "priority": "high",
+      "primary_metric": "accuracy",
+      "description": "Humanity's Last Exam — 2,500 expert-vetted questions across 100+ subjects. Frontier range: 20-59%. Claude Fable 5: 59.0%.",
+      "tags": [
+        "expert-level",
+        "multi-domain",
+        "hard"
+      ],
+      "labs": [
+        "OpenAI",
+        "Google",
+        "Anthropic",
+        "xAI",
+        "Scale AI"
+      ],
+      "in_mai_thinking_1": false,
+      "is_new": true
+    },
+    {
+      "name": "MATH-500",
+      "domain": "stem",
+      "priority": "high",
+      "primary_metric": "accuracy",
+      "description": "500 Hendrycks MATH problems. Algebra, calculus, number theory. Standard across all frontier reports.",
+      "tags": [
+        "math",
+        "reasoning"
+      ],
+      "labs": [
+        "OpenAI",
+        "Anthropic",
+        "Google",
+        "Microsoft",
+        "Meta",
+        "Alibaba"
+      ],
+      "in_mai_thinking_1": true
+    },
+    {
+      "name": "GPQA Diamond",
+      "domain": "stem",
+      "priority": "high",
+      "primary_metric": "accuracy",
+      "description": "198 PhD-level biology, chemistry, physics MCQs. Gemini 3.1 Pro leads at 94.3%.",
+      "tags": [
+        "science",
+        "expert-level"
+      ],
+      "labs": [
+        "OpenAI",
+        "Anthropic",
+        "Google",
+        "Microsoft",
+        "Meta",
+        "DeepSeek"
+      ],
+      "in_mai_thinking_1": true
+    },
+    {
+      "name": "FrontierMath",
+      "domain": "stem",
+      "priority": "high",
+      "primary_metric": "accuracy",
+      "description": "Expert-verified novel math problems not findable online. Most frontier models score below 2%.",
+      "tags": [
+        "math",
+        "novel",
+        "anti-saturation"
+      ],
+      "labs": [
+        "OpenAI",
+        "Anthropic",
+        "Google"
+      ],
+      "in_mai_thinking_1": false
+    },
+    {
+      "name": "LiveCodeBench v6",
+      "domain": "stem",
+      "priority": "high",
+      "primary_metric": "pass@1",
+      "description": "Monthly-updated competitive programming. Contamination-resistant. MAI-T1: 87.7%.",
+      "tags": [
+        "coding",
+        "contamination-safe"
+      ],
+      "labs": [
+        "OpenAI",
+        "Anthropic",
+        "Google",
+        "Microsoft",
+        "DeepSeek",
+        "Alibaba"
+      ],
+      "in_mai_thinking_1": true
+    },
+    {
+      "name": "OlympiadBench",
+      "domain": "stem",
+      "priority": "medium",
+      "primary_metric": "accuracy",
+      "description": "International olympiad problems across physics, chemistry, biology. Multi-step, multi-domain.",
+      "tags": [
+        "science",
+        "math"
+      ],
+      "labs": [
+        "Microsoft",
+        "Alibaba",
+        "Google"
+      ],
+      "in_mai_thinking_1": true
+    },
+    {
+      "name": "HumanEval+",
+      "domain": "stem",
+      "priority": "medium",
+      "primary_metric": "pass@1",
+      "description": "Enhanced HumanEval with stricter test cases. Near-saturating at frontier but still widely reported.",
+      "tags": [
+        "coding",
+        "function-level"
+      ],
+      "labs": [
+        "OpenAI",
+        "Anthropic",
+        "Google",
+        "Meta",
+        "Alibaba"
+      ],
+      "in_mai_thinking_1": true
+    },
+    {
+      "name": "MBPP+",
+      "domain": "stem",
+      "priority": "medium",
+      "primary_metric": "pass@1",
+      "description": "Broader Python coding tasks. Used alongside LiveCodeBench in most frontier reports.",
+      "tags": [
+        "coding",
+        "python"
+      ],
+      "labs": [
+        "Google",
+        "Meta",
+        "Microsoft",
+        "Alibaba"
+      ],
+      "in_mai_thinking_1": true
+    },
+    {
+      "name": "MathVista",
+      "domain": "stem",
+      "priority": "medium",
+      "primary_metric": "accuracy",
+      "description": "Mathematical reasoning with visual context. Charts, geometry, scientific figures.",
+      "tags": [
+        "math",
+        "multimodal",
+        "visual"
+      ],
+      "labs": [
+        "Google",
+        "OpenAI",
+        "Anthropic",
+        "Meta"
+      ],
+      "in_mai_thinking_1": false,
+      "is_new": true
+    },
+    {
+      "name": "SWE-Bench Verified",
+      "domain": "agentic",
+      "priority": "high",
+      "primary_metric": "resolve_rate",
+      "description": "500 real GitHub issue resolutions. Claude Fable 5: 95.0%, Opus 4.8: 88.6%. Gold standard for agentic coding.",
+      "tags": [
+        "agentic",
+        "real-world"
+      ],
+      "labs": [
+        "OpenAI",
+        "Anthropic",
+        "Google",
+        "Microsoft",
+        "DeepSeek",
+        "xAI"
+      ],
+      "in_mai_thinking_1": true
+    },
+    {
+      "name": "SWE-Bench Pro",
+      "domain": "agentic",
+      "priority": "high",
+      "primary_metric": "resolve_rate",
+      "description": "Contamination-resistant multi-language successor. Fable 5: 80.3%, GPT-5.5: 58.6%, Gemini 3.1: 54.2%.",
+      "tags": [
+        "agentic",
+        "harder",
+        "multi-lang"
+      ],
+      "labs": [
+        "OpenAI",
+        "Anthropic",
+        "Microsoft"
+      ],
+      "in_mai_thinking_1": true,
+      "is_new": true
+    },
+    {
+      "name": "FrontierCode Diamond",
+      "domain": "agentic",
+      "priority": "high",
+      "primary_metric": "pass@1",
+      "description": "Cognition's production-grade coding benchmark. Fable 5: 29.3%, Opus 4.8: 13.4%, GPT-5.5: 5.7%.",
+      "tags": [
+        "coding",
+        "production-grade"
+      ],
+      "labs": [
+        "Anthropic",
+        "OpenAI",
+        "Google"
+      ],
+      "in_mai_thinking_1": false,
+      "is_new": true
+    },
+    {
+      "name": "Terminal-Bench 2.1",
+      "domain": "agentic",
+      "priority": "high",
+      "primary_metric": "success_rate",
+      "description": "Agentic terminal task completion. Fable 5: 88.0%, GPT-5.5: 83.4%, Gemini 3.1: 70.7%.",
+      "tags": [
+        "agentic",
+        "terminal",
+        "cli"
+      ],
+      "labs": [
+        "Anthropic",
+        "OpenAI",
+        "Google"
+      ],
+      "in_mai_thinking_1": false,
+      "is_new": true
+    },
+    {
+      "name": "Aider Polyglot",
+      "domain": "agentic",
+      "priority": "high",
+      "primary_metric": "pass@1",
+      "description": "Code editing across C++, Go, Java, JS, Python, Rust. Tests editing existing code, not just generation.",
+      "tags": [
+        "code-editing",
+        "multi-lang"
+      ],
+      "labs": [
+        "Anthropic",
+        "OpenAI",
+        "Google",
+        "Microsoft"
+      ],
+      "in_mai_thinking_1": true
+    },
+    {
+      "name": "CursorBench 3.1",
+      "domain": "agentic",
+      "priority": "medium",
+      "primary_metric": "pass@1",
+      "description": "Cursor's real-world IDE coding benchmark. Fable 5: 72.9% at max effort.",
+      "tags": [
+        "coding",
+        "real-world",
+        "IDE"
+      ],
+      "labs": [
+        "Anthropic",
+        "OpenAI"
+      ],
+      "in_mai_thinking_1": false,
+      "is_new": true
+    },
+    {
+      "name": "tau-bench",
+      "domain": "agentic",
+      "priority": "high",
+      "primary_metric": "success_rate",
+      "description": "Multi-turn tool use in retail + airline domains. Already in HHRI-AI eval suite.",
+      "tags": [
+        "multi-turn",
+        "tool-use"
+      ],
+      "labs": [
+        "Anthropic",
+        "OpenAI",
+        "Meta",
+        "HHRI-AI"
+      ],
+      "in_mai_thinking_1": false
+    },
+    {
+      "name": "tau2-bench",
+      "domain": "agentic",
+      "priority": "high",
+      "primary_metric": "success_rate",
+      "description": "Harder sequel to tau-bench. Retail domain. Already in HHRI-AI eval suite. Claude-haiku-4-5 user simulator.",
+      "tags": [
+        "agentic",
+        "harder"
+      ],
+      "labs": [
+        "Anthropic",
+        "HHRI-AI"
+      ],
+      "in_mai_thinking_1": false
+    },
+    {
+      "name": "Cybench",
+      "domain": "agentic",
+      "priority": "medium",
+      "primary_metric": "accuracy",
+      "description": "CTF cybersecurity challenges requiring multi-step agentic reasoning.",
+      "tags": [
+        "cybersecurity",
+        "agentic"
+      ],
+      "labs": [
+        "Microsoft",
+        "OpenAI"
+      ],
+      "in_mai_thinking_1": true
+    },
+    {
+      "name": "MMLU-Pro",
+      "domain": "knowledge",
+      "priority": "high",
+      "primary_metric": "accuracy",
+      "description": "Harder MMLU with 10-choice answers. 14 domains. Reported in virtually every frontier report.",
+      "tags": [
+        "knowledge",
+        "multi-domain",
+        "10-choice"
+      ],
+      "labs": [
+        "OpenAI",
+        "Anthropic",
+        "Google",
+        "Microsoft",
+        "Meta",
+        "DeepSeek",
+        "Alibaba",
+        "xAI"
+      ],
+      "in_mai_thinking_1": true
+    },
+    {
+      "name": "MMLU",
+      "domain": "knowledge",
+      "priority": "medium",
+      "primary_metric": "accuracy",
+      "description": "Original 57-subject MCQ. Over 90% at frontier — reported for historical comparability.",
+      "tags": [
+        "knowledge",
+        "57-subjects"
+      ],
+      "labs": [
+        "OpenAI",
+        "Anthropic",
+        "Google",
+        "Meta",
+        "DeepSeek",
+        "Alibaba"
+      ],
+      "in_mai_thinking_1": true
+    },
+    {
+      "name": "MMMLU",
+      "domain": "knowledge",
+      "priority": "high",
+      "primary_metric": "accuracy",
+      "description": "Multilingual MMLU across 14 languages. Gemini 3.1 Pro: 92.6%, Gemma 4 31B: 85.2%.",
+      "tags": [
+        "multilingual",
+        "knowledge",
+        "14-languages"
+      ],
+      "labs": [
+        "Google",
+        "HHRI-AI",
+        "Alibaba",
+        "Meta"
+      ],
+      "in_mai_thinking_1": false,
+      "is_new": true
+    },
+    {
+      "name": "MMMU Pro",
+      "domain": "knowledge",
+      "priority": "medium",
+      "primary_metric": "accuracy",
+      "description": "Multimodal understanding benchmark. Gemini 3.1 Pro: 80.5%. Requires image+text input.",
+      "tags": [
+        "multimodal",
+        "visual-reasoning"
+      ],
+      "labs": [
+        "Google",
+        "OpenAI",
+        "Anthropic"
+      ],
+      "in_mai_thinking_1": false,
+      "is_new": true
+    },
+    {
+      "name": "SimpleQA",
+      "domain": "knowledge",
+      "priority": "medium",
+      "primary_metric": "accuracy",
+      "description": "Unambiguous factual short-answer QA. Tests factual precision without hallucination.",
+      "tags": [
+        "factuality",
+        "short-answer"
+      ],
+      "labs": [
+        "OpenAI",
+        "Anthropic",
+        "Google",
+        "Microsoft"
+      ],
+      "in_mai_thinking_1": true
+    },
+    {
+      "name": "FRAMES",
+      "domain": "knowledge",
+      "priority": "medium",
+      "primary_metric": "accuracy",
+      "description": "Long-context-dependent QA requiring document analysis.",
+      "tags": [
+        "long-context-QA",
+        "multi-hop"
+      ],
+      "labs": [
+        "Google",
+        "Microsoft"
+      ],
+      "in_mai_thinking_1": true
+    },
+    {
+      "name": "DROP",
+      "domain": "knowledge",
+      "priority": "medium",
+      "primary_metric": "f1",
+      "description": "Discrete reasoning over paragraphs — numerical ops, counting, sorting.",
+      "tags": [
+        "reading-comprehension",
+        "numerical"
+      ],
+      "labs": [
+        "OpenAI",
+        "Anthropic",
+        "Google",
+        "Meta"
+      ],
+      "in_mai_thinking_1": true
+    },
+    {
+      "name": "GDPval-AA",
+      "domain": "knowledge",
+      "priority": "medium",
+      "primary_metric": "score",
+      "description": "Advanced analytical knowledge work. Fable 5: 1932, Opus 4.8: 1890, GPT-5.5: 1769, Gemini 3.1: 1314.",
+      "tags": [
+        "knowledge-work",
+        "analytical",
+        "finance"
+      ],
+      "labs": [
+        "Anthropic",
+        "OpenAI",
+        "Google"
+      ],
+      "in_mai_thinking_1": false,
+      "is_new": true
+    },
+    {
+      "name": "TMMLU+",
+      "domain": "knowledge",
+      "priority": "high",
+      "primary_metric": "accuracy",
+      "description": "Traditional Chinese + Taiwan-specific knowledge benchmark. HHRI-AI flagship eval. Unique differentiation.",
+      "tags": [
+        "chinese",
+        "taiwan",
+        "multilingual"
+      ],
+      "labs": [
+        "HHRI-AI"
+      ],
+      "in_mai_thinking_1": false
+    },
+    {
+      "name": "BigBenchHard",
+      "domain": "knowledge",
+      "priority": "medium",
+      "primary_metric": "accuracy",
+      "description": "Hard BIG-Bench subset requiring multi-step reasoning. Already in HHRI-AI eval suite.",
+      "tags": [
+        "reasoning",
+        "multi-step"
+      ],
+      "labs": [
+        "Google",
+        "Anthropic",
+        "OpenAI",
+        "HHRI-AI"
+      ],
+      "in_mai_thinking_1": false
+    },
+    {
+      "name": "IFEval",
+      "domain": "instruction",
+      "priority": "high",
+      "primary_metric": "accuracy",
+      "description": "Verifiable instruction constraints — word count, format, structure. Most universally reported IF benchmark.",
+      "tags": [
+        "verifiable",
+        "format-constraint"
+      ],
+      "labs": [
+        "OpenAI",
+        "Anthropic",
+        "Google",
+        "Microsoft",
+        "Meta",
+        "DeepSeek",
+        "Alibaba"
+      ],
+      "in_mai_thinking_1": true
+    },
+    {
+      "name": "Multi-IF",
+      "domain": "instruction",
+      "priority": "high",
+      "primary_metric": "accuracy",
+      "description": "Multiple simultaneous constraints. Harder than IFEval. Used in MAI-T1 Table 12.",
+      "tags": [
+        "multi-constraint"
+      ],
+      "labs": [
+        "Microsoft",
+        "OpenAI"
+      ],
+      "in_mai_thinking_1": true
+    },
+    {
+      "name": "AlpacaEval 2.0",
+      "domain": "instruction",
+      "priority": "medium",
+      "primary_metric": "win_rate",
+      "description": "Length-controlled win-rate vs GPT-4. Captures IF quality via human preference.",
+      "tags": [
+        "preference",
+        "win-rate"
+      ],
+      "labs": [
+        "OpenAI",
+        "Anthropic",
+        "Google",
+        "Meta",
+        "Mistral AI"
+      ],
+      "in_mai_thinking_1": true
+    },
+    {
+      "name": "MT-Bench",
+      "domain": "instruction",
+      "priority": "low",
+      "primary_metric": "score",
+      "description": "Multi-turn conversation quality scored by GPT-4.",
+      "tags": [
+        "multi-turn",
+        "chat"
+      ],
+      "labs": [
+        "OpenAI",
+        "Anthropic",
+        "Google",
+        "Meta",
+        "Mistral AI"
+      ],
+      "in_mai_thinking_1": true
+    },
+    {
+      "name": "Arena ELO (LMArena)",
+      "domain": "instruction",
+      "priority": "medium",
+      "primary_metric": "elo_score",
+      "description": "Human preference win-rate on LMArena. Gemma 4 31B: 1452 ELO (best open-weight text model).",
+      "tags": [
+        "human-preference",
+        "chat",
+        "elo"
+      ],
+      "labs": [
+        "Google",
+        "Anthropic",
+        "OpenAI",
+        "Meta",
+        "DeepSeek"
+      ],
+      "in_mai_thinking_1": false,
+      "is_new": true
+    },
+    {
+      "name": "MRCR v2",
+      "domain": "longctx",
+      "priority": "high",
+      "primary_metric": "mrcr_ratio",
+      "description": "Multi-turn retrieval in long context. 2/4/8 needle variants. Already in HHRI-AI eval suite.",
+      "tags": [
+        "retrieval",
+        "multi-turn",
+        "8-needle"
+      ],
+      "labs": [
+        "Anthropic",
+        "Google",
+        "HHRI-AI"
+      ],
+      "in_mai_thinking_1": true
+    },
+    {
+      "name": "RULER",
+      "domain": "longctx",
+      "priority": "high",
+      "primary_metric": "accuracy",
+      "description": "Comprehensive long-context eval: retrieval, QA, summarization at 4K-128K.",
+      "tags": [
+        "4K-128K",
+        "multi-task"
+      ],
+      "labs": [
+        "NVIDIA",
+        "Microsoft",
+        "Anthropic",
+        "Google"
+      ],
+      "in_mai_thinking_1": true
+    },
+    {
+      "name": "LOFT",
+      "domain": "longctx",
+      "priority": "high",
+      "primary_metric": "accuracy",
+      "description": "Long context multi-hop + multi-needle retrieval, 300 queries. Used by Gemini 2.5 and MAI-T1.",
+      "tags": [
+        "multi-hop",
+        "multi-needle"
+      ],
+      "labs": [
+        "Google",
+        "Microsoft"
+      ],
+      "in_mai_thinking_1": true,
+      "is_new": true
+    },
+    {
+      "name": "LongBench v2",
+      "domain": "longctx",
+      "priority": "medium",
+      "primary_metric": "accuracy",
+      "description": "Real-world long document tasks — multi-doc QA, summarization.",
+      "tags": [
+        "real-world",
+        "multi-doc"
+      ],
+      "labs": [
+        "DeepSeek",
+        "Alibaba",
+        "Microsoft"
+      ],
+      "in_mai_thinking_1": false
+    },
+    {
+      "name": "WildGuard",
+      "domain": "safety",
+      "priority": "high",
+      "primary_metric": "accuracy",
+      "description": "Adversarial jailbreak + benign prompt safety. Tests both over-refusal and under-refusal.",
+      "tags": [
+        "jailbreak",
+        "refusal"
+      ],
+      "labs": [
+        "Microsoft",
+        "Allen AI",
+        "Meta"
+      ],
+      "in_mai_thinking_1": true
+    },
+    {
+      "name": "HarmBench",
+      "domain": "safety",
+      "priority": "high",
+      "primary_metric": "attack_success_rate",
+      "description": "Standardised red-teaming. Attack success rate across diverse harmful categories.",
+      "tags": [
+        "red-teaming"
+      ],
+      "labs": [
+        "OpenAI",
+        "Anthropic",
+        "Google",
+        "Microsoft"
+      ],
+      "in_mai_thinking_1": true,
+      "is_new": true
+    },
+    {
+      "name": "ExploitBench",
+      "domain": "safety",
+      "priority": "medium",
+      "primary_metric": "success_rate",
+      "description": "Cybersecurity exploit capability. Mythos 5: 78.0%. Fable 5 safeguards block progress entirely.",
+      "tags": [
+        "cybersecurity",
+        "exploit"
+      ],
+      "labs": [
+        "Anthropic"
+      ],
+      "in_mai_thinking_1": false,
+      "is_new": true
+    },
+    {
+      "name": "StrongREJECT",
+      "domain": "safety",
+      "priority": "medium",
+      "primary_metric": "score",
+      "description": "Automated jailbreak eval with LLM-as-judge. Measures real harmful output rate.",
+      "tags": [
+        "jailbreak",
+        "llm-judge"
+      ],
+      "labs": [
+        "Anthropic",
+        "Microsoft"
+      ],
+      "in_mai_thinking_1": true
+    },
+    {
+      "name": "XSTest",
+      "domain": "safety",
+      "priority": "medium",
+      "primary_metric": "accuracy",
+      "description": "Exaggerated safety — benign prompts. Measures over-refusal false positive rate.",
+      "tags": [
+        "over-refusal"
+      ],
+      "labs": [
+        "Anthropic",
+        "OpenAI",
+        "Google"
+      ],
+      "in_mai_thinking_1": true
+    },
+    {
+      "name": "AIEC",
+      "domain": "safety",
+      "priority": "high",
+      "primary_metric": "accuracy",
+      "description": "AI Ethics and Capability evaluation. Already in HHRI-AI eval suite. Chinese-language safety contexts.",
+      "tags": [
+        "ethics",
+        "chinese"
+      ],
+      "labs": [
+        "HHRI-AI"
+      ],
+      "in_mai_thinking_1": false
+    },
+    {
+      "name": "SycophancyEval",
+      "domain": "honesty",
+      "priority": "high",
+      "primary_metric": "accuracy",
+      "description": "Tests whether model agrees with incorrect user assertions. Key honesty signal.",
+      "tags": [
+        "sycophancy",
+        "agreement-bias"
+      ],
+      "labs": [
+        "Anthropic",
+        "OpenAI",
+        "Microsoft",
+        "Scale AI"
+      ],
+      "in_mai_thinking_1": true,
+      "is_new": true
+    },
+    {
+      "name": "TruthfulQA",
+      "domain": "honesty",
+      "priority": "medium",
+      "primary_metric": "accuracy",
+      "description": "Questions designed to elicit human misconceptions. Measures calibration and honesty.",
+      "tags": [
+        "calibration",
+        "misconceptions"
+      ],
+      "labs": [
+        "OpenAI",
+        "Anthropic",
+        "Google",
+        "Meta",
+        "Mistral AI"
+      ],
+      "in_mai_thinking_1": true
+    },
+    {
+      "name": "MedQA (USMLE)",
+      "domain": "health",
+      "priority": "high",
+      "primary_metric": "accuracy",
+      "description": "US Medical Licensing Exam. Widely reported by all frontier labs.",
+      "tags": [
+        "medical",
+        "4-choice"
+      ],
+      "labs": [
+        "OpenAI",
+        "Anthropic",
+        "Google",
+        "Microsoft",
+        "xAI"
+      ],
+      "in_mai_thinking_1": true
+    },
+    {
+      "name": "HealthBench Professional",
+      "domain": "health",
+      "priority": "high",
+      "primary_metric": "accuracy",
+      "description": "Professional-level health and medical reasoning. Fable 5: 66.0%. Introduced in Fable 5 system card.",
+      "tags": [
+        "health",
+        "medical",
+        "professional"
+      ],
+      "labs": [
+        "Anthropic",
+        "OpenAI",
+        "Google"
+      ],
+      "in_mai_thinking_1": false,
+      "is_new": true
+    },
+    {
+      "name": "MedBench",
+      "domain": "health",
+      "priority": "high",
+      "primary_metric": "accuracy",
+      "description": "Chinese medical QA — highly relevant for HHRI-AI market. Clinical, pharmacology, nursing.",
+      "tags": [
+        "medical",
+        "chinese"
+      ],
+      "labs": [
+        "HHRI-AI",
+        "Baidu",
+        "Alibaba"
+      ],
+      "in_mai_thinking_1": false
+    },
+    {
+      "name": "JAMA Clinical",
+      "domain": "health",
+      "priority": "medium",
+      "primary_metric": "accuracy",
+      "description": "Real clinical cases from JAMA. Multi-step diagnostic reasoning.",
+      "tags": [
+        "clinical-reasoning"
+      ],
+      "labs": [
+        "Microsoft",
+        "OpenAI"
+      ],
+      "in_mai_thinking_1": true
+    },
+    {
+      "name": "ClinConsensus",
+      "domain": "health",
+      "priority": "medium",
+      "primary_metric": "accuracy",
+      "description": "Chinese medical benchmark evaluated by 22 frontier models. Directly relevant to HHRI-AI.",
+      "tags": [
+        "medical",
+        "chinese",
+        "22-models"
+      ],
+      "labs": [
+        "Google",
+        "Anthropic",
+        "DeepSeek",
+        "Alibaba",
+        "xAI"
+      ],
+      "in_mai_thinking_1": false
+    },
+    {
+      "name": "BFCL v3",
+      "domain": "tool",
+      "priority": "high",
+      "primary_metric": "accuracy",
+      "description": "Berkeley Function Calling Leaderboard v3. Multi-turn + parallel tool calls. Standard tool-calling leaderboard.",
+      "tags": [
+        "function-call",
+        "JSON",
+        "multi-turn"
+      ],
+      "labs": [
+        "OpenAI",
+        "Anthropic",
+        "Google",
+        "Meta",
+        "Mistral AI",
+        "Cohere"
+      ],
+      "in_mai_thinking_1": true
+    },
+    {
+      "name": "tau-bench tool",
+      "domain": "tool",
+      "priority": "high",
+      "primary_metric": "success_rate",
+      "description": "Tool-use sub-dimension of tau-bench. Planning + tool selection in realistic environments.",
+      "tags": [
+        "multi-step",
+        "real-APIs"
+      ],
+      "labs": [
+        "Anthropic",
+        "OpenAI"
+      ],
+      "in_mai_thinking_1": true
+    },
+    {
+      "name": "API-Bank",
+      "domain": "tool",
+      "priority": "medium",
+      "primary_metric": "accuracy",
+      "description": "Multi-step real API tool use. Chained function calls across 73 real-world APIs.",
+      "tags": [
+        "real-world-APIs"
+      ],
+      "labs": [
+        "Microsoft",
+        "OpenAI"
+      ],
+      "in_mai_thinking_1": true
+    }
   ],
   "frontier_models": [
-    {"name": "Claude Sonnet 4.6",  "org": "Anthropic",       "weight": "closed", "in_mai_table_11": true, "in_mai_table_12": true},
-    {"name": "Claude Opus 4.6",    "org": "Anthropic",       "weight": "closed", "in_mai_table_11": true, "in_mai_table_12": false},
-    {"name": "GPT-5.4 / o3",       "org": "OpenAI",          "weight": "closed", "in_mai_table_11": true, "in_mai_table_12": true},
-    {"name": "Gemini 2.5 Pro",     "org": "Google DeepMind", "weight": "closed", "in_mai_table_11": true, "in_mai_table_12": true},
-    {"name": "DeepSeek-R1",        "org": "DeepSeek",        "weight": "open",   "in_mai_table_11": true, "in_mai_table_12": true},
-    {"name": "DeepSeek-V3",        "org": "DeepSeek",        "weight": "open",   "in_mai_table_11": false,"in_mai_table_12": true},
-    {"name": "Qwen3-235B-A22B",    "org": "Alibaba",         "weight": "open",   "in_mai_table_11": true, "in_mai_table_12": true},
-    {"name": "Llama 4 Maverick",   "org": "Meta",            "weight": "open",   "in_mai_table_11": false,"in_mai_table_12": true}
+    {
+      "name": "Claude Fable 5",
+      "org": "Anthropic",
+      "weight": "closed",
+      "api_id": "claude-fable-5",
+      "released": "Jun 9, 2026",
+      "in_mai_table_11": false,
+      "in_mai_table_12": false
+    },
+    {
+      "name": "Claude Mythos 5",
+      "org": "Anthropic",
+      "weight": "closed",
+      "api_id": "claude-mythos-5",
+      "released": "Jun 9, 2026",
+      "in_mai_table_11": false,
+      "in_mai_table_12": false
+    },
+    {
+      "name": "Claude Opus 4.8",
+      "org": "Anthropic",
+      "weight": "closed",
+      "api_id": "claude-opus-4-8",
+      "released": "May 28, 2026",
+      "in_mai_table_11": false,
+      "in_mai_table_12": false
+    },
+    {
+      "name": "Claude Opus 4.7",
+      "org": "Anthropic",
+      "weight": "closed",
+      "api_id": "claude-opus-4-7",
+      "released": "May 2026",
+      "in_mai_table_11": false,
+      "in_mai_table_12": false
+    },
+    {
+      "name": "Claude Opus 4.6",
+      "org": "Anthropic",
+      "weight": "closed",
+      "api_id": "claude-opus-4-6",
+      "released": "Feb 2026",
+      "in_mai_table_11": true,
+      "in_mai_table_12": true
+    },
+    {
+      "name": "Claude Sonnet 4.6",
+      "org": "Anthropic",
+      "weight": "closed",
+      "api_id": "claude-sonnet-4-6",
+      "released": "Feb 2026",
+      "in_mai_table_11": true,
+      "in_mai_table_12": true
+    },
+    {
+      "name": "GPT-5.5",
+      "org": "OpenAI",
+      "weight": "closed",
+      "api_id": "gpt-5-5",
+      "released": "Apr 2026",
+      "in_mai_table_11": false,
+      "in_mai_table_12": false
+    },
+    {
+      "name": "GPT-5.4",
+      "org": "OpenAI",
+      "weight": "closed",
+      "api_id": "gpt-5-4",
+      "released": "Mar 2026",
+      "in_mai_table_11": true,
+      "in_mai_table_12": true
+    },
+    {
+      "name": "o3",
+      "org": "OpenAI",
+      "weight": "closed",
+      "api_id": "o3",
+      "released": "2025",
+      "in_mai_table_11": true,
+      "in_mai_table_12": true
+    },
+    {
+      "name": "Gemini 3.1 Pro",
+      "org": "Google DeepMind",
+      "weight": "closed",
+      "api_id": "gemini-3.1-pro-preview",
+      "released": "Feb 2026",
+      "in_mai_table_11": false,
+      "in_mai_table_12": false
+    },
+    {
+      "name": "Gemini 2.5 Pro",
+      "org": "Google DeepMind",
+      "weight": "closed",
+      "api_id": "gemini-2.5-pro",
+      "released": "2025",
+      "in_mai_table_11": true,
+      "in_mai_table_12": true
+    },
+    {
+      "name": "Grok 4.3",
+      "org": "xAI",
+      "weight": "closed",
+      "api_id": "grok-4-3",
+      "released": "Apr 30, 2026",
+      "in_mai_table_11": false,
+      "in_mai_table_12": false
+    },
+    {
+      "name": "Llama 4 Maverick",
+      "org": "Meta",
+      "weight": "open",
+      "api_id": "meta-llama/Llama-4-Maverick-17B-128E-Instruct",
+      "released": "2025",
+      "in_mai_table_11": false,
+      "in_mai_table_12": true
+    },
+    {
+      "name": "DeepSeek V4 Pro",
+      "org": "DeepSeek",
+      "weight": "open",
+      "api_id": "deepseek-v4-pro",
+      "released": "Apr 2026",
+      "in_mai_table_11": false,
+      "in_mai_table_12": false
+    },
+    {
+      "name": "DeepSeek R1",
+      "org": "DeepSeek",
+      "weight": "open",
+      "api_id": "deepseek-r1",
+      "released": "2025",
+      "in_mai_table_11": true,
+      "in_mai_table_12": true
+    },
+    {
+      "name": "DeepSeek V3",
+      "org": "DeepSeek",
+      "weight": "open",
+      "api_id": "deepseek-v3",
+      "released": "2024",
+      "in_mai_table_11": false,
+      "in_mai_table_12": true
+    },
+    {
+      "name": "Qwen3-235B-A22B",
+      "org": "Alibaba",
+      "weight": "open",
+      "api_id": "Qwen/Qwen3-235B-A22B",
+      "released": "2025",
+      "in_mai_table_11": true,
+      "in_mai_table_12": true
+    },
+    {
+      "name": "Qwen3.7 Max",
+      "org": "Alibaba",
+      "weight": "closed",
+      "api_id": "qwen-qwq-plus",
+      "released": "Apr 2026",
+      "in_mai_table_11": false,
+      "in_mai_table_12": false
+    },
+    {
+      "name": "Mistral Large 3",
+      "org": "Mistral AI",
+      "weight": "open",
+      "api_id": "mistral-large-latest",
+      "released": "2026",
+      "in_mai_table_11": false,
+      "in_mai_table_12": false
+    },
+    {
+      "name": "MiniMax M2.5",
+      "org": "MiniMax",
+      "weight": "open",
+      "api_id": "MiniMaxAI/MiniMax-M2.5",
+      "released": "2026",
+      "in_mai_table_11": false,
+      "in_mai_table_12": false
+    },
+    {
+      "name": "GLM-5",
+      "org": "Zhipu AI",
+      "weight": "open",
+      "api_id": "THUDM/GLM-5",
+      "released": "2026",
+      "in_mai_table_11": false,
+      "in_mai_table_12": false
+    },
+    {
+      "name": "Kimi K2.5",
+      "org": "Moonshot AI",
+      "weight": "open",
+      "api_id": "moonshotai/Kimi-K2.5",
+      "released": "2026",
+      "in_mai_table_11": false,
+      "in_mai_table_12": false
+    },
+    {
+      "name": "Gemma 4 31B IT",
+      "org": "Google DeepMind",
+      "weight": "open",
+      "api_id": "google/gemma-4-31b-it",
+      "released": "Apr 2026",
+      "in_mai_table_11": false,
+      "in_mai_table_12": false
+    },
+    {
+      "name": "Gemma 4 31B Thinking",
+      "org": "Google DeepMind",
+      "weight": "open",
+      "api_id": "google/gemma-4-31b-it",
+      "released": "Apr 2026",
+      "in_mai_table_11": false,
+      "in_mai_table_12": false
+    },
+    {
+      "name": "Gemma 4 26B A4B IT",
+      "org": "Google DeepMind",
+      "weight": "open",
+      "api_id": "google/gemma-4-26b-a4b-it",
+      "released": "Apr 2026",
+      "in_mai_table_11": false,
+      "in_mai_table_12": false
+    },
+    {
+      "name": "Gemma 4 12B IT",
+      "org": "Google DeepMind",
+      "weight": "open",
+      "api_id": "google/gemma-4-12b-it",
+      "released": "Jun 3, 2026",
+      "in_mai_table_11": false,
+      "in_mai_table_12": false
+    },
+    {
+      "name": "Gemma 4 E4B IT",
+      "org": "Google DeepMind",
+      "weight": "open",
+      "api_id": "google/gemma-4-e4b-it",
+      "released": "Apr 2026",
+      "in_mai_table_11": false,
+      "in_mai_table_12": false
+    },
+    {
+      "name": "Gemma 4 E2B IT",
+      "org": "Google DeepMind",
+      "weight": "open",
+      "api_id": "google/gemma-4-e2b-it",
+      "released": "Apr 2026",
+      "in_mai_table_11": false,
+      "in_mai_table_12": false
+    }
   ]
 }
