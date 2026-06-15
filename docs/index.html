@@ -1499,11 +1499,63 @@ function setBenchXref(f, el) {
   renderByBench();
 }
 
+const BENCHMARK_LINKS = {
+  'MRCR v2':                  'https://benchlm.ai/benchmarks/mrcr1m',
+  'RULER':                    'https://github.com/NVIDIA/RULER',
+  'SWE-Bench Verified':       'https://www.swebench.com/',
+  'SWE-Bench Pro':            'https://www.swebench.com/',
+  'HLE':                      'https://agi.safe.ai/',
+  'GPQA Diamond':             'https://paperswithcode.com/sota/science-question-answering-on-gpqa',
+  'MMLU-Pro':                 'https://paperswithcode.com/sota/multi-task-language-understanding-on-mmlu-1',
+  'IFEval':                   'https://paperswithcode.com/sota/instruction-following-on-ifeval',
+  'LiveCodeBench v6':         'https://livecodebench.github.io/leaderboard.html',
+  'AIME 2025':                'https://artificialanalysis.ai/reasoning',
+  'BFCL v3':                  'https://gorilla.cs.berkeley.edu/leaderboard.html',
+  'Arena ELO (LMArena)':      'https://lmarena.ai/?leaderboard',
+  'FrontierCode Diamond':     'https://cognition.ai/benchmarks',
+  'Terminal-Bench 2.1':       'https://terminal-bench.com',
+  'HealthBench Professional': 'https://openai.com/index/healthbench/',
+  'LOFT':                     'https://arxiv.org/abs/2406.17419',
+  'LongBench v2':             'https://longbench2.github.io/',
+  'WildGuard':                'https://huggingface.co/datasets/allenai/wildguardmix',
+  'HarmBench':                'https://www.harmbench.org/',
+  'TMMLU+':                   'https://huggingface.co/datasets/ikala/tmmluplus',
+  'tau-bench':                'https://github.com/sierra-research/tau-bench',
+  'tau2-bench':               'https://github.com/sierra-research/tau-bench',
+  'MedQA (USMLE)':            'https://paperswithcode.com/sota/question-answering-on-medqa-usmle',
+  'MMMLU':                    'https://huggingface.co/datasets/openai/MMMLU',
+  'BigBenchHard':             'https://github.com/suzgunmirac/BIG-Bench-Hard',
+};
+
+const LAB_SOURCE_LINKS = {
+  'Anthropic':       'https://www.anthropic.com/research',
+  'OpenAI':          'https://platform.openai.com/docs/models',
+  'Google DeepMind': 'https://deepmind.google/technologies/gemini/',
+  'Microsoft':       'https://microsoft.ai/pdf/mai-thinking-1.pdf',
+  'DeepSeek':        'https://github.com/deepseek-ai/DeepSeek-V3',
+  'Alibaba':         'https://qwenlm.github.io/',
+  'xAI':             'https://x.ai/blog',
+  'Meta':            'https://ai.meta.com/research/',
+  'Mistral AI':      'https://mistral.ai/news/',
+  'HHRI-AI':         'https://muhammadsaqlainaslam.github.io/tmmlu-leaderboard/',
+};
+
+const CROSS_CHECK_LINKS = [
+  {name:'Artificial Analysis',  url:'https://artificialanalysis.ai/',            desc:'Independent cross-lab benchmark scores'},
+  {name:'BenchLM',              url:'https://benchlm.ai/',                       desc:'MRCR, SWE-Bench, GPQA — clean independent leaderboard'},
+  {name:'Scale AI Leaderboard', url:'https://labs.scale.com/leaderboard',        desc:'HLE, SWE-Bench, safety benchmarks'},
+  {name:'LLM Stats',            url:'https://llm-stats.com/',                    desc:'300+ benchmarks tracked per model'},
+  {name:'Papers With Code',     url:'https://paperswithcode.com/sota',           desc:'Academic benchmark SOTA leaderboards'},
+];
+
 function renderByLabs() {
   const labs = labXrefFilter === 'all' ? LAB_DATA : LAB_DATA.filter(l => l.lab === labXrefFilter);
   const grid = document.getElementById('bylabs-grid');
   if (!grid) return;
   grid.innerHTML = labs.map(lab => {
+    const sourceLink = LAB_SOURCE_LINKS[lab.lab]
+      ? ' <a href="' + LAB_SOURCE_LINKS[lab.lab] + '" target="_blank" style="font-size:11px;color:var(--accent);margin-left:8px">Official source ↗</a>'
+      : '';
     const rows = lab.entries.map(e => {
       const dm = DM[e.domain] || {};
       const domCls = dm.cls || '';
@@ -1523,7 +1575,7 @@ function renderByLabs() {
     return '<div class="xref-card">' +
       '<div class="xref-card-header">' +
         '<div>' +
-          '<div class="xref-card-title">' + lab.emoji + ' ' + lab.lab + '</div>' +
+          '<div class="xref-card-title">' + lab.emoji + ' ' + lab.lab + sourceLink + '</div>' +
           '<div class="xref-card-sub">Benchmarks evaluated with exact model API strings</div>' +
         '</div>' +
         '<span class="xref-count-badge">' + lab.entries.length + ' evals</span>' +
@@ -1542,9 +1594,25 @@ function renderByBench() {
   });
   const grid = document.getElementById('bybench-grid');
   if (!grid) return;
+  const crossCheck = '<div style="margin-top:20px;padding-top:16px;border-top:1px solid var(--border)">' +
+    '<div style="font-size:11px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px">Cross-check scores independently</div>' +
+    '<div style="display:flex;flex-wrap:wrap;gap:8px">' +
+    CROSS_CHECK_LINKS.map(l =>
+      '<a href="' + l.url + '" target="_blank" style="display:inline-flex;flex-direction:column;gap:2px;padding:7px 12px;border-radius:8px;border:1px solid var(--border);background:var(--surface2);text-decoration:none;min-width:160px">' +
+        '<span style="font-size:12px;font-weight:600;color:var(--accent)">' + l.name + ' ↗</span>' +
+        '<span style="font-size:11px;color:var(--text3)">' + l.desc + '</span>' +
+      '</a>'
+    ).join('') +
+    '</div></div>';
   grid.innerHTML = items.map(item => {
     const dm = DM[item.domain] || {};
     const domCls = dm.cls || '';
+    const verifyLink = BENCHMARK_LINKS[item.bench]
+      ? ' <a href="' + BENCHMARK_LINKS[item.bench] + '" target="_blank" style="font-size:11px;color:var(--accent);margin-left:8px">Verify scores ↗</a>'
+      : '';
+    const mrcrWarning = item.bench === 'MRCR v2'
+      ? '<div style="font-size:11px;color:#b45309;background:#fef3c7;border:1px solid #f59e0b;border-radius:5px;padding:4px 8px;margin-top:4px">⚠️ Needle count and context size must match when comparing — same model can show 91.5% (4-needle) vs 54% (8-needle) at same context length</div>'
+      : '';
     const rows = item.labs.map(entry => {
       const scoreHtml = (!entry.score || entry.score === 'N/A')
         ? '<span class="xref-score-na">N/A</span>'
@@ -1561,14 +1629,15 @@ function renderByBench() {
     return '<div class="xref-card">' +
       '<div class="xref-card-header">' +
         '<div>' +
-          '<div class="xref-card-title">' + item.bench + '</div>' +
+          '<div class="xref-card-title">' + item.bench + verifyLink + '</div>' +
           '<div class="xref-card-sub"><span class="xref-domain-pill ' + domCls + '">' + (dm.label || item.domain) + '</span></div>' +
+          mrcrWarning +
         '</div>' +
         '<span class="xref-count-badge">' + item.labs.length + ' labs</span>' +
       '</div>' +
       rows +
     '</div>';
-  }).join('');
+  }).join('') + crossCheck;
 }
 
 // ── Init ───────────────────────────────────────────────────────────────────
