@@ -806,7 +806,7 @@ tbody td { padding: 12px 16px; vertical-align: top; }
 
 <div class="footer">
   <span>FoxBrain EvalHub &nbsp;&bull;&nbsp; HHRI-AI / Foxconn AI Research Center &nbsp;&bull;&nbsp; <a href="https://muhammadsaqlainaslam.github.io/foxbrain-eval-dashboard/">muhammadsaqlainaslam.github.io/foxbrain-eval-dashboard</a></span>
-  <span>Updated June 11, 2026 &nbsp;&bull;&nbsp; Sources: MAI-Thinking-1, Anthropic, Google DeepMind, Qwen, DeepSeek</span>
+  <span id="footer-updated">Updated June 15, 2026</span> &nbsp;&bull;&nbsp; 9 labs &nbsp;&bull;&nbsp; 72 models &nbsp;&bull;&nbsp; 55 benchmarks &nbsp;&bull;&nbsp; 17 sources
 </div>
 
 <script>
@@ -1571,6 +1571,8 @@ renderModels();
       const fmt = d.toLocaleDateString('en-US', {year:'numeric', month:'long', day:'numeric'});
       const el = document.getElementById('last-updated-date');
       if (el) el.textContent = fmt;
+      const footerEl = document.getElementById('footer-updated');
+      if (footerEl) footerEl.textContent = 'Updated ' + fmt;
     })
     .catch(() => {}); // silently fail — static fallback stays
 })();
