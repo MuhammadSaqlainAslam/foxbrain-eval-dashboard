@@ -523,6 +523,121 @@ tbody td { padding: 12px 16px; vertical-align: top; }
   .topbar { padding: 0 14px; }
   .filter-bar { padding: 8px 10px; }
 }
+
+/* ── By Lab / By Benchmark cross-reference ──────────────────────────────── */
+.xref-section-bar {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 12px 16px;
+  margin-bottom: 16px;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+  box-shadow: var(--shadow);
+}
+.xref-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 14px;
+}
+.xref-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transition: box-shadow .15s, border-color .15s;
+}
+.xref-card:hover {
+  box-shadow: var(--shadow-lg);
+  border-color: var(--border2);
+}
+.xref-card-header {
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface2);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+.xref-card-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text);
+}
+.xref-card-sub {
+  font-size: 11px;
+  color: var(--text3);
+  margin-top: 2px;
+}
+.xref-count-badge {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 99px;
+  background: var(--accent-bg);
+  color: var(--accent);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.xref-entry {
+  padding: 11px 16px;
+  border-bottom: 1px solid var(--border);
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 12px;
+  align-items: start;
+  transition: background .1s;
+}
+.xref-entry:last-child { border-bottom: none; }
+.xref-entry:hover { background: var(--surface2); }
+.xref-entry-name {
+  font-weight: 600;
+  font-size: 13px;
+  color: var(--text);
+  margin-bottom: 3px;
+}
+.xref-api-badge {
+  display: inline-block;
+  font-size: 11px;
+  font-family: 'JetBrains Mono', 'Courier New', monospace;
+  background: var(--surface2);
+  border: 1px solid var(--border2);
+  border-radius: 4px;
+  padding: 2px 7px;
+  color: var(--text2);
+  margin-top: 3px;
+  word-break: break-all;
+}
+.xref-note {
+  font-size: 11px;
+  color: var(--text3);
+  margin-top: 4px;
+}
+.xref-domain-pill {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 99px;
+  margin-top: 3px;
+}
+.xref-score {
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--accent);
+  text-align: right;
+  white-space: nowrap;
+}
+.xref-score-na {
+  font-size: 12px;
+  color: var(--text3);
+  text-align: right;
+}
+
 </style>
 </head>
 <body>
@@ -645,7 +760,7 @@ tbody td { padding: 12px 16px; vertical-align: top; }
 
   <!-- BY LAB TAB -->
   <div id="tab-bylabs" style="display:none">
-    <div class="xref-filter-bar">
+    <div class="xref-section-bar filter-bar">
       <span class="filter-label">Filter by lab:</span>
       <button class="fbtn active" onclick="setLabXref('all',this)">All</button>
       <button class="fbtn" onclick="setLabXref('Anthropic',this)">Anthropic</button>
@@ -661,7 +776,7 @@ tbody td { padding: 12px 16px; vertical-align: top; }
 
   <!-- BY BENCHMARK TAB -->
   <div id="tab-bybench" style="display:none">
-    <div class="xref-filter-bar">
+    <div class="xref-section-bar filter-bar">
       <span class="filter-label">Filter by domain:</span>
       <button class="fbtn active" onclick="setBenchXref('all',this)">All</button>
       <button class="fbtn" onclick="setBenchXref('stem',this)">STEM</button>
@@ -1173,35 +1288,34 @@ function setBenchXref(f, el) {
 function renderByLabs() {
   const labs = labXrefFilter === 'all' ? LAB_DATA : LAB_DATA.filter(l => l.lab === labXrefFilter);
   const grid = document.getElementById('bylabs-grid');
+  if (!grid) return;
   grid.innerHTML = labs.map(lab => {
     const rows = lab.entries.map(e => {
       const dm = DM[e.domain] || {};
-      return `<div class="xref-row xref-row-2col">
-        <div>
-          <div class="xref-bench-name">${e.bench}</div>
-          <span class="xref-domain-tag">${dm.label || e.domain}</span>
-          <div class="xref-models-list">
-            <span class="xref-model" title="API model string">${e.api}</span>
-            ${e.notes ? `<span style="font-size:11px;color:var(--text3)">${e.notes}</span>` : ''}
-          </div>
-        </div>
-        <div style="text-align:right">
-          <div class="xref-score">${e.score}</div>
-          <div style="font-size:11px;color:var(--text3);margin-top:2px">${e.model !== e.api ? e.model : ''}</div>
-        </div>
-      </div>`;
+      const domCls = dm.cls || '';
+      const scoreHtml = (!e.score || e.score === 'N/A')
+        ? '<span class="xref-score-na">N/A</span>'
+        : '<span class="xref-score">' + e.score + '</span>';
+      return '<div class="xref-entry">' +
+        '<div>' +
+          '<div class="xref-entry-name">' + e.bench + '</div>' +
+          '<span class="xref-domain-pill ' + domCls + '">' + (dm.label || e.domain) + '</span>' +
+          '<div class="xref-api-badge">' + e.api + '</div>' +
+          (e.notes ? '<div class="xref-note">' + e.notes + '</div>' : '') +
+        '</div>' +
+        '<div>' + scoreHtml + '</div>' +
+      '</div>';
     }).join('');
-
-    return `<div class="xref-card">
-      <div class="xref-card-header">
-        <div>
-          <div class="xref-card-title">${lab.emoji} ${lab.lab}</div>
-          <div class="xref-card-sub">Evaluated benchmarks with exact model versions</div>
-        </div>
-        <span class="xref-count">${lab.entries.length} benchmarks</span>
-      </div>
-      <div class="xref-body">${rows}</div>
-    </div>`;
+    return '<div class="xref-card">' +
+      '<div class="xref-card-header">' +
+        '<div>' +
+          '<div class="xref-card-title">' + lab.emoji + ' ' + lab.lab + '</div>' +
+          '<div class="xref-card-sub">Benchmarks evaluated with exact model API strings</div>' +
+        '</div>' +
+        '<span class="xref-count-badge">' + lab.entries.length + ' evals</span>' +
+      '</div>' +
+      rows +
+    '</div>';
   }).join('');
 }
 
@@ -1213,29 +1327,33 @@ function renderByBench() {
     return dOrder !== 0 ? dOrder : a.bench.localeCompare(b.bench);
   });
   const grid = document.getElementById('bybench-grid');
+  if (!grid) return;
   grid.innerHTML = items.map(item => {
     const dm = DM[item.domain] || {};
+    const domCls = dm.cls || '';
     const rows = item.labs.map(entry => {
-      return `<div class="xref-row xref-row-2col">
-        <div>
-          <div style="font-weight:600;font-size:13px;color:var(--text)">${entry.emoji} ${entry.lab}</div>
-          <span class="xref-model" title="API model string">${entry.api}</span>
-          ${entry.notes ? `<div style="font-size:11px;color:var(--text3);margin-top:2px">${entry.notes}</div>` : ''}
-        </div>
-        <div class="xref-score">${entry.score}</div>
-      </div>`;
+      const scoreHtml = (!entry.score || entry.score === 'N/A')
+        ? '<span class="xref-score-na">N/A</span>'
+        : '<span class="xref-score">' + entry.score + '</span>';
+      return '<div class="xref-entry">' +
+        '<div>' +
+          '<div class="xref-entry-name">' + entry.emoji + ' ' + entry.lab + '</div>' +
+          '<div class="xref-api-badge">' + entry.api + '</div>' +
+          (entry.notes ? '<div class="xref-note">' + entry.notes + '</div>' : '') +
+        '</div>' +
+        '<div>' + scoreHtml + '</div>' +
+      '</div>';
     }).join('');
-
-    return `<div class="xref-card">
-      <div class="xref-card-header">
-        <div>
-          <div class="xref-card-title">${item.bench}</div>
-          <div class="xref-card-sub"><span class="dpill ${dm.cls}" style="font-size:10px;padding:2px 8px">${dm.label || item.domain}</span></div>
-        </div>
-        <span class="xref-count">${item.labs.length} labs</span>
-      </div>
-      <div class="xref-body">${rows}</div>
-    </div>`;
+    return '<div class="xref-card">' +
+      '<div class="xref-card-header">' +
+        '<div>' +
+          '<div class="xref-card-title">' + item.bench + '</div>' +
+          '<div class="xref-card-sub"><span class="xref-domain-pill ' + domCls + '">' + (dm.label || item.domain) + '</span></div>' +
+        '</div>' +
+        '<span class="xref-count-badge">' + item.labs.length + ' labs</span>' +
+      '</div>' +
+      rows +
+    '</div>';
   }).join('');
 }
 
