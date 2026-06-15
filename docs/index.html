@@ -642,6 +642,7 @@ tbody td { padding: 12px 16px; vertical-align: top; }
   </div>
 </div>
 
+
   <!-- BY LAB TAB -->
   <div id="tab-bylabs" style="display:none">
     <div class="xref-filter-bar">
@@ -1008,12 +1009,15 @@ function renderSources() {
 
 // ── Tab switching ──────────────────────────────────────────────────────────
 function setTab(tab, el) {
-  ['benchmarks','models','sources'].forEach(t => {
-    document.getElementById('tab-' + t).style.display = t === tab ? 'block' : 'none';
+  ['benchmarks','models','sources','bylabs','bybench'].forEach(t => {
+    const div = document.getElementById('tab-' + t);
+    if (div) div.style.display = t === tab ? 'block' : 'none';
   });
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
   if (el) el.classList.add('active');
   if (tab === 'sources') renderSources();
+  if (tab === 'bylabs')  renderByLabs();
+  if (tab === 'bybench') renderByBench();
 }
 
 
