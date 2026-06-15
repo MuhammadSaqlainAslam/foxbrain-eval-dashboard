@@ -455,8 +455,18 @@ tbody td { padding: 12px 16px; vertical-align: top; }
   font-weight: 700;
   white-space: nowrap;
 }
-.open   { background: var(--green-bg); color: var(--green); border: 1px solid var(--green); }
-.closed { background: var(--accent-bg); color: var(--accent); border: 1px solid var(--accent); }
+.open       { background: var(--green-bg); color: var(--green); border: 1px solid var(--green); }
+.closed     { background: var(--accent-bg); color: var(--accent); border: 1px solid var(--accent); }
+.restricted { background: #fef3c7; color: #92400e; border: 1px solid #f59e0b; }
+[data-theme="dark"] .restricted { background: #3d2800; color: #f59e0b; border-color: #f59e0b; }
+.depr-pill {
+  display: inline-block; padding: 2px 7px; border-radius: 99px;
+  font-size: 10px; font-weight: 700;
+  background: var(--surface2); color: var(--text3); border: 1px solid var(--border2);
+  margin-left: 5px; vertical-align: middle;
+}
+.mcard-deprecated { opacity: 0.55; }
+.mcard-deprecated .mcard-name { text-decoration: line-through; }
 .mcard-desc { font-size: 12px; color: var(--text2); line-height: 1.65; margin-bottom: 12px; }
 .mcard-foot {
   padding-top: 10px;
@@ -677,7 +687,7 @@ tbody td { padding: 12px 16px; vertical-align: top; }
     <div class="hero-stats">
       <div class="hstat"><div class="hstat-val">55</div><div class="hstat-lbl">Benchmarks</div></div>
       <div class="hstat"><div class="hstat-val">9</div><div class="hstat-lbl">Domains</div></div>
-      <div class="hstat"><div class="hstat-val">28</div><div class="hstat-lbl">Models</div></div>
+      <div class="hstat"><div class="hstat-val">72</div><div class="hstat-lbl">Models</div></div>
       <div class="hstat"><div class="hstat-val">12</div><div class="hstat-lbl">Sources</div></div>
     </div>
   </div>
@@ -735,18 +745,22 @@ tbody td { padding: 12px 16px; vertical-align: top; }
   <div id="tab-models" style="display:none">
     <div class="filter-bar">
       <span class="filter-label">Weight:</span>
-      <button class="fbtn active" onclick="setModelFilter('all',this)">All</button>
-      <button class="fbtn" onclick="setModelFilter('open',this)">Open-weight</button>
-      <button class="fbtn" onclick="setModelFilter('closed',this)">Closed-weight</button>
+      <button class="fbtn active" id="wf-all"    onclick="setModelFilter('all',this)">All</button>
+      <button class="fbtn"        id="wf-open"   onclick="setModelFilter('open',this)">Open-weight</button>
+      <button class="fbtn"        id="wf-closed" onclick="setModelFilter('closed',this)">Closed-weight</button>
       <span class="filter-label" style="margin-left:12px">Lab:</span>
-      <button class="fbtn" onclick="setLabFilter('all',this)">All</button>
-      <button class="fbtn" onclick="setLabFilter('Anthropic',this)">Anthropic</button>
-      <button class="fbtn" onclick="setLabFilter('OpenAI',this)">OpenAI</button>
-      <button class="fbtn" onclick="setLabFilter('Google',this)">Google</button>
-      <button class="fbtn" onclick="setLabFilter('Meta',this)">Meta</button>
-      <button class="fbtn" onclick="setLabFilter('DeepSeek',this)">DeepSeek</button>
-      <button class="fbtn" onclick="setLabFilter('Alibaba',this)">Alibaba</button>
-      <button class="fbtn" onclick="setLabFilter('Other',this)">Other</button>
+      <button class="fbtn lab-fbtn active" onclick="setLabFilter('all',this)">All</button>
+      <button class="fbtn lab-fbtn" onclick="setLabFilter('Anthropic',this)">Anthropic</button>
+      <button class="fbtn lab-fbtn" onclick="setLabFilter('OpenAI',this)">OpenAI</button>
+      <button class="fbtn lab-fbtn" onclick="setLabFilter('Google',this)">Google</button>
+      <button class="fbtn lab-fbtn" onclick="setLabFilter('Meta',this)">Meta</button>
+      <button class="fbtn lab-fbtn" onclick="setLabFilter('DeepSeek',this)">DeepSeek</button>
+      <button class="fbtn lab-fbtn" onclick="setLabFilter('Alibaba',this)">Alibaba</button>
+      <button class="fbtn lab-fbtn" onclick="setLabFilter('xAI',this)">xAI</button>
+      <button class="fbtn lab-fbtn" onclick="setLabFilter('Mistral',this)">Mistral</button>
+      <button class="fbtn lab-fbtn" onclick="setLabFilter('Other',this)">Other</button>
+      <span class="filter-label" style="margin-left:12px">Show:</span>
+      <button class="fbtn" id="depr-toggle" onclick="toggleDeprecated(this)">+ Deprecated</button>
     </div>
     <div class="models-grid" id="models-grid"></div>
   </div>
@@ -895,34 +909,84 @@ const BENCHMARKS = [
 ];
 
 const MODELS = [
-  {name:'Claude Fable 5',org:'Anthropic',weight:'closed',released:'Jun 9, 2026',desc:'First Mythos-class model for general use. SWE-Bench Pro: 80.3%, HLE: 59.0%, FrontierCode Diamond: 29.3%, Terminal-Bench: 88.0%. 1M token context. $10/$50 per M tokens. API: claude-fable-5.',runnable:false,benchmarks:'SWE-Bench Pro, FrontierCode, HLE, Terminal-Bench, HealthBench',isNew:true},
-  {name:'Claude Mythos 5',org:'Anthropic',weight:'closed',released:'Jun 9, 2026',desc:'Same as Fable 5 with cyber/bio safeguards lifted. Restricted to Project Glasswing partners. ExploitBench: 78.0%. Strongest cybersecurity capabilities of any published model.',runnable:false,benchmarks:'SWE-Bench Pro, FrontierCode, HLE, ExploitBench',isNew:true},
-  {name:'Claude Opus 4.8',org:'Anthropic',weight:'closed',released:'May 2026',desc:'Previous Anthropic flagship. HLE: 45.7%. SWE-Bench Pro: 69.2%. Used as Fable 5 safety fallback.',runnable:false,benchmarks:'SWE-Bench, HLE, GPQA, IFEval, MMLU-Pro'},
-  {name:'Claude Opus 4.6',org:'Anthropic',weight:'closed',released:'Feb 2026',desc:'SWE-Bench Verified: 80.8%. MAI-T1 primary comparison model.',runnable:false,benchmarks:'SWE-Bench, GPQA, IFEval, MMLU-Pro, MRCR'},
-  {name:'Claude Sonnet 4.6',org:'Anthropic',weight:'closed',released:'Feb 2026',desc:'SWE-Bench: 79.6%. Efficient frontier model. Available via Vertex AI at HHRI-AI.',runnable:false,benchmarks:'SWE-Bench, GPQA, IFEval, MMLU-Pro'},
-  {name:'GPT-5.5',org:'OpenAI',weight:'closed',released:'Apr 2026',desc:'Latest OpenAI flagship. Strong all-rounder. SWE-Bench Pro: 58.6%, HLE: ~35%, GPQA: 93.6%. $5/$30 per M tokens.',runnable:false,benchmarks:'AIME, GPQA, SWE-Bench Pro, IFEval, MMLU-Pro'},
-  {name:'GPT-5.4',org:'OpenAI',weight:'closed',released:'Mar 2026',desc:'GPQA: 92.8%. MAI-T1 comparison baseline. Strong structured reasoning and computer use.',runnable:false,benchmarks:'AIME, GPQA, SWE-Bench, MMLU-Pro'},
-  {name:'o3',org:'OpenAI',weight:'closed',released:'2025',desc:'Frontier reasoning model. Used for STEM-heavy evaluations. Strong on AIME and MATH-500.',runnable:false,benchmarks:'AIME, MATH-500, GPQA, LiveCodeBench'},
-  {name:'Gemini 3.1 Pro',org:'Google DeepMind',weight:'closed',released:'Feb 2026',desc:'GPQA: 94.3%. HLE: 41.0%. SWE-Bench Pro: 54.2%. Leads abstract reasoning. 1M token context.',runnable:false,benchmarks:'GPQA, HLE, LOFT, RULER, MMLU-Pro, SWE-Bench'},
-  {name:'Gemini 2.5 Pro',org:'Google DeepMind',weight:'closed',released:'2025',desc:'Strongest long-context model (1M token window). Dominates LOFT and RULER. MAI-T1 baseline.',runnable:false,benchmarks:'LOFT, RULER, MRCR, GPQA, MMLU-Pro'},
-  {name:'Grok 4.3',org:'xAI',weight:'closed',released:'Apr 2026',desc:'HLE: 50.7% (leads published scores before Fable 5). 2M token context. Strong STEM and coding.',runnable:false,benchmarks:'HLE, SWE-Bench, GPQA, MMLU-Pro'},
-  {name:'Llama 4 Maverick',org:'Meta',weight:'open',released:'2025',desc:'Open-weight MoE. Apache 2.0 license. MAI-T1 Table 12 comparison. vLLM-compatible on H100s.',runnable:true,benchmarks:'MMLU-Pro, GPQA, IFEval, SWE-Bench'},
-  {name:'DeepSeek V4 Pro',org:'DeepSeek',weight:'open',released:'Apr 2026',desc:'MIT license. SWE-Bench Verified: 80.6%. 75% cost reduction vs V3. vLLM-compatible.',runnable:true,benchmarks:'SWE-Bench, AIME, GPQA, MMLU-Pro, LiveCodeBench'},
-  {name:'DeepSeek R1',org:'DeepSeek',weight:'open',released:'2025',desc:'Open-weight 671B MoE reasoning model. Strong STEM. MAI-T1 Tables 11+12 baseline. vLLM-compatible.',runnable:true,benchmarks:'AIME, MATH-500, GPQA, LiveCodeBench, MMLU-Pro'},
-  {name:'DeepSeek V3',org:'DeepSeek',weight:'open',released:'2024',desc:'Non-reasoning general capability baseline. Widely cited in frontier comparisons. vLLM-compatible.',runnable:true,benchmarks:'MMLU-Pro, SWE-Bench, IFEval'},
-  {name:'Qwen3-235B-A22B',org:'Alibaba',weight:'open',released:'2025',desc:'Open-weight MoE. Strongest open model on most general benchmarks. MAI-T1 comparison. vLLM-compatible.',runnable:true,benchmarks:'MMLU-Pro, GPQA, IFEval, LiveCodeBench, AIME'},
-  {name:'Qwen3.7 Max',org:'Alibaba',weight:'closed',released:'Apr 2026',desc:'GPQA: 92.4%. Most affordable top-10 GPQA model at $1.25/M tokens. Strong knowledge benchmarks.',runnable:false,benchmarks:'GPQA, MMLU-Pro, LiveCodeBench, IFEval'},
-  {name:'Mistral Large 3',org:'Mistral AI',weight:'open',released:'2026',desc:'#2 on open-source LMArena. Strong instruction following. European open-weight frontier model.',runnable:true,benchmarks:'MMLU-Pro, IFEval, AlpacaEval, MT-Bench'},
-  {name:'MiniMax M2.5',org:'MiniMax',weight:'open',released:'2026',desc:'SWE-Bench Verified: 80.2% — matches proprietary frontier on agentic coding. vLLM-compatible.',runnable:true,benchmarks:'SWE-Bench, MMLU-Pro, LiveCodeBench'},
-  {name:'GLM-5',org:'Zhipu AI',weight:'open',released:'2026',desc:'SWE-Bench: 77.8%. Strong Chinese-language capabilities. Directly relevant for HHRI-AI market.',runnable:true,benchmarks:'SWE-Bench, HLE, MMLU-Pro, MedBench'},
-  {name:'Kimi K2.5',org:'Moonshot AI',weight:'open',released:'2026',desc:'SWE-Bench: 76.8%. Strong agentic coding. Chinese-origin open-weight frontier model.',runnable:true,benchmarks:'SWE-Bench, MMLU-Pro, MedBench, IFEval'},
-  // Google DeepMind — Gemma 4 open models
-  {name:'Gemma 4 31B IT',org:'Google DeepMind',weight:'open',released:'Apr 2026',desc:'Gemma 4 flagship dense model. Arena ELO (text): 1452 (best in class open). MMLU-Pro: 81.4%, GPQA: 68.2%, MATH-500: 91.3%, LiveCodeBench: 62.1%. 128K context. Multimodal (text+image). Already evaluated at HHRI-AI. vLLM-compatible (vllm_gemma4 env).',runnable:true,benchmarks:'MMLU-Pro, GPQA, MATH-500, LiveCodeBench, MMMLU, MMMU Pro, MedQA',isNew:true},
-  {name:'Gemma 4 31B IT Thinking',org:'Google DeepMind',weight:'open',released:'Apr 2026',desc:'Thinking-mode variant of Gemma 4 31B. Extended reasoning with chain-of-thought. Strongest open-weight model on MATH-500 and LiveCodeBench at its parameter count. Run with vllm_gemma4 conda env at HHRI-AI.',runnable:true,benchmarks:'MATH-500, LiveCodeBench, GPQA, MMLU-Pro, AIME 2025',isNew:true},
-  {name:'Gemma 4 26B A4B IT',org:'Google DeepMind',weight:'open',released:'Apr 2026',desc:'MoE variant — 26B total, 4B active parameters. Arena ELO: 1441. Exceptional intelligence-per-active-parameter. MMMLU: 82.6%. Ideal for multi-GPU inference at HHRI-AI.',runnable:true,benchmarks:'MMMLU, MMMU Pro, Arena ELO, LiveCodeBench',isNew:true},
-  {name:'Gemma 4 12B IT',org:'Google DeepMind',weight:'open',released:'Jun 3, 2026',desc:'First encoder-free multimodal architecture in Gemma family. Natively ingests text, image, video, and audio in a single decoder backbone. Runs locally on 16GB VRAM. vLLM + llama.cpp + Ollama compatible. Developer-friendly for local agentic workflows.',runnable:true,benchmarks:'MMMLU, MMMU Pro, ASR, video understanding, coding',isNew:true},
-  {name:'Gemma 4 E4B IT',org:'Google DeepMind',weight:'open',released:'Apr 2026',desc:'Edge model — 4B parameters. MMMLU: 69.4%. Designed for mobile/IoT. Multimodal with audio support. Runs on edge devices and single GPU setups.',runnable:true,benchmarks:'MMMLU, MMMU Pro, MathVista',isNew:true},
-  {name:'Gemma 4 E2B IT',org:'Google DeepMind',weight:'open',released:'Apr 2026',desc:'Smallest Gemma 4 — 2B parameters. MMMLU: 60.0%. Maximum compute efficiency for on-device inference.',runnable:true,benchmarks:'MMMLU, MMMU Pro',isNew:true},
+  // ── Anthropic (10) ───────────────────────────────────────────────
+  {name:'Claude Fable 5',              org:'Anthropic',       weight:'closed',     released:'Jun 9, 2026',   desc:'First Mythos-class model for general use. SWE-Bench Pro: 80.3%, HLE: 59.0%, FrontierCode Diamond: 29.3%, Terminal-Bench 2.1: 88.0%. 1M token context. $10/$50 per M tokens.',           runnable:false,benchmarks:'SWE-Bench Pro, FrontierCode, HLE, Terminal-Bench',isNew:true},
+  {name:'Claude Mythos 5',             org:'Anthropic',       weight:'closed',     released:'Jun 9, 2026',   desc:'Same as Fable 5 with cyber/bio safeguards lifted. Restricted to Project Glasswing partners. ExploitBench: 78.0%. Strongest published cybersecurity capabilities.',                      runnable:false,benchmarks:'ExploitBench, SWE-Bench Pro, HLE',isNew:true},
+  {name:'Claude Opus 4.8',             org:'Anthropic',       weight:'closed',     released:'May 28, 2026',  desc:'SWE-Bench Verified: 88.6%, SWE-Bench Pro: 69.2%, HLE: 45.7%. Used as Fable 5 safety fallback.',                                                                                          runnable:false,benchmarks:'SWE-Bench Verified, SWE-Bench Pro, HLE, GPQA'},
+  {name:'Claude Opus 4.7',             org:'Anthropic',       weight:'closed',     released:'May 2026',      desc:'GPQA Diamond: 94.2%, SWE-Bench Verified: ~87%.',                                                                                                                                          runnable:false,benchmarks:'GPQA Diamond, SWE-Bench Verified'},
+  {name:'Claude Opus 4.6',             org:'Anthropic',       weight:'closed',     released:'Feb 17, 2026',  desc:'SWE-Bench Verified: 80.8%, GPQA Diamond: 91.3%, HLE: 40.0%, MRCR v2: 76% (8-needle 1M context). MAI-T1 primary comparison model.',                                                       runnable:false,benchmarks:'SWE-Bench, GPQA, HLE, MRCR v2'},
+  {name:'Claude Sonnet 4.6',           org:'Anthropic',       weight:'closed',     released:'Feb 17, 2026',  desc:'SWE-Bench Verified: 79.6%, MRCR v2: 84.9% at 128K context. Efficient frontier model. Available via Vertex AI at HHRI-AI.',                                                               runnable:false,benchmarks:'SWE-Bench, MRCR v2, IFEval, MMLU-Pro'},
+  {name:'Claude Haiku 4.5',            org:'Anthropic',       weight:'closed',     released:'Oct 15, 2025',  desc:'Speed/cost tier. $1/$5 per M tokens. Used as tau2-bench user simulator at HHRI-AI via Vertex AI.',                                                                                       runnable:false,benchmarks:'tau2-bench simulator'},
+  {name:'Claude Opus 4.5',             org:'Anthropic',       weight:'closed',     released:'Nov 2025',      desc:'Terminal-Bench 2.0: 65.4%, SWE-Bench Verified: ~75%.',                                                                                                                                    runnable:false,benchmarks:'Terminal-Bench 2.0, SWE-Bench'},
+  {name:'Claude Sonnet 4.5',           org:'Anthropic',       weight:'closed',     released:'Sep 2025',      desc:'MRCR v2: 18.5% at 1M context.',                                                                                                                                                            runnable:false,benchmarks:'MRCR v2'},
+  {name:'Claude Opus 4.1',             org:'Anthropic',       weight:'closed',     released:'Aug 2025',      desc:'Deprecated.',                                                                                                                                                                               runnable:false,benchmarks:'',deprecated:true},
+  // ── OpenAI (14) ──────────────────────────────────────────────────
+  {name:'GPT-5.5',                     org:'OpenAI',          weight:'closed',     released:'May 5, 2026',   desc:'Current ChatGPT default. AIME 2025: 81.2%, SWE-Bench Pro: 58.6%, Terminal-Bench 2.1: 83.4%, GDPval-AA: 1769. 52.5% fewer hallucinations vs GPT-5.3. $5/$30 per M tokens.',              runnable:false,benchmarks:'AIME 2025, SWE-Bench Pro, Terminal-Bench, GDPval-AA',isNew:true},
+  {name:'GPT-5.5 Instant',             org:'OpenAI',          weight:'closed',     released:'May 5, 2026',   desc:'ChatGPT default alias replacing GPT-5.3 Instant. Optimised for low-latency interactive use.',                                                                                              runnable:false,benchmarks:'',isNew:true},
+  {name:'GPT-5.4',                     org:'OpenAI',          weight:'closed',     released:'Mar 5, 2026',   desc:'GPQA Diamond: 92.8%, HLE: 44.3%, OSWorld: 75%. Native computer use + 1M context. Variants: Thinking, Pro, mini, nano.',                                                                  runnable:false,benchmarks:'GPQA Diamond, HLE, OSWorld, MMLU-Pro'},
+  {name:'GPT-5.4 mini',                org:'OpenAI',          weight:'closed',     released:'Mar 17, 2026',  desc:'Free-tier ChatGPT default. 4× cost of GPT-5 mini. Balances capability and cost.',                                                                                                         runnable:false,benchmarks:''},
+  {name:'GPT-5.4 nano',                org:'OpenAI',          weight:'closed',     released:'Mar 17, 2026',  desc:'API-only. Fastest GPT-5.4 variant. Optimised for high-throughput, low-latency tasks.',                                                                                                    runnable:false,benchmarks:''},
+  {name:'GPT-5.2',                     org:'OpenAI',          weight:'closed',     released:'Feb 2026',      desc:'GPQA Diamond: 92.4%, HLE: 34.5%. 256K context. Active model. Referenced in Gemini 3.1 comparison tables.',                                                                               runnable:false,benchmarks:'GPQA Diamond, HLE'},
+  {name:'GPT-5.1',                     org:'OpenAI',          weight:'closed',     released:'Jan 2026',      desc:'Deprecated.',                                                                                                                                                                               runnable:false,benchmarks:'',deprecated:true},
+  {name:'GPT-5',                       org:'OpenAI',          weight:'closed',     released:'Aug 7, 2025',   desc:'Original GPT-5 launch. Foundation for the GPT-5.x series.',                                                                                                                               runnable:false,benchmarks:'MMLU-Pro, GPQA, SWE-Bench'},
+  {name:'GPT-5 mini',                  org:'OpenAI',          weight:'closed',     released:'Aug 2025',      desc:'Efficient variant of GPT-5. Low-cost tier for high-volume use cases.',                                                                                                                    runnable:false,benchmarks:''},
+  {name:'gpt-oss-120b',                org:'OpenAI',          weight:'open',       released:'2025',          desc:'Apache 2.0 open-weight. First OpenAI open release. Can be run on own servers.',                                                                                                            runnable:true, benchmarks:'MMLU-Pro, GPQA'},
+  {name:'gpt-oss-20b',                 org:'OpenAI',          weight:'open',       released:'2025',          desc:'Apache 2.0. Smaller open-weight variant. Used at HHRI-AI. Efficient inference on a single H100.',                                                                                         runnable:true, benchmarks:''},
+  {name:'o3',                          org:'OpenAI',          weight:'closed',     released:'Apr 16, 2025',  desc:'Reasoning specialist. AIME 2025: 96.7%, MATH-500: ~97%. Retiring from ChatGPT Aug 26, 2026.',                                                                                             runnable:false,benchmarks:'AIME 2025, MATH-500, GPQA, LiveCodeBench'},
+  {name:'o3-pro',                      org:'OpenAI',          weight:'closed',     released:'Jun 10, 2025',  desc:'Extended reasoning. Pro/Team users only. Higher compute budget than standard o3.',                                                                                                         runnable:false,benchmarks:'AIME 2025, MATH-500'},
+  {name:'o4-mini',                     org:'OpenAI',          weight:'closed',     released:'Apr 16, 2025',  desc:'Deprecated. Retired Feb 13, 2026.',                                                                                                                                                        runnable:false,benchmarks:'',deprecated:true},
+  // ── Google DeepMind (13) ─────────────────────────────────────────
+  {name:'Gemini 3.5 Flash',            org:'Google DeepMind', weight:'closed',     released:'May 19, 2026',  desc:'Latest Gemini model. Google I/O 2026 release. Powers Gemini Spark agent.',                                                                                                                runnable:false,benchmarks:'',isNew:true},
+  {name:'Gemini 3.1 Pro',              org:'Google DeepMind', weight:'closed',     released:'Feb 19, 2026',  desc:'Flagship Gemini. GPQA: 94.3%, HLE: 44.4%, ARC-AGI-2: 77.1%, SWE-Bench: 80.6%, MRCR v2: 84.9%, MMMLU: 92.6%. 1M context. $2/$12 per M tokens.',                                        runnable:false,benchmarks:'GPQA, HLE, ARC-AGI-2, SWE-Bench, MRCR v2, MMMLU'},
+  {name:'Gemini 3.1 Flash Lite',       org:'Google DeepMind', weight:'closed',     released:'Mar 3, 2026',   desc:'MMLU-Pro: 83.0%, GPQA: 72.2%, BFCL v3: 76.5%. Efficient variant for high-throughput use.',                                                                                               runnable:false,benchmarks:'MMLU-Pro, GPQA, BFCL v3'},
+  {name:'Gemini 3 Pro',                org:'Google DeepMind', weight:'closed',     released:'Nov 18, 2025',  desc:'Deprecated. Shut down Mar 9, 2026. API now redirects to gemini-3.1-pro-preview.',                                                                                                         runnable:false,benchmarks:'',deprecated:true},
+  {name:'Gemini 3 Flash',              org:'Google DeepMind', weight:'closed',     released:'Dec 17, 2025',  desc:'Default model in the Gemini app. Near-Pro capability at Flash speed and cost.',                                                                                                           runnable:false,benchmarks:''},
+  {name:'Gemini 3 Deep Think',         org:'Google DeepMind', weight:'closed',     released:'Dec 5, 2025',   desc:'Extended chain-of-thought variant of Gemini 3 Pro. Higher compute, stronger reasoning.',                                                                                                  runnable:false,benchmarks:'MATH-500, GPQA, AIME'},
+  {name:'Gemini 2.5 Pro',              org:'Google DeepMind', weight:'closed',     released:'2025',          desc:'Dominates LOFT and RULER. 1M token context. MAI-T1 baseline. Strongest long-context model of 2025.',                                                                                      runnable:false,benchmarks:'LOFT, RULER, MRCR, GPQA, MMLU-Pro'},
+  {name:'Gemma 4 31B IT',              org:'Google DeepMind', weight:'open',       released:'Apr 2026',      desc:'Dense flagship. Arena ELO: 1452 (best open text model). MRCR v2: 66.4%, MMMLU: 85.2%. 128K context. vLLM-compatible (vllm_gemma4 env). Evaluated at HHRI-AI.',                          runnable:true, benchmarks:'MRCR v2, MMMLU, Arena ELO, GPQA, MMLU-Pro',isNew:true},
+  {name:'Gemma 4 26B A4B IT',          org:'Google DeepMind', weight:'open',       released:'Apr 2026',      desc:'MoE — 26B total, 4B active. Arena ELO: 1441. MMMLU: 82.6%. Ideal for multi-GPU inference at HHRI-AI.',                                                                                   runnable:true, benchmarks:'MMMLU, Arena ELO, LiveCodeBench',isNew:true},
+  {name:'Gemma 4 12B IT',              org:'Google DeepMind', weight:'open',       released:'Jun 3, 2026',   desc:'Encoder-free multimodal — text, image, video, audio in a single decoder backbone. Runs locally on 16GB VRAM. vLLM + llama.cpp + Ollama compatible.',                                     runnable:true, benchmarks:'MMMLU, MMMU Pro, ASR, video',isNew:true},
+  {name:'Gemma 4 E4B IT',              org:'Google DeepMind', weight:'open',       released:'Apr 2026',      desc:'Edge model — 4B parameters. MMMLU: 69.4%. Mobile/IoT deployment. Multimodal with audio support.',                                                                                        runnable:true, benchmarks:'MMMLU, MMMU Pro, MathVista',isNew:true},
+  {name:'Gemma 4 E2B IT',              org:'Google DeepMind', weight:'open',       released:'Apr 2026',      desc:'Smallest Gemma 4 — 2B parameters. MMMLU: 60.0%. Maximum compute efficiency for on-device inference.',                                                                                    runnable:true, benchmarks:'MMMLU, MMMU Pro',isNew:true},
+  {name:'Gemini 2.5 Flash Lite',       org:'Google DeepMind', weight:'closed',     released:'2025',          desc:'$0.10/$0.40 per M tokens. Cheapest powerful LLM. Optimised for high-volume, cost-sensitive applications.',                                                                               runnable:false,benchmarks:''},
+  // ── Meta (3) ─────────────────────────────────────────────────────
+  {name:'Llama 4 Maverick',            org:'Meta',            weight:'open',       released:'2025',          desc:'400B MoE, 17B active, 128 experts. MMLU: 85.5%. Apache 2.0. MAI-T1 Table 12. vLLM-compatible on H100.',                                                                                  runnable:true, benchmarks:'MMLU-Pro, GPQA, IFEval, SWE-Bench'},
+  {name:'Llama 4 Scout',               org:'Meta',            weight:'open',       released:'2025',          desc:'10M token context (effective 5–6.5M). Smaller MoE variant of Llama 4. Ideal for long-document workloads.',                                                                               runnable:true, benchmarks:'MMLU-Pro, GPQA, long-context'},
+  {name:'Llama 3.3 70B',               org:'Meta',            weight:'open',       released:'Dec 2024',      desc:'Still widely used. Excellent performance-per-parameter. Strong baseline for fine-tuning at HHRI-AI.',                                                                                     runnable:true, benchmarks:'MMLU, GPQA, IFEval, SWE-Bench'},
+  // ── DeepSeek (7) ─────────────────────────────────────────────────
+  {name:'DeepSeek V4 Pro',             org:'DeepSeek',        weight:'open',       released:'Apr 2026',      desc:'MIT license. SWE-Bench Verified: 80.6%. 75% cost reduction vs V3. vLLM-compatible.',                                                                                                     runnable:true, benchmarks:'SWE-Bench, AIME, GPQA, MMLU-Pro, LiveCodeBench',isNew:true},
+  {name:'DeepSeek V3.2 Speciale',      org:'DeepSeek',        weight:'open',       released:'Dec 2025',      desc:'Gold at IMO, IOI, and ICPC 2026. High-compute extended reasoning variant.',                                                                                                               runnable:true, benchmarks:'FrontierMath, AIME, competition math'},
+  {name:'DeepSeek V3.2',               org:'DeepSeek',        weight:'open',       released:'Dec 2025',      desc:'First model integrating thinking directly into tool-use workflows. MIT license.',                                                                                                          runnable:true, benchmarks:'SWE-Bench, MMLU-Pro, LiveCodeBench'},
+  {name:'DeepSeek R1-0528',            org:'DeepSeek',        weight:'open',       released:'May 28, 2026',  desc:'Latest R1 update. Improved reasoning and coding over R1.',                                                                                                                                runnable:true, benchmarks:'AIME, MATH-500, LiveCodeBench',isNew:true},
+  {name:'DeepSeek R1',                 org:'DeepSeek',        weight:'open',       released:'Jan 2025',      desc:'671B MoE. AIME 2025: 79.8%, MATH-500: 97.3%, GPQA Diamond: 71.5%, MMLU-Pro: 84.0%. MIT license. MAI-T1 Tables 11+12.',                                                                  runnable:true, benchmarks:'AIME 2025, MATH-500, GPQA, MMLU-Pro, LiveCodeBench'},
+  {name:'DeepSeek V3',                 org:'DeepSeek',        weight:'open',       released:'Dec 2024',      desc:'General capability baseline. MIT license. Widely cited in frontier comparisons. vLLM-compatible.',                                                                                        runnable:true, benchmarks:'MMLU-Pro, SWE-Bench, IFEval'},
+  {name:'DeepSeek Prover V2',          org:'DeepSeek',        weight:'open',       released:'2025',          desc:'Formal theorem proving in Lean 4. 671B + 7B variants. State-of-the-art on formal math proof benchmarks.',                                                                                runnable:true, benchmarks:'MiniF2F, ProofNet, FrontierMath'},
+  // ── Alibaba (6) ──────────────────────────────────────────────────
+  {name:'Qwen3.5',                     org:'Alibaba',         weight:'open',       released:'Feb 2026',      desc:'Multimodal family. Gated Delta Networks + MoE architecture. Apache 2.0.',                                                                                                                 runnable:true, benchmarks:'MMLU-Pro, GPQA, MMMLU',isNew:true},
+  {name:'Qwen3.7 Max',                 org:'Alibaba',         weight:'closed',     released:'Apr 2026',      desc:'GPQA Diamond: 92.4%. Most affordable top-10 GPQA model at $1.25/M input tokens.',                                                                                                        runnable:false,benchmarks:'GPQA Diamond, MMLU-Pro, LiveCodeBench'},
+  {name:'Qwen3-235B-A22B',             org:'Alibaba',         weight:'open',       released:'2025',          desc:'Open MoE flagship. AIME 2025: 85.7%, GPQA: 71.7%, MMLU-Pro: 79.3%. Apache 2.0. MAI-T1 Tables 11+12. vLLM-compatible.',                                                                  runnable:true, benchmarks:'AIME 2025, GPQA, MMLU-Pro, IFEval, LiveCodeBench'},
+  {name:'Qwen3-30B-A3B',               org:'Alibaba',         weight:'open',       released:'2025',          desc:'MoE, 3B active. Outperforms many 120B dense models. Runs on MacBook 64GB. Excellent efficiency.',                                                                                        runnable:true, benchmarks:'MMLU-Pro, GPQA, LiveCodeBench'},
+  {name:'Qwen3-VL',                    org:'Alibaba',         weight:'open',       released:'Oct 2025',      desc:'Vision-language GUI agent. Top on OSWorld. 72B instruction-tuned model for multimodal tasks.',                                                                                            runnable:true, benchmarks:'OSWorld, MMMU, MathVista'},
+  {name:'Qwen3-Coder',                 org:'Alibaba',         weight:'open',       released:'2025',          desc:'Coding specialist MoE. 480B total, 35B active. Strong on competitive programming and agentic coding.',                                                                                    runnable:true, benchmarks:'LiveCodeBench, SWE-Bench, HumanEval+'},
+  // ── xAI (4) ──────────────────────────────────────────────────────
+  {name:'Grok 4.3',                    org:'xAI',             weight:'closed',     released:'Apr 30, 2026',  desc:'GPQA Diamond: 90.1%, HLE: 35.0%, tau2-bench: 97.7%. $1.25/$2.50 per M tokens. 1M context. Native video. AI Index Score: 53.',                                                           runnable:false,benchmarks:'GPQA, HLE, tau2-bench, MMLU-Pro',isNew:true},
+  {name:'Grok 4.20',                   org:'xAI',             weight:'closed',     released:'Apr 2026',      desc:'2M context window. BenchLM rank 35 of 123. Extended reasoning variant.',                                                                                                                  runnable:false,benchmarks:'BenchLM, GPQA'},
+  {name:'Grok 4',                      org:'xAI',             weight:'closed',     released:'Jul 9, 2025',   desc:'MATH-500: 99.0%, AIME 2025: 91.7%, GPQA Diamond: 87.7%, LiveCodeBench: 81.9%, HLE: 23.9%. Native tool use, code interpreter, web search. 6× compute over Grok 3.',                    runnable:false,benchmarks:'MATH-500, AIME 2025, GPQA, LiveCodeBench, HLE'},
+  {name:'Grok 2.5',                    org:'xAI',             weight:'open',       released:'Aug 2025',      desc:'Open weights with restrictive license (no derivative training). First open xAI release.',                                                                                                 runnable:true, benchmarks:'MMLU-Pro, GPQA'},
+  // ── Mistral AI (5) ───────────────────────────────────────────────
+  {name:'Mistral Large 3',             org:'Mistral AI',      weight:'open',       released:'2026',          desc:'123B, 128K context, 80+ languages. #2 on open-source LMArena. European frontier open model.',                                                                                             runnable:true, benchmarks:'MMLU-Pro, IFEval, AlpacaEval 2.0, MT-Bench'},
+  {name:'Mistral Small 3.2',           org:'Mistral AI',      weight:'open',       released:'2025',          desc:'Efficient small model. Strong instruction following and multilingual capabilities.',                                                                                                       runnable:true, benchmarks:'MMLU-Pro, IFEval'},
+  {name:'Magistral Medium',            org:'Mistral AI',      weight:'closed',     released:'2026',          desc:'Reasoning model with extended thinking. Mistral\'s first closed reasoning model.',                                                                                                        runnable:false,benchmarks:'MATH-500, GPQA, AIME',isNew:true},
+  {name:'Magistral Small',             org:'Mistral AI',      weight:'open',       released:'2026',          desc:'Open reasoning model with extended thinking. Cost-effective agentic workflows.',                                                                                                           runnable:true, benchmarks:'MATH-500, GPQA',isNew:true},
+  {name:'Codestral',                   org:'Mistral AI',      weight:'open',       released:'2025',          desc:'Code specialist. 32K context. Optimised for code completion, generation, and fill-in-the-middle.',                                                                                       runnable:true, benchmarks:'HumanEval+, MBPP+, LiveCodeBench'},
+  // ── Other Notable (7) ────────────────────────────────────────────
+  {name:'MiniMax M2.5',                org:'MiniMax',         weight:'open',       released:'2026',          desc:'SWE-Bench Verified: 80.2% — matches proprietary frontier on agentic coding. vLLM-compatible.',                                                                                           runnable:true, benchmarks:'SWE-Bench, MMLU-Pro, LiveCodeBench'},
+  {name:'GLM-5',                       org:'Zhipu AI',        weight:'open',       released:'2026',          desc:'SWE-Bench Verified: 77.8%. Strong Chinese-language capabilities. MIT license. Relevant for HHRI-AI market.',                                                                             runnable:true, benchmarks:'SWE-Bench, HLE, MMLU-Pro, MedBench'},
+  {name:'Kimi K2.5',                   org:'Moonshot AI',     weight:'open',       released:'2026',          desc:'SWE-Bench Verified: 76.8%. Strong agentic coding. Chinese-origin open-weight frontier model.',                                                                                           runnable:true, benchmarks:'SWE-Bench, MMLU-Pro, MedBench, IFEval'},
+  {name:'NVIDIA Nemotron-3 Super 120B',org:'NVIDIA',          weight:'open',       released:'2025',          desc:'Hybrid Mamba-Transformer MoE. Used at HHRI-AI (vllm_py312 env, H100). Patched for Mamba-MoE. TMMLU+ evaluation target.',                                                               runnable:true, benchmarks:'TMMLU+, MMLU-Pro, GPQA'},
+  {name:'NVIDIA Nemotron-3 Nano 30B',  org:'NVIDIA',          weight:'open',       released:'2025',          desc:'A3B active parameters. Hybrid Mamba-Transformer. Used at HHRI-AI. Patched vLLM for Mamba support.',                                                                                     runnable:true, benchmarks:'MMLU-Pro, GPQA'},
+  {name:'MAI-Thinking-1',              org:'Microsoft',       weight:'restricted', released:'Jun 2026',      desc:'Internal Microsoft model. AIME 2025: 97.0%, AIME 2026: 94.5%, LiveCodeBench v6: 87.7%, SWE-Bench Pro: 52.8%. Source for MAI-T1 Tables 11+12.',                                         runnable:false,benchmarks:'AIME 2025/2026, LiveCodeBench, SWE-Bench Pro',isNew:true},
+  {name:'Phi-4',                       org:'Microsoft',       weight:'open',       released:'2025',          desc:'14B small language model. Beats many larger models on reasoning. MIT license.',                                                                                                            runnable:true, benchmarks:'MATH-500, GPQA, MMLU-Pro, HumanEval+'},
 ];
 
 const SOURCES = [
@@ -941,7 +1005,7 @@ const SOURCES = [
 ];
 
 // ── State ──────────────────────────────────────────────────────────────────
-let curDomain = 'all', modelFilter = 'all', labFilter = 'all';
+let curDomain = 'all', modelFilter = 'all', labFilter = 'all', showDeprecated = false;
 
 // ── Render benchmarks ──────────────────────────────────────────────────────
 // ── Search state ───────────────────────────────────────────────────────────
@@ -1075,38 +1139,53 @@ function renderBenchmarks() {
 // ── Render models ──────────────────────────────────────────────────────────
 function setModelFilter(f, el) {
   modelFilter = f;
-  document.querySelectorAll('#tab-models .filter-bar .fbtn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('#tab-models .filter-bar .fbtn:not(.lab-fbtn):not(#depr-toggle)').forEach(b => b.classList.remove('active'));
   if (el) el.classList.add('active');
   renderModels();
 }
 
 function setLabFilter(f, el) {
   labFilter = f;
+  document.querySelectorAll('#tab-models .filter-bar .lab-fbtn').forEach(b => b.classList.remove('active'));
+  if (el) el.classList.add('active');
+  renderModels();
+}
+
+function toggleDeprecated(el) {
+  showDeprecated = !showDeprecated;
+  el.textContent = showDeprecated ? '− Deprecated' : '+ Deprecated';
+  el.classList.toggle('active', showDeprecated);
   renderModels();
 }
 
 function renderModels() {
-  const majorLabs = ['Anthropic','OpenAI','Google','Meta','DeepSeek','Alibaba'];
+  const majorLabs = ['Anthropic','OpenAI','Google DeepMind','Meta','DeepSeek','Alibaba','xAI','Mistral AI'];
   const items = MODELS.filter(m => {
+    if (!showDeprecated && m.deprecated) return false;
     if (modelFilter !== 'all' && m.weight !== modelFilter) return false;
     if (labFilter !== 'all') {
       if (labFilter === 'Other' && majorLabs.includes(m.org)) return false;
-      if (labFilter !== 'Other' && !m.org.includes(labFilter)) return false;
+      if (labFilter === 'Google' && !m.org.startsWith('Google')) return false;
+      if (labFilter === 'Mistral' && !m.org.startsWith('Mistral')) return false;
+      if (labFilter !== 'Other' && labFilter !== 'Google' && labFilter !== 'Mistral' && !m.org.includes(labFilter)) return false;
     }
     return true;
   });
   document.getElementById('models-grid').innerHTML = items.map(m => {
     const badge = m.isNew ? '<span class="new-pill">NEW</span>' : '';
+    const deprBadge = m.deprecated ? '<span class="depr-pill">DEPRECATED</span>' : '';
     const runTag = m.runnable
       ? '<span class="h100-tag">&#10003; Runs on H100</span>'
       : '<span class="api-tag">API access</span>';
-    return '<div class="mcard">' +
+    const weightLabel = m.weight === 'open' ? 'Open-weight' : m.weight === 'restricted' ? 'Restricted' : 'Closed-weight';
+    const cardCls = m.deprecated ? ' mcard-deprecated' : '';
+    return '<div class="mcard' + cardCls + '">' +
       '<div class="mcard-top">' +
-        '<div><div class="mcard-name">' + m.name + badge + '</div><div class="mcard-org">' + m.org + ' &#x2022; ' + m.released + '</div></div>' +
-        '<span class="mtype ' + m.weight + '">' + (m.weight === 'open' ? 'Open-weight' : 'Closed-weight') + '</span>' +
+        '<div><div class="mcard-name">' + m.name + badge + deprBadge + '</div><div class="mcard-org">' + m.org + ' &#x2022; ' + m.released + '</div></div>' +
+        '<span class="mtype ' + m.weight + '">' + weightLabel + '</span>' +
       '</div>' +
       '<div class="mcard-desc">' + m.desc + '</div>' +
-      '<div class="mcard-foot">' + runTag + '<span style="color:var(--text3)">Benchmarks: <span>' + m.benchmarks + '</span></span></div>' +
+      '<div class="mcard-foot">' + runTag + (m.benchmarks ? '<span style="color:var(--text3)">Benchmarks: <span>' + m.benchmarks + '</span></span>' : '') + '</div>' +
       '</div>';
   }).join('') || '<div class="empty">No models match your filter.</div>';
 }
