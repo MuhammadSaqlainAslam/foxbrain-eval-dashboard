@@ -685,7 +685,7 @@ tbody td { padding: 12px 16px; vertical-align: top; }
       </div>
     </div>
     <div class="hero-stats">
-      <div class="hstat"><div class="hstat-val">55</div><div class="hstat-lbl">Benchmarks</div></div>
+      <div class="hstat"><div class="hstat-val">61</div><div class="hstat-lbl">Benchmarks</div></div>
       <div class="hstat"><div class="hstat-val">9</div><div class="hstat-lbl">Domains</div></div>
       <div class="hstat"><div class="hstat-val">72</div><div class="hstat-lbl">Models</div></div>
       <div class="hstat"><div class="hstat-val">17</div><div class="hstat-lbl">Sources</div></div>
@@ -806,7 +806,7 @@ tbody td { padding: 12px 16px; vertical-align: top; }
 
 <div class="footer">
   <span>FoxBrain EvalHub &nbsp;&bull;&nbsp; HHRI-AI / Foxconn AI Research Center &nbsp;&bull;&nbsp; <a href="https://muhammadsaqlainaslam.github.io/foxbrain-eval-dashboard/">muhammadsaqlainaslam.github.io/foxbrain-eval-dashboard</a></span>
-  <span id="footer-updated">Updated June 15, 2026</span> &nbsp;&bull;&nbsp; 9 labs &nbsp;&bull;&nbsp; 72 models &nbsp;&bull;&nbsp; 55 benchmarks &nbsp;&bull;&nbsp; 17 sources
+  <span id="footer-updated">Updated June 15, 2026</span> &nbsp;&bull;&nbsp; 9 labs &nbsp;&bull;&nbsp; 72 models &nbsp;&bull;&nbsp; 61 benchmarks &nbsp;&bull;&nbsp; 17 sources
 </div>
 
 <script>
@@ -857,6 +857,7 @@ const BENCHMARKS = [
   {name:'MATH-500',domain:'stem',pri:'high',metric:'accuracy',labs:['OpenAI','Anthropic','Google','Microsoft','Meta','Alibaba'],desc:'500 Hendrycks MATH problems. Algebra, calculus, number theory. Standard across all frontier reports.',tags:['math','reasoning']},
   {name:'GPQA Diamond',domain:'stem',pri:'high',metric:'accuracy',labs:['OpenAI','Anthropic','Google','Microsoft','Meta','DeepSeek'],desc:'198 PhD-level biology, chemistry, physics MCQs. Gemini 3.1 Pro leads at 94.3%, GPT-5.5 at 93.6%.',tags:['science','expert-level']},
   {name:'FrontierMath',domain:'stem',pri:'high',metric:'accuracy',labs:['OpenAI','Anthropic','Google'],desc:'Expert-verified novel math problems not findable online. Most frontier models score below 2%.',tags:['math','novel','anti-saturation']},
+  {name:'ARC-AGI-2',domain:'stem',pri:'high',metric:'accuracy',labs:['Google','OpenAI','Anthropic'],desc:'Abstract reasoning tasks requiring novel problem solving. Gemini 3.1 Pro: 77.1% (2× improvement over previous gen). Tests fluid intelligence not memorization.',tags:['reasoning','abstract','novel'],isNew:true},
   {name:'LiveCodeBench v6',domain:'stem',pri:'high',metric:'pass@1',labs:['OpenAI','Anthropic','Google','Microsoft','DeepSeek','Alibaba'],desc:'Monthly-updated competitive programming. Contamination-resistant. MAI-T1: 87.7%.',tags:['coding','contamination-safe']},
   {name:'OlympiadBench',domain:'stem',pri:'medium',metric:'accuracy',labs:['Microsoft','Alibaba','Google'],desc:'International olympiad problems across physics, chemistry, biology. Multi-step, multi-domain.',tags:['science','math']},
   {name:'HumanEval+',domain:'stem',pri:'medium',metric:'pass@1',labs:['OpenAI','Anthropic','Google','Meta','Alibaba'],desc:'Enhanced HumanEval with stricter test cases. Near-saturating at frontier but still widely reported.',tags:['coding','function-level']},
@@ -880,15 +881,17 @@ const BENCHMARKS = [
   {name:'BigBenchHard',domain:'knowledge',pri:'medium',metric:'accuracy',labs:['Google','Anthropic','OpenAI'],desc:'Hard BIG-Bench subset requiring multi-step reasoning. Already in your eval suite.',tags:['reasoning','multi-step']},
   {name:'IFEval',domain:'instruction',pri:'high',metric:'accuracy',labs:['OpenAI','Anthropic','Google','Microsoft','Meta','DeepSeek','Alibaba'],desc:'Verifiable instruction constraints — word count, format, structure. Most universally reported IF benchmark.',tags:['verifiable','format-constraint']},
   {name:'Multi-IF',domain:'instruction',pri:'high',metric:'accuracy',labs:['Microsoft','OpenAI'],desc:'Multiple simultaneous constraints. Harder than IFEval. Used in MAI-T1.',tags:['multi-constraint']},
+  {name:'IFBench',domain:'instruction',pri:'medium',metric:'accuracy',labs:['xAI','Anthropic','OpenAI'],desc:'Instruction following benchmark used in Artificial Analysis Intelligence Index. Grok 4.3: 81.3%. Tests multi-constraint instruction compliance.',tags:['instruction','multi-constraint'],isNew:true},
   {name:'AlpacaEval 2.0',domain:'instruction',pri:'medium',metric:'win_rate',labs:['OpenAI','Anthropic','Google','Meta','Mistral'],desc:'Length-controlled win-rate vs GPT-4. Captures IF quality via human preference.',tags:['preference','win-rate']},
   {name:'MT-Bench',domain:'instruction',pri:'low',metric:'score',labs:['OpenAI','Anthropic','Google','Meta','Mistral'],desc:'Multi-turn conversation quality scored by GPT-4.',tags:['multi-turn','chat']},
   {name:'MRCR v2',domain:'longctx',pri:'high',metric:'mrcr_ratio',labs:['Anthropic','Google','HHRI-AI'],desc:'Multi-turn retrieval in long context. 2/4/8 needle variants. Already in your eval suite. Critical: needle count (2/4/8) and context size (32K/64K/128K/256K/1M) must match when comparing scores across labs. The same model can show 91.5% (4-needle 128K) vs 54% (8-needle 128K). Always verify variant.',tags:['retrieval','multi-turn','8-needle']},
-  {name:'MRCR v1',domain:'longctx',pri:'low',metric:'mrcr_ratio',labs:['Google'],desc:'Original Google benchmark. 2/4-needle only, up to 128K. Used in the Gemini 1.5 paper. Less stringent than v2 — scores are not comparable across versions.',tags:['retrieval','2-needle','4-needle','128K']},
+  {name:'MRCR v1',domain:'longctx',pri:'medium',metric:'mrcr_ratio',labs:['Google'],desc:'Original Google MRCR benchmark. 2/4-needle variants up to 128K. Used in Gemini 1.5 paper. Less stringent than v2 — the widely cited 91.5% figure comes from this variant or 4-needle, NOT 8-needle v2.',tags:['retrieval','multi-turn','2/4-needle']},
   {name:'RULER',domain:'longctx',pri:'high',metric:'wAvg',labs:['NVIDIA','Microsoft','Anthropic','Google','Cohere','Alibaba'],desc:'Created by NVIDIA. 13 tasks across 6 categories: NIAH, multi-key retrieval, variable tracking, CWE, FWE, QA. Evaluated at 4K/8K/16K/32K/64K/128K. wAvg aggregates score across all context lengths.',tags:['4K-128K','multi-task','NVIDIA']},
   {name:'LOFT',domain:'longctx',pri:'high',metric:'accuracy',labs:['Google','Microsoft'],desc:'Long context multi-hop + multi-needle retrieval, 300 queries. Used by Gemini 2.5 and MAI-T1.',tags:['multi-hop','multi-needle']},
   {name:'LongBench v2',domain:'longctx',pri:'medium',metric:'accuracy',labs:['DeepSeek','Alibaba','Microsoft'],desc:'Real-world long document tasks — multi-doc QA, summarization.',tags:['real-world','multi-doc']},
-  {name:'NoLiMa',domain:'longctx',pri:'medium',metric:'accuracy',labs:['Microsoft','Anthropic'],desc:'Latent associative reasoning in long contexts with minimal lexical overlap between questions and answers. Variants: 32K and 128K. New 2026 benchmark.',tags:['associative','32K','128K'],isNew:true},
-  {name:'InfiniteBench',domain:'longctx',pri:'medium',metric:'accuracy',labs:['DeepSeek','Alibaba'],desc:'Realistic tasks averaging ~200K context, up to 2M tokens. Single + multi-hop QA, code, math. Less synthetic than RULER — closer to real deployment conditions.',tags:['200K','2M','multi-hop','realistic']},
+  {name:'NoLiMa',domain:'longctx',pri:'medium',metric:'accuracy',labs:['Microsoft','Anthropic'],desc:'Latent associative reasoning in long contexts. Minimal lexical overlap between questions and answers — tests genuine understanding not keyword matching. Variants: 32K and 128K.',tags:['long-context','reasoning','2026'],isNew:true},
+  {name:'InfiniteBench',domain:'longctx',pri:'medium',metric:'accuracy',labs:['DeepSeek','Alibaba'],desc:'Realistic long-context tasks. Average input ~200K tokens, maximum exceeding 2M. Includes single-hop QA, multi-hop QA, code, math. Less synthetic than RULER.',tags:['long-context','real-world','2M-tokens']},
+  {name:'LV-Eval',domain:'longctx',pri:'medium',metric:'f1',labs:['DeepSeek','Alibaba','Microsoft'],desc:'Five length levels up to 256K tokens. Single-hop and multi-hop QA. Reports avg F1 across lengths below 128K and 256K. Used alongside RULER in long-context evaluations.',tags:['long-context','QA','256K']},
   {name:'WildGuard',domain:'safety',pri:'high',metric:'accuracy',labs:['Microsoft','Allen AI','Meta'],desc:'Adversarial jailbreak + benign prompt safety. Tests both over-refusal and under-refusal.',tags:['jailbreak','refusal']},
   {name:'HarmBench',domain:'safety',pri:'high',metric:'attack_success_rate',labs:['OpenAI','Anthropic','Google','Microsoft'],desc:'Standardised red-teaming. Attack success rate across diverse harmful categories.',tags:['red-teaming']},
   {name:'ExploitBench',domain:'safety',pri:'medium',metric:'success_rate',labs:['Anthropic'],desc:'Cybersecurity exploit capability. Mythos 5: 78.0%. Fable 5 safeguards block progress entirely.',tags:['cybersecurity','exploit'],isNew:true},
