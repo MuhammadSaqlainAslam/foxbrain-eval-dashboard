@@ -13,7 +13,7 @@
 
 ## What's inside
 
-### 📊 Benchmarks tab — 60 benchmarks across 9 domains
+### 📊 Benchmarks tab — 55 benchmarks across 9 domains
 
 | Domain | Key benchmarks |
 |---|---|
@@ -29,23 +29,22 @@
 
 Each benchmark shows domain, priority, metric, which frontier labs use it, and description.
 
-### 🤖 Frontier models tab — 28 models across 11 labs
+### 🤖 Frontier models tab — 72 models across 9 labs
 
-| Lab | Models |
-|---|---|
-| Anthropic | Claude **Fable 5**, **Mythos 5**, Opus 4.8, 4.7, 4.6 · Sonnet 4.6 |
-| OpenAI | GPT-5.5, GPT-5.4, o3 |
-| Google DeepMind | Gemini 3.1 Pro, Gemini 2.5 Pro, **Gemma 4 31B**, **Gemma 4 31B Thinking**, **Gemma 4 26B MoE**, **Gemma 4 12B**, **Gemma 4 E4B**, **Gemma 4 E2B** |
-| xAI | Grok 4.3 |
-| Meta | Llama 4 Maverick |
-| DeepSeek | DeepSeek V4 Pro, R1, V3 |
-| Alibaba | Qwen3-235B-A22B, Qwen3.7 Max |
-| Mistral AI | Mistral Large 3 |
-| MiniMax | MiniMax M2.5 |
-| Zhipu AI | GLM-5 |
-| Moonshot AI | Kimi K2.5 |
+| Lab | Models | Notable |
+|---|---|---|
+| Anthropic | 10 | Fable 5, Mythos 5, Opus 4.8/4.7/4.6, Sonnet 4.6, Haiku 4.5, Opus 4.5/4.1 |
+| OpenAI | 14 | GPT-5.5, GPT-5.4 (4 variants), GPT-5.2, GPT-5, o3, o3-pro, gpt-oss-20b/120b |
+| Google DeepMind | 13 | Gemini 3.5 Flash, 3.1 Pro, 3 Flash, 2.5 Pro + Gemma 4 full family (6 models) |
+| Meta | 3 | Llama 4 Maverick, Scout, Llama 3.3 70B |
+| DeepSeek | 7 | V4 Pro, V3.2 Speciale, R1-0528, R1, V3, Prover V2 |
+| Alibaba | 6 | Qwen3.5, Qwen3.7 Max, Qwen3-235B, 30B, VL, Coder |
+| xAI | 4 | Grok 4.3, 4.20, 4, Grok 2.5 |
+| Mistral AI | 5 | Mistral Large 3, Small 3.2, Magistral Medium/Small, Codestral |
+| Other | 7 | MiniMax M2.5, GLM-5, Kimi K2.5, NVIDIA Nemotron x2, MAI-Thinking-1, Phi-4 |
+| **Total** | **72** | Includes deprecated models with flags |
 
-Open-weight models (Gemma 4, DeepSeek, Qwen3, Llama 4, Mistral, MiniMax, GLM-5, Kimi) can run directly on HHRI-AI H100s via vLLM.
+> Open-weight models marked with Apache 2.0 or MIT license can run directly on HHRI-AI H100s via vLLM. Deprecated models are included for historical reference and reproducibility.
 
 ### 📖 Sources tab — 12 reference links
 
@@ -106,4 +105,4 @@ foxbrain-eval-dashboard/
 *Curated by [Muhammad Saqlain](https://github.com/MuhammadSaqlainAslam) · HHRI-AI / Foxconn AI Research Center*
 
 *Benchmark taxonomy based on MAI-Thinking-1 Technical Report §4.1 (Microsoft AI, June 2026) and additional sources listed in the Sources tab.*
-*Last updated: June 9, 2026 — added Gemma 4 full family (6 models), Claude Fable 5 & Mythos 5, FrontierCode Diamond, Terminal-Bench 2.1, HealthBench Professional, MMMLU, Arena ELO, MathVista*
+*Last updated: June 15, 2026 — expanded to 72 frontier models across 9 labs with all variants, deprecated flags, and exact API strings*
