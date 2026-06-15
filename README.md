@@ -13,42 +13,77 @@
 
 ## What's inside
 
-### 📊 Benchmarks tab — 55 benchmarks across 9 domains
+### 📊 Benchmarks tab — 61 benchmarks across 9 domains
 
 | Domain | Key benchmarks |
 |---|---|
-| STEM | AIME 2025/2026, HLE, GPQA Diamond, LiveCodeBench v6, MATH-500, FrontierMath, OlympiadBench, MathVista |
-| Agentic coding | SWE-Bench Verified/Pro, FrontierCode Diamond, Terminal-Bench 2.1, Aider Polyglot, CursorBench 3.1, τ-bench, τ²-bench |
+| STEM | AIME 2025/2026, HLE, GPQA Diamond, ARC-AGI-2, LiveCodeBench v6, MATH-500, FrontierMath, OlympiadBench, MathVista |
+| Agentic coding | SWE-Bench Verified/Pro, FrontierCode Diamond, Terminal-Bench 2.1, Aider Polyglot, CursorBench 3.1, τ-bench, τ²-bench, Cybench |
 | Knowledge | MMLU-Pro, MMLU, MMMLU, MMMU Pro, SimpleQA, FRAMES, DROP, GDPval-AA, TMMLU+, BigBenchHard |
-| Instruction following | IFEval, Multi-IF, AlpacaEval 2.0, MT-Bench, Arena ELO |
-| Long context | MRCR v2, RULER, LOFT, LongBench v2 |
+| Instruction following | IFEval, Multi-IF, AlpacaEval 2.0, MT-Bench, Arena ELO, IFBench |
+| Long context | MRCR v2, MRCR v1, RULER, LOFT, LongBench v2, NoLiMa, InfiniteBench, LV-Eval |
 | Safety | WildGuard, HarmBench, ExploitBench, StrongREJECT, XSTest, AIEC |
 | Honesty | SycophancyEval, TruthfulQA |
 | Health | MedQA (USMLE), HealthBench Professional, MedBench, JAMA Clinical, ClinConsensus |
 | Tool calling | BFCL v3, τ-bench tool, API-Bank |
 
-Each benchmark shows domain, priority, metric, which frontier labs use it, and description.
+Each benchmark shows: domain, priority, primary metric, which labs use it, description, and a **Verify scores ↗** link to the authoritative leaderboard.
+
+> ⚠️ **Score verification note:** Always check needle count and context size when comparing MRCR scores. The same model can show 91.5% (4-needle, 128K) vs 54% (8-needle, 128K). Use the verify links to confirm variant used.
 
 ### 🤖 Frontier models tab — 72 models across 9 labs
 
-| Lab | Models | Notable |
+| Lab | Count | Notable models |
 |---|---|---|
 | Anthropic | 10 | Fable 5, Mythos 5, Opus 4.8/4.7/4.6, Sonnet 4.6, Haiku 4.5, Opus 4.5/4.1 |
-| OpenAI | 14 | GPT-5.5, GPT-5.4 (4 variants), GPT-5.2, GPT-5, o3, o3-pro, gpt-oss-20b/120b |
-| Google DeepMind | 13 | Gemini 3.5 Flash, 3.1 Pro, 3 Flash, 2.5 Pro + Gemma 4 full family (6 models) |
+| OpenAI | 14 | GPT-5.5, GPT-5.4 (Thinking/Pro/mini/nano), GPT-5.2, GPT-5, o3, o3-pro, gpt-oss-20b/120b |
+| Google DeepMind | 13 | Gemini 3.5 Flash, 3.1 Pro, 3.1 Flash Lite, 3 Flash, 2.5 Pro + Gemma 4 (31B/26B MoE/12B/E4B/E2B) |
 | Meta | 3 | Llama 4 Maverick, Scout, Llama 3.3 70B |
-| DeepSeek | 7 | V4 Pro, V3.2 Speciale, R1-0528, R1, V3, Prover V2 |
+| DeepSeek | 7 | V4 Pro, V3.2 Speciale, V3.2, R1-0528, R1, V3, Prover V2 |
 | Alibaba | 6 | Qwen3.5, Qwen3.7 Max, Qwen3-235B, 30B, VL, Coder |
-| xAI | 4 | Grok 4.3, 4.20, 4, Grok 2.5 |
+| xAI | 4 | Grok 4.3, Grok 4.20, Grok 4, Grok 2.5 |
 | Mistral AI | 5 | Mistral Large 3, Small 3.2, Magistral Medium/Small, Codestral |
 | Other | 7 | MiniMax M2.5, GLM-5, Kimi K2.5, NVIDIA Nemotron x2, MAI-Thinking-1, Phi-4 |
 | **Total** | **72** | Includes deprecated models with flags |
 
-> Open-weight models marked with Apache 2.0 or MIT license can run directly on HHRI-AI H100s via vLLM. Deprecated models are included for historical reference and reproducibility.
+Open-weight models (Gemma 4, DeepSeek, Qwen3, Llama 4, Mistral, MiniMax, GLM-5, Kimi, NVIDIA Nemotron) can run directly on HHRI-AI H100s via vLLM. Deprecated models included for historical reference and reproducibility.
 
-### 📖 Sources tab — 12 reference links
+### 🏭 By Lab tab
 
-Technical reports, live leaderboards, and benchmark papers including Gemma 4 model card, MAI-Thinking-1, Gemini 3.1, Qwen3, DeepSeek, Llama 4, HLE, ClinConsensus, Scale AI, Artificial Analysis, and Vellum leaderboards.
+One card per lab showing every benchmark they evaluated with:
+- Exact API model string (e.g. `claude-opus-4-6`, `gemma-4-31b-it`, `deepseek-r1`)
+- Score reported
+- Context size and variant notes (crucial for long-context benchmarks)
+- **Official source ↗** link to lab's technical report or model card
+
+171 evaluation entries across 10 labs (Anthropic 34, Google DeepMind 28, Microsoft 27, OpenAI 25, HHRI-AI 11, xAI 11, DeepSeek 11, Alibaba 10, Meta 8, Mistral AI 6).
+
+### 📈 By Benchmark tab
+
+One card per benchmark showing every lab that evaluated it with exact model API string and score. Includes **Verify scores ↗** links to authoritative leaderboards.
+
+Cross-check resources: Artificial Analysis, BenchLM, Scale AI Leaderboard, LLM Stats, Papers With Code.
+
+### 📖 Sources tab — 17 reference links
+
+Technical reports, live leaderboards, and benchmark papers:
+- Claude Fable 5 & Mythos 5 system card (Anthropic)
+- MAI-Thinking-1 Technical Report §4.1 (Microsoft AI)
+- Gemini 3.1 Pro model card + API changelog (Google DeepMind)
+- Gemma 4 model card & developer guide (Google DeepMind)
+- Qwen3 Technical Report (Alibaba)
+- DeepSeek V4 Pro & R1-0528 release (DeepSeek)
+- Llama 4 Technical Report (Meta)
+- xAI Grok 4 & 4.3 release (xAI)
+- Magistral & Mistral Large 3 release (Mistral AI)
+- HLE — Humanity's Last Exam (Center for AI Safety / Scale AI)
+- ClinConsensus Benchmark (arXiv 2603.02097)
+- Scale AI Leaderboard (updated continuously)
+- Artificial Analysis Intelligence Index (updated continuously)
+- Vellum LLM Leaderboard (updated continuously)
+- OpenAI Model Release Notes & API Changelog
+- Gemini API Release Notes (Google DeepMind)
+- DeepSeek V3 / R1 Technical Report (DeepSeek)
 
 ---
 
@@ -78,10 +113,10 @@ To trigger manually: Actions → Frontier Model & Benchmark Monitor → Run work
 ```
 foxbrain-eval-dashboard/
 ├── docs/
-│   ├── index.html                 # Live reference page
-│   └── benchmark_registry.json   # Canonical benchmark definitions (JSON)
+│   ├── index.html                 # Live reference page (FoxBrain EvalHub)
+│   └── benchmark_registry.json   # Canonical benchmark + model registry (v2.0)
 ├── results/
-│   └── benchmark.csv             # Evaluation results (for future use)
+│   └── benchmark.csv             # FoxBrain evaluation results (for future use)
 ├── scripts/
 │   ├── monitor_models.py          # Weekly frontier monitor script
 │   ├── update_registry.py         # Add new benchmarks to registry
@@ -97,7 +132,7 @@ foxbrain-eval-dashboard/
 
 ## Related projects
 
-- 📊 **TMMLU+ Public Leaderboard** — [muhammadsaqlainaslam.github.io/tmmlu-leaderboard](https://muhammadsaqlainaslam.github.io/tmmlu-leaderboard/)
+- 📊 **HHRI-AI LLM EvalBoard** (TMMLU+ Leaderboard) — [muhammadsaqlainaslam.github.io/tmmlu-leaderboard](https://muhammadsaqlainaslam.github.io/tmmlu-leaderboard/)
 - 📁 **TMMLU+ GitHub repo** — [github.com/MuhammadSaqlainAslam/tmmlu-leaderboard](https://github.com/MuhammadSaqlainAslam/tmmlu-leaderboard)
 
 ---
@@ -105,4 +140,5 @@ foxbrain-eval-dashboard/
 *Curated by [Muhammad Saqlain](https://github.com/MuhammadSaqlainAslam) · HHRI-AI / Foxconn AI Research Center*
 
 *Benchmark taxonomy based on MAI-Thinking-1 Technical Report §4.1 (Microsoft AI, June 2026) and additional sources listed in the Sources tab.*
-*Last updated: June 15, 2026 — expanded to 72 frontier models across 9 labs with all variants, deprecated flags, and exact API strings*
+
+*Last updated: June 15, 2026 — 61 benchmarks, 72 models across 9 labs, 171 lab evaluation entries, 17 sources, verification links added*
