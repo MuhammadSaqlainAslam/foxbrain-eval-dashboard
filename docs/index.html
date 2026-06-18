@@ -687,7 +687,7 @@ tbody td { padding: 12px 16px; vertical-align: top; }
     <div class="hero-stats">
       <div class="hstat"><div class="hstat-val">61</div><div class="hstat-lbl">Benchmarks</div></div>
       <div class="hstat"><div class="hstat-val">9</div><div class="hstat-lbl">Domains</div></div>
-      <div class="hstat"><div class="hstat-val">72</div><div class="hstat-lbl">Models</div></div>
+      <div class="hstat"><div class="hstat-val">74</div><div class="hstat-lbl">Models</div></div>
       <div class="hstat"><div class="hstat-val">17</div><div class="hstat-lbl">Sources</div></div>
     </div>
   </div>
@@ -806,7 +806,7 @@ tbody td { padding: 12px 16px; vertical-align: top; }
 
 <div class="footer">
   <span>FoxBrain EvalHub &nbsp;&bull;&nbsp; HHRI-AI / Foxconn AI Research Center &nbsp;&bull;&nbsp; <a href="https://muhammadsaqlainaslam.github.io/foxbrain-eval-dashboard/">muhammadsaqlainaslam.github.io/foxbrain-eval-dashboard</a></span>
-  <span id="footer-updated">Updated June 15, 2026</span> &nbsp;&bull;&nbsp; 9 labs &nbsp;&bull;&nbsp; 72 models &nbsp;&bull;&nbsp; 61 benchmarks &nbsp;&bull;&nbsp; 17 sources
+  <span id="footer-updated">Updated June 15, 2026</span> &nbsp;&bull;&nbsp; 9 labs &nbsp;&bull;&nbsp; 74 models &nbsp;&bull;&nbsp; 61 benchmarks &nbsp;&bull;&nbsp; 17 sources
 </div>
 
 <script>
@@ -951,6 +951,7 @@ const MODELS = [
   {name:'Gemini 2.5 Pro',              org:'Google DeepMind', weight:'closed',     released:'2025',          desc:'Dominates LOFT and RULER. 1M token context. MAI-T1 baseline. Strongest long-context model of 2025.',                                                                                      runnable:false,benchmarks:'LOFT, RULER, MRCR, GPQA, MMLU-Pro'},
   {name:'Gemma 4 31B IT',              org:'Google DeepMind', weight:'open',       released:'Apr 2026',      desc:'Dense flagship. Arena ELO: 1452 (best open text model). MRCR v2: 66.4%, MMMLU: 85.2%. 128K context. vLLM-compatible (vllm_gemma4 env). Evaluated at HHRI-AI.',                          runnable:true, benchmarks:'MRCR v2, MMMLU, Arena ELO, GPQA, MMLU-Pro',isNew:true},
   {name:'Gemma 4 26B A4B IT',          org:'Google DeepMind', weight:'open',       released:'Apr 2026',      desc:'MoE — 26B total, 4B active. Arena ELO: 1441. MMMLU: 82.6%. Ideal for multi-GPU inference at HHRI-AI.',                                                                                   runnable:true, benchmarks:'MMMLU, Arena ELO, LiveCodeBench',isNew:true},
+  {name:'Diffusion Gemma 26B A4B IT',  org:'Google DeepMind', weight:'open',       released:'Jun 2026',      desc:'Diffusion-based architecture variant of Gemma 4 26B MoE. Novel non-autoregressive generation approach.',                                                                                   runnable:true, benchmarks:'',isNew:true},
   {name:'Gemma 4 12B IT',              org:'Google DeepMind', weight:'open',       released:'Jun 3, 2026',   desc:'Encoder-free multimodal — text, image, video, audio in a single decoder backbone. Runs locally on 16GB VRAM. vLLM + llama.cpp + Ollama compatible.',                                     runnable:true, benchmarks:'MMMLU, MMMU Pro, ASR, video',isNew:true},
   {name:'Gemma 4 E4B IT',              org:'Google DeepMind', weight:'open',       released:'Apr 2026',      desc:'Edge model — 4B parameters. MMMLU: 69.4%. Mobile/IoT deployment. Multimodal with audio support.',                                                                                        runnable:true, benchmarks:'MMMLU, MMMU Pro, MathVista',isNew:true},
   {name:'Gemma 4 E2B IT',              org:'Google DeepMind', weight:'open',       released:'Apr 2026',      desc:'Smallest Gemma 4 — 2B parameters. MMMLU: 60.0%. Maximum compute efficiency for on-device inference.',                                                                                    runnable:true, benchmarks:'MMMLU, MMMU Pro',isNew:true},
@@ -969,6 +970,7 @@ const MODELS = [
   {name:'DeepSeek Prover V2',          org:'DeepSeek',        weight:'open',       released:'2025',          desc:'Formal theorem proving in Lean 4. 671B + 7B variants. State-of-the-art on formal math proof benchmarks.',                                                                                runnable:true, benchmarks:'MiniF2F, ProofNet, FrontierMath'},
   // ── Alibaba (6) ──────────────────────────────────────────────────
   {name:'Qwen3.5',                     org:'Alibaba',         weight:'open',       released:'Feb 2026',      desc:'Multimodal family. Gated Delta Networks + MoE architecture. Apache 2.0.',                                                                                                                 runnable:true, benchmarks:'MMLU-Pro, GPQA, MMMLU',isNew:true},
+  {name:'Qwen3.6-35B-A3B',             org:'Alibaba',         weight:'open',       released:'2026',          desc:'MoE — 35B total, 3B active. Between Qwen3.5 and Qwen3.7 in release sequence.',                                                                                                             runnable:true, benchmarks:'',isNew:true},
   {name:'Qwen3.7 Max',                 org:'Alibaba',         weight:'closed',     released:'Apr 2026',      desc:'GPQA Diamond: 92.4%. Most affordable top-10 GPQA model at $1.25/M input tokens.',                                                                                                        runnable:false,benchmarks:'GPQA Diamond, MMLU-Pro, LiveCodeBench'},
   {name:'Qwen3-235B-A22B',             org:'Alibaba',         weight:'open',       released:'2025',          desc:'Open MoE flagship. AIME 2025: 85.7%, GPQA: 71.7%, MMLU-Pro: 79.3%. Apache 2.0. MAI-T1 Tables 11+12. vLLM-compatible.',                                                                  runnable:true, benchmarks:'AIME 2025, GPQA, MMLU-Pro, IFEval, LiveCodeBench'},
   {name:'Qwen3-30B-A3B',               org:'Alibaba',         weight:'open',       released:'2025',          desc:'MoE, 3B active. Outperforms many 120B dense models. Runs on MacBook 64GB. Excellent efficiency.',                                                                                        runnable:true, benchmarks:'MMLU-Pro, GPQA, LiveCodeBench'},
