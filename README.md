@@ -31,20 +31,20 @@ Each benchmark shows: domain, priority, primary metric, which labs use it, descr
 
 > ⚠️ **Score verification note:** Always check needle count and context size when comparing MRCR scores. The same model can show 91.5% (4-needle, 128K) vs 54% (8-needle, 128K). Use the verify links to confirm variant used.
 
-### 🤖 Frontier models tab — 72 models across 9 labs
+### 🤖 Frontier models tab — 74 models across 9 labs
 
 | Lab | Count | Notable models |
 |---|---|---|
 | Anthropic | 10 | Fable 5, Mythos 5, Opus 4.8/4.7/4.6, Sonnet 4.6, Haiku 4.5, Opus 4.5/4.1 |
 | OpenAI | 14 | GPT-5.5, GPT-5.4 (Thinking/Pro/mini/nano), GPT-5.2, GPT-5, o3, o3-pro, gpt-oss-20b/120b |
-| Google DeepMind | 13 | Gemini 3.5 Flash, 3.1 Pro, 3.1 Flash Lite, 3 Flash, 2.5 Pro + Gemma 4 (31B/26B MoE/12B/E4B/E2B) |
+| Google DeepMind | 14 | Gemini 3.5 Flash, 3.1 Pro, 3.1 Flash Lite, 3 Flash, 2.5 Pro + Gemma 4 family (31B/26B MoE/12B/E4B/E2B) + Diffusion Gemma 26B A4B |
 | Meta | 3 | Llama 4 Maverick, Scout, Llama 3.3 70B |
 | DeepSeek | 7 | V4 Pro, V3.2 Speciale, V3.2, R1-0528, R1, V3, Prover V2 |
-| Alibaba | 6 | Qwen3.5, Qwen3.7 Max, Qwen3-235B, 30B, VL, Coder |
+| Alibaba | 7 | Qwen3.5, Qwen3.6-35B-A3B, Qwen3.7 Max, Qwen3-235B, 30B, VL, Coder |
 | xAI | 4 | Grok 4.3, Grok 4.20, Grok 4, Grok 2.5 |
 | Mistral AI | 5 | Mistral Large 3, Small 3.2, Magistral Medium/Small, Codestral |
 | Other | 7 | MiniMax M2.5, GLM-5, Kimi K2.5, NVIDIA Nemotron x2, MAI-Thinking-1, Phi-4 |
-| **Total** | **72** | Includes deprecated models with flags |
+| **Total** | **74** | Includes deprecated models with flags |
 
 Open-weight models (Gemma 4, DeepSeek, Qwen3, Llama 4, Mistral, MiniMax, GLM-5, Kimi, NVIDIA Nemotron) can run directly on HHRI-AI H100s via vLLM. Deprecated models included for historical reference and reproducibility.
 
@@ -141,4 +141,4 @@ foxbrain-eval-dashboard/
 
 *Benchmark taxonomy based on MAI-Thinking-1 Technical Report §4.1 (Microsoft AI, June 2026) and additional sources listed in the Sources tab.*
 
-*Last updated: June 15, 2026 — 61 benchmarks, 72 models across 9 labs, 171 lab evaluation entries, 17 sources, verification links added*
+*Last updated: June 15, 2026 — added Diffusion Gemma 26B A4B IT and Qwen3.6-35B-A3B from weekly frontier monitor scan. 74 models across 9 labs.*
