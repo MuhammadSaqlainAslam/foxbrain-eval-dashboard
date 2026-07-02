@@ -31,7 +31,7 @@ Each benchmark shows: domain, priority, primary metric, which labs use it, descr
 
 > ⚠️ **Score verification note:** Always check needle count and context size when comparing MRCR scores. The same model can show 91.5% (4-needle, 128K) vs 54% (8-needle, 128K). Use the verify links to confirm variant used.
 
-### 🤖 Frontier models tab — 77 models across 10 labs
+### 🤖 Frontier models tab — 77 models across 13 labs
 
 | Lab | Count | Notable models |
 |---|---|---|
@@ -43,7 +43,11 @@ Each benchmark shows: domain, priority, primary metric, which labs use it, descr
 | Alibaba | 7 | Qwen3.5, Qwen3.6-35B-A3B, Qwen3.7 Max, Qwen3-235B, 30B, VL, Coder |
 | xAI | 4 | Grok 4.3, Grok 4.20, Grok 4, Grok 2.5 |
 | Mistral AI | 6 | Mistral Large 3, Small 3.2, Medium 3.5, Magistral Medium/Small, Codestral |
-| Other | 9 | Kimi K2.7 Code, Kimi K2.6 (Moonshot AI), GLM-5.2 (Zhipu AI), MiniMax M3, NVIDIA Nemotron Ultra 550B, Nemotron-3 Super 120B, Nemotron-3 Nano 30B, MAI-Thinking-1, Phi-4 (Microsoft) |
+| NVIDIA | 3 | Nemotron Ultra 550B, Nemotron Super 120B A12B, Nemotron Nano 30B A3B |
+| Microsoft | 2 | MAI-Thinking-1, Phi-4 |
+| Moonshot AI | 2 | Kimi K2.7 Code, Kimi K2.6 |
+| Zhipu AI | 1 | GLM-5.2 |
+| MiniMax | 1 | MiniMax M3 |
 | **Total** | **77** | Includes deprecated models with flags |
 
 Open-weight models (Gemma 4, DeepSeek, Qwen3, Llama 4, Mistral, MiniMax, GLM-5, Kimi, NVIDIA Nemotron) can run directly on HHRI-AI H100s via vLLM. Deprecated models included for historical reference and reproducibility.
@@ -141,4 +145,4 @@ foxbrain-eval-dashboard/
 
 *Benchmark taxonomy based on MAI-Thinking-1 Technical Report §4.1 (Microsoft AI, June 2026) and additional sources listed in the Sources tab.*
 
-*Last updated: July 2, 2026 — 77 models across 10 labs, 63 benchmarks, 19 sources. Added Claude Sonnet 5 (Jun 30), Gemini 3.1 Flash Image (Jun 23), DeepSeek V4 Flash, Kimi K2.6/K2.7 Code, GLM-5.2, MiniMax M3, NVIDIA Nemotron Ultra 550B (Jun 4), Mistral Medium 3.5. Official links added to all model cards.*
+*Last updated: July 2, 2026 — 77 models across 13 labs, 63 benchmarks, 19 sources. Added Claude Sonnet 5 (Jun 30), Gemini 3.1 Flash Image (Jun 23), DeepSeek V4 Flash, Kimi K2.6/K2.7 Code, GLM-5.2, MiniMax M3, NVIDIA Nemotron Ultra 550B (Jun 4), Mistral Medium 3.5. Official links added to all model cards.*
