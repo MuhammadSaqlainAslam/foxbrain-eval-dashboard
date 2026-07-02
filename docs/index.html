@@ -681,14 +681,14 @@ tbody td { padding: 12px 16px; vertical-align: top; }
       <p class="hero-desc">Frontier Benchmark &amp; Model Intelligence — HHRI-AI Research<br><span style="font-size:12px;color:var(--text3)">A curated, up-to-date reference of benchmarks and frontier models used by leading AI labs. Use this to select evaluation targets for FoxBrain model assessments across 9 capability domains.</span></p>
       <div class="hero-updated">
         <span class="dot"></span>
-        Last updated: <span id="last-updated-date">June 11, 2026</span> &nbsp;&bull;&nbsp; Latest: Gemma 4 12B &amp; Claude Fable 5
+        Last updated: <span id="last-updated-date">July 2, 2026</span> &nbsp;&bull;&nbsp; Latest: Claude Sonnet 5 (Jun 30) &amp; Fable 5 redeployed (Jul 1)
       </div>
     </div>
     <div class="hero-stats">
-      <div class="hstat"><div class="hstat-val">61</div><div class="hstat-lbl">Benchmarks</div></div>
+      <div class="hstat"><div class="hstat-val">63</div><div class="hstat-lbl">Benchmarks</div></div>
       <div class="hstat"><div class="hstat-val">9</div><div class="hstat-lbl">Domains</div></div>
-      <div class="hstat"><div class="hstat-val">74</div><div class="hstat-lbl">Models</div></div>
-      <div class="hstat"><div class="hstat-val">17</div><div class="hstat-lbl">Sources</div></div>
+      <div class="hstat"><div class="hstat-val">75</div><div class="hstat-lbl">Models</div></div>
+      <div class="hstat"><div class="hstat-val">19</div><div class="hstat-lbl">Sources</div></div>
     </div>
   </div>
 </div>
@@ -806,7 +806,7 @@ tbody td { padding: 12px 16px; vertical-align: top; }
 
 <div class="footer">
   <span>FoxBrain EvalHub &nbsp;&bull;&nbsp; HHRI-AI / Foxconn AI Research Center &nbsp;&bull;&nbsp; <a href="https://muhammadsaqlainaslam.github.io/foxbrain-eval-dashboard/">muhammadsaqlainaslam.github.io/foxbrain-eval-dashboard</a></span>
-  <span id="footer-updated">Updated June 15, 2026</span> &nbsp;&bull;&nbsp; 9 labs &nbsp;&bull;&nbsp; 74 models &nbsp;&bull;&nbsp; 61 benchmarks &nbsp;&bull;&nbsp; 17 sources
+  <span id="footer-updated">Updated June 15, 2026</span> &nbsp;&bull;&nbsp; 9 labs &nbsp;&bull;&nbsp; 75 models &nbsp;&bull;&nbsp; 63 benchmarks &nbsp;&bull;&nbsp; 19 sources
 </div>
 
 <script>
@@ -870,6 +870,8 @@ const BENCHMARKS = [
   {name:'CursorBench 3.1',domain:'agentic',pri:'medium',metric:'pass@1',labs:['Anthropic','OpenAI'],desc:"Cursor's real-world IDE coding benchmark. Fable 5: 72.9% at max effort.",tags:['coding','real-world','IDE'],isNew:true},
   {name:'tau-bench',domain:'agentic',pri:'high',metric:'success_rate',labs:['Anthropic','OpenAI','Meta','HHRI-AI'],desc:'Multi-turn tool use in retail + airline domains. Already in your eval suite.',tags:['multi-turn','tool-use']},
   {name:'tau2-bench',domain:'agentic',pri:'high',metric:'success_rate',labs:['Anthropic','HHRI-AI'],desc:'Harder sequel to tau-bench. Retail domain. Already in your eval suite.',tags:['agentic','harder']},
+  {name:'BrowseComp',domain:'agentic',pri:'high',metric:'success_rate',labs:['Anthropic','OpenAI'],desc:'Agentic web search benchmark. Tests multi-step information retrieval requiring sustained browsing. Sonnet 5 strictly improves over Sonnet 4.6 at all effort levels; matches Opus 4.8 at high effort. Standard methodology: 10M token budget with compaction and programmatic tool calling.',tags:['agentic','search','web-browsing','effort-levels'],isNew:true},
+  {name:'OSWorld-Verified',domain:'agentic',pri:'high',metric:'success_rate',labs:['Anthropic','OpenAI'],desc:'Computer use benchmark on verified real desktop tasks. Sonnet 4.6 corrected score: 78.5%. Sonnet 5 surpasses Sonnet 4.6 at all effort levels; matches Opus 4.8 at high effort. More accurate real-world methodology than original OSWorld.',tags:['computer-use','desktop','agentic','effort-levels'],isNew:true},
   {name:'Cybench',domain:'agentic',pri:'medium',metric:'accuracy',labs:['Microsoft','OpenAI'],desc:'CTF cybersecurity challenges requiring multi-step agentic reasoning.',tags:['cybersecurity','agentic']},
   {name:'MMLU-Pro',domain:'knowledge',pri:'high',metric:'accuracy',labs:['OpenAI','Anthropic','Google','Microsoft','Meta','DeepSeek','Alibaba','xAI'],desc:'Harder MMLU with 10-choice answers. 14 domains. Reported in virtually every frontier report. Near-saturating (83-90%).',tags:['knowledge','multi-domain']},
   {name:'MMLU',domain:'knowledge',pri:'medium',metric:'accuracy',labs:['OpenAI','Anthropic','Google','Meta','DeepSeek','Alibaba'],desc:'Original 57-subject MCQ. Over 90% at frontier — reported for historical comparability only.',tags:['knowledge','57-subjects']},
@@ -916,7 +918,8 @@ const BENCHMARKS = [
 
 const MODELS = [
   // ── Anthropic (10) ───────────────────────────────────────────────
-  {name:'Claude Fable 5',              org:'Anthropic',       weight:'closed',     released:'Jun 9, 2026',   desc:'First Mythos-class model for general use. SWE-Bench Pro: 80.3%, HLE: 59.0%, FrontierCode Diamond: 29.3%, Terminal-Bench 2.1: 88.0%. 1M token context. $10/$50 per M tokens.',           runnable:false,benchmarks:'SWE-Bench Pro, FrontierCode, HLE, Terminal-Bench',isNew:true},
+  {name:'Claude Sonnet 5',             org:'Anthropic',       weight:'closed',     released:'Jun 30, 2026',  desc:'New default model for Free and Pro plans. Most agentic Sonnet yet — closes gap with Opus 4.8. Faster follow-through on multi-step tasks, self-checking output without prompting. Updated tokenizer (1.0–1.35x token multiplier vs Sonnet 4.6). $2/$10 per MTok intro pricing until Aug 31 2026, then $3/$15. API: claude-sonnet-5.',                              runnable:false,benchmarks:'SWE-Bench, BrowseComp, OSWorld-Verified, HLE, GPQA, IFEval, MMLU-Pro',isNew:true},
+  {name:'Claude Fable 5',              org:'Anthropic',       weight:'closed',     released:'Jun 9, 2026',   desc:'First Mythos-class model for general use. SWE-Bench Pro: 80.3%, HLE: 59.0%, FrontierCode Diamond: 29.3%, Terminal-Bench 2.1: 88.0%. 1M token context. $10/$50 per M tokens. Suspended Jun 12–Jul 1 due to US export controls (now restored globally). Updated safety classifier deployed — blocks reported jailbreak in >99% of cases. Blocked requests route to Opus 4.8.',           runnable:false,benchmarks:'SWE-Bench Pro, FrontierCode, HLE, Terminal-Bench',isNew:true},
   {name:'Claude Mythos 5',             org:'Anthropic',       weight:'closed',     released:'Jun 9, 2026',   desc:'Same as Fable 5 with cyber/bio safeguards lifted. Restricted to Project Glasswing partners. ExploitBench: 78.0%. Strongest published cybersecurity capabilities.',                      runnable:false,benchmarks:'ExploitBench, SWE-Bench Pro, HLE',isNew:true},
   {name:'Claude Opus 4.8',             org:'Anthropic',       weight:'closed',     released:'May 28, 2026',  desc:'SWE-Bench Verified: 88.6%, SWE-Bench Pro: 69.2%, HLE: 45.7%. Used as Fable 5 safety fallback.',                                                                                          runnable:false,benchmarks:'SWE-Bench Verified, SWE-Bench Pro, HLE, GPQA'},
   {name:'Claude Opus 4.7',             org:'Anthropic',       weight:'closed',     released:'May 2026',      desc:'GPQA Diamond: 94.2%, SWE-Bench Verified: ~87%.',                                                                                                                                          runnable:false,benchmarks:'GPQA Diamond, SWE-Bench Verified'},
@@ -998,6 +1001,8 @@ const MODELS = [
 ];
 
 const SOURCES = [
+  {title:'Claude Sonnet 5 — Launch Announcement & System Card',org:'Anthropic',date:'Jun 30, 2026',url:'https://www.anthropic.com/news/claude-sonnet-5',desc:'Launch of Claude Sonnet 5 — new default model for Free/Pro plans. Most agentic Sonnet yet. Introduces BrowseComp and OSWorld-Verified benchmarks with effort-level curves. Corrects Sonnet 4.6 HLE (now 34.6%/46.8%) and OSWorld-Verified (now 78.5%) scores. API: claude-sonnet-5. $2/$10 MTok intro until Aug 31 2026.'},
+  {title:'Redeploying Claude Fable 5 — Export Controls & Safety Framework',org:'Anthropic',date:'Jun 30 / Jul 1, 2026',url:'https://www.anthropic.com/news/redeploying-fable-5',desc:'Fable 5 and Mythos 5 suspended Jun 12 due to US export controls after Amazon researchers found a safeguard bypass. Controls lifted Jun 30; models restored Jul 1. New safety classifier deployed blocking reported jailbreak in >99% of cases. Includes new industry jailbreak severity framework (with Amazon, Microsoft, Google). Blocked requests route to Opus 4.8.'},
   {title:'Claude Fable 5 & Mythos 5 — Launch Announcement',org:'Anthropic',date:'Jun 9, 2026',url:'https://www.anthropic.com/news/claude-fable-5-mythos-5',desc:'Launch of first Mythos-class model for general use. Benchmarks: SWE-Bench Pro (80.3%), FrontierCode Diamond (29.3%), HLE (59.0%), Terminal-Bench 2.1 (88.0%), HealthBench (66.0%). $10/$50 per M tokens.'},
   {title:'Gemma 4 Model Card & Developer Guide',org:'Google DeepMind',date:'Apr-Jun 2026',url:'https://deepmind.google/models/gemma/gemma-4/',desc:'Full Gemma 4 family: E2B, E4B, 12B (encoder-free multimodal), 26B MoE, 31B Dense. Benchmarks: Arena ELO (1452), MMMLU (85.2%), MMMU Pro, MATH-500, LiveCodeBench, GPQA. vLLM + llama.cpp + Ollama compatible.'},
   {title:"MAI-Thinking-1 Technical Report",org:'Microsoft AI',date:'Jun 2026',url:'https://microsoft.ai/pdf/mai-thinking-1.pdf',desc:'Primary source for benchmark taxonomy. Tables 11 & 12 cover 9 capability domains, 47+ benchmarks, 8 frontier model comparisons. AIME 2025: 97.0%, LiveCodeBench: 87.7%, SWE-Bench Pro: 52.8%.'},
@@ -1246,9 +1251,14 @@ const LAB_DATA = [
       {bench:'Terminal-Bench 2.1',       domain:'agentic',     model:'claude-opus-4-8',      api:'claude-opus-4-8',               score:'82.7%', notes:''},
       {bench:'CursorBench 3.1',          domain:'agentic',     model:'claude-fable-5',       api:'claude-fable-5',                score:'72.9%', notes:'Max effort'},
       {bench:'Aider Polyglot',           domain:'agentic',     model:'claude-opus-4-6',      api:'claude-opus-4-6',               score:'N/A',   notes:''},
+      {bench:'BrowseComp',               domain:'agentic',     model:'claude-sonnet-5',      api:'claude-sonnet-5',               score:'N/A',   notes:'Strict improvement over Sonnet 4.6 at all effort levels; matches Opus 4.8 at high effort. 10M token budget with compaction.'},
+      {bench:'BrowseComp',               domain:'agentic',     model:'claude-opus-4-8',      api:'claude-opus-4-8',               score:'N/A',   notes:'Opus 4.8 reference line. Sonnet 5 matches at extra-high effort.'},
+      {bench:'OSWorld-Verified',         domain:'agentic',     model:'claude-sonnet-5',      api:'claude-sonnet-5',               score:'N/A',   notes:'Strict improvement over Sonnet 4.6. Matches Opus 4.8 at high effort.'},
+      {bench:'OSWorld-Verified',         domain:'agentic',     model:'claude-sonnet-4-6',    api:'claude-sonnet-4-6',             score:'78.5%', notes:'CORRECTED score (updated methodology). Previously reported differently in Sonnet 4.6 launch blog.'},
       {bench:'HLE',                      domain:'stem',        model:'claude-fable-5',       api:'claude-fable-5',                score:'59.0%', notes:'No tools; 64.5% with tools'},
       {bench:'HLE',                      domain:'stem',        model:'claude-opus-4-8',      api:'claude-opus-4-8',               score:'45.7%', notes:''},
       {bench:'HLE',                      domain:'stem',        model:'claude-opus-4-6',      api:'claude-opus-4-6',               score:'40.0%', notes:''},
+      {bench:'HLE',                      domain:'stem',        model:'claude-sonnet-4-6',    api:'claude-sonnet-4-6',             score:'34.6%', notes:'CORRECTED score — updated grader model. 46.8% with tools. Previously reported differently in Sonnet 4.6 launch blog.'},
       {bench:'GPQA Diamond',             domain:'stem',        model:'claude-opus-4-7',      api:'claude-opus-4-7',               score:'94.2%', notes:''},
       {bench:'GPQA Diamond',             domain:'stem',        model:'claude-opus-4-6',      api:'claude-opus-4-6',               score:'91.3%', notes:''},
       {bench:'MATH-500',                 domain:'stem',        model:'claude-opus-4-6',      api:'claude-opus-4-6',               score:'N/A',   notes:''},
