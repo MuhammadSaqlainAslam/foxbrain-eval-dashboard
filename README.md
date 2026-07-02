@@ -13,7 +13,7 @@
 
 ## What's inside
 
-### 📊 Benchmarks tab — 65 benchmarks across 9 domains
+### 📊 Benchmarks tab — 63 benchmarks across 9 domains
 
 | Domain | Key benchmarks |
 |---|---|
@@ -31,24 +31,20 @@ Each benchmark shows: domain, priority, primary metric, which labs use it, descr
 
 > ⚠️ **Score verification note:** Always check needle count and context size when comparing MRCR scores. The same model can show 91.5% (4-needle, 128K) vs 54% (8-needle, 128K). Use the verify links to confirm variant used.
 
-### 🤖 Frontier models tab — 82 models across 10 labs
+### 🤖 Frontier models tab — 77 models across 10 labs
 
 | Lab | Count | Notable models |
 |---|---|---|
-| Anthropic | 12 | **Claude Sonnet 5**, Fable 5, Mythos 5, Opus 4.8/4.7/4.6, Sonnet 4.6, Haiku 4.5, Opus 4.5/4.1 |
-| OpenAI | 14 | GPT-5.5, GPT-5.4 (Thinking/Pro/mini/nano), GPT-5.2, GPT-5, o3, o3-pro, gpt-oss-20b/120b |
-| Google DeepMind | 14 | Gemini 3.5 Flash, 3.1 Pro, 3.1 Flash Image, 3.1 Flash Lite, Gemma 4 family (6 models), Gemini 3 Flash, 2.5 Pro |
+| Anthropic | 11 | **Claude Sonnet 5**, Fable 5, Mythos 5, Opus 4.8/4.7/4.6, Sonnet 4.6, Haiku 4.5, Opus 4.5, Sonnet 4.5, Opus 4.1 |
+| OpenAI | 14 | GPT-5.5, GPT-5.5 Instant, GPT-5.4 (mini/nano), GPT-5.2, GPT-5.1, GPT-5, GPT-5 mini, gpt-oss-120b, gpt-oss-20b, o3, o3-pro, o4-mini |
+| Google DeepMind | 15 | Gemini 3.5 Flash, 3.1 Pro, 3.1 Flash Image, 3.1 Flash Lite, 3 Pro, 3 Flash, 3 Deep Think, 2.5 Pro, 2.5 Flash Lite, Gemma 4 (31B/26B A4B/12B/E4B/E2B), Diffusion Gemma 26B A4B |
+| Meta | 3 | Llama 4 Maverick, Scout, Llama 3.3 70B |
 | DeepSeek | 8 | V4 Pro, V4 Flash, V3.2 Speciale, V3.2, R1-0528, R1, V3, Prover V2 |
 | Alibaba | 7 | Qwen3.5, Qwen3.6-35B-A3B, Qwen3.7 Max, Qwen3-235B, 30B, VL, Coder |
-| Mistral AI | 6 | Mistral Large 3, Small 3.2, Medium 3.5 (NEW), Magistral Medium/Small, Codestral |
 | xAI | 4 | Grok 4.3, Grok 4.20, Grok 4, Grok 2.5 |
-| Meta | 3 | Llama 4 Maverick, Scout, Llama 3.3 70B |
-| NVIDIA | 3 | Nemotron Ultra 550B (NEW), Nemotron-3 Super 120B, Nemotron-3 Nano 30B |
-| Moonshot AI | 3 | Kimi K2.7 Code, Kimi K2.6, (K2.5 deprecated) |
-| Microsoft | 2 | MAI-Thinking-1, Phi-4 |
-| Zhipu AI | 1 | GLM-5.2 |
-| MiniMax | 1 | MiniMax M3 |
-| **Total** | **82** | Includes deprecated models with flags |
+| Mistral AI | 6 | Mistral Large 3, Small 3.2, Medium 3.5, Magistral Medium/Small, Codestral |
+| Other | 9 | Kimi K2.7 Code, Kimi K2.6 (Moonshot AI), GLM-5.2 (Zhipu AI), MiniMax M3, NVIDIA Nemotron Ultra 550B, Nemotron-3 Super 120B, Nemotron-3 Nano 30B, MAI-Thinking-1, Phi-4 (Microsoft) |
+| **Total** | **77** | Includes deprecated models with flags |
 
 Open-weight models (Gemma 4, DeepSeek, Qwen3, Llama 4, Mistral, MiniMax, GLM-5, Kimi, NVIDIA Nemotron) can run directly on HHRI-AI H100s via vLLM. Deprecated models included for historical reference and reproducibility.
 
@@ -68,7 +64,7 @@ One card per benchmark showing every lab that evaluated it with exact model API 
 
 Cross-check resources: Artificial Analysis, BenchLM, Scale AI Leaderboard, LLM Stats, Papers With Code.
 
-### 📖 Sources tab — 21 reference links
+### 📖 Sources tab — 19 reference links
 
 Technical reports, live leaderboards, and benchmark papers:
 - Claude Fable 5 & Mythos 5 system card (Anthropic)
@@ -145,4 +141,4 @@ foxbrain-eval-dashboard/
 
 *Benchmark taxonomy based on MAI-Thinking-1 Technical Report §4.1 (Microsoft AI, June 2026) and additional sources listed in the Sources tab.*
 
-*Last updated: July 2, 2026 — 82 models, 65 benchmarks, 21 sources. Added Claude Sonnet 5, NVIDIA Nemotron Ultra 550B, Kimi K2.6/K2.7, GLM-5.2, MiniMax M3, DeepSeek V4 Flash, Mistral Medium 3.5, Gemini 3.1 Flash Image. Added official links to all model cards.*
+*Last updated: July 2, 2026 — 77 models across 10 labs, 63 benchmarks, 19 sources. Added Claude Sonnet 5 (Jun 30), Gemini 3.1 Flash Image (Jun 23), DeepSeek V4 Flash, Kimi K2.6/K2.7 Code, GLM-5.2, MiniMax M3, NVIDIA Nemotron Ultra 550B (Jun 4), Mistral Medium 3.5. Official links added to all model cards.*
