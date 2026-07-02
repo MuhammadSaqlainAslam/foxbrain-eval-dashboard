@@ -1181,6 +1181,101 @@ function toggleDeprecated(el) {
   renderModels();
 }
 
+const MODEL_LINKS = {
+  // Anthropic
+  'Claude Sonnet 5':        'https://www.anthropic.com/news/claude-sonnet-5',
+  'Claude Fable 5':         'https://www.anthropic.com/news/claude-fable-5-mythos-5',
+  'Claude Mythos 5':        'https://www.anthropic.com/news/claude-fable-5-mythos-5',
+  'Claude Opus 4.8':        'https://www.anthropic.com/news/claude-opus-4-8',
+  'Claude Opus 4.7':        'https://www.anthropic.com/claude/opus',
+  'Claude Opus 4.6':        'https://www.anthropic.com/claude/opus',
+  'Claude Sonnet 4.6':      'https://www.anthropic.com/claude/sonnet',
+  'Claude Sonnet 4.5':      'https://www.anthropic.com/claude/sonnet',
+  'Claude Haiku 4.5':       'https://www.anthropic.com/claude/haiku',
+  'Claude Opus 4.5':        'https://www.anthropic.com/claude/opus',
+  'Claude Opus 4.1':        'https://www.anthropic.com/claude/opus',
+  // OpenAI
+  'GPT-5.5':                'https://platform.openai.com/docs/models/gpt-5-5',
+  'GPT-5.5 Instant':        'https://platform.openai.com/docs/models',
+  'GPT-5.4':                'https://platform.openai.com/docs/models/gpt-5-4',
+  'GPT-5.4 mini':           'https://platform.openai.com/docs/models',
+  'GPT-5.4 nano':           'https://platform.openai.com/docs/models',
+  'GPT-5.2':                'https://platform.openai.com/docs/models',
+  'GPT-5.1':                'https://platform.openai.com/docs/models',
+  'GPT-5':                  'https://openai.com/index/hello-gpt-5/',
+  'GPT-5 mini':             'https://platform.openai.com/docs/models',
+  'gpt-oss-20b':            'https://huggingface.co/openai/gpt-oss-20b',
+  'gpt-oss-120b':           'https://huggingface.co/openai/gpt-oss-120b',
+  'o3':                     'https://openai.com/index/openai-o3-mini/',
+  'o3-pro':                 'https://openai.com/index/openai-o3-mini/',
+  'o4-mini':                'https://openai.com/index/openai-o3-mini/',
+  // Google DeepMind
+  'Gemini 3.5 Flash':       'https://ai.google.dev/gemini-api/docs/models',
+  'Gemini 3.1 Pro':         'https://deepmind.google/technologies/gemini/pro/',
+  'Gemini 3.1 Flash Lite':  'https://ai.google.dev/gemini-api/docs/models',
+  'Gemini 3.1 Flash Image': 'https://ai.google.dev/gemini-api/docs/models',
+  'Gemini 3 Pro':           'https://deepmind.google/technologies/gemini/',
+  'Gemini 3 Flash':         'https://deepmind.google/technologies/gemini/',
+  'Gemini 3 Deep Think':    'https://deepmind.google/technologies/gemini/',
+  'Gemini 2.5 Pro':         'https://deepmind.google/technologies/gemini/',
+  'Gemini 2.5 Flash Lite':  'https://ai.google.dev/gemini-api/docs/models',
+  'Gemma 4 31B IT':         'https://deepmind.google/models/gemma/gemma-4/',
+  'Gemma 4 31B IT Thinking':'https://deepmind.google/models/gemma/gemma-4/',
+  'Gemma 4 26B A4B IT':     'https://deepmind.google/models/gemma/gemma-4/',
+  'Gemma 4 12B IT':         'https://developers.googleblog.com/gemma-4-12b-the-developer-guide/',
+  'Gemma 4 E4B IT':         'https://deepmind.google/models/gemma/gemma-4/',
+  'Gemma 4 E2B IT':         'https://deepmind.google/models/gemma/gemma-4/',
+  'Diffusion Gemma 26B A4B IT': 'https://huggingface.co/google/diffusiongemma-26B-A4B-it',
+  // xAI
+  'Grok 4.3':               'https://x.ai/blog/grok-4-3',
+  'Grok 4.20':              'https://x.ai/blog/grok-4',
+  'Grok 4':                 'https://x.ai/blog/grok-4',
+  'Grok 2.5':               'https://x.ai/news',
+  // Meta
+  'Llama 4 Maverick':       'https://ai.meta.com/blog/llama-4-multimodal-models/',
+  'Llama 4 Scout':          'https://ai.meta.com/blog/llama-4-multimodal-models/',
+  'Llama 3.3 70B':          'https://ai.meta.com/blog/meta-llama-3/',
+  // DeepSeek
+  'DeepSeek V4 Pro':        'https://github.com/deepseek-ai/DeepSeek-V4',
+  'DeepSeek V4 Flash':      'https://github.com/deepseek-ai/DeepSeek-V4',
+  'DeepSeek V3.2 Speciale': 'https://github.com/deepseek-ai/DeepSeek-V3',
+  'DeepSeek V3.2':          'https://github.com/deepseek-ai/DeepSeek-V3',
+  'DeepSeek R1-0528':       'https://github.com/deepseek-ai/DeepSeek-R1',
+  'DeepSeek R1':            'https://github.com/deepseek-ai/DeepSeek-R1',
+  'DeepSeek V3':            'https://github.com/deepseek-ai/DeepSeek-V3',
+  'DeepSeek Prover V2':     'https://github.com/deepseek-ai/DeepSeek-Prover-V2',
+  // Alibaba
+  'Qwen3.5':                'https://qwenlm.github.io/blog/qwen3/',
+  'Qwen3.6 27B':            'https://qwenlm.github.io/',
+  'Qwen3.6-35B-A3B':        'https://qwenlm.github.io/',
+  'Qwen3.7 Max':            'https://qwenlm.github.io/',
+  'Qwen3-235B-A22B':        'https://qwenlm.github.io/blog/qwen3/',
+  'Qwen3-30B-A3B':          'https://qwenlm.github.io/blog/qwen3/',
+  'Qwen3-VL':               'https://qwenlm.github.io/',
+  'Qwen3-Coder':            'https://qwenlm.github.io/',
+  // Mistral
+  'Mistral Large 3':        'https://mistral.ai/news/mistral-large-3',
+  'Mistral Small 3.2':      'https://mistral.ai/news/',
+  'Mistral Medium 3.5':     'https://mistral.ai/news/',
+  'Magistral Medium':       'https://mistral.ai/news/magistral/',
+  'Magistral Small':        'https://mistral.ai/news/magistral/',
+  'Codestral':              'https://mistral.ai/news/codestral/',
+  // NVIDIA
+  'NVIDIA Nemotron Ultra 550B': 'https://huggingface.co/nvidia/Llama-3.1-Nemotron-Ultra-550B-Instruct',
+  'NVIDIA Nemotron-3 Super 120B': 'https://huggingface.co/nvidia/Llama-3.1-Nemotron-Super-120B-Instruct',
+  'NVIDIA Nemotron-3 Nano 30B': 'https://huggingface.co/nvidia/Llama-3.1-Nemotron-Nano-30B-v1',
+  // Microsoft
+  'MAI-Thinking-1':         'https://microsoft.ai/pdf/mai-thinking-1.pdf',
+  'Phi-4':                  'https://huggingface.co/microsoft/phi-4',
+  // Moonshot
+  'Kimi K2.7 Code':         'https://moonshotai.github.io/Kimi-K2/',
+  'Kimi K2.6':              'https://moonshotai.github.io/Kimi-K2/',
+  // Zhipu
+  'GLM-5.2':                'https://zhipuai.cn/',
+  // MiniMax
+  'MiniMax M3':             'https://www.minimaxi.com/',
+};
+
 function renderModels() {
   const majorLabs = ['Anthropic','OpenAI','Google DeepMind','Meta','DeepSeek','Alibaba','xAI','Mistral AI'];
   const items = MODELS.filter(m => {
@@ -1202,13 +1297,16 @@ function renderModels() {
       : '<span class="api-tag">API access</span>';
     const weightLabel = m.weight === 'open' ? 'Open-weight' : m.weight === 'restricted' ? 'Restricted' : 'Closed-weight';
     const cardCls = m.deprecated ? ' mcard-deprecated' : '';
+    const officialLink = MODEL_LINKS[m.name]
+      ? '<a href="' + MODEL_LINKS[m.name] + '" target="_blank" rel="noopener noreferrer" style="font-size:11px;font-weight:600;color:var(--accent);margin-left:auto;white-space:nowrap;text-decoration:none;padding:2px 8px;border:1px solid var(--accent);border-radius:99px;background:var(--accent-bg)">Official page &#8599;</a>'
+      : '';
     return '<div class="mcard' + cardCls + '">' +
       '<div class="mcard-top">' +
         '<div><div class="mcard-name">' + m.name + badge + deprBadge + '</div><div class="mcard-org">' + m.org + ' &#x2022; ' + m.released + '</div></div>' +
         '<span class="mtype ' + m.weight + '">' + weightLabel + '</span>' +
       '</div>' +
       '<div class="mcard-desc">' + m.desc + '</div>' +
-      '<div class="mcard-foot">' + runTag + (m.benchmarks ? '<span style="color:var(--text3)">Benchmarks: <span>' + m.benchmarks + '</span></span>' : '') + '</div>' +
+      '<div class="mcard-foot" style="display:flex;align-items:center;flex-wrap:wrap;gap:8px">' + runTag + (m.benchmarks ? '<span style="color:var(--text3);font-size:11px">Benchmarks: <span style="color:var(--text2)">' + m.benchmarks + '</span></span>' : '') + officialLink + '</div>' +
       '</div>';
   }).join('') || '<div class="empty">No models match your filter.</div>';
 }
