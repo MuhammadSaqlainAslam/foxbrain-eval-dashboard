@@ -1276,6 +1276,102 @@ const MODEL_LINKS = {
   'MiniMax M3':             'https://www.minimaxi.com/',
 };
 
+const MODEL_PRICES = {
+  // Anthropic
+  'Claude Sonnet 5':           '$2/$10 → $3/$15 (Sep 1)',
+  'Claude Fable 5':            '$10/$50',
+  'Claude Mythos 5':           '$10/$50',
+  'Claude Opus 4.8':           '$5/$25',
+  'Claude Opus 4.7':           '$5/$25',
+  'Claude Opus 4.6':           '$5/$25',
+  'Claude Sonnet 4.6':         '$3/$15',
+  'Claude Sonnet 4.5':         '$3/$15',
+  'Claude Haiku 4.5':          '$1/$5',
+  'Claude Opus 4.5':           '$5/$25',
+  'Claude Opus 4.1':           'Deprecated',
+  // OpenAI
+  'GPT-5.5':                   '$5/$30',
+  'GPT-5.5 Instant':           '$5/$30',
+  'GPT-5.4':                   '$2.50/$15',
+  'GPT-5.4 mini':              '$0.40/$1.60',
+  'GPT-5.4 nano':              '$0.10/$0.40',
+  'GPT-5.4 Pro':               '$30/$180',
+  'GPT-5.2':                   '$2.50/$15',
+  'GPT-5.1':                   'Deprecated',
+  'GPT-5':                     '$2.50/$15',
+  'GPT-5 mini':                '$0.40/$1.60',
+  'gpt-oss-20b':               'Open-weight',
+  'gpt-oss-120b':              'Open-weight',
+  'o3':                        '$2/$8',
+  'o3-pro':                    '$20/$80',
+  'o4-mini':                   'Deprecated',
+  // Google DeepMind
+  'Gemini 3.5 Flash':          '$1.50/$9',
+  'Gemini 3.1 Pro':            '$2/$12 (>200K: $4/$18)',
+  'Gemini 3.1 Flash Lite':     '$0.10/$0.40',
+  'Gemini 3.1 Flash Image':    '$0.50/$3',
+  'Gemini 3 Pro':              'Deprecated',
+  'Gemini 3 Flash':            '$0.50/$3',
+  'Gemini 3 Deep Think':       '$2/$12',
+  'Gemini 2.5 Pro':            '$1.25/$10',
+  'Gemini 2.5 Flash Lite':     '$0.10/$0.40',
+  'Gemma 4 31B IT':            'Open-weight',
+  'Gemma 4 31B IT Thinking':   'Open-weight',
+  'Gemma 4 26B A4B IT':        'Open-weight',
+  'Gemma 4 12B IT':            'Open-weight',
+  'Gemma 4 E4B IT':            'Open-weight',
+  'Gemma 4 E2B IT':            'Open-weight',
+  'Diffusion Gemma 26B A4B IT':'Open-weight',
+  // xAI
+  'Grok 4.3':                  '$1.25/$2.50',
+  'Grok 4.20':                 '$2/$6',
+  'Grok 4':                    '$3/$15',
+  'Grok 2.5':                  'Open-weight',
+  // Meta
+  'Llama 4 Maverick':          'Open-weight',
+  'Llama 4 Scout':             'Open-weight',
+  'Llama 3.3 70B':             'Open-weight',
+  // DeepSeek
+  'DeepSeek V4 Pro':           '$1.74/$3.48',
+  'DeepSeek V4 Flash':         '$0.14/$0.28',
+  'DeepSeek V3.2 Speciale':    'Open-weight',
+  'DeepSeek V3.2':             'Open-weight',
+  'DeepSeek R1-0528':          'Open-weight',
+  'DeepSeek R1':               'Open-weight',
+  'DeepSeek V3':               '$0.27/$1.10',
+  'DeepSeek Prover V2':        'Open-weight',
+  // Alibaba
+  'Qwen3.5':                   'Open-weight',
+  'Qwen3.6 27B':               '$0.60/$3.60',
+  'Qwen3.6-35B-A3B':           'Open-weight',
+  'Qwen3.7 Max':               '$1.25/$3.75',
+  'Qwen3-235B-A22B':           'Open-weight',
+  'Qwen3-30B-A3B':             'Open-weight',
+  'Qwen3-VL':                  'Open-weight',
+  'Qwen3-Coder':               'Open-weight',
+  // Mistral
+  'Mistral Large 3':           '$2/$6',
+  'Mistral Small 3.2':         '$0.10/$0.30',
+  'Mistral Medium 3.5':        '$1.50/$7.50',
+  'Magistral Medium':          '$2/$6',
+  'Magistral Small':           '$0.50/$1.50',
+  'Codestral':                 '$0.30/$0.90',
+  // NVIDIA
+  'NVIDIA Nemotron Ultra 550B':'$0.60/$2.60',
+  'NVIDIA Nemotron-3 Super 120B': 'Open-weight',
+  'NVIDIA Nemotron-3 Nano 30B':   'Open-weight',
+  // Microsoft
+  'MAI-Thinking-1':            'Internal/restricted',
+  'Phi-4':                     'Open-weight',
+  // Moonshot
+  'Kimi K2.7 Code':            '$0.28/$1.10',
+  'Kimi K2.6':                 '$0.28/$1.10',
+  // Zhipu
+  'GLM-5.2':                   '$1.40/$4.40',
+  // MiniMax
+  'MiniMax M3':                '$0.60/$2.40',
+};
+
 function renderModels() {
   const majorLabs = ['Anthropic','OpenAI','Google DeepMind','Meta','DeepSeek','Alibaba','xAI','Mistral AI'];
   const items = MODELS.filter(m => {
@@ -1300,13 +1396,24 @@ function renderModels() {
     const officialLink = MODEL_LINKS[m.name]
       ? '<a href="' + MODEL_LINKS[m.name] + '" target="_blank" rel="noopener noreferrer" style="font-size:11px;font-weight:600;color:var(--accent);margin-left:auto;white-space:nowrap;text-decoration:none;padding:2px 8px;border:1px solid var(--accent);border-radius:99px;background:var(--accent-bg)">Official page &#8599;</a>'
       : '';
+    const priceTag = (() => {
+      const price = MODEL_PRICES[m.name];
+      if (!price) return '';
+      const isSpecial = price === 'Open-weight' || price === 'Deprecated' || price === 'Internal/restricted';
+      const color = isSpecial
+        ? 'color:var(--text3);background:var(--surface2);border-color:var(--border2)'
+        : 'color:var(--green);background:var(--green-bg);border-color:var(--green)';
+      const icon = isSpecial ? '' : '💰 ';
+      const suffix = isSpecial ? '' : ' /MTok';
+      return '<span style="font-size:11px;font-weight:600;' + color + ';border-radius:99px;padding:2px 8px;white-space:nowrap;border-style:solid;border-width:1px">' + icon + price + suffix + '</span>';
+    })();
     return '<div class="mcard' + cardCls + '">' +
       '<div class="mcard-top">' +
         '<div><div class="mcard-name">' + m.name + badge + deprBadge + '</div><div class="mcard-org">' + m.org + ' &#x2022; ' + m.released + '</div></div>' +
         '<span class="mtype ' + m.weight + '">' + weightLabel + '</span>' +
       '</div>' +
       '<div class="mcard-desc">' + m.desc + '</div>' +
-      '<div class="mcard-foot" style="display:flex;align-items:center;flex-wrap:wrap;gap:8px">' + runTag + (m.benchmarks ? '<span style="color:var(--text3);font-size:11px">Benchmarks: <span style="color:var(--text2)">' + m.benchmarks + '</span></span>' : '') + officialLink + '</div>' +
+      '<div class="mcard-foot" style="display:flex;align-items:center;flex-wrap:wrap;gap:8px">' + runTag + priceTag + (m.benchmarks ? '<span style="color:var(--text3);font-size:11px">Benchmarks: <span style="color:var(--text2)">' + m.benchmarks + '</span></span>' : '') + officialLink + '</div>' +
       '</div>';
   }).join('') || '<div class="empty">No models match your filter.</div>';
 }
