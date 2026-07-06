@@ -481,6 +481,10 @@ tbody td { padding: 12px 16px; vertical-align: top; }
 .mcard-foot span { color: var(--text2); font-weight: 500; }
 .h100-tag { background: var(--green-bg); color: var(--green); border: 1px solid var(--green); padding: 2px 8px; border-radius: 99px; font-size: 10px; font-weight: 600; }
 .api-tag  { background: var(--surface2); color: var(--text3); border: 1px solid var(--border2); padding: 2px 8px; border-radius: 99px; font-size: 10px; font-weight: 500; }
+.score-hi  { background: var(--green-bg); color: var(--green); border: 1px solid var(--green); }
+.score-mid { background: #fef3c7; color: #92400e; border: 1px solid #f59e0b; }
+[data-theme="dark"] .score-mid { background: #3d2800; color: #f59e0b; border-color: #f59e0b; }
+.score-na  { background: var(--surface2); color: var(--text3); border: 1px solid var(--border2); }
 
 /* ── Sources grid ──────────────────────────────────────────────── */
 .sources-grid {
@@ -681,11 +685,11 @@ tbody td { padding: 12px 16px; vertical-align: top; }
       <p class="hero-desc">Frontier Benchmark &amp; Model Intelligence — HHRI-AI Research<br><span style="font-size:12px;color:var(--text3)">A curated, up-to-date reference of benchmarks and frontier models used by leading AI labs. Use this to select evaluation targets for FoxBrain model assessments across 9 capability domains.</span></p>
       <div class="hero-updated">
         <span class="dot"></span>
-        Last updated: <span id="last-updated-date">July 2, 2026</span> &nbsp;&bull;&nbsp; Latest: Claude Sonnet 5 (Jun 30) &amp; Fable 5 redeployed (Jul 1)
+        Last updated: <span id="last-updated-date">July 6, 2026</span> &nbsp;&bull;&nbsp; Added: Coding Models tab (20 models) &amp; 7 agentic coding benchmarks
       </div>
     </div>
     <div class="hero-stats">
-      <div class="hstat"><div class="hstat-val">63</div><div class="hstat-lbl">Benchmarks</div></div>
+      <div class="hstat"><div class="hstat-val">70</div><div class="hstat-lbl">Benchmarks</div></div>
       <div class="hstat"><div class="hstat-val">9</div><div class="hstat-lbl">Domains</div></div>
       <div class="hstat"><div class="hstat-val">77</div><div class="hstat-lbl">Models</div></div>
       <div class="hstat"><div class="hstat-val">19</div><div class="hstat-lbl">Sources</div></div>
@@ -698,6 +702,7 @@ tbody td { padding: 12px 16px; vertical-align: top; }
   <div class="tab-bar">
     <button class="tab-btn active" onclick="setTab('benchmarks',this)">&#128202; Benchmarks</button>
     <button class="tab-btn" onclick="setTab('models',this)">&#129302; Frontier models</button>
+    <button class="tab-btn" onclick="setTab('coding',this)">&#128187; Coding models</button>
     <button class="tab-btn" onclick="setTab('bylabs',this)">&#127981; By Lab</button>
     <button class="tab-btn" onclick="setTab('bybench',this)">&#128202; By Benchmark</button>
     <button class="tab-btn" onclick="setTab('sources',this)">&#128216; Sources</button>
@@ -765,6 +770,22 @@ tbody td { padding: 12px 16px; vertical-align: top; }
     <div class="models-grid" id="models-grid"></div>
   </div>
 
+  <!-- CODING MODELS -->
+  <div id="tab-coding" style="display:none">
+    <div class="filter-bar">
+      <span class="filter-label">Tier:</span>
+      <button class="fbtn active" id="cf-all"    onclick="setCodingFilter('all',this)">All</button>
+      <button class="fbtn"        id="cf-closed" onclick="setCodingFilter('closed',this)">Closed-weight</button>
+      <button class="fbtn"        id="cf-open"   onclick="setCodingFilter('open',this)">Open-weight</button>
+      <span class="filter-label" style="margin-left:12px">Specialty:</span>
+      <button class="fbtn spec-fbtn active" onclick="setCodingSpec('all',this)">All</button>
+      <button class="fbtn spec-fbtn" onclick="setCodingSpec('agentic',this)">Agentic</button>
+      <button class="fbtn spec-fbtn" onclick="setCodingSpec('local',this)">Local/self-host</button>
+      <button class="fbtn spec-fbtn" onclick="setCodingSpec('autocomplete',this)">Autocomplete/FIM</button>
+    </div>
+    <div class="models-grid" id="coding-grid"></div>
+  </div>
+
   <!-- SOURCES -->
   <div id="tab-sources" style="display:none">
     <div class="sources-grid" id="sources-grid"></div>
@@ -806,7 +827,7 @@ tbody td { padding: 12px 16px; vertical-align: top; }
 
 <div class="footer">
   <span>FoxBrain EvalHub &nbsp;&bull;&nbsp; HHRI-AI / Foxconn AI Research Center &nbsp;&bull;&nbsp; <a href="https://muhammadsaqlainaslam.github.io/foxbrain-eval-dashboard/">muhammadsaqlainaslam.github.io/foxbrain-eval-dashboard</a></span>
-  <span id="footer-updated">Updated July 2, 2026</span> &nbsp;&bull;&nbsp; 13 labs &nbsp;&bull;&nbsp; 77 models &nbsp;&bull;&nbsp; 63 benchmarks &nbsp;&bull;&nbsp; 19 sources
+  <span id="footer-updated">Updated July 6, 2026</span> &nbsp;&bull;&nbsp; 13 labs &nbsp;&bull;&nbsp; 77 models &nbsp;&bull;&nbsp; 70 benchmarks &nbsp;&bull;&nbsp; 19 sources
 </div>
 
 <script>
@@ -873,6 +894,13 @@ const BENCHMARKS = [
   {name:'BrowseComp',domain:'agentic',pri:'high',metric:'success_rate',labs:['Anthropic','OpenAI'],desc:'Agentic web search benchmark. Tests multi-step information retrieval requiring sustained browsing. Sonnet 5 strictly improves over Sonnet 4.6 at all effort levels; matches Opus 4.8 at high effort. Standard methodology: 10M token budget with compaction and programmatic tool calling.',tags:['agentic','search','web-browsing','effort-levels'],isNew:true},
   {name:'OSWorld-Verified',domain:'agentic',pri:'high',metric:'success_rate',labs:['Anthropic','OpenAI'],desc:'Computer use benchmark on verified real desktop tasks. Sonnet 4.6 corrected score: 78.5%. Sonnet 5 surpasses Sonnet 4.6 at all effort levels; matches Opus 4.8 at high effort. More accurate real-world methodology than original OSWorld.',tags:['computer-use','desktop','agentic','effort-levels'],isNew:true},
   {name:'Cybench',domain:'agentic',pri:'medium',metric:'accuracy',labs:['Microsoft','OpenAI'],desc:'CTF cybersecurity challenges requiring multi-step agentic reasoning.',tags:['cybersecurity','agentic']},
+  {name:'BigCodeBench',domain:'agentic',pri:'high',metric:'pass@1',labs:['Google','Anthropic','OpenAI','Alibaba'],desc:'Practical software engineering challenges. 1140 tasks requiring diverse library calls and real-world APIs. Harder than HumanEval — tests function composition across real Python libraries. Complete and Instruct variants.',tags:['coding','real-world','library-calls'],isNew:false},
+  {name:'LiveCodeBench Pro',domain:'stem',pri:'high',metric:'pass@1',labs:['Google','Anthropic','OpenAI','DeepSeek'],desc:'Harder competitive programming variant of LiveCodeBench. Drawn from contest problems rated 2000+ on Codeforces/AtCoder. Contamination-resistant via continuous updates.',tags:['coding','competitive','contamination-safe'],isNew:true},
+  {name:'SWE-Bench Multilingual',domain:'agentic',pri:'high',metric:'resolve_rate',labs:['Moonshot AI','Microsoft','OpenAI'],desc:'SWE-Bench extended beyond Python to Java, TypeScript, Go, Rust, C++. Kimi K2.6: 76.7%. Tests real-world agentic coding across diverse language codebases.',tags:['agentic','multilingual','multi-language'],isNew:true},
+  {name:'Devbench',domain:'agentic',pri:'medium',metric:'success_rate',labs:['Microsoft','OpenAI'],desc:'End-to-end software development lifecycle benchmark. Covers requirements → design → code → test → documentation. Tests sustained multi-step agentic development.',tags:['agentic','end-to-end','software-lifecycle']},
+  {name:'Multi-SWE-Bench',domain:'agentic',pri:'medium',metric:'resolve_rate',labs:['Anthropic','OpenAI','Google'],desc:'Multi-file, multi-PR software engineering tasks. Harder than SWE-Bench Verified — requires coordinating changes across multiple files and pull requests simultaneously.',tags:['agentic','multi-file','multi-PR'],isNew:true},
+  {name:'VIBE-Pro',domain:'agentic',pri:'medium',metric:'success_rate',labs:['MiniMax','OpenAI','Anthropic'],desc:'Vibe coding benchmark — evaluates from-scratch project development in realistic environments. MiniMax M3 pioneered this benchmark. Tests complete application creation.',tags:['agentic','from-scratch','project-creation'],isNew:true},
+  {name:'ProgramBench',domain:'stem',pri:'medium',metric:'resolve_rate',labs:['OpenAI','Anthropic'],desc:'Cleanroom program reconstruction benchmark. Currently all public models at 0% fully resolved — represents the current frontier ceiling for coding AI. Display-only stress test.',tags:['coding','hardest','frontier-ceiling'],isNew:true},
   {name:'MMLU-Pro',domain:'knowledge',pri:'high',metric:'accuracy',labs:['OpenAI','Anthropic','Google','Microsoft','Meta','DeepSeek','Alibaba','xAI'],desc:'Harder MMLU with 10-choice answers. 14 domains. Reported in virtually every frontier report. Near-saturating (83-90%).',tags:['knowledge','multi-domain']},
   {name:'MMLU',domain:'knowledge',pri:'medium',metric:'accuracy',labs:['OpenAI','Anthropic','Google','Meta','DeepSeek','Alibaba'],desc:'Original 57-subject MCQ. Over 90% at frontier — reported for historical comparability only.',tags:['knowledge','57-subjects']},
   {name:'SimpleQA',domain:'knowledge',pri:'medium',metric:'accuracy',labs:['OpenAI','Anthropic','Google','Microsoft'],desc:'Unambiguous factual short-answer QA. Tests factual precision without hallucination.',tags:['factuality','short-answer']},
@@ -1005,6 +1033,337 @@ const MODELS = [
   {name:'Phi-4',                       org:'Microsoft',       weight:'open',       released:'2025',          desc:'14B small language model. Beats many larger models on reasoning. MIT license.',                                                                                                            runnable:true, benchmarks:'MATH-500, GPQA, MMLU-Pro, HumanEval+'},
 ];
 
+// ── Dedicated Agentic Coding reference ──────────────────────────────────────
+const CODING_MODELS = [
+
+  // ── TIER 1: Frontier agentic coding (closed) ──────────
+  {
+    name:'Claude Fable 5',
+    org:'Anthropic', weight:'closed',
+    released:'Jun 9, 2026',
+    specialty:'Agentic + long-horizon',
+    price:'$10/$50',
+    api:'claude-fable-5',
+    context:'1M',
+    license:'Proprietary',
+    scores:{swe_verified:'95.0%', swe_pro:'80.3%',
+            livecode:'N/A', humaneval:'N/A',
+            frontiercode:'29.3%', terminal:'88.0%'},
+    notes:'Best available for agentic coding. Matches Mythos 5 on coding benchmarks.',
+    runnable:false,
+    url:'https://www.anthropic.com/news/claude-fable-5-mythos-5'
+  },
+  {
+    name:'Claude Sonnet 5',
+    org:'Anthropic', weight:'closed',
+    released:'Jun 30, 2026',
+    specialty:'Agentic + cost-efficient',
+    price:'$2/$10 → $3/$15',
+    api:'claude-sonnet-5',
+    context:'1M',
+    license:'Proprietary',
+    scores:{swe_verified:'N/A', swe_pro:'63.2%',
+            livecode:'N/A', humaneval:'N/A',
+            frontiercode:'N/A', terminal:'N/A'},
+    notes:'Best value agentic Sonnet. Matches Opus 4.8 at high effort on BrowseComp + OSWorld.',
+    runnable:false,
+    url:'https://www.anthropic.com/news/claude-sonnet-5'
+  },
+  {
+    name:'Claude Opus 4.8',
+    org:'Anthropic', weight:'closed',
+    released:'May 2026',
+    specialty:'Agentic + hard tasks',
+    price:'$5/$25',
+    api:'claude-opus-4-8',
+    context:'1M',
+    license:'Proprietary',
+    scores:{swe_verified:'88.6%', swe_pro:'69.2%',
+            livecode:'N/A', humaneval:'N/A',
+            frontiercode:'13.4%', terminal:'82.7%'},
+    notes:'Previous Anthropic flagship. Safety fallback for Fable 5.',
+    runnable:false,
+    url:'https://www.anthropic.com/claude/opus'
+  },
+  {
+    name:'GPT-5.5',
+    org:'OpenAI', weight:'closed',
+    released:'May 2026',
+    specialty:'Agentic + coding',
+    price:'$5/$30',
+    api:'gpt-5-5',
+    context:'256K',
+    license:'Proprietary',
+    scores:{swe_verified:'88.7%', swe_pro:'58.6%',
+            livecode:'N/A', humaneval:'N/A',
+            frontiercode:'5.7%', terminal:'83.4%'},
+    notes:'Current OpenAI flagship.',
+    runnable:false,
+    url:'https://platform.openai.com/docs/models/gpt-5-5'
+  },
+  {
+    name:'Gemini 3.1 Pro',
+    org:'Google DeepMind', weight:'closed',
+    released:'Feb 2026',
+    specialty:'Agentic + long context',
+    price:'$2/$12',
+    api:'gemini-3.1-pro-preview',
+    context:'1M',
+    license:'Proprietary',
+    scores:{swe_verified:'80.6%', swe_pro:'54.2%',
+            livecode:'N/A', humaneval:'N/A',
+            frontiercode:'N/A', terminal:'70.7%'},
+    notes:'Best price/performance at frontier level for long-context coding.',
+    runnable:false,
+    url:'https://deepmind.google/technologies/gemini/pro/'
+  },
+
+  // ── TIER 2: Frontier open-weight agentic ──────────────
+  {
+    name:'DeepSeek V4 Pro',
+    org:'DeepSeek', weight:'open',
+    released:'Apr 2026',
+    specialty:'Agentic coding + cheapest frontier',
+    price:'$1.74/$3.48 (or self-host)',
+    api:'deepseek-v4-pro',
+    context:'1M',
+    license:'MIT',
+    scores:{swe_verified:'80.6%', swe_pro:'N/A',
+            livecode:'93.5%', humaneval:'N/A',
+            frontiercode:'N/A', terminal:'N/A'},
+    notes:'MIT license. Leads all evaluated open models on LiveCodeBench (93.5) and Codeforces Rating (3206). vLLM-compatible.',
+    runnable:true,
+    url:'https://github.com/deepseek-ai/DeepSeek-V4'
+  },
+  {
+    name:'Kimi K2.6',
+    org:'Moonshot AI', weight:'open',
+    released:'Apr 19, 2026',
+    specialty:'Agentic + tool-use',
+    price:'$0.28/$1.10 (or self-host)',
+    api:'moonshotai/Kimi-K2.6',
+    context:'256K',
+    license:'Modified MIT',
+    scores:{swe_verified:'N/A', swe_pro:'58.6%',
+            livecode:'N/A', humaneval:'N/A',
+            frontiercode:'N/A', terminal:'N/A'},
+    notes:'#1 open-weight Artificial Analysis AI Index (54). BrowseComp: 83.2%. 300 parallel sub-agents, 4000+ tool calls. 1T total / 32B active MoE.',
+    runnable:true,
+    url:'https://moonshotai.github.io/Kimi-K2/'
+  },
+  {
+    name:'Kimi K2.7 Code',
+    org:'Moonshot AI', weight:'open',
+    released:'Jun 16, 2026',
+    specialty:'Long-horizon coding agent',
+    price:'$0.28/$1.10 (or self-host)',
+    api:'moonshotai/Kimi-K2.7-Code',
+    context:'256K',
+    license:'Modified MIT',
+    scores:{swe_verified:'N/A', swe_pro:'N/A',
+            livecode:'N/A', humaneval:'N/A',
+            frontiercode:'N/A', terminal:'N/A'},
+    notes:'Coding-focused Kimi. 12+ hour continuous execution, 4000+ tool-call sequences. Image+video input via tools.',
+    runnable:true,
+    url:'https://moonshotai.github.io/Kimi-K2/'
+  },
+  {
+    name:'GLM-5.2',
+    org:'Zhipu AI', weight:'open',
+    released:'Jun 2026',
+    specialty:'Agentic coding + Chinese',
+    price:'$1.40/$4.40 (or self-host)',
+    api:'THUDM/GLM-5.2',
+    context:'1M',
+    license:'MIT',
+    scores:{swe_verified:'77.8%', swe_pro:'62.1%',
+            livecode:'N/A', humaneval:'N/A',
+            frontiercode:'N/A', terminal:'N/A'},
+    notes:'MIT license. Code Arena ELO: 1534. Strong Chinese + agentic coding. 1M context via glm-5.2[1m]. vLLM-compatible.',
+    runnable:true,
+    url:'https://zhipuai.cn/'
+  },
+  {
+    name:'MiniMax M3',
+    org:'MiniMax', weight:'open',
+    released:'Jun 2026',
+    specialty:'Coding + value',
+    price:'$0.60/$2.40 (or self-host)',
+    api:'MiniMaxAI/MiniMax-M3',
+    context:'1M',
+    license:'Apache 2.0',
+    scores:{swe_verified:'80.5%', swe_pro:'59.0%',
+            livecode:'N/A', humaneval:'N/A',
+            frontiercode:'N/A', terminal:'N/A'},
+    notes:'Cheapest model above 80% SWE-Bench Verified ($0.60/$2.40). Surpasses GPT-5.5 and Gemini 3.1 Pro on SWE-Bench Pro at 59.0%.',
+    runnable:true,
+    url:'https://www.minimaxi.com/'
+  },
+  {
+    name:'DeepSeek V4 Flash',
+    org:'DeepSeek', weight:'open',
+    released:'Apr 2026',
+    specialty:'Budget agentic coding',
+    price:'$0.14/$0.28 (or self-host)',
+    api:'deepseek-v4-flash',
+    context:'1M',
+    license:'MIT',
+    scores:{swe_verified:'N/A', swe_pro:'N/A',
+            livecode:'N/A', humaneval:'N/A',
+            frontiercode:'N/A', terminal:'N/A'},
+    notes:'Cheapest viable frontier coding model. 284B total / 13B active MoE. Thinking + non-thinking + Think Max modes.',
+    runnable:true,
+    url:'https://github.com/deepseek-ai/DeepSeek-V4'
+  },
+
+  // ── TIER 3: Coding specialist models ──────────────────
+  {
+    name:'Qwen3-Coder-480B-A35B',
+    org:'Alibaba', weight:'open',
+    released:'2025',
+    specialty:'Coding specialist MoE',
+    price:'Self-host',
+    api:'Qwen/Qwen3-Coder-480B-A35B-Instruct',
+    context:'256K',
+    license:'Apache 2.0',
+    scores:{swe_verified:'N/A', swe_pro:'N/A',
+            livecode:'N/A', humaneval:'N/A',
+            frontiercode:'N/A', terminal:'N/A'},
+    notes:'Coding-specialist MoE. 480B total / 35B active. Apache 2.0. Optimized for agentic coding workflows.',
+    runnable:true,
+    url:'https://qwenlm.github.io/'
+  },
+  {
+    name:'Qwen3-Coder-Next (30B-A3B)',
+    org:'Alibaba', weight:'open',
+    released:'Feb 2026',
+    specialty:'Local agentic coding',
+    price:'Self-host',
+    api:'Qwen/Qwen3-Coder-Next-30B-A3B',
+    context:'256K',
+    license:'Apache 2.0',
+    scores:{swe_verified:'70.6%', swe_pro:'N/A',
+            livecode:'N/A', humaneval:'73-74%',
+            frontiercode:'N/A', terminal:'N/A'},
+    notes:'80B MoE / 3B active. Runs at 3-7B dense speed. SWE-Bench: 70.6%. Best local agentic coding model at its compute tier.',
+    runnable:true,
+    url:'https://qwenlm.github.io/'
+  },
+  {
+    name:'Qwen3.6-27B',
+    org:'Alibaba', weight:'open',
+    released:'Apr 2026',
+    specialty:'Local coding (24GB GPU)',
+    price:'Self-host',
+    api:'Qwen/Qwen3.6-27B-Instruct',
+    context:'128K',
+    license:'Apache 2.0',
+    scores:{swe_verified:'77.2%', swe_pro:'N/A',
+            livecode:'N/A', humaneval:'N/A',
+            frontiercode:'N/A', terminal:'N/A'},
+    notes:'Best dense model for single 24GB GPU. SWE-Bench: 77.2% — competitive with frontier closed models for local use.',
+    runnable:true,
+    url:'https://qwenlm.github.io/'
+  },
+  {
+    name:'DeepSeek Coder V2',
+    org:'DeepSeek', weight:'open',
+    released:'Jun 2024',
+    specialty:'Coding specialist (legacy)',
+    price:'Self-host',
+    api:'deepseek-ai/DeepSeek-Coder-V2-Instruct',
+    context:'128K',
+    license:'DeepSeek Model License',
+    scores:{swe_verified:'N/A', swe_pro:'N/A',
+            livecode:'N/A', humaneval:'90.2%',
+            frontiercode:'N/A', terminal:'N/A'},
+    notes:'Training on 2T tokens of code + natural language. HumanEval: 90.2% (full 236B). V2 Lite (16B): 81.1%. Still widely used baseline. Superseded by V4 for agentic tasks.',
+    runnable:true,
+    url:'https://github.com/deepseek-ai/DeepSeek-Coder-V2'
+  },
+  {
+    name:'Devstral Small 2',
+    org:'Mistral AI', weight:'open',
+    released:'Dec 2025',
+    specialty:'Agentic coding specialist',
+    price:'Self-host / API',
+    api:'mistralai/Devstral-Small-2',
+    context:'256K',
+    license:'Apache 2.0',
+    scores:{swe_verified:'68.0%', swe_pro:'N/A',
+            livecode:'N/A', humaneval:'N/A',
+            frontiercode:'N/A', terminal:'N/A'},
+    notes:'24B model purpose-built for agentic coding. SWE-Bench: 68%. Best open-weight agentic model at its size class. Tool calling specialist.',
+    runnable:true,
+    url:'https://mistral.ai/news/devstral'
+  },
+  {
+    name:'Codestral 25.01',
+    org:'Mistral AI', weight:'open',
+    released:'Jan 2025',
+    specialty:'FIM autocomplete specialist',
+    price:'$0.30/$0.90 (or self-host)',
+    api:'codestral-latest',
+    context:'256K',
+    license:'Mistral AI Non-Production',
+    scores:{swe_verified:'N/A', swe_pro:'N/A',
+            livecode:'N/A', humaneval:'86.6%',
+            frontiercode:'N/A', terminal:'N/A'},
+    notes:'#1 on LMSys Copilot Arena for autocomplete. FIM accuracy 95.3%. Best fill-in-the-middle model available. IDE integration via Continue.dev.',
+    runnable:true,
+    url:'https://mistral.ai/news/codestral/'
+  },
+  {
+    name:'StarCoder2-15B',
+    org:'BigCode (Hugging Face + ServiceNow)',
+    weight:'open',
+    released:'2024',
+    specialty:'Code completion + transparency',
+    price:'Self-host',
+    api:'bigcode/starcoder2-15b',
+    context:'16K',
+    license:'BigCode Open RAIL-M v1',
+    scores:{swe_verified:'N/A', swe_pro:'N/A',
+            livecode:'N/A', humaneval:'N/A',
+            frontiercode:'N/A', terminal:'N/A'},
+    notes:'Transparently trained — full training code and data public. 80+ languages. Best for auditability and reproducibility. Superseded for agentic tasks but still reference model.',
+    runnable:true,
+    url:'https://huggingface.co/bigcode/starcoder2-15b'
+  },
+  {
+    name:'NVIDIA Nemotron Ultra 550B',
+    org:'NVIDIA', weight:'open',
+    released:'Jun 4, 2026',
+    specialty:'Agentic + reasoning',
+    price:'$0.60/$2.60 via NIM (or self-host)',
+    api:'nvidia/Llama-3.1-Nemotron-Ultra-550B-Instruct',
+    context:'1M',
+    license:'Llama 3.1 Community License',
+    scores:{swe_verified:'N/A', swe_pro:'N/A',
+            livecode:'N/A', humaneval:'N/A',
+            frontiercode:'N/A', terminal:'N/A'},
+    notes:'Hybrid Mamba-2/attention MoE. 550B total / 55B active. Thinking + non-thinking + tool use. RULER creator. H100 cluster runnable at HHRI-AI.',
+    runnable:true,
+    url:'https://huggingface.co/nvidia/Llama-3.1-Nemotron-Ultra-550B-Instruct'
+  },
+  {
+    name:'IBM Granite Code 34B',
+    org:'IBM', weight:'open',
+    released:'2024',
+    specialty:'Enterprise coding',
+    price:'Self-host',
+    api:'ibm-granite/granite-34b-code-instruct',
+    context:'128K',
+    license:'Apache 2.0',
+    scores:{swe_verified:'N/A', swe_pro:'N/A',
+            livecode:'N/A', humaneval:'N/A',
+            frontiercode:'N/A', terminal:'N/A'},
+    notes:'Apache 2.0 enterprise-safe license. Full training data disclosed. Strong for enterprise Java/Python. Fine-tunable without restrictions.',
+    runnable:true,
+    url:'https://huggingface.co/ibm-granite/granite-34b-code-instruct'
+  },
+];
+
 const SOURCES = [
   {title:'Claude Sonnet 5 — Launch Announcement & System Card',org:'Anthropic',date:'Jun 30, 2026',url:'https://www.anthropic.com/news/claude-sonnet-5',desc:'Launch of Claude Sonnet 5 — new default model for Free/Pro plans. Most agentic Sonnet yet. Introduces BrowseComp and OSWorld-Verified benchmarks with effort-level curves. Corrects Sonnet 4.6 HLE (now 34.6%/46.8%) and OSWorld-Verified (now 78.5%) scores. API: claude-sonnet-5. $2/$10 MTok intro until Aug 31 2026.'},
   {title:'Redeploying Claude Fable 5 — Export Controls & Safety Framework',org:'Anthropic',date:'Jun 30 / Jul 1, 2026',url:'https://www.anthropic.com/news/redeploying-fable-5',desc:'Fable 5 and Mythos 5 suspended Jun 12 due to US export controls after Amazon researchers found a safeguard bypass. Controls lifted Jun 30; models restored Jul 1. New safety classifier deployed blocking reported jailbreak in >99% of cases. Includes new industry jailbreak severity framework (with Amazon, Microsoft, Google). Blocked requests route to Opus 4.8.'},
@@ -1029,6 +1388,7 @@ const SOURCES = [
 
 // ── State ──────────────────────────────────────────────────────────────────
 let curDomain = 'all', modelFilter = 'all', labFilter = 'all', showDeprecated = false;
+let codingFilter = 'all', codingSpec = 'all';
 
 // ── Render benchmarks ──────────────────────────────────────────────────────
 // ── Search state ───────────────────────────────────────────────────────────
@@ -1418,6 +1778,88 @@ function renderModels() {
   }).join('') || '<div class="empty">No models match your filter.</div>';
 }
 
+// ── Render coding models ────────────────────────────────────────────────────
+function setCodingFilter(f, el) {
+  codingFilter = f;
+  document.querySelectorAll('#tab-coding .filter-bar .fbtn:not(.spec-fbtn)').forEach(b => b.classList.remove('active'));
+  if (el) el.classList.add('active');
+  renderCodingModels();
+}
+
+function setCodingSpec(s, el) {
+  codingSpec = s;
+  document.querySelectorAll('#tab-coding .filter-bar .spec-fbtn').forEach(b => b.classList.remove('active'));
+  if (el) el.classList.add('active');
+  renderCodingModels();
+}
+
+function codingSpecCategory(m) {
+  const s = m.specialty.toLowerCase();
+  if (s.includes('autocomplete') || s.includes('fim') || s.includes('completion')) return 'autocomplete';
+  if (s.includes('local') || m.price === 'Self-host') return 'local';
+  if (s.includes('agentic') || s.includes('agent')) return 'agentic';
+  return null;
+}
+
+function scoreClass(val) {
+  if (!val || val === 'N/A') return 'score-na';
+  const m = val.match(/(\d+(\.\d+)?)/);
+  if (!m) return 'score-na';
+  const n = parseFloat(m[1]);
+  if (n >= 80) return 'score-hi';
+  if (n >= 60) return 'score-mid';
+  return 'score-na';
+}
+
+function renderCodingModels() {
+  const items = CODING_MODELS.filter(m => {
+    if (codingFilter !== 'all' && m.weight !== codingFilter) return false;
+    if (codingSpec !== 'all' && codingSpecCategory(m) !== codingSpec) return false;
+    return true;
+  });
+  document.getElementById('coding-grid').innerHTML = items.map(m => {
+    const isNew2026 = /2026/.test(m.released);
+    const badge = isNew2026 ? '<span class="new-pill">NEW</span>' : '';
+    const runTag = m.runnable
+      ? '<span class="h100-tag">&#10003; Runs on H100</span>'
+      : '<span class="api-tag">API access</span>';
+    const weightLabel = m.weight === 'open' ? 'Open-weight' : 'Closed-weight';
+    const scoreRows = [
+      ['SWE-Bench Verified', m.scores.swe_verified],
+      ['SWE-Bench Pro',      m.scores.swe_pro],
+      ['LiveCodeBench',      m.scores.livecode],
+      ['HumanEval',          m.scores.humaneval],
+    ].filter(([, v]) => v && v !== 'N/A');
+    const scoreGrid = scoreRows.length
+      ? '<div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin:10px 0">' +
+        scoreRows.map(([label, val]) =>
+          '<div class="score-cell ' + scoreClass(val) + '" style="font-size:11px;padding:5px 8px;border-radius:6px;display:flex;justify-content:space-between;gap:6px">' +
+            '<span style="opacity:.8">' + label + '</span><span style="font-weight:700">' + val + '</span>' +
+          '</div>'
+        ).join('') +
+        '</div>'
+      : '';
+    return '<div class="mcard">' +
+      '<div class="mcard-top">' +
+        '<div><div class="mcard-name">' + m.name + badge + '</div><div class="mcard-org">' + m.org + ' &#x2022; ' + m.released + '</div></div>' +
+        '<span class="mtype ' + m.weight + '">' + weightLabel + '</span>' +
+      '</div>' +
+      '<div style="font-size:11px;font-weight:600;color:var(--accent);margin-bottom:6px">' + m.specialty + '</div>' +
+      '<div style="display:flex;flex-wrap:wrap;gap:8px;font-size:11px;color:var(--text3);margin-bottom:8px">' +
+        '<span>' + m.price + ' /MTok</span><span>&#x2022;</span>' +
+        '<span>' + m.context + ' context</span><span>&#x2022;</span>' +
+        '<span>' + m.license + '</span>' +
+      '</div>' +
+      scoreGrid +
+      '<div class="mcard-desc">' + m.notes + '</div>' +
+      '<div class="mcard-foot" style="display:flex;align-items:center;flex-wrap:wrap;gap:8px">' +
+        runTag +
+        '<a href="' + m.url + '" target="_blank" rel="noopener noreferrer" style="font-size:11px;font-weight:600;color:var(--accent);margin-left:auto;white-space:nowrap;text-decoration:none;padding:2px 8px;border:1px solid var(--accent);border-radius:99px;background:var(--accent-bg)">Details &#8599;</a>' +
+      '</div>' +
+      '</div>';
+  }).join('') || '<div class="empty">No models match your filter.</div>';
+}
+
 // ── Render sources ─────────────────────────────────────────────────────────
 function renderSources() {
   document.getElementById('sources-grid').innerHTML = SOURCES.map(s =>
@@ -1431,7 +1873,7 @@ function renderSources() {
 
 // ── Tab switching ──────────────────────────────────────────────────────────
 function setTab(tab, el) {
-  ['benchmarks','models','sources','bylabs','bybench'].forEach(t => {
+  ['benchmarks','models','coding','sources','bylabs','bybench'].forEach(t => {
     const div = document.getElementById('tab-' + t);
     if (div) div.style.display = t === tab ? 'block' : 'none';
   });
@@ -1868,6 +2310,7 @@ function renderByBench() {
 // ── Init ───────────────────────────────────────────────────────────────────
 renderBenchmarks();
 renderModels();
+renderCodingModels();
 
 // Auto-update "last updated" badge from GitHub API
 (function() {
