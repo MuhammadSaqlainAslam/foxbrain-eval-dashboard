@@ -13,12 +13,12 @@
 
 ## What's inside
 
-### 📊 Benchmarks tab — 63 benchmarks across 9 domains
+### 📊 Benchmarks tab — 70 benchmarks across 9 domains
 
 | Domain | Key benchmarks |
 |---|---|
-| STEM | AIME 2025/2026, HLE, GPQA Diamond, ARC-AGI-2, LiveCodeBench v6, MATH-500, FrontierMath, OlympiadBench, MathVista |
-| Agentic coding | SWE-Bench Verified/Pro, FrontierCode Diamond, Terminal-Bench 2.1, Aider Polyglot, CursorBench 3.1, τ-bench, τ²-bench, Cybench |
+| STEM | AIME 2025/2026, HLE, GPQA Diamond, ARC-AGI-2, LiveCodeBench v6, LiveCodeBench Pro, ProgramBench, MATH-500, FrontierMath, OlympiadBench, MathVista |
+| Agentic coding | SWE-Bench Verified/Pro, SWE-Bench Multilingual, Multi-SWE-Bench, BigCodeBench, VIBE-Pro, DevBench, FrontierCode Diamond, Terminal-Bench 2.1, Aider Polyglot, CursorBench 3.1, τ-bench, τ²-bench, Cybench |
 | Knowledge | MMLU-Pro, MMLU, MMMLU, MMMU Pro, SimpleQA, FRAMES, DROP, GDPval-AA, TMMLU+, BigBenchHard |
 | Instruction following | IFEval, Multi-IF, AlpacaEval 2.0, MT-Bench, Arena ELO, IFBench |
 | Long context | MRCR v2, MRCR v1, RULER, LOFT, LongBench v2, NoLiMa, InfiniteBench, LV-Eval |
@@ -51,6 +51,16 @@ Each benchmark shows: domain, priority, primary metric, which labs use it, descr
 | **Total** | **77** | Includes deprecated models with flags |
 
 Open-weight models (Gemma 4, DeepSeek, Qwen3, Llama 4, Mistral, MiniMax, GLM-5, Kimi, NVIDIA Nemotron) can run directly on HHRI-AI H100s via vLLM. Deprecated models included for historical reference and reproducibility.
+
+### 💻 Coding Models tab — 20 models across 3 tiers
+
+| Tier | Models | Purpose |
+|---|---|---|
+| Tier 1 — Frontier closed | Claude Fable 5, Sonnet 5, Opus 4.8, GPT-5.5, Gemini 3.1 Pro | Best absolute performance |
+| Tier 2 — Frontier open-weight | DeepSeek V4 Pro, Kimi K2.6/K2.7, GLM-5.2, MiniMax M3, DeepSeek V4 Flash | H100-runnable at HHRI-AI |
+| Tier 3 — Coding specialists | Qwen3-Coder, Qwen3.6-27B, DeepSeek Coder V2, Devstral Small 2, Codestral, StarCoder2, NVIDIA Nemotron Ultra, IBM Granite Code | Specific use cases: FIM, local, enterprise |
+
+Each card shows: specialty, price, context window, license, benchmark scores (SWE-Bench Verified, SWE-Bench Pro, LiveCodeBench, HumanEval) color-coded by performance, H100-runnable badge, and official page link.
 
 ### 🏭 By Lab tab
 
@@ -145,4 +155,4 @@ foxbrain-eval-dashboard/
 
 *Benchmark taxonomy based on MAI-Thinking-1 Technical Report §4.1 (Microsoft AI, June 2026) and additional sources listed in the Sources tab.*
 
-*Last updated: July 2, 2026 — 77 models across 13 labs, 63 benchmarks, 19 sources. Added Claude Sonnet 5 (Jun 30), Gemini 3.1 Flash Image (Jun 23), DeepSeek V4 Flash, Kimi K2.6/K2.7 Code, GLM-5.2, MiniMax M3, NVIDIA Nemotron Ultra 550B (Jun 4), Mistral Medium 3.5. Official links added to all model cards.*
+*Last updated: July 6, 2026 — added Coding Models tab (20 specialist models in 3 tiers), 7 new agentic coding benchmarks. Total: 70 benchmarks, 77 frontier models, 20 coding specialist models, 19 sources.*
