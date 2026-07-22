@@ -435,6 +435,39 @@ tbody td { padding: 12px 16px; vertical-align: top; }
 [data-theme="dark"] .dom-computer    { background:#431407; color:#fdba74; }
 [data-theme="dark"] .dom-chinese     { background:#422006; color:#fef08a; }
 
+/* ── Priority view ─────────────────────────────────────────────── */
+.priority-tier { margin-bottom: 32px; }
+.priority-tier-header {
+  display: flex; align-items: center; font-size: 16px; font-weight: 700;
+  margin-bottom: 14px; padding-bottom: 8px; border-bottom: 2px solid var(--border);
+}
+.priority-domain-group { margin-bottom: 18px; }
+.priority-domain-label { margin-bottom: 8px; }
+.priority-card {
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg);
+  padding: 14px 16px; margin-bottom: 10px; box-shadow: var(--shadow);
+}
+.priority-card-head {
+  display: flex; justify-content: space-between; align-items: center;
+  flex-wrap: wrap; gap: 8px; margin-bottom: 10px;
+}
+.priority-bench-name { font-weight: 600; font-size: 14px; }
+.priority-sota { font-size: 11px; color: var(--text2); font-family: monospace; }
+.priority-bar-row { display: flex; align-items: center; gap: 8px; margin: 5px 0; }
+.priority-bar-lab {
+  width: 130px; flex-shrink: 0; font-size: 11px; color: var(--text2);
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.priority-bar-track {
+  flex: 1; height: 8px; background: var(--surface2); border-radius: 99px; overflow: hidden;
+}
+.priority-bar-fill { height: 100%; border-radius: 99px; }
+.priority-bar-score { width: 60px; flex-shrink: 0; text-align: right; font-size: 11px; font-family: monospace; color: var(--text); }
+.priority-headroom { display: flex; align-items: center; gap: 8px; margin-top: 8px; font-size: 11px; color: var(--text3); }
+.priority-headroom-track { flex: 1; height: 5px; background: var(--surface2); border-radius: 99px; overflow: hidden; }
+.priority-headroom-fill { height: 100%; background: var(--red); border-radius: 99px; }
+.priority-empty-note { font-size: 12px; color: var(--text3); font-style: italic; }
+
 /* ── Model cards ───────────────────────────────────────────────── */
 .models-grid {
   display: grid;
@@ -726,6 +759,7 @@ tbody td { padding: 12px 16px; vertical-align: top; }
 <div class="container">
   <div class="tab-bar">
     <button class="tab-btn active" onclick="setTab('benchmarks',this)">&#127919; Benchmark Registry</button>
+    <button class="tab-btn" onclick="setTab('priority',this)">&#128993; Priority View</button>
     <button class="tab-btn" onclick="setTab('models',this)">&#129302; Models</button>
     <button class="tab-btn" onclick="setTab('coding',this)">&#128187; Coding</button>
     <button class="tab-btn" onclick="setTab('bylabs',this)">&#127963; By Lab</button>
@@ -824,6 +858,12 @@ tbody td { padding: 12px 16px; vertical-align: top; }
   <!-- SOURCES -->
   <div id="tab-sources" style="display:none">
     <div class="sources-grid" id="sources-grid"></div>
+  </div>
+
+  <!-- PRIORITY VIEW -->
+  <div id="tab-priority" style="display:none">
+    <p style="font-size:12px;color:var(--text3);margin-bottom:16px">Benchmarks grouped by run priority, then domain. Bars show the best reported score per lab, pulled live from the By Lab / By Benchmark cross-reference data. Labs with no recorded score for a benchmark are omitted from its bars.</p>
+    <div id="priority-content"></div>
   </div>
 </div>
 
@@ -1989,6 +2029,80 @@ function renderCodingModels() {
   }).join('') || '<div class="empty">No models match your filter.</div>';
 }
 
+// ── Render priority view ─────────────────────────────────────────────────────
+const PRIORITY_TIERS = [
+  {key:'critical', label:'Tier 1 — Critical (Run on FoxBrain now)', emoji:'&#128308;', color:'var(--red)'},
+  {key:'high',     label:'Tier 2 — High Priority',                  emoji:'&#128992;', color:'var(--amber)'},
+  {key:'medium',   label:'Tier 3 — Medium Priority',                emoji:'&#128993;', color:'var(--accent)'},
+  {key:'low',      label:'Tier 4 — Low Priority',                   emoji:'&#9898;',   color:'var(--text3)'},
+  {key:'watch',    label:'Watch List (early / not yet meaningful)', emoji:'&#128064;', color:'var(--green)'},
+];
+
+function labScoresForBench(benchName) {
+  const results = [];
+  LAB_DATA.forEach(lab => {
+    let best = null;
+    lab.entries.filter(e => e.bench === benchName).forEach(e => {
+      if (!e.score || e.score === 'N/A') return;
+      const m = e.score.match(/-?\d+(\.\d+)?/);
+      if (!m) return;
+      const val = parseFloat(m[0]);
+      if (!best || val > best.val) best = {val, isPct: e.score.includes('%'), text: e.score, model: e.model};
+    });
+    if (best) results.push({lab: lab.lab, color: lab.color, emoji: lab.emoji, ...best});
+  });
+  results.sort((a, b) => b.val - a.val);
+  return results;
+}
+
+function renderPriority() {
+  let html = '';
+  PRIORITY_TIERS.forEach(tier => {
+    const benches = BENCHMARKS.filter(b => b.pri === tier.key);
+    if (!benches.length) return;
+    const byDomain = {};
+    benches.forEach(b => { (byDomain[b.domain] = byDomain[b.domain] || []).push(b); });
+    html += '<div class="priority-tier">' +
+      '<div class="priority-tier-header" style="color:' + tier.color + '">' + tier.emoji + ' ' + tier.label +
+      ' <span style="font-weight:400;color:var(--text3);font-size:12px;margin-left:6px">(' + benches.length + ' benchmark' + (benches.length === 1 ? '' : 's') + ')</span></div>';
+    Object.keys(byDomain).sort().forEach(domain => {
+      const dm = DM[domain] || {label: domain, cls: ''};
+      html += '<div class="priority-domain-group">' +
+        '<div class="priority-domain-label"><span class="dpill ' + dm.cls + '">' + dm.label + '</span></div>';
+      byDomain[domain].forEach(b => {
+        const scores = labScoresForBench(b.name);
+        html += '<div class="priority-card">' +
+          '<div class="priority-card-head"><span class="priority-bench-name">' + b.name + '</span>' +
+          (scores.length ? '<span class="priority-sota">SOTA: ' + scores[0].text + ' (' + scores[0].lab + ')</span>' : '') +
+          '</div>';
+        if (scores.length) {
+          const maxVal = scores[0].val || 1;
+          scores.forEach((s, i) => {
+            const pct = Math.min(100, (s.val / maxVal) * 100);
+            html += '<div class="priority-bar-row">' +
+              '<span class="priority-bar-lab" title="' + s.lab + '">' + s.emoji + ' ' + s.lab + '</span>' +
+              '<div class="priority-bar-track"><div class="priority-bar-fill" style="width:' + pct + '%;background:' + (i === 0 ? 'var(--green)' : s.color) + '"></div></div>' +
+              '<span class="priority-bar-score">' + s.text + '</span>' +
+              '</div>';
+          });
+          if (scores[0].isPct && scores[0].val <= 100) {
+            const headroom = Math.max(0, 100 - scores[0].val);
+            html += '<div class="priority-headroom">Headroom' +
+              '<div class="priority-headroom-track"><div class="priority-headroom-fill" style="width:' + headroom.toFixed(1) + '%"></div></div>' +
+              headroom.toFixed(1) + '%</div>';
+          }
+        } else {
+          html += '<div class="priority-empty-note">No cross-lab score data recorded yet for this benchmark.</div>';
+        }
+        html += '</div>';
+      });
+      html += '</div>';
+    });
+    html += '</div>';
+  });
+  document.getElementById('priority-content').innerHTML = html || '<div class="empty">No benchmarks found.</div>';
+}
+
 // ── Render sources ─────────────────────────────────────────────────────────
 function renderSources() {
   document.getElementById('sources-grid').innerHTML = SOURCES.map(s =>
@@ -2002,15 +2116,16 @@ function renderSources() {
 
 // ── Tab switching ──────────────────────────────────────────────────────────
 function setTab(tab, el) {
-  ['benchmarks','models','coding','sources','bylabs','bybench'].forEach(t => {
+  ['benchmarks','priority','models','coding','sources','bylabs','bybench'].forEach(t => {
     const div = document.getElementById('tab-' + t);
     if (div) div.style.display = t === tab ? 'block' : 'none';
   });
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
   if (el) el.classList.add('active');
-  if (tab === 'sources') renderSources();
-  if (tab === 'bylabs')  renderByLabs();
-  if (tab === 'bybench') renderByBench();
+  if (tab === 'sources')  renderSources();
+  if (tab === 'bylabs')   renderByLabs();
+  if (tab === 'bybench')  renderByBench();
+  if (tab === 'priority') renderPriority();
 }
 
 
