@@ -419,6 +419,9 @@ tbody td { padding: 12px 16px; vertical-align: top; }
 .dom-honesty     { background:#fdf2f8; color:#a21caf; }
 .dom-health      { background:#dcfce7; color:#166534; }
 .dom-tool        { background:#ecfdf5; color:#065f46; }
+.dom-multimodal  { background:#fdf4ff; color:#7e22ce; }
+.dom-computer    { background:#fff7ed; color:#c2410c; }
+.dom-chinese     { background:#fef9c3; color:#713f12; }
 [data-theme="dark"] .dom-stem        { background:#1e3a5f; color:#93c5fd; }
 [data-theme="dark"] .dom-agentic     { background:#064e3b; color:#6ee7b7; }
 [data-theme="dark"] .dom-knowledge   { background:#2e1065; color:#c4b5fd; }
@@ -428,6 +431,9 @@ tbody td { padding: 12px 16px; vertical-align: top; }
 [data-theme="dark"] .dom-honesty     { background:#3b0764; color:#e879f9; }
 [data-theme="dark"] .dom-health      { background:#052e16; color:#86efac; }
 [data-theme="dark"] .dom-tool        { background:#052e16; color:#34d399; }
+[data-theme="dark"] .dom-multimodal  { background:#3b0764; color:#d8b4fe; }
+[data-theme="dark"] .dom-computer    { background:#431407; color:#fdba74; }
+[data-theme="dark"] .dom-chinese     { background:#422006; color:#fef08a; }
 
 /* ── Model cards ───────────────────────────────────────────────── */
 .models-grid {
@@ -699,12 +705,12 @@ tbody td { padding: 12px 16px; vertical-align: top; }
     <div class="hero-text">
       <div class="hero-title">
         FoxBrain EvalHub
-        <span class="badge" style="background:var(--accent-bg);color:var(--accent);border:1px solid var(--accent);border-radius:99px;padding:3px 10px;font-size:11px;font-weight:600">July 2026</span>
+        <span class="badge" style="background:var(--accent-bg);color:var(--accent);border:1px solid var(--accent);border-radius:99px;padding:3px 10px;font-size:11px;font-weight:600">July 9, 2026 &bull; Latest: GPT-5.6 Sol/Terra/Luna (OpenAI)</span>
       </div>
-      <p class="hero-desc">Frontier Benchmark &amp; Model Intelligence — HHRI-AI Research<br><span style="font-size:12px;color:var(--text3)">A curated, up-to-date reference of benchmarks and frontier models used by leading AI labs. Use this to select evaluation targets for FoxBrain model assessments across 9 capability domains.</span></p>
+      <p class="hero-desc">Frontier Benchmark &amp; Model Intelligence — HHRI-AI Research<br><span style="font-size:12px;color:var(--text3)">A curated, up-to-date reference of benchmarks and frontier models used by leading AI labs. Use this to select evaluation targets for FoxBrain model assessments across 12 capability domains.</span></p>
       <div class="hero-updated">
         <span class="dot"></span>
-        Last updated: <span id="last-updated-date">July 6, 2026</span> &nbsp;&bull;&nbsp; Added: Coding Models tab (20 models) &amp; 7 agentic coding benchmarks
+        Last updated: <span id="last-updated-date">July 9, 2026</span> &nbsp;&bull;&nbsp; Added: GPT-5.6 Sol/Terra/Luna &amp; 13 new benchmarks, institution-aligned domain categories
       </div>
     </div>
     <div class="hero-stats">
@@ -732,15 +738,18 @@ tbody td { padding: 12px 16px; vertical-align: top; }
     <div class="filter-bar">
       <span class="filter-label">Domain:</span>
       <button class="fbtn active" onclick="setDomain('all',this)">All</button>
-      <button class="fbtn" onclick="setDomain('stem',this)">STEM</button>
-      <button class="fbtn" onclick="setDomain('agentic',this)">Agentic</button>
-      <button class="fbtn" onclick="setDomain('knowledge',this)">Knowledge</button>
+      <button class="fbtn" onclick="setDomain('stem',this)">&#129514; STEM</button>
+      <button class="fbtn" onclick="setDomain('agentic',this)">&#9889; Agentic Coding</button>
+      <button class="fbtn" onclick="setDomain('knowledge',this)">&#128218; Knowledge</button>
       <button class="fbtn" onclick="setDomain('instruction',this)">Instruction</button>
-      <button class="fbtn" onclick="setDomain('longctx',this)">Long context</button>
-      <button class="fbtn" onclick="setDomain('safety',this)">Safety</button>
+      <button class="fbtn" onclick="setDomain('multimodal',this)">&#128444; Multimodal</button>
+      <button class="fbtn" onclick="setDomain('longctx',this)">&#128207; Long Context</button>
+      <button class="fbtn" onclick="setDomain('computer',this)">&#128421; Computer Use</button>
+      <button class="fbtn" onclick="setDomain('tool',this)">&#128295; Tool Use</button>
+      <button class="fbtn" onclick="setDomain('safety',this)">&#128737; Safety &amp; Cyber</button>
+      <button class="fbtn" onclick="setDomain('health',this)">&#129146; Health &amp; Science</button>
       <button class="fbtn" onclick="setDomain('honesty',this)">Honesty</button>
-      <button class="fbtn" onclick="setDomain('health',this)">Health</button>
-      <button class="fbtn" onclick="setDomain('tool',this)">Tool calling</button>
+      <button class="fbtn" onclick="setDomain('chinese',this)">&#127471; Chinese/HHRI-AI</button>
       <button class="fbtn" id="new-only-btn" onclick="toggleNewOnly(this)" style="margin-left:auto;border-color:var(--green);color:var(--green)">&#10022; New only</button>
       <div class="search-wrap">
         <svg class="search-icon" width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="9" r="6"/><path d="m15 15 3 3"/></svg>
@@ -853,7 +862,7 @@ tbody td { padding: 12px 16px; vertical-align: top; }
 
 <div class="footer">
   <span>FoxBrain EvalHub &nbsp;&bull;&nbsp; HHRI-AI / Foxconn AI Research Center &nbsp;&bull;&nbsp; <a href="https://muhammadsaqlainaslam.github.io/foxbrain-eval-dashboard/">muhammadsaqlainaslam.github.io/foxbrain-eval-dashboard</a></span>
-  <span id="footer-updated">Updated July 6, 2026</span> &nbsp;&bull;&nbsp; 13 labs &nbsp;&bull;&nbsp; 77 models &nbsp;&bull;&nbsp; 70 benchmarks &nbsp;&bull;&nbsp; 19 sources
+  <span id="footer-updated">Updated July 9, 2026</span> &nbsp;&bull;&nbsp; 11 labs &nbsp;&bull;&nbsp; 80 models &nbsp;&bull;&nbsp; 83 benchmarks &nbsp;&bull;&nbsp; 18 sources
 </div>
 
 <script>
@@ -885,17 +894,24 @@ function setTheme(t) {
 
 // ── Data ───────────────────────────────────────────────────────────────────
 const DM = {
-  stem:        {label:'STEM',           cls:'dom-stem'},
-  agentic:     {label:'Agentic coding', cls:'dom-agentic'},
-  knowledge:   {label:'Knowledge',      cls:'dom-knowledge'},
-  instruction: {label:'Instruction',    cls:'dom-instruction'},
-  longctx:     {label:'Long context',   cls:'dom-longctx'},
-  safety:      {label:'Safety',         cls:'dom-safety'},
-  honesty:     {label:'Honesty',        cls:'dom-honesty'},
-  health:      {label:'Health',         cls:'dom-health'},
-  tool:        {label:'Tool calling',   cls:'dom-tool'},
+  stem:        {label:'STEM Reasoning',      cls:'dom-stem'},
+  agentic:     {label:'Agentic Coding',      cls:'dom-agentic'},
+  knowledge:   {label:'Knowledge & Language',cls:'dom-knowledge'},
+  instruction: {label:'Instruction',         cls:'dom-instruction'},
+  multimodal:  {label:'Multimodal',          cls:'dom-multimodal'},
+  longctx:     {label:'Long Context',        cls:'dom-longctx'},
+  computer:    {label:'Computer Use',        cls:'dom-computer'},
+  tool:        {label:'Tool Use',            cls:'dom-tool'},
+  safety:      {label:'Safety & Cyber',      cls:'dom-safety'},
+  health:      {label:'Health & Science',    cls:'dom-health'},
+  honesty:     {label:'Honesty',             cls:'dom-honesty'},
+  chinese:     {label:'Chinese/HHRI-AI',     cls:'dom-chinese'},
 };
-const DO = ['stem','agentic','knowledge','instruction','longctx','safety','honesty','health','tool'];
+const DO = [
+  'stem','agentic','knowledge','instruction','multimodal',
+  'longctx','computer','tool',
+  'safety','health','honesty','chinese'
+];
 
 const BENCHMARKS = [
   {name:'AIME 2025',domain:'stem',pri:'high',metric:'pass@1',labs:['OpenAI','Anthropic','Google','Microsoft','Alibaba','DeepSeek'],desc:'30 AMC competition math problems. Primary frontier math signal. Scores now 94-97% at frontier.',tags:['math','reasoning']},
@@ -917,8 +933,8 @@ const BENCHMARKS = [
   {name:'CursorBench 3.1',domain:'agentic',pri:'medium',metric:'pass@1',labs:['Anthropic','OpenAI'],desc:"Cursor's real-world IDE coding benchmark. Fable 5: 72.9% at max effort.",tags:['coding','real-world','IDE'],isNew:true},
   {name:'tau-bench',domain:'agentic',pri:'high',metric:'success_rate',labs:['Anthropic','OpenAI','Meta','HHRI-AI'],desc:'Multi-turn tool use in retail + airline domains. Already in your eval suite.',tags:['multi-turn','tool-use']},
   {name:'tau2-bench',domain:'agentic',pri:'high',metric:'success_rate',labs:['Anthropic','HHRI-AI'],desc:'Harder sequel to tau-bench. Retail domain. Already in your eval suite.',tags:['agentic','harder']},
-  {name:'BrowseComp',domain:'agentic',pri:'high',metric:'success_rate',labs:['Anthropic','OpenAI'],desc:'Agentic web search benchmark. Tests multi-step information retrieval requiring sustained browsing. Sonnet 5 strictly improves over Sonnet 4.6 at all effort levels; matches Opus 4.8 at high effort. Standard methodology: 10M token budget with compaction and programmatic tool calling.',tags:['agentic','search','web-browsing','effort-levels'],isNew:true},
-  {name:'OSWorld-Verified',domain:'agentic',pri:'high',metric:'success_rate',labs:['Anthropic','OpenAI'],desc:'Computer use benchmark on verified real desktop tasks. Sonnet 4.6 corrected score: 78.5%. Sonnet 5 surpasses Sonnet 4.6 at all effort levels; matches Opus 4.8 at high effort. More accurate real-world methodology than original OSWorld.',tags:['computer-use','desktop','agentic','effort-levels'],isNew:true},
+  {name:'BrowseComp',domain:'computer',pri:'high',metric:'success_rate',labs:['Anthropic','OpenAI'],desc:'Agentic web search benchmark. Tests multi-step information retrieval requiring sustained browsing. Sonnet 5 strictly improves over Sonnet 4.6 at all effort levels; matches Opus 4.8 at high effort. Standard methodology: 10M token budget with compaction and programmatic tool calling.',tags:['agentic','search','web-browsing','effort-levels'],isNew:true},
+  {name:'OSWorld-Verified',domain:'computer',pri:'high',metric:'success_rate',labs:['Anthropic','OpenAI'],desc:'Computer use benchmark on verified real desktop tasks. Sonnet 4.6 corrected score: 78.5%. Sonnet 5 surpasses Sonnet 4.6 at all effort levels; matches Opus 4.8 at high effort. More accurate real-world methodology than original OSWorld.',tags:['computer-use','desktop','agentic','effort-levels'],isNew:true},
   {name:'Cybench',domain:'agentic',pri:'medium',metric:'accuracy',labs:['Microsoft','OpenAI'],desc:'CTF cybersecurity challenges requiring multi-step agentic reasoning.',tags:['cybersecurity','agentic']},
   {name:'BigCodeBench',domain:'agentic',pri:'high',metric:'pass@1',labs:['Google','Anthropic','OpenAI','Alibaba'],desc:'Practical software engineering challenges. 1140 tasks requiring diverse library calls and real-world APIs. Harder than HumanEval — tests function composition across real Python libraries. Complete and Instruct variants.',tags:['coding','real-world','library-calls'],isNew:false},
   {name:'LiveCodeBench Pro',domain:'stem',pri:'high',metric:'pass@1',labs:['Google','Anthropic','OpenAI','DeepSeek'],desc:'Harder competitive programming variant of LiveCodeBench. Drawn from contest problems rated 2000+ on Codeforces/AtCoder. Contamination-resistant via continuous updates.',tags:['coding','competitive','contamination-safe'],isNew:true},
@@ -933,7 +949,7 @@ const BENCHMARKS = [
   {name:'FRAMES',domain:'knowledge',pri:'medium',metric:'accuracy',labs:['Google','Microsoft'],desc:'Long-context-dependent QA requiring document analysis.',tags:['long-context-QA','multi-hop']},
   {name:'DROP',domain:'knowledge',pri:'medium',metric:'f1',labs:['OpenAI','Anthropic','Google','Meta'],desc:'Discrete reasoning over paragraphs — numerical ops, counting, sorting.',tags:['reading-comprehension','numerical']},
   {name:'GDPval-AA',domain:'knowledge',pri:'medium',metric:'score',labs:['Anthropic','OpenAI','Google'],desc:'Advanced analytical knowledge work. Fable 5: 1932, Opus 4.8: 1890, GPT-5.5: 1769.',tags:['knowledge-work','analytical'],isNew:true},
-  {name:'TMMLU+',domain:'knowledge',pri:'high',metric:'accuracy',labs:['HHRI-AI'],desc:'Traditional Chinese + Taiwan-specific knowledge benchmark. HHRI-AI flagship eval. Unique differentiation — no Western frontier lab benchmarks against this.',tags:['chinese','taiwan','multilingual']},
+  {name:'TMMLU+',domain:'chinese',pri:'high',metric:'accuracy',labs:['HHRI-AI'],desc:'Traditional Chinese + Taiwan-specific knowledge benchmark. HHRI-AI flagship eval. Unique differentiation — no Western frontier lab benchmarks against this.',tags:['chinese','taiwan','multilingual']},
   {name:'BigBenchHard',domain:'knowledge',pri:'medium',metric:'accuracy',labs:['Google','Anthropic','OpenAI'],desc:'Hard BIG-Bench subset requiring multi-step reasoning. Already in your eval suite.',tags:['reasoning','multi-step']},
   {name:'IFEval',domain:'instruction',pri:'high',metric:'accuracy',labs:['OpenAI','Anthropic','Google','Microsoft','Meta','DeepSeek','Alibaba'],desc:'Verifiable instruction constraints — word count, format, structure. Most universally reported IF benchmark.',tags:['verifiable','format-constraint']},
   {name:'Multi-IF',domain:'instruction',pri:'high',metric:'accuracy',labs:['Microsoft','OpenAI'],desc:'Multiple simultaneous constraints. Harder than IFEval. Used in MAI-T1.',tags:['multi-constraint']},
@@ -953,21 +969,34 @@ const BENCHMARKS = [
   {name:'ExploitBench',domain:'safety',pri:'medium',metric:'success_rate',labs:['Anthropic'],desc:'Cybersecurity exploit capability. Mythos 5: 78.0%. Fable 5 safeguards block progress entirely.',tags:['cybersecurity','exploit'],isNew:true},
   {name:'StrongREJECT',domain:'safety',pri:'medium',metric:'score',labs:['Anthropic','Microsoft'],desc:'Automated jailbreak eval with LLM-as-judge. Measures real harmful output rate.',tags:['jailbreak','llm-judge']},
   {name:'XSTest',domain:'safety',pri:'medium',metric:'accuracy',labs:['Anthropic','OpenAI','Google'],desc:'Exaggerated safety — benign prompts. Measures over-refusal false positive rate.',tags:['over-refusal']},
-  {name:'AIEC',domain:'safety',pri:'high',metric:'accuracy',labs:['HHRI-AI'],desc:'AI Ethics and Capability evaluation. Already in your eval suite. Covers Chinese-language safety contexts.',tags:['ethics','chinese']},
+  {name:'AIEC',domain:'chinese',pri:'high',metric:'accuracy',labs:['HHRI-AI'],desc:'AI Ethics and Capability evaluation. Already in your eval suite. Covers Chinese-language safety contexts.',tags:['ethics','chinese']},
   {name:'SycophancyEval',domain:'honesty',pri:'high',metric:'accuracy',labs:['Anthropic','OpenAI','Microsoft','Scale AI'],desc:'Tests whether model agrees with incorrect user assertions. Key honesty signal.',tags:['sycophancy','agreement-bias']},
   {name:'TruthfulQA',domain:'honesty',pri:'medium',metric:'accuracy',labs:['OpenAI','Anthropic','Google','Meta','Mistral'],desc:'Questions designed to elicit human misconceptions. Measures calibration and honesty.',tags:['calibration','misconceptions']},
   {name:'MedQA (USMLE)',domain:'health',pri:'high',metric:'accuracy',labs:['OpenAI','Anthropic','Google','Microsoft','xAI'],desc:'US Medical Licensing Exam. Widely reported by all frontier labs.',tags:['medical','4-choice']},
   {name:'HealthBench Professional',domain:'health',pri:'high',metric:'accuracy',labs:['Anthropic','OpenAI','Google'],desc:'Professional-level health and medical reasoning. Fable 5: 66.0%. Introduced in Fable 5 system card.',tags:['health','medical','professional'],isNew:true},
-  {name:'MedBench',domain:'health',pri:'high',metric:'accuracy',labs:['HHRI-AI','Baidu','Alibaba'],desc:'Chinese medical QA — highly relevant for HHRI-AI market. Clinical, pharmacology, nursing.',tags:['medical','chinese']},
+  {name:'MedBench',domain:'chinese',pri:'high',metric:'accuracy',labs:['HHRI-AI','Baidu','Alibaba'],desc:'Chinese medical QA — highly relevant for HHRI-AI market. Clinical, pharmacology, nursing.',tags:['medical','chinese']},
   {name:'JAMA Clinical',domain:'health',pri:'medium',metric:'accuracy',labs:['Microsoft','OpenAI'],desc:'Real clinical cases from JAMA. Multi-step diagnostic reasoning.',tags:['clinical-reasoning']},
-  {name:'ClinConsensus',domain:'health',pri:'medium',metric:'accuracy',labs:['Google','Anthropic','DeepSeek','Alibaba','xAI'],desc:'Chinese medical benchmark evaluated by 22 frontier models. Directly relevant to HHRI.',tags:['medical','chinese','22-models']},
+  {name:'ClinConsensus',domain:'chinese',pri:'medium',metric:'accuracy',labs:['Google','Anthropic','DeepSeek','Alibaba','xAI'],desc:'Chinese medical benchmark evaluated by 22 frontier models. Directly relevant to HHRI.',tags:['medical','chinese','22-models']},
   {name:'BFCL v3',domain:'tool',pri:'high',metric:'accuracy',labs:['OpenAI','Anthropic','Google','Meta','Mistral','Cohere'],desc:'Berkeley Function Calling Leaderboard v3. Multi-turn + parallel tool calls. The standard tool-calling leaderboard.',tags:['function-call','JSON','multi-turn']},
   {name:'tau-bench tool',domain:'tool',pri:'high',metric:'success_rate',labs:['Anthropic','OpenAI'],desc:'Tool-use sub-dimension of tau-bench. Planning + tool selection in realistic environments.',tags:['multi-step','real-APIs']},
   {name:'API-Bank',domain:'tool',pri:'medium',metric:'accuracy',labs:['Microsoft','OpenAI'],desc:'Multi-step real API tool use. Chained function calls across 73 real-world APIs.',tags:['real-world-APIs']},
-  {name:'MMMLU',domain:'knowledge',pri:'high',metric:'accuracy',labs:['Google','HHRI-AI','Alibaba','Meta'],desc:'Multilingual MMLU across 14 languages. Gemma 4 31B: 85.2%, Gemma 4 26B MoE: 82.6%. Critical for HHRI-AI multilingual evaluation including Traditional Chinese.',tags:['multilingual','knowledge','14-languages'],isNew:true},
-  {name:'MMMU Pro',domain:'knowledge',pri:'medium',metric:'accuracy',labs:['Google','OpenAI','Anthropic'],desc:'Multimodal understanding benchmark. Tests visual reasoning with text. Used in Gemma 4 model card. Requires image+text input.',tags:['multimodal','visual-reasoning','university-level'],isNew:true},
-  {name:'MathVista',domain:'stem',pri:'medium',metric:'accuracy',labs:['Google','OpenAI','Anthropic','Meta'],desc:'Mathematical reasoning with visual context. Charts, geometry, scientific figures. Gemma 4 family strong here due to encoder-free multimodal design.',tags:['math','multimodal','visual'],isNew:true},
+  {name:'MMMLU',domain:'multimodal',pri:'high',metric:'accuracy',labs:['Google','HHRI-AI','Alibaba','Meta'],desc:'Multilingual MMLU across 14 languages. Gemma 4 31B: 85.2%, Gemma 4 26B MoE: 82.6%. Critical for HHRI-AI multilingual evaluation including Traditional Chinese.',tags:['multilingual','knowledge','14-languages'],isNew:true},
+  {name:'MMMU Pro',domain:'multimodal',pri:'medium',metric:'accuracy',labs:['Google','OpenAI','Anthropic'],desc:'Multimodal understanding benchmark. Tests visual reasoning with text. Used in Gemma 4 model card. Requires image+text input.',tags:['multimodal','visual-reasoning','university-level'],isNew:true},
+  {name:'MathVista',domain:'multimodal',pri:'medium',metric:'accuracy',labs:['Google','OpenAI','Anthropic','Meta'],desc:'Mathematical reasoning with visual context. Charts, geometry, scientific figures. Gemma 4 family strong here due to encoder-free multimodal design.',tags:['math','multimodal','visual'],isNew:true},
   {name:'Arena ELO (LMArena)',domain:'instruction',pri:'medium',metric:'elo_score',labs:['Google','Anthropic','OpenAI','Meta','DeepSeek'],desc:'Human preference win-rate on LMArena chatbot leaderboard. Gemma 4 31B: 1452 ELO (best open-weight text model). Reflects real-world user preference, not just academic benchmarks.',tags:['human-preference','chat','elo'],isNew:true},
+  {name:'Agents Last Exam', domain:'agentic', pri:'critical', metric:'score', labs:['OpenAI','Anthropic','Google'], desc:'Long-horizon agentic workflows across 55 professional fields. GPT-5.6 Sol: 53.6 (new SOTA), Claude Fable 5: 40.5, Opus 4.8: 45.2, Gemini 3.1 Pro: 32.1. Tests real professional workflows not academic tasks.', tags:['agentic','long-horizon','professional'],isNew:true},
+  {name:'DeepSWE v1.1', domain:'agentic', pri:'high', metric:'resolve_rate', labs:['OpenAI','Anthropic','Google'], desc:'Long-horizon engineering in real codebases. GPT-5.6 Sol: 72.7%, Terra: 69.6%, Claude Fable 5: 69.7%, Gemini 3.1 Pro: 11.8%. Tests complex multi-file engineering tasks beyond standard SWE-Bench.', tags:['agentic','real-world','long-horizon'],isNew:true},
+  {name:'OSWorld 2.0', domain:'computer', pri:'high', metric:'success_rate', labs:['OpenAI','Anthropic','Google'], desc:'Computer use on real desktop tasks (updated 2026). GPT-5.6 Sol: 62.6% (new SOTA), Opus 4.8: 54.8%, GPT-5.5: 47.5%. Replaces original OSWorld with verified methodology.', tags:['computer-use','desktop','verified'],isNew:true},
+  {name:'BenchCAD', domain:'computer', pri:'medium', metric:'accuracy', labs:['OpenAI','Anthropic'], desc:'CAD design and visual reasoning benchmark. GPT-5.6 Sol: 70.6% (83.4% with python tool), Claude Mythos 5: 38.4%, GPT-5.5: 44.4%. Tests design judgment and spatial reasoning.', tags:['computer-use','design','visual'],isNew:true},
+  {name:'SEC-Bench Pro', domain:'safety', pri:'medium', metric:'success_rate', labs:['OpenAI'], desc:'Proof-of-concept generation on complex software vulnerabilities. GPT-5.6 Sol: 71.2% (74.3% ultra), GPT-5.5: 45.8%. Tests cybersecurity capability — dual-use benchmark.', tags:['cybersecurity','exploit','dual-use'],isNew:true},
+  {name:'ExploitGym', domain:'safety', pri:'medium', metric:'pass_rate', labs:['OpenAI'], desc:'Turns real-world CVEs into working exploits. GPT-5.6 Sol: 33.7% (6hr cap), GPT-5.5: 15.1%. Tests end-to-end offensive cyber capability. Used to calibrate model safety levels.', tags:['cybersecurity','exploit','red-team'],isNew:true},
+  {name:'GeneBench Pro', domain:'health', pri:'medium', metric:'accuracy', labs:['OpenAI','Anthropic','Google'], desc:'Long-horizon genomics and quantitative biology analysis. GPT-5.6 Sol: 28.7%, Gemini 3.5 Flash: 8.14%, Opus 4.8: 16.0%, Claude Fable 5 refuses biology questions per system card.', tags:['biology','health','science','long-horizon'],isNew:true},
+  {name:'GraphWalks BFS', domain:'longctx', pri:'high', metric:'f1', labs:['OpenAI','Anthropic'], desc:'Graph traversal in long context (256K and 1M). GPT-5.6 Sol 256K: 90.7%, Claude Mythos 5 256K: 91.1%, Opus 4.8: 85.9%. Tests structured reasoning in very long contexts beyond simple retrieval.', tags:['long-context','graph','reasoning'],isNew:true},
+  {name:'ARC-AGI-3', domain:'stem', pri:'watch', metric:'accuracy', labs:['OpenAI','Anthropic','Google'], desc:'Third generation ARC-AGI. Early days — GPT-5.6 Sol: 7.78%, Terra: 0.8%, Opus 4.8: 1.5% (high effort). Scores below 5% not yet meaningful. Watch for 2027 as next major abstract reasoning benchmark.', tags:['abstract-reasoning','fluid-intelligence','2026'],isNew:true},
+  {name:'AutomationBench', domain:'tool', pri:'medium', metric:'success_rate', labs:['OpenAI','Anthropic','Google'], desc:'Automation workflow benchmark. GPT-5.6 Sol: 18.1%, Claude Fable 5: 17.4%, GPT-5.5: 12.9%, Gemini 3.5 Flash: 14.5%. Tests sustained multi-step automation without human intervention.', tags:['tool-use','automation','workflows'],isNew:true},
+  {name:'MCP Atlas', domain:'tool', pri:'high', metric:'accuracy', labs:['OpenAI','Anthropic','Google'], desc:'Model Context Protocol tool orchestration (Scale AI). Claude Mythos 5: 61.7%, Claude Fable 5: 61.7%, Opus 4.8: 59.9%, GPT-5.6 Sol: 58.0%, GPT-5.5: 55.6%. Anthropic leads on MCP workflows.', tags:['tool-use','MCP','orchestration'],isNew:true},
+  {name:'Toolathlon', domain:'tool', pri:'medium', metric:'accuracy', labs:['OpenAI','Anthropic','Google','Moonshot AI'], desc:'Tool decathlon — diverse tool-use tasks. Claude Mythos 5: 61.7%, Fable 5: 61.7%, Opus 4.8: 59.9%, GPT-5.6 Sol: 58.0%, Kimi K2.6: 50.0%, Gemini 3.1 Pro: 48.8%.', tags:['tool-use','multi-step','diverse'],isNew:true},
+  {name:'LifeSciBench', domain:'health', pri:'medium', metric:'accuracy', labs:['OpenAI','Anthropic'], desc:'Life sciences benchmark. GPT-5.6 Sol: 59.9%, Terra: 56.0%, Opus 4.8: 53.6%, GPT-5.5: 50.4%. Tests broad biology, chemistry, and biomedical reasoning.', tags:['science','biology','health'],isNew:true},
 ];
 
 const MODELS = [
@@ -984,6 +1013,9 @@ const MODELS = [
   {name:'Claude Sonnet 4.5',           org:'Anthropic',       weight:'closed',     released:'Sep 2025',      desc:'MRCR v2: 18.5% at 1M context.',                                                                                                                                                            runnable:false,benchmarks:'MRCR v2'},
   {name:'Claude Opus 4.1',             org:'Anthropic',       weight:'closed',     released:'Aug 2025',      desc:'Deprecated.',                                                                                                                                                                               runnable:false,benchmarks:'',deprecated:true},
   // ── OpenAI (14) ──────────────────────────────────────────────────
+  {name:'GPT-5.6 Sol',                 org:'OpenAI',          weight:'closed',     released:'Jul 9, 2026',   desc:'OpenAI flagship. New SOTA on Agents Last Exam (53.6), BrowseComp (90.4%), OSWorld 2.0 (62.6%), Terminal-Bench (88.8%), DeepSWE (72.7%). Programmatic Tool Calling for efficient multi-step workflows. Ultra mode coordinates 4 parallel agents.', runnable:false,benchmarks:'Agents Last Exam, BrowseComp, SWE-Bench Pro, DeepSWE, Terminal-Bench 2.1, OSWorld 2.0',isNew:true,params:'N/A (undisclosed)', arch:'Dense (transformer)', context:'256K', cutoff:'Jan 2026',price:'$5/$30'},
+  {name:'GPT-5.6 Terra',               org:'OpenAI',          weight:'closed',     released:'Jul 9, 2026',   desc:'Balanced tier. Competitive with GPT-5.5 at lower cost. SWE-Bench Pro: 63.4%, Terminal-Bench: 87.4%, BrowseComp: 87.5%. Good for everyday agentic work.', runnable:false,benchmarks:'SWE-Bench Pro, Terminal-Bench, BrowseComp, GPQA',isNew:true,params:'N/A (undisclosed)', arch:'Dense (transformer)', context:'256K', cutoff:'Jan 2026',price:'$2.50/$15'},
+  {name:'GPT-5.6 Luna',                org:'OpenAI',          weight:'closed',     released:'Jul 9, 2026',   desc:'Most cost-efficient GPT-5.6. SWE-Bench Pro: 62.7%, BrowseComp: 83.3%. Outperforms Claude Opus 4.8 at ~1/4 the estimated cost. Best value in GPT-5.6 family.', runnable:false,benchmarks:'SWE-Bench Pro, BrowseComp, Terminal-Bench',isNew:true,params:'N/A (undisclosed)', arch:'Dense (transformer)', context:'256K', cutoff:'Jan 2026',price:'$1/$6'},
   {name:'GPT-5.5',                     org:'OpenAI',          weight:'closed',     released:'May 5, 2026',   desc:'Current ChatGPT default. AIME 2025: 81.2%, SWE-Bench Pro: 58.6%, Terminal-Bench 2.1: 83.4%, GDPval-AA: 1769. 52.5% fewer hallucinations vs GPT-5.3. $5/$30 per M tokens.',              runnable:false,benchmarks:'AIME 2025, SWE-Bench Pro, Terminal-Bench, GDPval-AA',isNew:true,params:'N/A (undisclosed)', arch:'Dense (transformer)', context:'256K', cutoff:'Jan 2026'},
   {name:'GPT-5.5 Instant',             org:'OpenAI',          weight:'closed',     released:'May 5, 2026',   desc:'ChatGPT default alias replacing GPT-5.3 Instant. Optimised for low-latency interactive use.',                                                                                              runnable:false,benchmarks:'',isNew:true},
   {name:'GPT-5.4',                     org:'OpenAI',          weight:'closed',     released:'Mar 5, 2026',   desc:'GPQA Diamond: 92.8%, HLE: 44.3%, OSWorld: 75%. Native computer use + 1M context. Variants: Thinking, Pro, mini, nano.',                                                                  runnable:false,benchmarks:'GPQA Diamond, HLE, OSWorld, MMLU-Pro',params:'N/A (undisclosed)', arch:'Dense (transformer)', context:'1M', cutoff:'Jan 2026'},
@@ -1391,6 +1423,7 @@ const CODING_MODELS = [
 ];
 
 const SOURCES = [
+  {title:'GPT-5.6 Launch — Sol, Terra, Luna',org:'OpenAI',date:'Jul 9, 2026',url:'https://openai.com/index/gpt-5-6/',desc:'GPT-5.6 family: Sol ($5/$30), Terra ($2.50/$15), Luna ($1/$6). New benchmarks: Agents Last Exam (53.6 SOTA), DeepSWE (72.7%), OSWorld 2.0 (62.6%), BrowseComp (90.4% ultra). New Ultra mode coordinates 4 parallel agents. Programmatic Tool Calling for ZDR-compatible workflows. ARC-AGI-3 introduced (7.78% Sol). SEC-Bench Pro, ExploitGym for cybersecurity. GeneBench Pro, LifeSciBench for science/health.'},
   {title:'Claude Sonnet 5 — Launch Announcement & System Card',org:'Anthropic',date:'Jun 30, 2026',url:'https://www.anthropic.com/news/claude-sonnet-5',desc:'Launch of Claude Sonnet 5 — new default model for Free/Pro plans. Most agentic Sonnet yet. Introduces BrowseComp and OSWorld-Verified benchmarks with effort-level curves. Corrects Sonnet 4.6 HLE (now 34.6%/46.8%) and OSWorld-Verified (now 78.5%) scores. API: claude-sonnet-5. $2/$10 MTok intro until Aug 31 2026.'},
   {title:'Redeploying Claude Fable 5 — Export Controls & Safety Framework',org:'Anthropic',date:'Jun 30 / Jul 1, 2026',url:'https://www.anthropic.com/news/redeploying-fable-5',desc:'Fable 5 and Mythos 5 suspended Jun 12 due to US export controls after Amazon researchers found a safeguard bypass. Controls lifted Jun 30; models restored Jul 1. New safety classifier deployed blocking reported jailbreak in >99% of cases. Includes new industry jailbreak severity framework (with Amazon, Microsoft, Google). Blocked requests route to Opus 4.8.'},
   {title:'Claude Fable 5 & Mythos 5 — Launch Announcement',org:'Anthropic',date:'Jun 9, 2026',url:'https://www.anthropic.com/news/claude-fable-5-mythos-5',desc:'Launch of first Mythos-class model for general use. Benchmarks: SWE-Bench Pro (80.3%), FrontierCode Diamond (29.3%), HLE (59.0%), Terminal-Bench 2.1 (88.0%), HealthBench (66.0%). $10/$50 per M tokens.'},
@@ -1607,6 +1640,10 @@ function toggleDeprecated(el) {
 }
 
 const MODEL_LINKS = {
+  // OpenAI GPT-5.6
+  'GPT-5.6 Sol':            'https://openai.com/index/gpt-5-6/',
+  'GPT-5.6 Terra':          'https://openai.com/index/gpt-5-6/',
+  'GPT-5.6 Luna':           'https://openai.com/index/gpt-5-6/',
   // Anthropic
   'Claude Sonnet 5':        'https://www.anthropic.com/news/claude-sonnet-5',
   'Claude Fable 5':         'https://www.anthropic.com/news/claude-fable-5-mythos-5',
@@ -1702,6 +1739,10 @@ const MODEL_LINKS = {
 };
 
 const MODEL_PRICES = {
+  // OpenAI GPT-5.6
+  'GPT-5.6 Sol':               '$5/$30',
+  'GPT-5.6 Terra':             '$2.50/$15',
+  'GPT-5.6 Luna':              '$1/$6',
   // Anthropic
   'Claude Sonnet 5':           '$2/$10 → $3/$15 (Sep 1)',
   'Claude Fable 5':            '$10/$50',
