@@ -866,6 +866,7 @@ tbody td { padding: 12px 16px; vertical-align: top; }
     Capability trend tracker — where top labs are heading across 4 core domains.
     🟢 = HHRI-AI running &nbsp;|&nbsp; 🔴 Critical &nbsp;|&nbsp; 🟡 High &nbsp;|&nbsp; 🔵 Monitor
   </p>
+  <div id="priority-content"></div>
     <div id="priority-content"></div>
   </div>
 </div>
@@ -2197,7 +2198,8 @@ function renderPriority() {
   h += '<div style="margin-top:16px;padding-top:12px;border-top:1px solid var(--border);font-size:11px;color:var(--text3)">';
   h += '⚡ Verified July 22, 2026 · Sources: BenchLM, Anthropic/OpenAI/Google model cards, arXiv:2606.18699 (TW-LegalBench)';
   h += '</div>';
-  return h;
+  var pc=document.getElementById('priority-content');
+  if(pc) pc.innerHTML = h;
 }
 function renderSources() {
   document.getElementById('sources-grid').innerHTML = SOURCES.map(s =>
