@@ -862,7 +862,10 @@ tbody td { padding: 12px 16px; vertical-align: top; }
 
   <!-- PRIORITY VIEW -->
   <div id="tab-priority" style="display:none">
-    <p style="font-size:12px;color:var(--text3);margin-bottom:16px">Benchmarks grouped by run priority, then domain. Bars show the best reported score per lab, pulled live from the By Lab / By Benchmark cross-reference data. Labs with no recorded score for a benchmark are omitted from its bars.</p>
+  <p style="font-size:12px;color:var(--text3);margin-bottom:16px">
+    Capability trend tracker — where top labs are heading across 4 core domains.
+    🟢 = HHRI-AI running &nbsp;|&nbsp; 🔴 Critical &nbsp;|&nbsp; 🟡 High &nbsp;|&nbsp; 🔵 Monitor
+  </p>
     <div id="priority-content"></div>
   </div>
 </div>
@@ -2056,54 +2059,146 @@ function labScoresForBench(benchName) {
 }
 
 function renderPriority() {
-  let html = '';
-  PRIORITY_TIERS.forEach(tier => {
-    const benches = BENCHMARKS.filter(b => b.pri === tier.key);
-    if (!benches.length) return;
-    const byDomain = {};
-    benches.forEach(b => { (byDomain[b.domain] = byDomain[b.domain] || []).push(b); });
-    html += '<div class="priority-tier">' +
-      '<div class="priority-tier-header" style="color:' + tier.color + '">' + tier.emoji + ' ' + tier.label +
-      ' <span style="font-weight:400;color:var(--text3);font-size:12px;margin-left:6px">(' + benches.length + ' benchmark' + (benches.length === 1 ? '' : 's') + ')</span></div>';
-    Object.keys(byDomain).sort().forEach(domain => {
-      const dm = DM[domain] || {label: domain, cls: ''};
-      html += '<div class="priority-domain-group">' +
-        '<div class="priority-domain-label"><span class="dpill ' + dm.cls + '">' + dm.label + '</span></div>';
-      byDomain[domain].forEach(b => {
-        const scores = labScoresForBench(b.name);
-        html += '<div class="priority-card">' +
-          '<div class="priority-card-head"><span class="priority-bench-name">' + b.name + '</span>' +
-          (scores.length ? '<span class="priority-sota">SOTA: ' + scores[0].text + ' (' + scores[0].lab + ')</span>' : '') +
-          '</div>';
-        if (scores.length) {
-          const maxVal = scores[0].val || 1;
-          scores.forEach((s, i) => {
-            const pct = Math.min(100, (s.val / maxVal) * 100);
-            html += '<div class="priority-bar-row">' +
-              '<span class="priority-bar-lab" title="' + s.lab + '">' + s.emoji + ' ' + s.lab + '</span>' +
-              '<div class="priority-bar-track"><div class="priority-bar-fill" style="width:' + pct + '%;background:' + (i === 0 ? 'var(--green)' : s.color) + '"></div></div>' +
-              '<span class="priority-bar-score">' + s.text + '</span>' +
-              '</div>';
-          });
-          if (scores[0].isPct && scores[0].val <= 100) {
-            const headroom = Math.max(0, 100 - scores[0].val);
-            html += '<div class="priority-headroom">Headroom' +
-              '<div class="priority-headroom-track"><div class="priority-headroom-fill" style="width:' + headroom.toFixed(1) + '%"></div></div>' +
-              headroom.toFixed(1) + '%</div>';
-          }
-        } else {
-          html += '<div class="priority-empty-note">No cross-lab score data recorded yet for this benchmark.</div>';
-        }
-        html += '</div>';
-      });
-      html += '</div>';
-    });
-    html += '</div>';
-  });
-  document.getElementById('priority-content').innerHTML = html || '<div class="empty">No benchmarks found.</div>';
-}
+  const DOMAINS = [
+    {
+      id:'coding', icon:'⚡', label:'Coding & Agents',
+      color:'#2dd4a0', cls:'dom-agentic',
+      desc:'Where all top labs are racing. Agentic coding = biggest capability investment in 2026.',
+      benches:[
+        {name:'SWE-Bench Pro', sota:'80.3%', lab:'Anthropic', headroom:20, trend:'rising',
+         priority:'critical', hhri:false, why:'Primary agentic coding signal. Replacing SWE-Bench Verified (95% — near ceiling).',
+         url:'https://benchlm.ai/benchmarks/swePro'},
+        {name:'τ³-bench', sota:'Running', lab:'HHRI-AI', headroom:null, trend:'stable',
+         priority:'critical', hhri:true, why:'Already in HHRI-AI suite. Retail + Airline domains. Qwen3.5-9B: retail 73.7%, airline 74.0%.',
+         url:'https://github.com/sierra-research/tau-bench'},
+        {name:'Terminal-Bench 2.1', sota:'88.0%', lab:'Anthropic', headroom:12, trend:'rising',
+         priority:'high', hhri:false, why:'Agentic CLI task completion. GPT-5.6 Sol leads at 88.8%.',
+         url:'https://terminal-bench.com'},
+        {name:'FrontierCode Diamond', sota:'29.3%', lab:'Anthropic', headroom:71, trend:'new',
+         priority:'critical', hhri:false, why:'71% headroom — most models below 15%. Will discriminate frontier for years.',
+         url:'https://cognition.ai/benchmarks'},
+        {name:'Agents Last Exam', sota:'53.6', lab:'OpenAI', headroom:46, trend:'new',
+         priority:'critical', hhri:false, why:'OpenAI flagship Jul 2026. Long-horizon professional workflows. 46% headroom.',
+         url:'https://agents-last-exam.org/'},
+      ]
+    },
+    {
+      id:'reasoning', icon:'🧠', label:'Reasoning & Math',
+      color:'#4f8ef7', cls:'dom-stem',
+      desc:'Mathematical and scientific reasoning — hardest remaining frontier after coding.',
+      benches:[
+        {name:'HLE', sota:'64.5%', lab:'Anthropic', headroom:36, trend:'rising',
+         priority:'critical', hhri:false, why:'Hardest available benchmark. Rose 3.8%→64.5% in 18 months. 36% headroom.',
+         url:'https://benchlm.ai/benchmarks/hle'},
+        {name:'FrontierMath', sota:'89%', lab:'OpenAI', headroom:11, trend:'stable',
+         priority:'critical', hhri:false, why:'Tier 4 still hard — Fable 5 leads at 87.8%. Tests genuine math vs memorization.',
+         url:'https://epoch.ai/frontiermath'},
+        {name:'ARC-AGI-2', sota:'83.3%', lab:'OpenAI', headroom:17, trend:'rising',
+         priority:'high', hhri:false, why:'Fluid intelligence not memorization. Rose from <5% to 83% in one year.',
+         url:'https://arcprize.org/leaderboard'},
+        {name:'GPQA Diamond', sota:'94.6%', lab:'OpenAI', headroom:5, trend:'monitor',
+         priority:'monitor', hhri:false, why:'Near ceiling. Top-9 labs cluster 90-94%. Transitioning to HLE.',
+         url:'https://paperswithcode.com/sota/science-question-answering-on-gpqa'},
+        {name:'AIME 2025', sota:'97.0%', lab:'Microsoft', headroom:3, trend:'saturated',
+         priority:'retired', hhri:false, why:'Fully saturated. Use AIME 2026 or FrontierMath instead.',
+         url:'https://llm-stats.com/benchmarks/aime-2025'},
+      ]
+    },
+    {
+      id:'knowledge', icon:'📚', label:'Knowledge & Language',
+      color:'#9c88ff', cls:'dom-knowledge',
+      desc:'HHRI-AI's unique edge — Traditional Chinese and Taiwan-specific benchmarks no Western lab covers.',
+      benches:[
+        {name:'TMMLU+', sota:'HHRI-AI leads', lab:'HHRI-AI', headroom:null, trend:'stable',
+         priority:'critical', hhri:true, why:'HHRI-AI flagship. No Western frontier lab evaluates here. Core differentiator.',
+         url:'https://muhammadsaqlainaslam.github.io/tmmlu-leaderboard/'},
+        {name:'TW-LegalBench', sota:'New Jun 2026', lab:'None yet', headroom:null, trend:'new',
+         priority:'critical', hhri:false, why:'NEW: 16K+ MCQs across 18 Taiwan legal domains. 117 essay + 14K judgment prediction. Zero competition from Western labs. arXiv:2606.18699',
+         url:'https://arxiv.org/abs/2606.18699'},
+        {name:'MMMLU', sota:'92.6%', lab:'Google', headroom:7, trend:'rising',
+         priority:'high', hhri:false, why:'14 languages. Gemini 3.1 Pro leads. Critical for HHRI-AI multilingual positioning.',
+         url:'https://huggingface.co/datasets/openai/MMMLU'},
+        {name:'AIEC', sota:'HHRI-AI', lab:'HHRI-AI', headroom:null, trend:'stable',
+         priority:'critical', hhri:true, why:'Chinese AI ethics — unique to HHRI-AI. Run every cycle.',
+         url:'https://muhammadsaqlainaslam.github.io/tmmlu-leaderboard/'},
+        {name:'MMLU-Pro', sota:'91.5%', lab:'Anthropic', headroom:9, trend:'monitor',
+         priority:'monitor', hhri:false, why:'Near ceiling for frontier. Use MMMLU for multilingual signal instead.',
+         url:'https://paperswithcode.com/sota/multi-task-language-understanding-on-mmlu-1'},
+      ]
+    },
+    {
+      id:'multimodal', icon:'🖼', label:'Multimodal',
+      color:'#f87171', cls:'dom-multimodal',
+      desc:'Vision + action becoming standard requirement. 2026 is the year multimodal goes frontier.',
+      benches:[
+        {name:'MMMU Pro', sota:'84.6%', lab:'OpenAI', headroom:15, trend:'rising',
+         priority:'high', hhri:false, why:'University-level multimodal. 15% headroom. Growing lab adoption.',
+         url:'https://mmmu-benchmark.github.io/'},
+        {name:'OSWorld 2.0', sota:'62.6%', lab:'OpenAI', headroom:37, trend:'rising',
+         priority:'high', hhri:false, why:'Computer use on real desktop tasks. 37% headroom. OpenAI now leads Anthropic here.',
+         url:'https://os-world.github.io/'},
+        {name:'BrowseComp', sota:'92.2%', lab:'OpenAI', headroom:8, trend:'monitor',
+         priority:'monitor', hhri:false, why:'Agentic web search. Near ceiling for top models at ultra settings.',
+         url:'https://openai.com/browsecomp'},
+        {name:'MathVista', sota:'N/A', lab:'Various', headroom:null, trend:'stable',
+         priority:'high', hhri:false, why:'Math with visual context. Charts, geometry, scientific figures. Growing standard.',
+         url:'https://mathvista.github.io/'},
+      ]
+    },
+  ];
 
-// ── Render sources ─────────────────────────────────────────────────────────
+  const PRIORITY_COLORS = {
+    critical:'#dc2626', high:'#d97706', monitor:'#4f8ef7', retired:'#6b7280'
+  };
+  const PRIORITY_LABELS = {
+    critical:'🔴 Critical', high:'🟡 High', monitor:'🔵 Monitor', retired:'⚫ Retiring'
+  };
+
+  let h = '<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:18px">';
+
+  DOMAINS.forEach(dom => {
+    h += '<div class="xref-card" style="border-top:3px solid '+dom.color+'">';
+    h += '<div class="xref-card-header"><div>';
+    h += '<div class="xref-card-title">'+dom.icon+' '+dom.label+'</div>';
+    h += '<div class="xref-card-sub">'+dom.desc+'</div>';
+    h += '</div></div>';
+
+    dom.benches.forEach(b => {
+      const pc = PRIORITY_COLORS[b.priority] || '#6b7280';
+      const pl = PRIORITY_LABELS[b.priority] || '';
+      const hhriTag = b.hhri
+        ? '<span style="font-size:10px;background:#dcfce7;color:#16a34a;border:1px solid #16a34a;border-radius:99px;padding:1px 7px;margin-left:6px">✓ HHRI-AI running</span>'
+        : '';
+      const headroomBar = b.headroom !== null
+        ? '<div style="margin-top:6px"><div style="display:flex;justify-content:space-between;font-size:10px;color:var(--text3)"><span>Headroom</span><span style="font-weight:700;color:'+
+          (b.headroom>30?'#16a34a':b.headroom>10?'#d97706':'#dc2626')+'">'
+          +b.headroom+'%</span></div>'
+          +'<div style="height:4px;background:var(--border);border-radius:2px;margin-top:2px">'
+          +'<div style="height:100%;width:'+b.headroom+'%;background:'
+          +(b.headroom>30?'#16a34a':b.headroom>10?'#d97706':'#dc2626')
+          +';border-radius:2px"></div></div></div>' : '';
+
+      h += '<div class="xref-entry" style="border-left:3px solid '+pc+';padding-left:10px;margin:0">';
+      h += '<div><div style="display:flex;align-items:center;gap:6px;margin-bottom:4px">';
+      h += '<span style="font-weight:700;font-size:13px">'+b.name+'</span>';
+      h += '<span style="font-size:10px;color:'+pc+';font-weight:600">'+pl+'</span>';
+      h += hhriTag + '</div>';
+      h += '<div style="font-size:11px;color:var(--text2);line-height:1.5;margin-bottom:4px">'+b.why+'</div>';
+      h += headroomBar;
+      h += '<div style="display:flex;align-items:center;justify-content:space-between;margin-top:6px">';
+      h += '<span style="font-size:11px;color:var(--text3)">SOTA: <strong style="color:var(--accent)">'+b.sota+'</strong> · '+b.lab+'</span>';
+      h += '<a href="'+b.url+'" target="_blank" style="font-size:11px;color:var(--accent)">Leaderboard ↗</a>';
+      h += '</div></div></div>';
+    });
+    h += '</div>';
+  });
+
+  h += '</div>';
+  h += '<div style="margin-top:16px;padding-top:12px;border-top:1px solid var(--border);font-size:11px;color:var(--text3)">';
+  h += '⚡ Verified July 22, 2026 · Sources: BenchLM, Anthropic/OpenAI/Google model cards, arXiv:2606.18699 (TW-LegalBench)';
+  h += '</div>';
+  return h;
+}
 function renderSources() {
   document.getElementById('sources-grid').innerHTML = SOURCES.map(s =>
     '<div class="scard">' +
