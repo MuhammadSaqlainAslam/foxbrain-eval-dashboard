@@ -2060,19 +2060,20 @@ function labScoresForBench(benchName) {
 }
 
 function renderPriority() {
+  function gfav(d){return 'https://www.google.com/s2/favicons?domain='+d+'&sz=32';}
   const LAB_META = {
-    'Anthropic':       {logo:'https://www.anthropic.com/favicon.ico',       emoji:'🔶', color:'#cc4b00'},
-    'OpenAI':          {logo:'https://openai.com/favicon.ico',               emoji:'🟢', color:'#10a37f'},
-    'Google DeepMind': {logo:'https://www.google.com/favicon.ico',           emoji:'🔵', color:'#4285f4'},
-    'Microsoft':       {logo:'https://www.microsoft.com/favicon.ico',        emoji:'🪟', color:'#00a4ef'},
-    'DeepSeek':        {logo:'https://www.deepseek.com/favicon.ico',         emoji:'🔷', color:'#1a5fb4'},
-    'Alibaba':         {logo:'https://www.alibabacloud.com/favicon.ico',     emoji:'🟠', color:'#ff6900'},
-    'xAI':             {logo:'https://x.ai/favicon.ico',                     emoji:'✖',  color:'#555'},
-    'Meta':            {logo:'https://about.meta.com/favicon.ico',           emoji:'🔹', color:'#0866ff'},
-    'NVIDIA':          {logo:'https://www.nvidia.com/favicon.ico',           emoji:'💚', color:'#76b900'},
-    'Moonshot AI':     {logo:'https://www.moonshot.cn/favicon.ico',          emoji:'🌙', color:'#7c3aed'},
-    'ByteDance':       {logo:'https://www.bytedance.com/favicon.ico',        emoji:'🎵', color:'#000000'},
-    'HHRI-AI':         {logo:'https://www.foxconn.com/favicon.ico',          emoji:'🦊', color:'#7c3aed'},
+    'Anthropic':       {logo:gfav('anthropic.com'),    emoji:'🔶', color:'#cc4b00'},
+    'OpenAI':          {logo:gfav('openai.com'),       emoji:'🟢', color:'#10a37f'},
+    'Google DeepMind': {logo:gfav('deepmind.google'),  emoji:'🔵', color:'#4285f4'},
+    'Microsoft':       {logo:gfav('microsoft.com'),    emoji:'🪟', color:'#00a4ef'},
+    'DeepSeek':        {logo:gfav('deepseek.com'),     emoji:'🔷', color:'#1a5fb4'},
+    'Alibaba':         {logo:gfav('alibabacloud.com'), emoji:'🟠', color:'#ff6900'},
+    'xAI':             {logo:gfav('x.ai'),             emoji:'✖',  color:'#555'},
+    'Meta':            {logo:gfav('meta.com'),         emoji:'🔹', color:'#0866ff'},
+    'NVIDIA':          {logo:gfav('nvidia.com'),       emoji:'💚', color:'#76b900'},
+    'Moonshot AI':     {logo:gfav('moonshot.cn'),      emoji:'🌙', color:'#a855f7'},
+    'ByteDance':       {logo:gfav('bytedance.com'),    emoji:'🎵', color:'#000000'},
+    'HHRI-AI':         {logo:gfav('foxconn.com'),      emoji:'🦊', color:'#7c3aed'},
   };
   const PC = {critical:'#dc2626',high:'#d97706',monitor:'#4f8ef7',retired:'#6b7280'};
   const PL = {critical:'🔴 Critical',high:'🟡 High',monitor:'🔵 Monitor',retired:'⚫ Retiring'};
