@@ -2286,6 +2286,81 @@ function renderPriority() {
          ]},
       ]
     },
+    {
+      id:'longctx', icon:'📏', label:'Long Context', color:'#06b6d4',
+      desc:'Critical for enterprise document processing. Google Gemini leads at 1M context. MRCR v2 already running at HHRI-AI.',
+      benches:[
+        {name:'MRCR v2', sota:'91.5%', headroom:9, priority:'critical', hhri:true,
+         why:'Already in HHRI-AI suite. Compare only at same needle count + context size. GPT-5.6 Sol 91.5% (256K). Gemma 4 31B 66.4% (256K).',
+         url:'https://benchlm.ai/benchmarks/mrcr1m',
+         labs:[
+           {lab:'OpenAI',          model:'GPT-5.6 Sol (256K)',    score:'91.5%'},
+           {lab:'Anthropic',       model:'Claude Sonnet 4.6',     score:'84.9%'},
+           {lab:'Google DeepMind', model:'Gemini 3.1 Pro',        score:'84.9%'},
+           {lab:'Anthropic',       model:'Claude Opus 4.6 (1M)',  score:'76.0%'},
+           {lab:'HHRI-AI',         model:'Gemma 4 31B (256K)',    score:'66.4% ✓'},
+         ]},
+        {name:'GraphWalks BFS', sota:'91.1%', headroom:9, priority:'high', hhri:false,
+         why:'Graph traversal in 256K-1M context. Claude Mythos 5 leads at 91.1%. Tests structured long-context reasoning beyond simple retrieval.',
+         url:'https://openai.com/index/gpt-5-6/',
+         labs:[
+           {lab:'Anthropic',       model:'Claude Mythos 5 (256K)', score:'91.1%'},
+           {lab:'OpenAI',          model:'GPT-5.6 Sol (256K)',     score:'90.7%'},
+           {lab:'Anthropic',       model:'Claude Opus 4.8',        score:'85.9%'},
+           {lab:'HHRI-AI',         model:'Not yet run',            score:null},
+         ]},
+        {name:'NoLiMa', sota:'N/A', headroom:null, priority:'high', hhri:false,
+         why:'2026 benchmark - latent associative reasoning with minimal lexical overlap. Tests genuine understanding not keyword matching.',
+         url:'https://huggingface.co/datasets/apple/NoLiMa',
+         labs:[
+           {lab:'Anthropic',  model:'Claude Fable 5', score:'N/A'},
+           {lab:'OpenAI',     model:'GPT-5.6 Sol',    score:'N/A'},
+           {lab:'HHRI-AI',    model:'Not yet run',    score:null},
+         ]},
+      ]
+    },
+    {
+      id:'tool', icon:'🔧', label:'Tool Use & Agents', color:'#f59e0b',
+      desc:'Anthropic leads with MCP. All top labs investing heavily - tool use bridges reasoning and real-world agentic deployment.',
+      benches:[
+        {name:'MCP Atlas', sota:'61.7%', headroom:38, priority:'critical', hhri:false,
+         why:'Tool orchestration via Model Context Protocol. Anthropic leads (61.7%) over OpenAI (58.0%) and Google (48.8%). Directly relevant for HHRI-AI eval pipeline.',
+         url:'https://scale.com/leaderboard',
+         labs:[
+           {lab:'Anthropic',       model:'Claude Mythos 5 / Fable 5', score:'61.7%'},
+           {lab:'Anthropic',       model:'Claude Opus 4.8',           score:'59.9%'},
+           {lab:'OpenAI',          model:'GPT-5.6 Sol',               score:'58.0%'},
+           {lab:'Google DeepMind', model:'Gemini 3.1 Pro',            score:'48.8%'},
+           {lab:'HHRI-AI',         model:'Not yet run',               score:null},
+         ]},
+        {name:'Toolathlon', sota:'73.2%', headroom:27, priority:'high', hhri:false,
+         why:'Tool decathlon across diverse task types. Kimi K3 leads verified subset (73.2%). Anthropic (61.7%) ahead of OpenAI (58.0%) and Google (48.8%).',
+         url:'https://scale.com/leaderboard',
+         labs:[
+           {lab:'Moonshot AI',     model:'Kimi K3 (verified)',        score:'73.2%'},
+           {lab:'Anthropic',       model:'Claude Mythos 5 / Fable 5', score:'61.7%'},
+           {lab:'OpenAI',          model:'GPT-5.6 Sol',               score:'58.0%'},
+           {lab:'Google DeepMind', model:'Gemini 3.1 Pro',            score:'48.8%'},
+           {lab:'HHRI-AI',         model:'Not yet run',               score:null},
+         ]},
+        {name:'tau3-bench', sota:'97.7%', headroom:null, priority:'critical', hhri:true,
+         why:'HHRI-AI running. Fundamentally a tool-use benchmark - agents call retail/airline APIs. Qwen3.5-9B: retail 73.7%, airline 74.0%. Gap vs Grok 4.3 (97.7%) = ~24pp.',
+         url:'https://github.com/sierra-research/tau-bench',
+         labs:[
+           {lab:'xAI',     model:'Grok 4.3',   score:'97.7%'},
+           {lab:'HHRI-AI', model:'Qwen3.5-9B', score:'retail 73.7% · airline 74.0% ✓'},
+         ]},
+        {name:'BFCL v4', sota:'N/A', headroom:null, priority:'high', hhri:false,
+         why:'Berkeley Function Calling Leaderboard - multi-turn parallel tool calls. Standard adopted by all top labs. Consider adding to HHRI-AI suite.',
+         url:'https://gorilla.cs.berkeley.edu/leaderboard.html',
+         labs:[
+           {lab:'Anthropic',       model:'Claude Fable 5', score:'N/A'},
+           {lab:'OpenAI',          model:'GPT-5.6 Sol',    score:'N/A'},
+           {lab:'Google DeepMind', model:'Gemini 3.1 Pro', score:'N/A'},
+           {lab:'HHRI-AI',         model:'Not yet run',    score:null},
+         ]},
+      ]
+    }
   ];
 
   // Get active domain from state or default to 'all'
