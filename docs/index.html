@@ -2061,18 +2061,18 @@ function labScoresForBench(benchName) {
 
 function renderPriority() {
   const LAB_META = {
-    'Anthropic':       {emoji:'🔶', color:'#cc4b00'},
-    'OpenAI':          {emoji:'🟢', color:'#10a37f'},
-    'Google DeepMind': {emoji:'🔵', color:'#4285f4'},
-    'Microsoft':       {emoji:'🪟', color:'#00a4ef'},
-    'DeepSeek':        {emoji:'🔷', color:'#1a5fb4'},
-    'Alibaba':         {emoji:'🟠', color:'#ff6900'},
-    'xAI':             {emoji:'✖',  color:'#555'},
-    'Meta':            {emoji:'🔹', color:'#0866ff'},
-    'NVIDIA':          {emoji:'💚', color:'#76b900'},
-    'Moonshot AI':     {emoji:'🌙', color:'#7c3aed'},
-    'ByteDance':       {emoji:'🎵', color:'#000000'},
-    'HHRI-AI':         {emoji:'🦊', color:'#7c3aed'},
+    'Anthropic':       {logo:'https://www.anthropic.com/favicon.ico',       emoji:'🔶', color:'#cc4b00'},
+    'OpenAI':          {logo:'https://openai.com/favicon.ico',               emoji:'🟢', color:'#10a37f'},
+    'Google DeepMind': {logo:'https://www.google.com/favicon.ico',           emoji:'🔵', color:'#4285f4'},
+    'Microsoft':       {logo:'https://www.microsoft.com/favicon.ico',        emoji:'🪟', color:'#00a4ef'},
+    'DeepSeek':        {logo:'https://www.deepseek.com/favicon.ico',         emoji:'🔷', color:'#1a5fb4'},
+    'Alibaba':         {logo:'https://www.alibabacloud.com/favicon.ico',     emoji:'🟠', color:'#ff6900'},
+    'xAI':             {logo:'https://x.ai/favicon.ico',                     emoji:'✖',  color:'#555'},
+    'Meta':            {logo:'https://meta.com/favicon.ico',                 emoji:'🔹', color:'#0866ff'},
+    'NVIDIA':          {logo:'https://www.nvidia.com/favicon.ico',           emoji:'💚', color:'#76b900'},
+    'Moonshot AI':     {logo:'https://www.moonshot.cn/favicon.ico',          emoji:'🌙', color:'#7c3aed'},
+    'ByteDance':       {logo:'https://www.bytedance.com/favicon.ico',        emoji:'🎵', color:'#000000'},
+    'HHRI-AI':         {logo:'https://www.foxconn.com/favicon.ico',          emoji:'🦊', color:'#7c3aed'},
   };
   const PC = {critical:'#dc2626',high:'#d97706',monitor:'#4f8ef7',retired:'#6b7280'};
   const PL = {critical:'🔴 Critical',high:'🟡 High',monitor:'🔵 Monitor',retired:'⚫ Retiring'};
@@ -2332,7 +2332,13 @@ function renderPriority() {
         var isHHRI = entry.lab === 'HHRI-AI';
         var scoreColor = isHHRI ? '#7c3aed' : (entry.score ? 'var(--accent)' : 'var(--text4)');
         labRows += '<div style="display:flex;align-items:center;gap:6px;padding:4px 0;border-bottom:1px solid var(--border)">';
-        labRows += '<span style="width:20px;text-align:center;font-size:12px">'+lm.emoji+'</span>';
+        var logoHtml = lm.logo
+          ? '<img src="'+lm.logo+'" width="16" height="16" '
+            +'style="border-radius:3px;object-fit:contain;vertical-align:middle" '
+            +'onerror="this.style.display=\'none\';this.nextSibling.style.display=\'inline\'" />'
+            +'<span style="display:none;font-size:12px">'+lm.emoji+'</span>'
+          : '<span style="font-size:12px">'+lm.emoji+'</span>';
+        labRows += '<span style="width:20px;text-align:center;display:inline-flex;align-items:center;justify-content:center">'+logoHtml+'</span>';
         labRows += '<div style="flex:1;min-width:0">';
         labRows += '<div style="font-size:11px;font-weight:600;color:var(--text)">'+entry.lab+'</div>';
         labRows += '<div style="font-size:10px;color:var(--text3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+entry.model+'</div>';
