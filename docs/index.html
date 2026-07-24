@@ -2060,143 +2060,247 @@ function labScoresForBench(benchName) {
 }
 
 function renderPriority() {
+  const LAB_META = {
+    'Anthropic':       {emoji:'🔶', color:'#cc4b00'},
+    'OpenAI':          {emoji:'🟢', color:'#10a37f'},
+    'Google DeepMind': {emoji:'🔵', color:'#4285f4'},
+    'Microsoft':       {emoji:'🪟', color:'#00a4ef'},
+    'DeepSeek':        {emoji:'🔷', color:'#1a5fb4'},
+    'Alibaba':         {emoji:'🟠', color:'#ff6900'},
+    'xAI':             {emoji:'✖',  color:'#000000'},
+    'Meta':            {emoji:'🔹', color:'#0866ff'},
+    'NVIDIA':          {emoji:'💚', color:'#76b900'},
+    'Mistral AI':      {emoji:'🌪',  color:'#ff7000'},
+    'HHRI-AI':         {emoji:'🦊', color:'#7c3aed'},
+  };
+
   const DOMAINS = [
     {
       id:'coding', icon:'⚡', label:'Coding & Agents',
-      color:'#2dd4a0', cls:'dom-agentic',
-      desc:'Where all top labs are racing. Agentic coding = biggest capability investment in 2026.',
+      color:'#2dd4a0',
+      desc:'Where all top labs are racing — autonomous coding agents.',
       benches:[
-        {name:'SWE-Bench Pro', sota:'80.3%', lab:'Anthropic', headroom:20, trend:'rising',
-         priority:'critical', hhri:false, why:'Primary agentic coding signal. Replacing SWE-Bench Verified (95% — near ceiling).',
-         url:'https://benchlm.ai/benchmarks/swePro'},
-        {name:'τ³-bench', sota:'Running', lab:'HHRI-AI', headroom:null, trend:'stable',
-         priority:'critical', hhri:true, why:'Already in HHRI-AI suite. Retail + Airline domains. Qwen3.5-9B: retail 73.7%, airline 74.0%.',
-         url:'https://github.com/sierra-research/tau-bench'},
-        {name:'Terminal-Bench 2.1', sota:'88.0%', lab:'Anthropic', headroom:12, trend:'rising',
-         priority:'high', hhri:false, why:'Agentic CLI task completion. GPT-5.6 Sol leads at 88.8%.',
-         url:'https://terminal-bench.com'},
-        {name:'FrontierCode Diamond', sota:'29.3%', lab:'Anthropic', headroom:71, trend:'new',
-         priority:'critical', hhri:false, why:'71% headroom — most models below 15%. Will discriminate frontier for years.',
-         url:'https://cognition.ai/benchmarks'},
-        {name:'Agents Last Exam', sota:'53.6', lab:'OpenAI', headroom:46, trend:'new',
-         priority:'critical', hhri:false, why:'OpenAI flagship Jul 2026. Long-horizon professional workflows. 46% headroom.',
-         url:'https://agents-last-exam.org/'},
+        {name:'SWE-Bench Pro', sota:'80.3%', headroom:20, priority:'critical',
+         hhri:false, why:'Primary agentic coding signal 2026. Replacing SWE-Bench Verified (95% ceiling).',
+         url:'https://benchlm.ai/benchmarks/swePro',
+         labs:[
+           {lab:'DeepSeek',     model:'V4 Pro',          score:'80.6%'},
+           {lab:'Anthropic',    model:'Claude Fable 5',  score:'80.3%'},
+           {lab:'xAI',          model:'Grok 4',          score:'69.1%'},
+           {lab:'OpenAI',       model:'GPT-5.6 Sol',     score:'64.6%'},
+           {lab:'Google DeepMind', model:'Gemini 3.1 Pro', score:'54.2%'},
+           {lab:'Microsoft',    model:'MAI-Thinking-1',  score:'52.8%'},
+           {lab:'HHRI-AI',      model:'Not yet run',     score:null},
+         ]},
+        {name:'tau3-bench', sota:'97.7% (Grok 4.3)', headroom:null, priority:'critical',
+         hhri:true, why:'Already running at HHRI-AI. Qwen3.5-9B: retail 73.7%, airline 74.0%.',
+         url:'https://github.com/sierra-research/tau-bench',
+         labs:[
+           {lab:'xAI',      model:'Grok 4.3',     score:'97.7%'},
+           {lab:'HHRI-AI',  model:'Qwen3.5-9B',   score:'retail 73.7% · airline 74.0%'},
+         ]},
+        {name:'Terminal-Bench 2.1', sota:'88.8%', headroom:11, priority:'high',
+         hhri:false, why:'Agentic CLI task completion. Fast-rising benchmark across labs.',
+         url:'https://terminal-bench.com',
+         labs:[
+           {lab:'OpenAI',    model:'GPT-5.6 Sol',   score:'88.8%'},
+           {lab:'Anthropic', model:'Claude Fable 5', score:'88.0%'},
+           {lab:'Google DeepMind', model:'Gemini 3.1 Pro', score:'70.7%'},
+           {lab:'HHRI-AI',   model:'Not yet run',   score:null},
+         ]},
+        {name:'FrontierCode Diamond', sota:'29.3%', headroom:71, priority:'critical',
+         hhri:false, why:'71% headroom. Most models below 15%. Key differentiator for next 2 years.',
+         url:'https://cognition.ai/benchmarks',
+         labs:[
+           {lab:'Anthropic', model:'Claude Fable 5', score:'29.3%'},
+           {lab:'Anthropic', model:'Claude Opus 4.8', score:'13.4%'},
+           {lab:'OpenAI',    model:'GPT-5.5',        score:'5.7%'},
+           {lab:'HHRI-AI',   model:'Not yet run',    score:null},
+         ]},
+        {name:'Agents Last Exam', sota:'53.6', headroom:46, priority:'critical',
+         hhri:false, why:'OpenAI flagship Jul 2026. Long-horizon professional workflows. 46% headroom.',
+         url:'https://agents-last-exam.org/',
+         labs:[
+           {lab:'OpenAI',    model:'GPT-5.6 Sol',    score:'53.6'},
+           {lab:'Anthropic', model:'Claude Opus 4.8', score:'45.2'},
+           {lab:'Google DeepMind', model:'Gemini 3.1 Pro', score:'32.1'},
+           {lab:'HHRI-AI',   model:'Not yet run',    score:null},
+         ]},
       ]
     },
     {
       id:'reasoning', icon:'🧠', label:'Reasoning & Math',
-      color:'#4f8ef7', cls:'dom-stem',
-      desc:'Mathematical and scientific reasoning — hardest remaining frontier after coding.',
+      color:'#4f8ef7',
+      desc:'Mathematical and scientific reasoning — hardest remaining frontier.',
       benches:[
-        {name:'HLE', sota:'64.5%', lab:'Anthropic', headroom:36, trend:'rising',
-         priority:'critical', hhri:false, why:'Hardest available benchmark. Rose 3.8%→64.5% in 18 months. 36% headroom.',
-         url:'https://benchlm.ai/benchmarks/hle'},
-        {name:'FrontierMath', sota:'89%', lab:'OpenAI', headroom:11, trend:'stable',
-         priority:'critical', hhri:false, why:'Tier 4 still hard — Fable 5 leads at 87.8%. Tests genuine math vs memorization.',
-         url:'https://epoch.ai/frontiermath'},
-        {name:'ARC-AGI-2', sota:'83.3%', lab:'OpenAI', headroom:17, trend:'rising',
-         priority:'high', hhri:false, why:'Fluid intelligence not memorization. Rose from <5% to 83% in one year.',
-         url:'https://arcprize.org/leaderboard'},
-        {name:'GPQA Diamond', sota:'94.6%', lab:'OpenAI', headroom:5, trend:'monitor',
-         priority:'monitor', hhri:false, why:'Near ceiling. Top-9 labs cluster 90-94%. Transitioning to HLE.',
-         url:'https://paperswithcode.com/sota/science-question-answering-on-gpqa'},
-        {name:'AIME 2025', sota:'97.0%', lab:'Microsoft', headroom:3, trend:'saturated',
-         priority:'retired', hhri:false, why:'Fully saturated. Use AIME 2026 or FrontierMath instead.',
-         url:'https://llm-stats.com/benchmarks/aime-2025'},
+        {name:'HLE', sota:'64.5%', headroom:36, priority:'critical',
+         hhri:false, why:'Hardest benchmark. Rose 3.8% to 64.5% in 18 months. 36% headroom.',
+         url:'https://benchlm.ai/benchmarks/hle',
+         labs:[
+           {lab:'Anthropic',    model:'Claude Mythos 5',  score:'64.5%'},
+           {lab:'Anthropic',    model:'Claude Fable 5',   score:'59.0%'},
+           {lab:'Google DeepMind', model:'Gemini 3.1 Pro', score:'44.4%'},
+           {lab:'OpenAI',       model:'GPT-5.4',          score:'44.3%'},
+           {lab:'xAI',          model:'Grok 4.3',         score:'35.0%'},
+           {lab:'HHRI-AI',      model:'Not yet run',      score:null},
+         ]},
+        {name:'FrontierMath', sota:'89% (T1-3)', headroom:11, priority:'critical',
+         hhri:false, why:'Tier 4: Fable 5 leads at 87.8%. Tests genuine math vs memorization.',
+         url:'https://epoch.ai/frontiermath',
+         labs:[
+           {lab:'OpenAI',    model:'GPT-5.6 Sol',    score:'89% (T1-3)'},
+           {lab:'Anthropic', model:'Claude Fable 5', score:'87% (T1-3) · 87.8% (T4)'},
+           {lab:'Google DeepMind', model:'Gemini 3.1 Pro', score:'59.6%'},
+           {lab:'HHRI-AI',   model:'Not yet run',   score:null},
+         ]},
+        {name:'GPQA Diamond', sota:'94.6%', headroom:5, priority:'monitor',
+         hhri:false, why:'Near ceiling. Top labs cluster 90-94%. Transitioning to HLE.',
+         url:'https://paperswithcode.com/sota/science-question-answering-on-gpqa',
+         labs:[
+           {lab:'OpenAI',    model:'GPT-5.6 Sol',    score:'94.6%'},
+           {lab:'Google DeepMind', model:'Gemini 3.1 Pro', score:'94.3%'},
+           {lab:'Anthropic', model:'Claude Fable 5', score:'92.6%'},
+           {lab:'Alibaba',   model:'Qwen3.7 Max',    score:'92.4%'},
+           {lab:'xAI',       model:'Grok 4.3',       score:'90.1%'},
+           {lab:'DeepSeek',  model:'DeepSeek R1',    score:'71.5%'},
+         ]},
       ]
     },
     {
       id:'knowledge', icon:'📚', label:'Knowledge & Language',
-      color:'#9c88ff', cls:'dom-knowledge',
-      desc:'HHRI-AI unique edge — Traditional Chinese and Taiwan-specific benchmarks no Western lab covers.',
+      color:'#9c88ff',
+      desc:'HHRI-AI unique edge — Traditional Chinese benchmarks no Western lab covers.',
       benches:[
-        {name:'TMMLU+', sota:'HHRI-AI leads', lab:'HHRI-AI', headroom:null, trend:'stable',
-         priority:'critical', hhri:true, why:'HHRI-AI flagship. No Western frontier lab evaluates here. Core differentiator.',
-         url:'https://muhammadsaqlainaslam.github.io/tmmlu-leaderboard/'},
-        {name:'TW-LegalBench', sota:'New Jun 2026', lab:'None yet', headroom:null, trend:'new',
-         priority:'critical', hhri:false, why:'NEW: 16K+ MCQs across 18 Taiwan legal domains. 117 essay + 14K judgment prediction. Zero competition from Western labs. arXiv:2606.18699',
-         url:'https://arxiv.org/abs/2606.18699'},
-        {name:'MMMLU', sota:'92.6%', lab:'Google', headroom:7, trend:'rising',
-         priority:'high', hhri:false, why:'14 languages. Gemini 3.1 Pro leads. Critical for HHRI-AI multilingual positioning.',
-         url:'https://huggingface.co/datasets/openai/MMMLU'},
-        {name:'AIEC', sota:'HHRI-AI', lab:'HHRI-AI', headroom:null, trend:'stable',
-         priority:'critical', hhri:true, why:'Chinese AI ethics — unique to HHRI-AI. Run every cycle.',
-         url:'https://muhammadsaqlainaslam.github.io/tmmlu-leaderboard/'},
-        {name:'MMLU-Pro', sota:'91.5%', lab:'Anthropic', headroom:9, trend:'monitor',
-         priority:'monitor', hhri:false, why:'Near ceiling for frontier. Use MMMLU for multilingual signal instead.',
-         url:'https://paperswithcode.com/sota/multi-task-language-understanding-on-mmlu-1'},
+        {name:'TMMLU+', sota:'HHRI-AI leads', headroom:null, priority:'critical',
+         hhri:true, why:'HHRI-AI flagship. No Western frontier lab evaluates here. Core differentiator.',
+         url:'https://muhammadsaqlainaslam.github.io/tmmlu-leaderboard/',
+         labs:[
+           {lab:'HHRI-AI', model:'FoxBrain family', score:'Running ✓'},
+           {lab:'Anthropic', model:'Not evaluated', score:null},
+           {lab:'OpenAI',    model:'Not evaluated', score:null},
+           {lab:'Google DeepMind', model:'Not evaluated', score:null},
+         ]},
+        {name:'TW-LegalBench', sota:'New Jun 2026', headroom:null, priority:'critical',
+         hhri:false, why:'NEW: 16K+ MCQs across 18 Taiwan legal domains. Zero competition. arXiv:2606.18699',
+         url:'https://arxiv.org/abs/2606.18699',
+         labs:[
+           {lab:'HHRI-AI', model:'Opportunity — run first', score:'Not yet run'},
+         ]},
+        {name:'MMMLU', sota:'92.6%', headroom:7, priority:'high',
+         hhri:false, why:'14 languages. Critical for HHRI-AI multilingual positioning.',
+         url:'https://huggingface.co/datasets/openai/MMMLU',
+         labs:[
+           {lab:'Google DeepMind', model:'Gemini 3.1 Pro', score:'92.6%'},
+           {lab:'Google DeepMind', model:'Gemma 4 31B',    score:'85.2%'},
+           {lab:'HHRI-AI',   model:'Not yet run',          score:null},
+         ]},
+        {name:'AIEC', sota:'HHRI-AI', headroom:null, priority:'critical',
+         hhri:true, why:'Chinese AI ethics — unique to HHRI-AI. Run every cycle.',
+         url:'https://muhammadsaqlainaslam.github.io/tmmlu-leaderboard/',
+         labs:[
+           {lab:'HHRI-AI', model:'FoxBrain family', score:'Running ✓'},
+         ]},
       ]
     },
     {
       id:'multimodal', icon:'🖼', label:'Multimodal',
-      color:'#f87171', cls:'dom-multimodal',
-      desc:'Vision + action becoming standard requirement. 2026 is the year multimodal goes frontier.',
+      color:'#f87171',
+      desc:'Vision + action becoming standard. 2026 is the year multimodal goes frontier.',
       benches:[
-        {name:'MMMU Pro', sota:'84.6%', lab:'OpenAI', headroom:15, trend:'rising',
-         priority:'high', hhri:false, why:'University-level multimodal. 15% headroom. Growing lab adoption.',
-         url:'https://mmmu-benchmark.github.io/'},
-        {name:'OSWorld 2.0', sota:'62.6%', lab:'OpenAI', headroom:37, trend:'rising',
-         priority:'high', hhri:false, why:'Computer use on real desktop tasks. 37% headroom. OpenAI now leads Anthropic here.',
-         url:'https://os-world.github.io/'},
-        {name:'BrowseComp', sota:'92.2%', lab:'OpenAI', headroom:8, trend:'monitor',
-         priority:'monitor', hhri:false, why:'Agentic web search. Near ceiling for top models at ultra settings.',
-         url:'https://openai.com/browsecomp'},
-        {name:'MathVista', sota:'N/A', lab:'Various', headroom:null, trend:'stable',
-         priority:'high', hhri:false, why:'Math with visual context. Charts, geometry, scientific figures. Growing standard.',
-         url:'https://mathvista.github.io/'},
+        {name:'MMMU Pro', sota:'84.6%', headroom:15, priority:'high',
+         hhri:false, why:'University-level multimodal. 15% headroom. Growing lab adoption.',
+         url:'https://mmmu-benchmark.github.io/',
+         labs:[
+           {lab:'OpenAI',    model:'GPT-5.6 Sol',    score:'84.6%'},
+           {lab:'Google DeepMind', model:'Gemini 3.1 Pro', score:'80.5%'},
+           {lab:'Meta',      model:'Llama 4 Maverick', score:'73.4%'},
+           {lab:'HHRI-AI',   model:'Not yet run',    score:null},
+         ]},
+        {name:'OSWorld 2.0', sota:'62.6%', headroom:37, priority:'high',
+         hhri:false, why:'Computer use on real desktop. 37% headroom. OpenAI leads Anthropic here.',
+         url:'https://os-world.github.io/',
+         labs:[
+           {lab:'OpenAI',    model:'GPT-5.6 Sol',    score:'62.6%'},
+           {lab:'Anthropic', model:'Claude Opus 4.8', score:'54.8%'},
+           {lab:'OpenAI',    model:'GPT-5.5',        score:'47.5%'},
+           {lab:'HHRI-AI',   model:'Not yet run',    score:null},
+         ]},
+        {name:'MathVista', sota:'N/A', headroom:null, priority:'high',
+         hhri:false, why:'Math with visual context — charts, geometry, figures. Growing standard.',
+         url:'https://mathvista.github.io/',
+         labs:[
+           {lab:'OpenAI',    model:'GPT-5.6 Sol',    score:'N/A'},
+           {lab:'Google DeepMind', model:'Gemini 3.1 Pro', score:'N/A'},
+           {lab:'HHRI-AI',   model:'Not yet run',    score:null},
+         ]},
       ]
     },
   ];
 
-  const PRIORITY_COLORS = {
-    critical:'#dc2626', high:'#d97706', monitor:'#4f8ef7', retired:'#6b7280'
-  };
-  const PRIORITY_LABELS = {
-    critical:'🔴 Critical', high:'🟡 High', monitor:'🔵 Monitor', retired:'⚫ Retiring'
-  };
+  const PC = {critical:'#dc2626',high:'#d97706',monitor:'#4f8ef7',retired:'#6b7280'};
+  const PL = {critical:'🔴 Critical',high:'🟡 High',monitor:'🔵 Monitor',retired:'⚫ Retiring'};
 
-  let h = '<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:18px">';
+  let h = '<div style="display:flex;flex-direction:column;gap:24px">';
 
   DOMAINS.forEach(dom => {
-    h += '<div class="xref-card" style="border-top:3px solid '+dom.color+'">';
-    h += '<div class="xref-card-header"><div>';
-    h += '<div class="xref-card-title">'+dom.icon+' '+dom.label+'</div>';
-    h += '<div class="xref-card-sub">'+dom.desc+'</div>';
-    h += '</div></div>';
+    h += '<div>';
+    h += '<div style="font-size:16px;font-weight:700;color:'+dom.color+';margin-bottom:12px;'
+       + 'padding-bottom:6px;border-bottom:2px solid '+dom.color+'">'
+       + dom.icon+' '+dom.label+'</div>';
+    h += '<div style="font-size:12px;color:var(--text3);margin-bottom:12px">'+dom.desc+'</div>';
+    h += '<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:12px">';
 
     dom.benches.forEach(b => {
-      const pc = PRIORITY_COLORS[b.priority] || '#6b7280';
-      const pl = PRIORITY_LABELS[b.priority] || '';
+      const pc = PC[b.priority]||'#6b7280';
+      const pl = PL[b.priority]||'';
       const hhriTag = b.hhri
-        ? '<span style="font-size:10px;background:#dcfce7;color:#16a34a;border:1px solid #16a34a;border-radius:99px;padding:1px 7px;margin-left:6px">✓ HHRI-AI running</span>'
+        ? '<span style="font-size:10px;background:#dcfce7;color:#16a34a;border:1px solid #16a34a;border-radius:99px;padding:1px 7px;margin-left:6px">✓ HHRI-AI</span>'
         : '';
       const headroomBar = b.headroom !== null
-        ? '<div style="margin-top:6px"><div style="display:flex;justify-content:space-between;font-size:10px;color:var(--text3)"><span>Headroom</span><span style="font-weight:700;color:'+
-          (b.headroom>30?'#16a34a':b.headroom>10?'#d97706':'#dc2626')+'">'
-          +b.headroom+'%</span></div>'
-          +'<div style="height:4px;background:var(--border);border-radius:2px;margin-top:2px">'
-          +'<div style="height:100%;width:'+b.headroom+'%;background:'
-          +(b.headroom>30?'#16a34a':b.headroom>10?'#d97706':'#dc2626')
-          +';border-radius:2px"></div></div></div>' : '';
+        ? '<div style="margin:6px 0 4px"><div style="display:flex;justify-content:space-between;font-size:10px;color:var(--text3);margin-bottom:2px">'
+          +'<span>Headroom</span><span style="font-weight:700;color:'+(b.headroom>30?'#16a34a':b.headroom>10?'#d97706':'#dc2626')+'">'+b.headroom+'%</span></div>'
+          +'<div style="height:4px;background:var(--border);border-radius:2px">'
+          +'<div style="height:100%;width:'+b.headroom+'%;background:'+(b.headroom>30?'#16a34a':b.headroom>10?'#d97706':'#dc2626')+';border-radius:2px"></div></div></div>' : '';
 
-      h += '<div class="xref-entry" style="border-left:3px solid '+pc+';padding-left:10px;margin:0">';
-      h += '<div><div style="display:flex;align-items:center;gap:6px;margin-bottom:4px">';
-      h += '<span style="font-weight:700;font-size:13px">'+b.name+'</span>';
-      h += '<span style="font-size:10px;color:'+pc+';font-weight:600">'+pl+'</span>';
-      h += hhriTag + '</div>';
-      h += '<div style="font-size:11px;color:var(--text2);line-height:1.5;margin-bottom:4px">'+b.why+'</div>';
+      // Labs table
+      let labRows = '';
+      b.labs.forEach(function(entry) {
+        const lm = LAB_META[entry.lab] || {emoji:'•', color:'#888'};
+        const scoreColor = entry.score && entry.score !== null
+          ? (entry.lab === 'HHRI-AI' ? '#7c3aed' : 'var(--accent)')
+          : 'var(--text4)';
+        const scoreText = entry.score || '—';
+        labRows += '<div style="display:flex;align-items:center;gap:6px;padding:4px 0;border-bottom:1px solid var(--border)">';
+        labRows += '<span style="width:20px;text-align:center;font-size:13px">'+lm.emoji+'</span>';
+        labRows += '<div style="flex:1;min-width:0">';
+        labRows += '<div style="font-size:11px;font-weight:600;color:var(--text)">'+entry.lab+'</div>';
+        labRows += '<div style="font-size:10px;color:var(--text3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+entry.model+'</div>';
+        labRows += '</div>';
+        labRows += '<span style="font-size:12px;font-weight:700;color:'+scoreColor+';white-space:nowrap">'+scoreText+'</span>';
+        labRows += '</div>';
+      });
+
+      h += '<div class="xref-card" style="border-left:3px solid '+pc+'">';
+      h += '<div class="xref-card-header" style="padding:10px 14px">';
+      h += '<div><div style="font-weight:700;font-size:13px;color:var(--text)">'+b.name+hhriTag+'</div>';
+      h += '<div style="font-size:10px;color:'+pc+';font-weight:600;margin-top:2px">'+pl+'</div></div>';
+      h += '<a href="'+b.url+'" target="_blank" style="font-size:11px;color:var(--accent);white-space:nowrap">Leaderboard ↗</a>';
+      h += '</div>';
+      h += '<div style="padding:10px 14px">';
+      h += '<div style="font-size:11px;color:var(--text2);line-height:1.5;margin-bottom:6px">'+b.why+'</div>';
       h += headroomBar;
-      h += '<div style="display:flex;align-items:center;justify-content:space-between;margin-top:6px">';
-      h += '<span style="font-size:11px;color:var(--text3)">SOTA: <strong style="color:var(--accent)">'+b.sota+'</strong> · '+b.lab+'</span>';
-      h += '<a href="'+b.url+'" target="_blank" style="font-size:11px;color:var(--accent)">Leaderboard ↗</a>';
+      h += '<div style="margin-top:8px;border-top:1px solid var(--border);padding-top:8px">';
+      h += '<div style="font-size:10px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px">Lab scores</div>';
+      h += labRows;
       h += '</div></div></div>';
     });
-    h += '</div>';
+
+    h += '</div></div>';
   });
 
   h += '</div>';
   h += '<div style="margin-top:16px;padding-top:12px;border-top:1px solid var(--border);font-size:11px;color:var(--text3)">';
-  h += '⚡ Verified July 22, 2026 · Sources: BenchLM, Anthropic/OpenAI/Google model cards, arXiv:2606.18699 (TW-LegalBench)';
+  h += '⚡ Verified July 23, 2026 · Sources: BenchLM, lab model cards, arXiv:2606.18699 (TW-LegalBench)';
   h += '</div>';
   var pc=document.getElementById('priority-content');
   if(pc) pc.innerHTML = h;
