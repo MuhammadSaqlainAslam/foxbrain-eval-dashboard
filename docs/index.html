@@ -2093,17 +2093,20 @@ function renderPriority() {
       desc:'Where all top labs are racing — autonomous coding agents are the #1 investment in 2026.',
       benches:[
         {name:'SWE-Bench Pro', sota:'80.3%', headroom:20, priority:'critical', hhri:false,
-         why:'Primary agentic coding signal for 2026-2027. Replacing SWE-Bench Verified which is saturating at 95%.',
+         why:'Primary agentic coding signal for 2026-2027. Source: BenchLM Jul 19 2026 (51 models). Note: OpenAI Jul 2026 audit found ~30% of public tasks broken — use as directional signal. DeepSeek V4 Pro default scores 52.1%, not 80.6%.',
          url:'https://benchlm.ai/benchmarks/swePro',
          labs:[
-           {lab:'DeepSeek',     model:'V4 Pro',           score:'80.6%'},
-           {lab:'Anthropic',    model:'Claude Fable 5',   score:'80.3%'},
-           {lab:'Moonshot AI',  model:'Kimi K3',          score:'76.8%'},
-           {lab:'xAI',          model:'Grok 4',           score:'69.1%'},
-           {lab:'OpenAI',       model:'GPT-5.6 Sol',      score:'64.6%'},
-           {lab:'Google DeepMind', model:'Gemini 3.6 Flash', score:'58.7%'},
-           {lab:'Microsoft',    model:'MAI-Thinking-1',   score:'52.8%'},
-           {lab:'HHRI-AI',      model:'Not yet run',      score:null},
+           {lab:'Anthropic',       model:'Claude Mythos 5',     score:'80.3%'},
+           {lab:'Anthropic',       model:'Claude Fable 5',      score:'80.0%'},
+           {lab:'Anthropic',       model:'Claude Opus 4.8',     score:'69.2%'},
+           {lab:'xAI',             model:'Grok 4.5',            score:'64.7%'},
+           {lab:'OpenAI',          model:'GPT-5.6 Sol',         score:'64.6%'},
+           {lab:'Alibaba',         model:'Qwen3.7 Max',         score:'60.6%'},
+           {lab:'Google DeepMind', model:'Gemini 3.5 Flash',    score:'55.1%'},
+           {lab:'DeepSeek',        model:'V4 Pro (Max effort)', score:'55.4%'},
+           {lab:'Microsoft',       model:'MAI-Thinking-1',      score:'52.8%'},
+           {lab:'DeepSeek',        model:'V4 Pro (default)',     score:'52.1%'},
+           {lab:'HHRI-AI',         model:'Not yet run',         score:null},
          ]},
         {name:'SWE-Bench Verified', sota:'95.0%', headroom:5, priority:'monitor', hhri:false,
          why:'Near ceiling. Use SWE-Bench Pro for frontier comparison. Still useful for open-weight ranking.',
@@ -2415,7 +2418,7 @@ function renderPriority() {
         ? '<span style="font-size:10px;background:#dcfce7;color:#16a34a;border:1px solid #16a34a;border-radius:99px;padding:1px 7px;margin-left:6px">✓ HHRI-AI</span>'
         : '';
       var headroomBar = b.headroom !== null
-        ? '<div style="margin:6px 0 4px"><div style="display:flex;justify-content:space-between;font-size:10px;color:var(--text3);margin-bottom:2px"><span>Headroom</span>'
+        ? '<div style="margin:6px 0 4px"><div style="display:flex;justify-content:space-between;font-size:10px;color:var(--text3);margin-bottom:2px"><span>Headroom <span style=\'font-size:9px;font-weight:400;color:var(--text3)\'>(% left before 100% saturation)</span></span>'
           +'<span style="font-weight:700;color:'+(b.headroom>30?'#16a34a':b.headroom>10?'#d97706':'#dc2626')+'">'+b.headroom+'%</span></div>'
           +'<div style="height:4px;background:var(--border);border-radius:2px"><div style="height:100%;width:'+b.headroom+'%;background:'+(b.headroom>30?'#16a34a':b.headroom>10?'#d97706':'#dc2626')+';border-radius:2px"></div></div></div>' : '';
 
