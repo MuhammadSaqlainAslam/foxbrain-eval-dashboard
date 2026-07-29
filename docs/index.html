@@ -2316,10 +2316,10 @@ function renderPriority() {
          why:'Already in HHRI-AI suite. Compare only at same needle count + context size. GPT-5.6 Sol 91.5% (256K). Gemma 4 31B 66.4% (256K).',
          url:'https://benchlm.ai/benchmarks/mrcr1m',
          labs:[
-           {lab:'OpenAI',          model:'GPT-5.6 Sol (256K)',    score:'91.5%'},
+           {lab:'OpenAI',          model:'GPT-5.6 Sol (256K, Closed)',    score:'91.5%'},
            {lab:'Anthropic',       model:'Claude Sonnet 4.6 (Closed)',     score:'84.9%'},
            {lab:'Google DeepMind', model:'Gemini 3.1 Pro (Closed)',        score:'84.9%'},
-           {lab:'Anthropic',       model:'Claude Opus 4.6 (1M)',  score:'76.0%'},
+           {lab:'Anthropic',       model:'Claude Opus 4.6 (1M, Closed)',  score:'76.0%'},
            {lab:'HHRI-AI',         model:'Gemma 4 31B (256K)',    score:'66.4% ✓'},
          ]},
         {name:'GraphWalks BFS', sota:'91.1%', headroom:9, priority:'high', hhri:false,
@@ -2327,7 +2327,7 @@ function renderPriority() {
          url:'https://openai.com/index/gpt-5-6/',
          labs:[
            {lab:'Anthropic',       model:'Claude Mythos 5 (256K) (Closed)', score:'91.1%'},
-           {lab:'OpenAI',          model:'GPT-5.6 Sol (256K)',     score:'90.7%'},
+           {lab:'OpenAI',          model:'GPT-5.6 Sol (256K, Closed)',     score:'90.7%'},
            {lab:'Anthropic',       model:'Claude Opus 4.8 (Closed)',        score:'85.9%'},
            {lab:'HHRI-AI',         model:'Not yet run',            score:null},
          ]},
@@ -2335,8 +2335,8 @@ function renderPriority() {
          why:'ICML 2025 (Adobe Research). NIAH with minimal lexical overlap - models must infer latent associations. Tested up to 32K context. At 32K: GPT-4o drops to 69.7%, Claude 3.5 Sonnet to 29.8%. Most models degrade significantly past 8K.',
          url:'https://github.com/adobe-research/NoLiMa',
          labs:[
-           {lab:'OpenAI',          model:'GPT-4o (eff. 8K)',         score:'99.3% base · 69.7% @32K'},
-           {lab:'Meta',            model:'Llama 3.3 70B (eff. 2K)',  score:'97.3% base · 42.7% @32K'},
+           {lab:'OpenAI',          model:'GPT-4o (eff. 8K, Closed)',         score:'99.3% base · 69.7% @32K'},
+           {lab:'Meta',            model:'Llama 3.3 70B (eff. 2K, Open weight)',  score:'97.3% base · 42.7% @32K'},
            {lab:'Google DeepMind', model:'Gemini 1.5 Pro (eff. 2K) (Closed)', score:'92.6% base · 48.2% @32K'},
            {lab:'Anthropic',       model:'Claude 3.5 Sonnet (eff. 4K) (Closed)', score:'87.6% base · 29.8% @32K'},
            {lab:'Meta',            model:'Gemini 2.0 Flash (eff. 4K) (Closed)', score:'89.4% base · 41.0% @32K'},
@@ -2362,7 +2362,7 @@ function renderPriority() {
          why:'Tool decathlon across diverse task types. Kimi K3 leads verified subset (73.2%). Anthropic (61.7%) ahead of OpenAI (58.0%) and Google (48.8%).',
          url:'https://scale.com/leaderboard',
          labs:[
-           {lab:'Moonshot AI',     model:'Kimi K3 (verified)',        score:'73.2%'},
+           {lab:'Moonshot AI',     model:'Kimi K3 (verified, Open weight)',        score:'73.2%'},
            {lab:'Anthropic',       model:'Claude Mythos 5 / Fable 5 (Closed)', score:'61.7%'},
            {lab:'OpenAI',          model:'GPT-5.6 Sol (Closed)',               score:'58.0%'},
            {lab:'Google DeepMind', model:'Gemini 3.1 Pro (Closed)',            score:'48.8%'},
