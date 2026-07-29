@@ -2150,7 +2150,7 @@ function renderPriority() {
          labs:[
            {lab:'OpenAI',       model:'GPT-5.6 Sol',      score:'53.6'},
            {lab:'Anthropic',    model:'Claude Opus 4.8',  score:'45.2'},
-           {lab:'Google DeepMind', model:'Gemini 3.1 Pro', score:'32.1'},
+           {lab:'Google DeepMind', model:'Gemini 3.1 Pro (Closed)', score:'32.1'},
            {lab:'HHRI-AI',      model:'Not yet run',      score:null},
          ]},
         {name:'BrowseComp', sota:'91.2%', headroom:9, priority:'high', hhri:false,
@@ -2160,7 +2160,7 @@ function renderPriority() {
            {lab:'Moonshot AI',  model:'Kimi K3',          score:'91.2%'},
            {lab:'OpenAI',       model:'GPT-5.6 Sol',      score:'90.4%'},
            {lab:'Anthropic',    model:'Claude Fable 5',   score:'85.9%'},
-           {lab:'Google DeepMind', model:'Gemini 3.1 Pro', score:'85.9%'},
+           {lab:'Google DeepMind', model:'Gemini 3.1 Pro (Closed)', score:'85.9%'},
            {lab:'HHRI-AI',      model:'Not yet run',      score:null},
          ]},
       ]
@@ -2197,7 +2197,7 @@ function renderPriority() {
          labs:[
            {lab:'OpenAI',       model:'GPT-5.6 Sol',      score:'89% (T1-3)'},
            {lab:'Anthropic',    model:'Claude Fable 5',   score:'87% (T1-3) · 87.8% (T4)'},
-           {lab:'Google DeepMind', model:'Gemini 3.1 Pro', score:'59.6%'},
+           {lab:'Google DeepMind', model:'Gemini 3.1 Pro (Closed)', score:'59.6%'},
            {lab:'HHRI-AI',      model:'Not yet run',      score:null},
          ]},
         {name:'GPQA Diamond', sota:'94.6%', headroom:5, priority:'monitor', hhri:false,
@@ -2205,7 +2205,7 @@ function renderPriority() {
          url:'https://paperswithcode.com/sota/science-question-answering-on-gpqa',
          labs:[
            {lab:'OpenAI',       model:'GPT-5.6 Sol',      score:'94.6%'},
-           {lab:'Google DeepMind', model:'Gemini 3.1 Pro', score:'94.3%'},
+           {lab:'Google DeepMind', model:'Gemini 3.1 Pro (Closed)', score:'94.3%'},
            {lab:'Anthropic',    model:'Claude Fable 5',   score:'92.6%'},
            {lab:'Alibaba',      model:'Qwen3.7 Max',      score:'92.4%'},
            {lab:'xAI',          model:'Grok 4.3',         score:'90.1%'},
@@ -2216,7 +2216,7 @@ function renderPriority() {
          url:'https://arcprize.org/leaderboard',
          labs:[
            {lab:'OpenAI',       model:'GPT-5.5 Pro',      score:'83.3%'},
-           {lab:'Google DeepMind', model:'Gemini 3.1 Pro', score:'77.1%'},
+           {lab:'Google DeepMind', model:'Gemini 3.1 Pro (Closed)', score:'77.1%'},
            {lab:'HHRI-AI',      model:'Not yet run',      score:null},
          ]},
       ]
@@ -2229,15 +2229,15 @@ function renderPriority() {
          why:'66 subjects, 20K+ questions in Traditional Chinese. Source: ikala/tmmluplus on HuggingFace (0-shot direct). HHRI-AI FoxBrain_v1.2 scores 68.44 avg. No Western frontier lab runs this consistently.',
          url:'https://huggingface.co/datasets/ikala/tmmluplus',
          labs:[
-           {lab:'OpenAI',       model:'gpt-5-2025-08-07', score:'88.60 avg (STEM 92.77)'},
+           {lab:'OpenAI',       model:'gpt-5-2025-08-07 (Closed)', score:'88.60 avg (STEM 92.77)'},
            {lab:'OpenAI',       model:'gpt-oss-120b',     score:'69.14 avg (STEM 82.13)'},
            {lab:'HHRI-AI',      model:'FoxBrain_v1.2',    score:'68.44 avg ✓ Running'},
-           {lab:'Google DeepMind', model:'Gemini-1.5-pro', score:'64.65 avg'},
+           {lab:'Google DeepMind', model:'Gemini-1.5-pro (Closed)', score:'64.65 avg'},
            {lab:'Alibaba',      model:'Qwen-72B',         score:'64.27 avg'},
            {lab:'OpenAI',       model:'gpt-4-0613',       score:'60.34 avg'},
            {lab:'OpenAI',       model:'gpt-oss-20b',      score:'56.60 avg (STEM 73.87)'},
            {lab:'Anthropic',    model:'Claude-3-opus',    score:'41.12 avg'},
-           {lab:'Meta',         model:'Llama-3-70b-chat', score:'39.62 avg'},
+           {lab:'Meta',         model:'Llama-3-70b-chat (Open weight)', score:'39.62 avg'},
          ]},
         {name:'TW-LegalBench', sota:'New Jun 2026', headroom:null, priority:'critical', hhri:false,
          why:'NEW arXiv:2606.18699. 16K+ MCQs across 18 Taiwan legal domains. 117 essays + 14K judgment prediction. Zero Western lab competition.',
@@ -2249,7 +2249,7 @@ function renderPriority() {
          why:'14 languages. Gemini 3.1 Pro leads. Critical for HHRI-AI multilingual positioning.',
          url:'https://huggingface.co/datasets/openai/MMMLU',
          labs:[
-           {lab:'Google DeepMind', model:'Gemini 3.1 Pro', score:'92.6%'},
+           {lab:'Google DeepMind', model:'Gemini 3.1 Pro (Closed)', score:'92.6%'},
            {lab:'Google DeepMind', model:'Gemma 4 31B',    score:'85.2%'},
            {lab:'HHRI-AI',      model:'Not yet run',      score:null},
          ]},
@@ -2264,7 +2264,7 @@ function renderPriority() {
          url:'https://paperswithcode.com/sota/multi-task-language-understanding-on-mmlu-1',
          labs:[
            {lab:'Anthropic',    model:'Claude Fable 5',   score:'91.5%'},
-           {lab:'Google DeepMind', model:'Gemini 3.1 Pro', score:'91.0%'},
+           {lab:'Google DeepMind', model:'Gemini 3.1 Pro (Closed)', score:'91.0%'},
            {lab:'xAI',          model:'Grok 4',           score:'86.6%'},
            {lab:'DeepSeek',     model:'DeepSeek R1',      score:'84.0%'},
            {lab:'HHRI-AI',      model:'Not yet run',      score:null},
@@ -2282,7 +2282,7 @@ function renderPriority() {
            {lab:'OpenAI',       model:'GPT-5.4 Pro',      score:'94%'},
            {lab:'Anthropic',    model:'Claude Mythos 5',  score:'92.7%'},
            {lab:'Anthropic',    model:'Claude Fable 5',   score:'92.7%'},
-           {lab:'Google DeepMind', model:'Gemini 3.5 Flash', score:'83.6%'},
+           {lab:'Google DeepMind', model:'Gemini 3.5 Flash (Closed)', score:'83.6%'},
            {lab:'OpenAI',       model:'GPT-5.6 Sol',      score:'83%'},
            {lab:'HHRI-AI',      model:'Not yet run',      score:null},
          ]},
@@ -2326,7 +2326,7 @@ function renderPriority() {
          why:'Graph traversal in 256K-1M context. Claude Mythos 5 leads at 91.1%. Tests structured long-context reasoning beyond simple retrieval.',
          url:'https://openai.com/index/gpt-5-6/',
          labs:[
-           {lab:'Anthropic',       model:'Claude Mythos 5 (256K)', score:'91.1%'},
+           {lab:'Anthropic',       model:'Claude Mythos 5 (256K) (Closed)', score:'91.1%'},
            {lab:'OpenAI',          model:'GPT-5.6 Sol (256K)',     score:'90.7%'},
            {lab:'Anthropic',       model:'Claude Opus 4.8',        score:'85.9%'},
            {lab:'HHRI-AI',         model:'Not yet run',            score:null},
@@ -2337,9 +2337,9 @@ function renderPriority() {
          labs:[
            {lab:'OpenAI',          model:'GPT-4o (eff. 8K)',         score:'99.3% base · 69.7% @32K'},
            {lab:'Meta',            model:'Llama 3.3 70B (eff. 2K)',  score:'97.3% base · 42.7% @32K'},
-           {lab:'Google DeepMind', model:'Gemini 1.5 Pro (eff. 2K)', score:'92.6% base · 48.2% @32K'},
-           {lab:'Anthropic',       model:'Claude 3.5 Sonnet (eff. 4K)', score:'87.6% base · 29.8% @32K'},
-           {lab:'Meta',            model:'Gemini 2.0 Flash (eff. 4K)', score:'89.4% base · 41.0% @32K'},
+           {lab:'Google DeepMind', model:'Gemini 1.5 Pro (eff. 2K) (Closed)', score:'92.6% base · 48.2% @32K'},
+           {lab:'Anthropic',       model:'Claude 3.5 Sonnet (eff. 4K) (Closed)', score:'87.6% base · 29.8% @32K'},
+           {lab:'Meta',            model:'Gemini 2.0 Flash (eff. 4K) (Closed)', score:'89.4% base · 41.0% @32K'},
            {lab:'HHRI-AI',         model:'Not yet run',              score:null},
          ]},
       ]
@@ -2352,7 +2352,7 @@ function renderPriority() {
          why:'Tool orchestration via Model Context Protocol. Anthropic leads (61.7%) over OpenAI (58.0%) and Google (48.8%). Directly relevant for HHRI-AI eval pipeline.',
          url:'https://scale.com/leaderboard',
          labs:[
-           {lab:'Anthropic',       model:'Claude Mythos 5 / Fable 5', score:'61.7%'},
+           {lab:'Anthropic',       model:'Claude Mythos 5 / Fable 5 (Closed)', score:'61.7%'},
            {lab:'Anthropic',       model:'Claude Opus 4.8',           score:'59.9%'},
            {lab:'OpenAI',          model:'GPT-5.6 Sol',               score:'58.0%'},
            {lab:'Google DeepMind', model:'Gemini 3.1 Pro',            score:'48.8%'},
@@ -2363,7 +2363,7 @@ function renderPriority() {
          url:'https://scale.com/leaderboard',
          labs:[
            {lab:'Moonshot AI',     model:'Kimi K3 (verified)',        score:'73.2%'},
-           {lab:'Anthropic',       model:'Claude Mythos 5 / Fable 5', score:'61.7%'},
+           {lab:'Anthropic',       model:'Claude Mythos 5 / Fable 5 (Closed)', score:'61.7%'},
            {lab:'OpenAI',          model:'GPT-5.6 Sol',               score:'58.0%'},
            {lab:'Google DeepMind', model:'Gemini 3.1 Pro',            score:'48.8%'},
            {lab:'HHRI-AI',         model:'Not yet run',               score:null},
@@ -2373,15 +2373,15 @@ function renderPriority() {
          url:'https://github.com/sierra-research/tau-bench',
          labs:[
            {lab:'xAI',     model:'Grok 4.3',   score:'97.7%'},
-           {lab:'HHRI-AI', model:'Qwen3.5-9B', score:'retail 73.7% · airline 74.0% ✓'},
+           {lab:'HHRI-AI', model:'Qwen3.5-9B (Open weight)', score:'retail 73.7% · airline 74.0% ✓'},
          ]},
         {name:'BFCL v4', sota:'N/A', headroom:null, priority:'high', hhri:false,
          why:'Berkeley Function Calling Leaderboard - multi-turn parallel tool calls. Standard adopted by all top labs. Consider adding to HHRI-AI suite.',
          url:'https://gorilla.cs.berkeley.edu/leaderboard.html',
          labs:[
-           {lab:'Anthropic',       model:'Claude Fable 5', score:'N/A'},
+           {lab:'Anthropic',       model:'Claude Fable 5 (Closed)', score:'N/A'},
            {lab:'OpenAI',          model:'GPT-5.6 Sol',    score:'N/A'},
-           {lab:'Google DeepMind', model:'Gemini 3.1 Pro', score:'N/A'},
+           {lab:'Google DeepMind', model:'Gemini 3.1 Pro (Closed)', score:'N/A'},
            {lab:'HHRI-AI',         model:'Not yet run',    score:null},
          ]},
       ]
