@@ -1100,7 +1100,7 @@ const MODELS = [
   {name:'Llama 4 Scout',               org:'Meta',            weight:'open',       released:'2025',          desc:'10M token context (effective 5–6.5M). Smaller MoE variant of Llama 4. Ideal for long-document workloads.',                                                                               runnable:true, benchmarks:'MMLU-Pro, GPQA, long-context',params:'109B total / 17B active', arch:'MoE (multimodal)', context:'10M', cutoff:'2024',gpu_req:'2× H100 80GB (FP8)'},
   {name:'Llama 3.3 70B',               org:'Meta',            weight:'open',       released:'Dec 2024',      desc:'Still widely used. Excellent performance-per-parameter. Strong baseline for fine-tuning at HHRI-AI.',                                                                                     runnable:true, benchmarks:'MMLU, GPQA, IFEval, SWE-Bench',params:'70B', arch:'Dense (transformer)', context:'128K', cutoff:'Dec 2023',gpu_req:'2× A100 40GB or 1× H100 80GB'},
   // ── DeepSeek (7) ─────────────────────────────────────────────────
-  {name:'DeepSeek V4 Pro',             org:'DeepSeek',        weight:'open',       released:'Apr 2026',      desc:'MIT license. SWE-Bench Verified: 80.6%. 75% cost reduction vs V3. vLLM-compatible.',                                                                                                     runnable:true, benchmarks:'SWE-Bench, AIME, GPQA, MMLU-Pro, LiveCodeBench',isNew:true,params:'1.6T total / 49B active', arch:'MoE (hybrid attention)', context:'1M', cutoff:'2024',gpu_req:'8× H100 80GB (FP8) cluster'},
+  {name:'DeepSeek V4 Pro',             org:'DeepSeek',        weight:'open',       released:'Apr 2026',      desc:'MIT license. SWE-Bench Verified: 80.6%. Input price cut ~75% from its own $1.74 launch price (now $0.435), effective May 31 2026. vLLM-compatible.',                                                                                                     runnable:true, benchmarks:'SWE-Bench, AIME, GPQA, MMLU-Pro, LiveCodeBench',isNew:true,params:'1.6T total / 49B active', arch:'MoE (hybrid attention)', context:'1M', cutoff:'2024',gpu_req:'8× H100 80GB (FP8) cluster'},
   {name:'DeepSeek V4 Flash',           org:'DeepSeek',        weight:'open',       released:'Apr 2026',      desc:'284B total 13B active MoE. 1M context. $0.14/M input — cheapest viable frontier coding. Thinking + non-thinking + Think Max modes.',                                                       runnable:true, benchmarks:'SWE-Bench, LiveCodeBench, MMLU-Pro',isNew:true,params:'284B total / 13B active', arch:'MoE (hybrid attention)', context:'1M', cutoff:'2024',gpu_req:'2× H100 80GB (BF16)'},
   {name:'DeepSeek V3.2 Speciale',      org:'DeepSeek',        weight:'open',       released:'Dec 2025',      desc:'Gold at IMO, IOI, and ICPC 2025. High-compute extended reasoning variant.',                                                                                                               runnable:true, benchmarks:'FrontierMath, AIME, competition math',gpu_req:'8× H100 80GB cluster'},
   {name:'DeepSeek V3.2',               org:'DeepSeek',        weight:'open',       released:'Dec 2025',      desc:'First model integrating thinking directly into tool-use workflows. MIT license.',                                                                                                          runnable:true, benchmarks:'SWE-Bench, MMLU-Pro, LiveCodeBench',gpu_req:'8× H100 80GB cluster'},
@@ -1144,6 +1144,104 @@ const MODELS = [
 
 // ── Dedicated Agentic Coding reference ──────────────────────────────────────
 const CODING_MODELS = [
+
+  // ── TIER 0: Newest releases (Jul 2026) ────────────────
+  {
+    name:'Claude Opus 5',
+    org:'Anthropic', weight:'closed',
+    released:'Jul 24, 2026',
+    specialty:'Agentic + hard tasks',
+    price:'$5/$25',
+    api:'claude-opus-5',
+    context:'1M',
+    license:'Proprietary',
+    scores:{swe_verified:'N/A', swe_pro:'N/A',
+            livecode:'N/A', humaneval:'N/A',
+            frontiercode:'N/A', terminal:'89.1%'},
+    notes:'New Anthropic flagship. Leads Terminal-Bench 2.1 at 89.1% (CodingFleet Jul 25 2026). Most aligned Anthropic model to date; close to Fable 5 at half the cost.',
+    runnable:false,
+    url:'https://www.anthropic.com/news/claude-opus-5'
+  },
+  {
+    name:'GPT-5.6 Sol',
+    org:'OpenAI', weight:'closed',
+    released:'Jul 9, 2026',
+    specialty:'Agentic + coding',
+    price:'$5/$30',
+    api:'gpt-5-6-sol',
+    context:'256K',
+    license:'Proprietary',
+    scores:{swe_verified:'96.2%', swe_pro:'64.6%',
+            livecode:'N/A', humaneval:'N/A',
+            frontiercode:'N/A', terminal:'88.8%'},
+    notes:'New OpenAI flagship. SOTA on Agents Last Exam, DeepSWE, OSWorld 2.0. Programmatic Tool Calling; Ultra mode coordinates 4 parallel agents.',
+    runnable:false,
+    url:'https://openai.com/index/gpt-5-6/'
+  },
+  {
+    name:'Kimi K3',
+    org:'Moonshot AI', weight:'open',
+    released:'Jul 16, 2026',
+    specialty:'Agentic + long-horizon coding',
+    price:'$3.00/$15.00 (cache-hit $0.30)',
+    api:'kimi-k3',
+    context:'1M',
+    license:'Modified MIT',
+    scores:{swe_verified:'76.8% (Moonshot) / 93.4% (vals.ai)', swe_pro:'N/A',
+            livecode:'N/A', humaneval:'N/A',
+            frontiercode:'N/A', terminal:'N/A'},
+    notes:'World-first open 3T-class model (2.8T params). Kimi Delta Attention + Stable LatentMoE. Trails Fable 5 and GPT-5.6 Sol but outperforms all other tested models. SWE-Bench Verified figures differ by tracker — Moonshot self-reports 76.8% (down from K2.6\'s 80.2%), vals.ai reports 93.4% on a different harness.',
+    runnable:true,
+    url:'https://www.kimi.com/blog/kimi-k3'
+  },
+  {
+    name:'Grok 4.5',
+    org:'xAI', weight:'closed',
+    released:'Jul 8, 2026',
+    specialty:'Agentic coding',
+    price:'$2/$6',
+    api:'grok-4.5',
+    context:'1M',
+    license:'Proprietary',
+    scores:{swe_verified:'N/A', swe_pro:'64.7%',
+            livecode:'N/A', humaneval:'N/A',
+            frontiercode:'N/A', terminal:'N/A'},
+    notes:'"Opus-class" xAI flagship.',
+    runnable:false,
+    url:'https://x.ai/news/grok-4-5'
+  },
+  {
+    name:'GPT-5.6 Terra',
+    org:'OpenAI', weight:'closed',
+    released:'Jul 9, 2026',
+    specialty:'Agentic + coding (balanced tier)',
+    price:'$2.50/$15',
+    api:'gpt-5-6-terra',
+    context:'256K',
+    license:'Proprietary',
+    scores:{swe_verified:'N/A', swe_pro:'63.4%',
+            livecode:'N/A', humaneval:'N/A',
+            frontiercode:'N/A', terminal:'87.4%'},
+    notes:'Balanced GPT-5.6 tier. Competitive with GPT-5.5 at lower cost.',
+    runnable:false,
+    url:'https://openai.com/index/gpt-5-6/'
+  },
+  {
+    name:'GPT-5.6 Luna',
+    org:'OpenAI', weight:'closed',
+    released:'Jul 9, 2026',
+    specialty:'Agentic + coding (value tier)',
+    price:'$1/$6',
+    api:'gpt-5-6-luna',
+    context:'256K',
+    license:'Proprietary',
+    scores:{swe_verified:'N/A', swe_pro:'62.7%',
+            livecode:'N/A', humaneval:'N/A',
+            frontiercode:'N/A', terminal:'N/A'},
+    notes:'Most cost-efficient GPT-5.6 tier. Outperforms Claude Opus 4.8 at ~1/4 the estimated cost.',
+    runnable:false,
+    url:'https://openai.com/index/gpt-5-6/'
+  },
 
   // ── TIER 1: Frontier agentic coding (closed) ──────────
   {
@@ -1233,14 +1331,14 @@ const CODING_MODELS = [
     org:'DeepSeek', weight:'open',
     released:'Apr 2026',
     specialty:'Agentic coding + cheapest frontier',
-    price:'$1.74/$3.48 (or self-host)',
+    price:'$0.435/$3.48 (or self-host)',
     api:'deepseek-v4-pro',
     context:'1M',
     license:'MIT',
     scores:{swe_verified:'80.6%', swe_pro:'N/A',
             livecode:'93.5%', humaneval:'N/A',
             frontiercode:'N/A', terminal:'N/A'},
-    notes:'MIT license. Leads all evaluated open models on LiveCodeBench (93.5) and Codeforces Rating (3206). vLLM-compatible.',
+    notes:'1.6T total / 49B active MoE. MIT license. Leads all evaluated open models on LiveCodeBench (93.5) and Codeforces Rating (3206). vLLM-compatible. Input price cut ~75% from $1.74 launch price, effective May 31 2026.',
     runnable:true,
     url:'https://github.com/deepseek-ai/DeepSeek-V4'
   },
@@ -1858,7 +1956,7 @@ const MODEL_PRICES = {
   'Llama 4 Scout':             'Open-weight',
   'Llama 3.3 70B':             'Open-weight',
   // DeepSeek
-  'DeepSeek V4 Pro':           '$1.74/$3.48',
+  'DeepSeek V4 Pro':           '$0.435/$3.48',
   'DeepSeek V4 Flash':         '$0.14/$0.28',
   'DeepSeek V3.2 Speciale':    'Open-weight',
   'DeepSeek V3.2':             'Open-weight',
@@ -2001,12 +2099,23 @@ function scoreClass(val) {
   return 'score-na';
 }
 
+function parseCodingReleaseDate(s) {
+  const MON = {Jan:0,Feb:1,Mar:2,Apr:3,May:4,Jun:5,Jul:6,Aug:7,Sep:8,Oct:9,Nov:10,Dec:11};
+  let m = s.match(/^([A-Za-z]{3})[a-z]*\s+(\d{1,2}),\s*(\d{4})$/);
+  if (m) return Date.UTC(+m[3], MON[m[1]], +m[2]);
+  m = s.match(/^([A-Za-z]{3})[a-z]*\s+(\d{4})$/);
+  if (m) return Date.UTC(+m[2], MON[m[1]], 1);
+  m = s.match(/^(\d{4})$/);
+  if (m) return Date.UTC(+m[1], 0, 1);
+  return 0;
+}
+
 function renderCodingModels() {
   const items = CODING_MODELS.filter(m => {
     if (codingFilter !== 'all' && m.weight !== codingFilter) return false;
     if (codingSpec !== 'all' && codingSpecCategory(m) !== codingSpec) return false;
     return true;
-  });
+  }).sort((a, b) => parseCodingReleaseDate(b.released) - parseCodingReleaseDate(a.released));
   document.getElementById('coding-grid').innerHTML = items.map(m => {
     const isNew2026 = /2026/.test(m.released);
     const badge = isNew2026 ? '<span class="new-pill">NEW</span>' : '';
