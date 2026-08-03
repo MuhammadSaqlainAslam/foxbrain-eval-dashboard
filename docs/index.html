@@ -2009,12 +2009,13 @@ function clearModelSearch() {
   const el = document.getElementById('model-search');
   if (el) { el.value = ''; renderModels(); }
   const cl = document.getElementById('model-search-clear');
-  if (cl) cl.style.display = 'none';
+  if (cl) cl.classList.remove('visible');
 }
 
 function renderModels() {
   const majorLabs = ['Anthropic','OpenAI','Google DeepMind','Meta','DeepSeek','Alibaba','xAI','Mistral AI'];
   const mq = (document.getElementById('model-search')?.value || '').toLowerCase();
+  document.getElementById('model-search-clear')?.classList.toggle('visible', mq.length > 0);
   const items = MODELS.filter(m => {
     if (!showDeprecated && m.deprecated) return false;
     if (newOnlyMode && !m.isNew) return false;
@@ -2030,6 +2031,12 @@ function renderModels() {
       if (!hay.includes(mq)) return false;
     }
     return true;
+  }).sort((a, b) => {
+    const orgIdx = m => { const i = majorLabs.indexOf(m.org); return i === -1 ? majorLabs.length : i; };
+    const groupDiff = orgIdx(a) - orgIdx(b);
+    if (groupDiff !== 0) return groupDiff;
+    if (orgIdx(a) === majorLabs.length && a.org !== b.org) return a.org.localeCompare(b.org);
+    return parseCodingReleaseDate(b.released) - parseCodingReleaseDate(a.released);
   });
   document.getElementById('models-grid').innerHTML = items.map(m => {
     const badge = m.isNew ? '<span class="new-pill">NEW</span>' : '';
@@ -2122,11 +2129,12 @@ function clearCodingSearch() {
   const el = document.getElementById('coding-search');
   if (el) { el.value = ''; renderCodingModels(); }
   const cl = document.getElementById('coding-search-clear');
-  if (cl) cl.style.display = 'none';
+  if (cl) cl.classList.remove('visible');
 }
 
 function renderCodingModels() {
   const cq = (document.getElementById('coding-search')?.value || '').toLowerCase();
+  document.getElementById('coding-search-clear')?.classList.toggle('visible', cq.length > 0);
   const items = CODING_MODELS.filter(m => {
     if (codingFilter !== 'all' && m.weight !== codingFilter) return false;
     if (codingSpec !== 'all' && codingSpecCategory(m) !== codingSpec) return false;
