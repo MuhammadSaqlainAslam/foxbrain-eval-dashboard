@@ -738,12 +738,12 @@ tbody td { padding: 12px 16px; vertical-align: top; }
     <div class="hero-text">
       <div class="hero-title">
         FoxBrain EvalHub
-        <span class="badge" style="background:var(--accent-bg);color:var(--accent);border:1px solid var(--accent);border-radius:99px;padding:3px 10px;font-size:11px;font-weight:600">July 30, 2026 &bull; Latest: Claude Opus 5 (Jul 24, Anthropic)</span>
+        <span class="badge" style="background:var(--accent-bg);color:var(--accent);border:1px solid var(--accent);border-radius:99px;padding:3px 10px;font-size:11px;font-weight:600">August 2, 2026 &bull; Latest: Claude Opus 5 (Jul 24, Anthropic)</span>
       </div>
       <p class="hero-desc">Frontier Benchmark &amp; Model Intelligence — HHRI-AI Research<br><span style="font-size:12px;color:var(--text3)">A curated, up-to-date reference of benchmarks and frontier models used by leading AI labs. Use this to select evaluation targets for FoxBrain model assessments across 12 capability domains.</span></p>
       <div class="hero-updated">
         <span class="dot"></span>
-        Last updated: <span id="last-updated-date">July 30, 2026</span> &nbsp;&bull;&nbsp; Full accuracy audit: corrected dates/scores across 13 models, added Grok 4.5 &amp; Muse Spark 1.1 (Meta)
+        Last updated: <span id="last-updated-date">August 2, 2026</span> &nbsp;&bull;&nbsp; Added Qwen3.8-Max (Alibaba, preview) &amp; a Coding tab search bar
       </div>
     </div>
     <div class="hero-stats">
@@ -851,6 +851,11 @@ tbody td { padding: 12px 16px; vertical-align: top; }
       <button class="fbtn spec-fbtn" onclick="setCodingSpec('agentic',this)">Agentic</button>
       <button class="fbtn spec-fbtn" onclick="setCodingSpec('local',this)">Local/self-host</button>
       <button class="fbtn spec-fbtn" onclick="setCodingSpec('autocomplete',this)">Autocomplete/FIM</button>
+      <div class="search-wrap">
+        <svg class="search-icon" width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="9" r="6"/><path d="m15 15 3 3"/></svg>
+        <input class="search-input" id="coding-search" placeholder="Search coding models..." autocomplete="off" oninput="renderCodingModels()">
+        <button class="search-clear" id="coding-search-clear" onclick="clearCodingSearch()" title="Clear search">&times;</button>
+      </div>
     </div>
     <div class="models-grid" id="coding-grid"></div>
   </div>
@@ -905,7 +910,7 @@ tbody td { padding: 12px 16px; vertical-align: top; }
 
 <div class="footer">
   <span>FoxBrain EvalHub &nbsp;&bull;&nbsp; HHRI-AI / Foxconn AI Research Center &nbsp;&bull;&nbsp; <a href="https://muhammadsaqlainaslam.github.io/foxbrain-eval-dashboard/">muhammadsaqlainaslam.github.io/foxbrain-eval-dashboard</a></span>
-  <span id="footer-updated">Updated July 30, 2026</span> &nbsp;&bull;&nbsp; 11 labs &nbsp;&bull;&nbsp; 83 models &nbsp;&bull;&nbsp; 84 benchmarks &nbsp;&bull;&nbsp; 20 sources
+  <span id="footer-updated">Updated August 2, 2026</span> &nbsp;&bull;&nbsp; 11 labs &nbsp;&bull;&nbsp; 84 models &nbsp;&bull;&nbsp; 84 benchmarks &nbsp;&bull;&nbsp; 20 sources
 </div>
 
 <script>
@@ -1108,10 +1113,11 @@ const MODELS = [
   {name:'DeepSeek R1',                 org:'DeepSeek',        weight:'open',       released:'Jan 2025',      desc:'671B MoE. AIME 2024: 79.8%, MATH-500: 97.3%, GPQA Diamond: 71.5%, MMLU-Pro: 84.0%. MIT license. MAI-T1 Tables 11+12.',                                                                  runnable:true, benchmarks:'AIME 2024, MATH-500, GPQA, MMLU-Pro, LiveCodeBench',params:'671B total / 37B active', arch:'MoE + RL reasoning', context:'128K', cutoff:'2024',gpu_req:'8× H100 80GB (FP8) cluster'},
   {name:'DeepSeek V3',                 org:'DeepSeek',        weight:'open',       released:'Dec 2024',      desc:'General capability baseline. MIT license. Widely cited in frontier comparisons. vLLM-compatible.',                                                                                        runnable:true, benchmarks:'MMLU-Pro, SWE-Bench, IFEval',params:'671B total / 37B active', arch:'MoE (transformer)', context:'128K', cutoff:'2024',gpu_req:'8× H100 80GB (FP8) cluster'},
   {name:'DeepSeek Prover V2',          org:'DeepSeek',        weight:'open',       released:'2025',          desc:'Formal theorem proving in Lean 4. 671B + 7B variants. State-of-the-art on formal math proof benchmarks.',                                                                                runnable:true, benchmarks:'MiniF2F, ProofNet, FrontierMath',gpu_req:'8× H100 80GB cluster'},
-  // ── Alibaba (6) ──────────────────────────────────────────────────
+  // ── Alibaba (7) ──────────────────────────────────────────────────
   {name:'Qwen3.5',                     org:'Alibaba',         weight:'open',       released:'Feb 2026',      desc:'Multimodal family. Gated Delta Networks + MoE architecture. Apache 2.0.',                                                                                                                 runnable:true, benchmarks:'MMLU-Pro, GPQA, MMMLU',isNew:true,params:'N/A (undisclosed)', arch:'MoE (multimodal)', context:'256K', cutoff:'2024',gpu_req:'2× H100 80GB'},
   {name:'Qwen3.6-35B-A3B',             org:'Alibaba',         weight:'open',       released:'2026',          desc:'MoE — 35B total, 3B active. Between Qwen3.5 and Qwen3.7 in release sequence.',                                                                                                             runnable:true, benchmarks:'',isNew:true,params:'35B total / 3B active', arch:'MoE (transformer)', context:'128K', cutoff:'2024',gpu_req:'1× H100 80GB (BF16)'},
   {name:'Qwen3.7 Max',                 org:'Alibaba',         weight:'closed',     released:'May 2026',      desc:'GPQA Diamond: 92.4%. Official list price $2.50/$7.50 per MTok (as low as $1.25/M input via discounted resellers).',                                                                                                        runnable:false,benchmarks:'GPQA Diamond, MMLU-Pro, LiveCodeBench',params:'N/A (undisclosed)', arch:'Dense (transformer)', context:'128K', cutoff:'2024'},
+  {name:'Qwen3.8-Max',                 org:'Alibaba',         weight:'closed',     released:'Jul 19, 2026',  desc:'Preview only — Alibaba claims performance "second only to Fable 5" but has not published a benchmark table or independent evaluation yet. 2.4T param sparse MoE, first Qwen multimodal model above 1T params (text, image, video, document input). Live now as Qwen3.8-Max-Preview via Token Plan/Qoder; full release + possible open-weight variant expected later in Aug 2026 (unconfirmed).',   runnable:false,benchmarks:'None published yet',isNew:true,params:'2.4T total (active undisclosed)', arch:'MoE (multimodal, sparse)', context:'N/A (undisclosed)', cutoff:'2024'},
   {name:'Qwen3-235B-A22B',             org:'Alibaba',         weight:'open',       released:'2025',          desc:'Open MoE flagship. Thinking-2507 variant: AIME 2025: 92.3%, GPQA: 81.1%. Instruct-2507 variant: AIME 2025: 70.3%, GPQA: 77.5%. Apache 2.0. MAI-T1 Tables 11+12. vLLM-compatible.',                                                                  runnable:true, benchmarks:'AIME 2025, GPQA, MMLU-Pro, IFEval, LiveCodeBench',params:'235B total / 22B active', arch:'MoE (transformer)', context:'128K', cutoff:'2024',gpu_req:'4× H100 80GB (FP8)'},
   {name:'Qwen3-30B-A3B',               org:'Alibaba',         weight:'open',       released:'2025',          desc:'MoE, 3B active. Outperforms many 120B dense models. Runs on MacBook 64GB. Excellent efficiency.',                                                                                        runnable:true, benchmarks:'MMLU-Pro, GPQA, LiveCodeBench',params:'30B total / 3B active', arch:'MoE (transformer)', context:'128K', cutoff:'2024',gpu_req:'1× H100 40GB'},
   {name:'Qwen3-VL',                    org:'Alibaba',         weight:'open',       released:'Sep 2025',      desc:'Vision-language GUI agent. Top on OSWorld. 72B instruction-tuned model for multimodal tasks.',                                                                                            runnable:true, benchmarks:'OSWorld, MMMU, MathVista',gpu_req:'2× H100 80GB'},
@@ -1865,6 +1871,7 @@ const MODEL_LINKS = {
   'Qwen3.6 27B':            'https://qwenlm.github.io/',
   'Qwen3.6-35B-A3B':        'https://qwenlm.github.io/',
   'Qwen3.7 Max':            'https://qwenlm.github.io/',
+  'Qwen3.8-Max':            'https://qwenlm.github.io/',
   'Qwen3-235B-A22B':        'https://qwenlm.github.io/blog/qwen3/',
   'Qwen3-30B-A3B':          'https://qwenlm.github.io/blog/qwen3/',
   'Qwen3-VL':               'https://qwenlm.github.io/',
@@ -1969,6 +1976,7 @@ const MODEL_PRICES = {
   'Qwen3.6 27B':               '$0.60/$3.60',
   'Qwen3.6-35B-A3B':           'Open-weight',
   'Qwen3.7 Max':               '$1.25/$3.75',
+  'Qwen3.8-Max':               'Preview (pricing TBD)',
   'Qwen3-235B-A22B':           'Open-weight',
   'Qwen3-30B-A3B':             'Open-weight',
   'Qwen3-VL':                  'Open-weight',
@@ -2037,7 +2045,7 @@ function renderModels() {
     const priceTag = (() => {
       const price = MODEL_PRICES[m.name];
       if (!price) return '';
-      const isSpecial = price === 'Open-weight' || price === 'Deprecated' || price === 'Internal/restricted';
+      const isSpecial = price === 'Open-weight' || price === 'Deprecated' || price === 'Internal/restricted' || price === 'Preview (pricing TBD)';
       const color = isSpecial
         ? 'color:var(--text3);background:var(--surface2);border-color:var(--border2)'
         : 'color:var(--green);background:var(--green-bg);border-color:var(--green)';
@@ -2110,10 +2118,22 @@ function parseCodingReleaseDate(s) {
   return 0;
 }
 
+function clearCodingSearch() {
+  const el = document.getElementById('coding-search');
+  if (el) { el.value = ''; renderCodingModels(); }
+  const cl = document.getElementById('coding-search-clear');
+  if (cl) cl.style.display = 'none';
+}
+
 function renderCodingModels() {
+  const cq = (document.getElementById('coding-search')?.value || '').toLowerCase();
   const items = CODING_MODELS.filter(m => {
     if (codingFilter !== 'all' && m.weight !== codingFilter) return false;
     if (codingSpec !== 'all' && codingSpecCategory(m) !== codingSpec) return false;
+    if (cq) {
+      const hay = (m.name + ' ' + m.org + ' ' + (m.specialty||'') + ' ' + (m.notes||'') + ' ' + (m.api||'')).toLowerCase();
+      if (!hay.includes(cq)) return false;
+    }
     return true;
   }).sort((a, b) => parseCodingReleaseDate(b.released) - parseCodingReleaseDate(a.released));
   document.getElementById('coding-grid').innerHTML = items.map(m => {
