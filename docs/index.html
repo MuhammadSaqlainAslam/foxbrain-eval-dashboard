@@ -738,12 +738,12 @@ tbody td { padding: 12px 16px; vertical-align: top; }
     <div class="hero-text">
       <div class="hero-title">
         FoxBrain EvalHub
-        <span class="badge" style="background:var(--accent-bg);color:var(--accent);border:1px solid var(--accent);border-radius:99px;padding:3px 10px;font-size:11px;font-weight:600">August 2, 2026 &bull; Latest: Claude Opus 5 (Jul 24, Anthropic)</span>
+        <span class="badge" style="background:var(--accent-bg);color:var(--accent);border:1px solid var(--accent);border-radius:99px;padding:3px 10px;font-size:11px;font-weight:600">August 4, 2026 &bull; Latest: Claude Opus 5 (Jul 24, Anthropic)</span>
       </div>
       <p class="hero-desc">Frontier Benchmark &amp; Model Intelligence — HHRI-AI Research<br><span style="font-size:12px;color:var(--text3)">A curated, up-to-date reference of benchmarks and frontier models used by leading AI labs. Use this to select evaluation targets for FoxBrain model assessments across 12 capability domains.</span></p>
       <div class="hero-updated">
         <span class="dot"></span>
-        Last updated: <span id="last-updated-date">August 2, 2026</span> &nbsp;&bull;&nbsp; Added Qwen3.8-Max (Alibaba, preview) &amp; a Coding tab search bar
+        Last updated: <span id="last-updated-date">August 4, 2026</span> &nbsp;&bull;&nbsp; Full re-audit: Qwen3.8-Max went live (Aug 3), 3 new Gemini models added, GPT-5.6 Terra/Luna price cuts, DeepSeek V4 Flash GA
       </div>
     </div>
     <div class="hero-stats">
@@ -910,7 +910,7 @@ tbody td { padding: 12px 16px; vertical-align: top; }
 
 <div class="footer">
   <span>FoxBrain EvalHub &nbsp;&bull;&nbsp; HHRI-AI / Foxconn AI Research Center &nbsp;&bull;&nbsp; <a href="https://muhammadsaqlainaslam.github.io/foxbrain-eval-dashboard/">muhammadsaqlainaslam.github.io/foxbrain-eval-dashboard</a></span>
-  <span id="footer-updated">Updated August 2, 2026</span> &nbsp;&bull;&nbsp; 11 labs &nbsp;&bull;&nbsp; 84 models &nbsp;&bull;&nbsp; 84 benchmarks &nbsp;&bull;&nbsp; 22 sources
+  <span id="footer-updated">Updated August 4, 2026</span> &nbsp;&bull;&nbsp; 11 labs &nbsp;&bull;&nbsp; 87 models &nbsp;&bull;&nbsp; 84 benchmarks &nbsp;&bull;&nbsp; 24 sources
 </div>
 
 <script>
@@ -1062,11 +1062,11 @@ const MODELS = [
   {name:'Claude Haiku 4.5',            org:'Anthropic',       weight:'closed',     released:'Oct 15, 2025',  desc:'Speed/cost tier. $1/$5 per M tokens. Used as tau2-bench user simulator at HHRI-AI via Vertex AI.',                                                                                       runnable:false,benchmarks:'tau2-bench simulator',params:'N/A (undisclosed)', arch:'Dense (transformer)', context:'1M', cutoff:'Apr 2024'},
   {name:'Claude Opus 4.5',             org:'Anthropic',       weight:'closed',     released:'Nov 2025',      desc:'Terminal-Bench 2.0: 65.4%, SWE-Bench Verified: 80.9% (first model to break 80%).',                                                                                                                                    runnable:false,benchmarks:'Terminal-Bench 2.0, SWE-Bench'},
   {name:'Claude Sonnet 4.5',           org:'Anthropic',       weight:'closed',     released:'Sep 2025',      desc:'MRCR v2: 18.5% at 1M context.',                                                                                                                                                            runnable:false,benchmarks:'MRCR v2'},
-  {name:'Claude Opus 4.1',             org:'Anthropic',       weight:'closed',     released:'Aug 2025',      desc:'Deprecated.',                                                                                                                                                                               runnable:false,benchmarks:'',deprecated:true},
+  {name:'Claude Opus 4.1',             org:'Anthropic',       weight:'closed',     released:'Aug 2025',      desc:'Deprecated. Hard API retirement Aug 5, 2026.',                                                                                                                                                                               runnable:false,benchmarks:'',deprecated:true},
   // ── OpenAI (14) ──────────────────────────────────────────────────
-  {name:'GPT-5.6 Sol',                 org:'OpenAI',          weight:'closed',     released:'Jul 9, 2026',   desc:'OpenAI flagship. New SOTA on Agents Last Exam (53.6), BrowseComp (92.2% ultra 4-agent mode; 90.4% single-agent), OSWorld 2.0 (62.6%), Terminal-Bench (88.8%), DeepSWE (72.7%). Programmatic Tool Calling for efficient multi-step workflows. Ultra mode coordinates 4 parallel agents.', runnable:false,benchmarks:'Agents Last Exam, BrowseComp, SWE-Bench Pro, DeepSWE, Terminal-Bench 2.1, OSWorld 2.0',isNew:true,params:'N/A (undisclosed)', arch:'Dense (transformer)', context:'256K', cutoff:'Jan 2026',price:'$5/$30'},
-  {name:'GPT-5.6 Terra',               org:'OpenAI',          weight:'closed',     released:'Jul 9, 2026',   desc:'Balanced tier. Competitive with GPT-5.5 at lower cost. SWE-Bench Pro: 63.4%, Terminal-Bench: 87.4%, BrowseComp: 87.5%. Good for everyday agentic work.', runnable:false,benchmarks:'SWE-Bench Pro, Terminal-Bench, BrowseComp, GPQA',isNew:true,params:'N/A (undisclosed)', arch:'Dense (transformer)', context:'256K', cutoff:'Jan 2026',price:'$2.50/$15'},
-  {name:'GPT-5.6 Luna',                org:'OpenAI',          weight:'closed',     released:'Jul 9, 2026',   desc:'Most cost-efficient GPT-5.6. SWE-Bench Pro: 62.7%, BrowseComp: 83.3%. Outperforms Claude Opus 4.8 at ~1/4 the estimated cost. Best value in GPT-5.6 family.', runnable:false,benchmarks:'SWE-Bench Pro, BrowseComp, Terminal-Bench',isNew:true,params:'N/A (undisclosed)', arch:'Dense (transformer)', context:'256K', cutoff:'Jan 2026',price:'$1/$6'},
+  {name:'GPT-5.6 Sol',                 org:'OpenAI',          weight:'closed',     released:'Jul 9, 2026',   desc:'OpenAI flagship. New SOTA on Agents Last Exam (53.6), BrowseComp (92.2% ultra 4-agent mode; 90.4% single-agent), OSWorld 2.0 (62.6%), Terminal-Bench (88.8%), DeepSWE (72.7%). Programmatic Tool Calling for efficient multi-step workflows. Ultra mode coordinates 4 parallel agents. New "Sol Fast" mode added Jul 30, 2026: $10/$60/MTok, 2.5x throughput at same intelligence.', runnable:false,benchmarks:'Agents Last Exam, BrowseComp, SWE-Bench Pro, DeepSWE, Terminal-Bench 2.1, OSWorld 2.0',isNew:true,params:'N/A (undisclosed)', arch:'Dense (transformer)', context:'256K', cutoff:'Jan 2026',price:'$5/$30'},
+  {name:'GPT-5.6 Terra',               org:'OpenAI',          weight:'closed',     released:'Jul 9, 2026',   desc:'Balanced tier. Competitive with GPT-5.5 at lower cost. SWE-Bench Pro: 63.4%, Terminal-Bench: 87.4%, BrowseComp: 87.5%. Good for everyday agentic work. Price cut 20% Jul 30, 2026 (was $2.50/$15).', runnable:false,benchmarks:'SWE-Bench Pro, Terminal-Bench, BrowseComp, GPQA',isNew:true,params:'N/A (undisclosed)', arch:'Dense (transformer)', context:'256K', cutoff:'Jan 2026',price:'$2/$12'},
+  {name:'GPT-5.6 Luna',                org:'OpenAI',          weight:'closed',     released:'Jul 9, 2026',   desc:'Most cost-efficient GPT-5.6. SWE-Bench Pro: 62.7%, BrowseComp: 83.3%. Outperforms Claude Opus 4.8 at ~1/4 the estimated cost. Best value in GPT-5.6 family. Price cut 80% Jul 30, 2026 (was $1/$6).', runnable:false,benchmarks:'SWE-Bench Pro, BrowseComp, Terminal-Bench',isNew:true,params:'N/A (undisclosed)', arch:'Dense (transformer)', context:'256K', cutoff:'Jan 2026',price:'$0.20/$1.20'},
   {name:'GPT-5.5',                     org:'OpenAI',          weight:'closed',     released:'May 5, 2026',   desc:'Current ChatGPT default. AIME 2025: 81.2%, SWE-Bench Pro: 58.6%, Terminal-Bench 2.1: 83.4%, GDPval-AA: 1769. 52.5% fewer hallucinations vs GPT-5.3. $5/$30 per M tokens.',              runnable:false,benchmarks:'AIME 2025, SWE-Bench Pro, Terminal-Bench, GDPval-AA',isNew:true,params:'N/A (undisclosed)', arch:'Dense (transformer)', context:'256K', cutoff:'Jan 2026'},
   {name:'GPT-5.5 Instant',             org:'OpenAI',          weight:'closed',     released:'May 5, 2026',   desc:'ChatGPT default alias replacing GPT-5.3 Instant. Optimised for low-latency interactive use.',                                                                                              runnable:false,benchmarks:'',isNew:true},
   {name:'GPT-5.4',                     org:'OpenAI',          weight:'closed',     released:'Mar 5, 2026',   desc:'GPQA Diamond: 92.8%, HLE: 44.3%, OSWorld: 75%. Native computer use + 1M context. Variants: Thinking, Pro, mini, nano.',                                                                  runnable:false,benchmarks:'GPQA Diamond, HLE, OSWorld, MMLU-Pro',params:'N/A (undisclosed)', arch:'Dense (transformer)', context:'1M', cutoff:'Jan 2026'},
@@ -1081,7 +1081,10 @@ const MODELS = [
   {name:'o3',                          org:'OpenAI',          weight:'closed',     released:'Apr 16, 2025',  desc:'Reasoning specialist. AIME 2025: 96.7%, MATH-500: ~97%. Retiring from ChatGPT Aug 26, 2026.',                                                                                             runnable:false,benchmarks:'AIME 2025, MATH-500, GPQA, LiveCodeBench',params:'N/A (undisclosed)', arch:'Dense + RL reasoning', context:'200K', cutoff:'2024'},
   {name:'o3-pro',                      org:'OpenAI',          weight:'closed',     released:'Jun 10, 2025',  desc:'Extended reasoning. Pro/Team users only. Higher compute budget than standard o3.',                                                                                                         runnable:false,benchmarks:'AIME 2025, MATH-500'},
   {name:'o4-mini',                     org:'OpenAI',          weight:'closed',     released:'Apr 16, 2025',  desc:'Deprecated. Retired Feb 13, 2026.',                                                                                                                                                        runnable:false,benchmarks:'',deprecated:true},
-  // ── Google DeepMind (13) ─────────────────────────────────────────
+  // ── Google DeepMind (16) ─────────────────────────────────────────
+  {name:'Gemini 3.6 Flash',            org:'Google DeepMind', weight:'closed',     released:'Jul 21, 2026',  desc:'New mid-tier workhorse, positioned for coding/agentic work. 17% fewer output tokens vs 3.5 Flash. DeepSWE: 49% (vs 37% predecessor), MLE-Bench: 63.9%, OSWorld-Verified: 83% (vs 78.4%). Knowledge cutoff advances to Mar 2026. Artificial Analysis Index score 50 (11th of 26 at launch) — beats Google\'s own Gemini 3.1 Pro Preview (46). Trails GPT-5.6 Luna on agentic coding and Claude Sonnet 5 on ML engineering/knowledge work.',   runnable:false,benchmarks:'DeepSWE, MLE-Bench, OSWorld-Verified',isNew:true,params:'N/A (undisclosed)', arch:'Dense (multimodal)', context:'131K', cutoff:'Mar 2026',price:'$1.50/$7.50'},
+  {name:'Gemini 3.5 Flash-Lite',       org:'Google DeepMind', weight:'closed',     released:'Jul 21, 2026',  desc:'Fastest/cheapest Gemini tier — high-throughput agentic search & document processing. Terminal-Bench 2.1: 54% (vs 31% prior Flash-Lite), GDM-MRCR v2: 72.2%, GDPval-AA v2: 1140, SWE-Bench Pro: 54.2% (beats larger Gemini 3 Flash at 49.6%), OSWorld-Verified: 74.0%. 350 output tok/s.',   runnable:false,benchmarks:'Terminal-Bench 2.1, GDM-MRCR v2, SWE-Bench Pro, OSWorld-Verified',isNew:true,params:'N/A (undisclosed)', arch:'Dense (multimodal)', context:'131K', cutoff:'Mar 2026',price:'$0.30/$2.50'},
+  {name:'Gemini 3.5 Flash Cyber',      org:'Google DeepMind', weight:'restricted', released:'Jul 21, 2026',  desc:'Cybersecurity fine-tune of 3.5 Flash for finding/fixing vulnerabilities via CodeMender (multi-agent report generation). Competitive at the frontier on CyberGym. Dual-use — Google restricts access to governments and trusted partners via a limited pilot program, not publicly available.',   runnable:false,benchmarks:'CyberGym',isNew:true,params:'N/A (undisclosed)', arch:'Dense (multimodal)', context:'131K', cutoff:'Mar 2026'},
   {name:'Gemini 3.1 Flash Image',      org:'Google DeepMind', weight:'closed',     released:'Feb 26, 2026',  desc:'Native image generation in Gemini 3.1 Flash ("Nano Banana 2"). $0.50/MTok input; $1.50/MTok text output, $60/MTok image output (~$0.045-0.15/image). 131K context. Deprecated Jun 25, 2026 alongside gemini-3-pro-image-preview.',                                                                                                       runnable:false,benchmarks:'MMMU Pro, visual generation tasks',isNew:true,deprecated:true},
   {name:'Gemini 3.5 Flash',            org:'Google DeepMind', weight:'closed',     released:'May 19, 2026',  desc:'Latest Gemini model. Google I/O 2026 release. Powers Gemini Spark agent.',                                                                                                                runnable:false,benchmarks:'',isNew:true,params:'N/A (undisclosed)', arch:'Dense (multimodal)', context:'131K', cutoff:'Jan 2026'},
   {name:'Gemini 3.1 Pro',              org:'Google DeepMind', weight:'closed',     released:'Feb 19, 2026',  desc:'Flagship Gemini. GPQA: 94.3%, HLE: 44.4%, ARC-AGI-2: 77.1%, SWE-Bench: 80.6%, MRCR v2: 84.9%, MMMLU: 92.6%. 1M context. $2/$12 per M tokens.',                                        runnable:false,benchmarks:'GPQA, HLE, ARC-AGI-2, SWE-Bench, MRCR v2, MMMLU',params:'N/A (undisclosed)', arch:'Dense (multimodal)', context:'1M', cutoff:'Jan 2026'},
@@ -1106,7 +1109,7 @@ const MODELS = [
   {name:'Llama 3.3 70B',               org:'Meta',            weight:'open',       released:'Dec 2024',      desc:'Still widely used. Excellent performance-per-parameter. Strong baseline for fine-tuning at HHRI-AI.',                                                                                     runnable:true, benchmarks:'MMLU, GPQA, IFEval, SWE-Bench',params:'70B', arch:'Dense (transformer)', context:'128K', cutoff:'Dec 2023',gpu_req:'2× A100 40GB or 1× H100 80GB'},
   // ── DeepSeek (7) ─────────────────────────────────────────────────
   {name:'DeepSeek V4 Pro',             org:'DeepSeek',        weight:'open',       released:'Apr 2026',      desc:'MIT license. SWE-Bench Verified: 80.6%. Input price cut ~75% from its own $1.74 launch price (now $0.435), effective May 31 2026. vLLM-compatible.',                                                                                                     runnable:true, benchmarks:'SWE-Bench, AIME, GPQA, MMLU-Pro, LiveCodeBench',isNew:true,params:'1.6T total / 49B active', arch:'MoE (hybrid attention)', context:'1M', cutoff:'2024',gpu_req:'8× H100 80GB (FP8) cluster'},
-  {name:'DeepSeek V4 Flash',           org:'DeepSeek',        weight:'open',       released:'Apr 2026',      desc:'284B total 13B active MoE. 1M context. $0.14/M input — cheapest viable frontier coding. Thinking + non-thinking + Think Max modes.',                                                       runnable:true, benchmarks:'SWE-Bench, LiveCodeBench, MMLU-Pro',isNew:true,params:'284B total / 13B active', arch:'MoE (hybrid attention)', context:'1M', cutoff:'2024',gpu_req:'2× H100 80GB (BF16)'},
+  {name:'DeepSeek V4 Flash',           org:'DeepSeek',        weight:'open',       released:'Apr 2026',      desc:'284B total 13B active MoE. 1M context. $0.14/M input — cheapest viable frontier coding. Thinking + non-thinking + Think Max modes. Official GA release Jul 31, 2026 (previously preview); architecture unchanged, post-training gains only.',                                                       runnable:true, benchmarks:'SWE-Bench, LiveCodeBench, MMLU-Pro',isNew:true,params:'284B total / 13B active', arch:'MoE (hybrid attention)', context:'1M', cutoff:'2024',gpu_req:'2× H100 80GB (BF16)'},
   {name:'DeepSeek V3.2 Speciale',      org:'DeepSeek',        weight:'open',       released:'Dec 2025',      desc:'Gold at IMO, IOI, and ICPC 2025. High-compute extended reasoning variant.',                                                                                                               runnable:true, benchmarks:'FrontierMath, AIME, competition math',gpu_req:'8× H100 80GB cluster'},
   {name:'DeepSeek V3.2',               org:'DeepSeek',        weight:'open',       released:'Dec 2025',      desc:'First model integrating thinking directly into tool-use workflows. MIT license.',                                                                                                          runnable:true, benchmarks:'SWE-Bench, MMLU-Pro, LiveCodeBench',gpu_req:'8× H100 80GB cluster'},
   {name:'DeepSeek R1-0528',            org:'DeepSeek',        weight:'open',       released:'May 28, 2025',  desc:'Latest R1 update. Improved reasoning and coding over R1.',                                                                                                                                runnable:true, benchmarks:'AIME, MATH-500, LiveCodeBench',isNew:true,params:'671B total / 37B active', arch:'MoE + RL reasoning', context:'128K', cutoff:'2024',gpu_req:'8× H100 80GB (FP8) cluster'},
@@ -1117,7 +1120,7 @@ const MODELS = [
   {name:'Qwen3.5',                     org:'Alibaba',         weight:'open',       released:'Feb 2026',      desc:'Multimodal family. Gated Delta Networks + MoE architecture. Apache 2.0.',                                                                                                                 runnable:true, benchmarks:'MMLU-Pro, GPQA, MMMLU',isNew:true,params:'N/A (undisclosed)', arch:'MoE (multimodal)', context:'256K', cutoff:'2024',gpu_req:'2× H100 80GB'},
   {name:'Qwen3.6-35B-A3B',             org:'Alibaba',         weight:'open',       released:'2026',          desc:'MoE — 35B total, 3B active. Between Qwen3.5 and Qwen3.7 in release sequence.',                                                                                                             runnable:true, benchmarks:'',isNew:true,params:'35B total / 3B active', arch:'MoE (transformer)', context:'128K', cutoff:'2024',gpu_req:'1× H100 80GB (BF16)'},
   {name:'Qwen3.7 Max',                 org:'Alibaba',         weight:'closed',     released:'May 2026',      desc:'GPQA Diamond: 92.4%. Official list price $2.50/$7.50 per MTok (as low as $1.25/M input via discounted resellers).',                                                                                                        runnable:false,benchmarks:'GPQA Diamond, MMLU-Pro, LiveCodeBench',params:'N/A (undisclosed)', arch:'Dense (transformer)', context:'128K', cutoff:'2024'},
-  {name:'Qwen3.8-Max',                 org:'Alibaba',         weight:'closed',     released:'Jul 19, 2026',  desc:'Preview only — Alibaba claims performance "second only to Fable 5" but has not published a benchmark table or independent evaluation yet. 2.4T param sparse MoE, first Qwen multimodal model above 1T params (text, image, video, document input). Live now as Qwen3.8-Max-Preview via Token Plan/Qoder; full release + possible open-weight variant expected later in Aug 2026 (unconfirmed).',   runnable:false,benchmarks:'None published yet',isNew:true,params:'2.4T total (active undisclosed)', arch:'MoE (multimodal, sparse)', context:'N/A (undisclosed)', cutoff:'2024'},
+  {name:'Qwen3.8-Max',                 org:'Alibaba',         weight:'closed',     released:'Jul 19, 2026',  desc:'Previewed Jul 19, made broadly available via API Aug 3, 2026. 2.4T total / 95B active param sparse MoE, first Qwen multimodal model above 1T params (text, image, video, document input), 1M context. First published scores: Terminal-Bench 2.1 86.6% (vs GPT-5.6 Sol 88.8%, Claude Fable 5 84.6%), SWE-Bench Pro 67.7% (vs Fable 5 80.0%), OSWorld-Verified 86.1%, IFBench 82.8%. Open-weight variant (incl. smaller Qwen3.8-27B) promised "next week" as of Aug 3 — not yet shipped.',   runnable:false,benchmarks:'Terminal-Bench 2.1, SWE-Bench Pro, OSWorld-Verified, IFBench',isNew:true,params:'2.4T total / 95B active', arch:'MoE (multimodal, sparse)', context:'1M', cutoff:'2024',price:'$2.00/$6.00'},
   {name:'Qwen3-235B-A22B',             org:'Alibaba',         weight:'open',       released:'2025',          desc:'Open MoE flagship. Thinking-2507 variant: AIME 2025: 92.3%, GPQA: 81.1%. Instruct-2507 variant: AIME 2025: 70.3%, GPQA: 77.5%. Apache 2.0. MAI-T1 Tables 11+12. vLLM-compatible.',                                                                  runnable:true, benchmarks:'AIME 2025, GPQA, MMLU-Pro, IFEval, LiveCodeBench',params:'235B total / 22B active', arch:'MoE (transformer)', context:'128K', cutoff:'2024',gpu_req:'4× H100 80GB (FP8)'},
   {name:'Qwen3-30B-A3B',               org:'Alibaba',         weight:'open',       released:'2025',          desc:'MoE, 3B active. Outperforms many 120B dense models. Runs on MacBook 64GB. Excellent efficiency.',                                                                                        runnable:true, benchmarks:'MMLU-Pro, GPQA, LiveCodeBench',params:'30B total / 3B active', arch:'MoE (transformer)', context:'128K', cutoff:'2024',gpu_req:'1× H100 40GB'},
   {name:'Qwen3-VL',                    org:'Alibaba',         weight:'open',       released:'Sep 2025',      desc:'Vision-language GUI agent. Top on OSWorld. 72B instruction-tuned model for multimodal tasks.',                                                                                            runnable:true, benchmarks:'OSWorld, MMMU, MathVista',gpu_req:'2× H100 80GB'},
@@ -1221,14 +1224,14 @@ const CODING_MODELS = [
     org:'OpenAI', weight:'closed',
     released:'Jul 9, 2026',
     specialty:'Agentic + coding (balanced tier)',
-    price:'$2.50/$15',
+    price:'$2/$12',
     api:'gpt-5-6-terra',
     context:'256K',
     license:'Proprietary',
     scores:{swe_verified:'N/A', swe_pro:'63.4%',
             livecode:'N/A', humaneval:'N/A',
             frontiercode:'N/A', terminal:'87.4%'},
-    notes:'Balanced GPT-5.6 tier. Competitive with GPT-5.5 at lower cost.',
+    notes:'Balanced GPT-5.6 tier. Competitive with GPT-5.5 at lower cost. Price cut 20% Jul 30, 2026 (was $2.50/$15).',
     runnable:false,
     url:'https://openai.com/index/gpt-5-6/'
   },
@@ -1237,16 +1240,32 @@ const CODING_MODELS = [
     org:'OpenAI', weight:'closed',
     released:'Jul 9, 2026',
     specialty:'Agentic + coding (value tier)',
-    price:'$1/$6',
+    price:'$0.20/$1.20',
     api:'gpt-5-6-luna',
     context:'256K',
     license:'Proprietary',
     scores:{swe_verified:'N/A', swe_pro:'62.7%',
             livecode:'N/A', humaneval:'N/A',
             frontiercode:'N/A', terminal:'N/A'},
-    notes:'Most cost-efficient GPT-5.6 tier. Outperforms Claude Opus 4.8 at ~1/4 the estimated cost.',
+    notes:'Most cost-efficient GPT-5.6 tier. Outperforms Claude Opus 4.8 at ~1/4 the estimated cost. Price cut 80% Jul 30, 2026 (was $1/$6).',
     runnable:false,
     url:'https://openai.com/index/gpt-5-6/'
+  },
+  {
+    name:'Qwen3.8-Max',
+    org:'Alibaba', weight:'closed',
+    released:'Jul 19, 2026',
+    specialty:'Agentic + multimodal',
+    price:'$2.00/$6.00',
+    api:'qwen3.8-max',
+    context:'1M',
+    license:'Proprietary',
+    scores:{swe_verified:'N/A', swe_pro:'67.7%',
+            livecode:'N/A', humaneval:'N/A',
+            frontiercode:'N/A', terminal:'86.6%'},
+    notes:'Previewed Jul 19, broadly available via API Aug 3, 2026 (benchlm.ai, MarkTechPost). Mid-pack on SWE-Bench Pro — behind Claude Fable 5 and Opus 4.8, ahead of GPT-5.6 Sol per one tracker. Open-weight variant promised "next week" as of Aug 3 — not yet shipped.',
+    runnable:false,
+    url:'https://qwenlm.github.io/'
   },
 
   // ── TIER 1: Frontier agentic coding (closed) ──────────
@@ -1424,7 +1443,7 @@ const CODING_MODELS = [
     scores:{swe_verified:'N/A', swe_pro:'N/A',
             livecode:'N/A', humaneval:'N/A',
             frontiercode:'N/A', terminal:'N/A'},
-    notes:'Cheapest viable frontier coding model. 284B total / 13B active MoE. Thinking + non-thinking + Think Max modes.',
+    notes:'Cheapest viable frontier coding model. 284B total / 13B active MoE. Thinking + non-thinking + Think Max modes. Official GA release Jul 31, 2026 (previously preview).',
     runnable:true,
     url:'https://github.com/deepseek-ai/DeepSeek-V4'
   },
@@ -1580,7 +1599,9 @@ const CODING_MODELS = [
 const SOURCES = [
   {title:'Claude Opus 5 — Jul 24, 2026', org:'Anthropic', date:'Jul 24, 2026', url:'https://www.anthropic.com/news/claude-opus-5', desc:'New SOTA Frontier-Bench v0.1, ARC-AGI 3 (3x next-best), OSWorld 2.0. $5/$25 per MTok. API: claude-opus-5. Most aligned model to date.'},
   {title:'Kimi K3 — Jul 16, 2026', org:'Moonshot AI', date:'Jul 16, 2026', url:'https://www.kimi.com/blog/kimi-k3', desc:'World first open 3T-class model (2.8T params). Native vision, 1M context. Kimi Delta Attention + LatentMoE. API: kimi-k3. $3.00/$15.00. Weights released Jul 27 2026.'},
-  {title:'GPT-5.6 Launch — Sol, Terra, Luna',org:'OpenAI',date:'Jul 9, 2026',url:'https://openai.com/index/gpt-5-6/',desc:'GPT-5.6 family: Sol ($5/$30), Terra ($2.50/$15), Luna ($1/$6). New SOTA scores on third-party benchmarks: Agents Last Exam (53.6, Berkeley RDI/Snorkel AI), DeepSWE (72.7%, Datacurve), OSWorld 2.0 (62.6%, Stanford/xlang-ai), BrowseComp (92.2% ultra 4-agent mode; 90.4% single-agent). New Ultra mode coordinates 4 parallel agents. Programmatic Tool Calling for ZDR-compatible workflows. ARC-AGI-3 (ARC Prize Foundation) scored 7.78% Sol. SEC-Bench Pro, ExploitGym for cybersecurity. GeneBench Pro, LifeSciBench for science/health.'},
+  {title:'GPT-5.6 Launch — Sol, Terra, Luna',org:'OpenAI',date:'Jul 9, 2026',url:'https://openai.com/index/gpt-5-6/',desc:'GPT-5.6 family launch: Sol ($5/$30), Terra ($2.50/$15), Luna ($1/$6). New SOTA scores on third-party benchmarks: Agents Last Exam (53.6, Berkeley RDI/Snorkel AI), DeepSWE (72.7%, Datacurve), OSWorld 2.0 (62.6%, Stanford/xlang-ai), BrowseComp (92.2% ultra 4-agent mode; 90.4% single-agent). New Ultra mode coordinates 4 parallel agents. Programmatic Tool Calling for ZDR-compatible workflows. ARC-AGI-3 (ARC Prize Foundation) scored 7.78% Sol. SEC-Bench Pro, ExploitGym for cybersecurity. GeneBench Pro, LifeSciBench for science/health. Prices cut Jul 30, 2026: Terra to $2/$12 (-20%), Luna to $0.20/$1.20 (-80%); new "Sol Fast" mode added at $10/$60 (2.5x throughput).'},
+  {title:'Gemini 3.6 Flash, 3.5 Flash-Lite & 3.5 Flash Cyber Launch',org:'Google DeepMind',date:'Jul 21, 2026',url:'https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-6-flash-3-5-flash-lite-3-5-flash-cyber/',desc:'Three new models: 3.6 Flash ($1.50/$7.50, 17% fewer output tokens than 3.5 Flash, knowledge cutoff advances to Mar 2026), 3.5 Flash-Lite ($0.30/$2.50, high-throughput tier beating Gemini 3 Flash on SWE-Bench Pro despite being smaller/cheaper), and 3.5 Flash Cyber (CodeMender vulnerability-fixing fine-tune, restricted to governments/trusted partners).'},
+  {title:'Qwen3.8-Max Broad Availability',org:'Alibaba',date:'Aug 3, 2026',url:'https://qwenlm.github.io/',desc:'Previewed Jul 19 2026 as a closed preview with no published benchmarks; made broadly available via hosted API Aug 3, 2026 at $2.00/$6.00 per MTok with first independent-style scores (Terminal-Bench 2.1 86.6%, SWE-Bench Pro 67.7%, OSWorld-Verified 86.1%). 2.4T total / 95B active param multimodal MoE. Open-weight release (incl. smaller Qwen3.8-27B) promised "next week" as of Aug 3 — not yet shipped.'},
   {title:'Claude Sonnet 5 — Launch Announcement & System Card',org:'Anthropic',date:'Jun 30, 2026',url:'https://www.anthropic.com/news/claude-sonnet-5',desc:'Launch of Claude Sonnet 5 — new default model for Free/Pro plans. Most agentic Sonnet yet. Introduces BrowseComp and OSWorld-Verified benchmarks with effort-level curves. Corrects Sonnet 4.6 HLE (now 34.6%/46.8%) and OSWorld-Verified (now 78.5%) scores. API: claude-sonnet-5. $2/$10 MTok intro until Aug 31 2026.'},
   {title:'Redeploying Claude Fable 5 — Export Controls & Safety Framework',org:'Anthropic',date:'Jun 30 / Jul 1, 2026',url:'https://www.anthropic.com/news/redeploying-fable-5',desc:'Fable 5 and Mythos 5 suspended Jun 12 due to US export controls after Amazon researchers found a safeguard bypass. Controls lifted Jun 30; models restored Jul 1. New safety classifier deployed blocking reported jailbreak in >99% of cases. Includes new industry jailbreak severity framework (with Amazon, Microsoft, Google). Blocked requests route to Opus 4.8.'},
   {title:'Claude Fable 5 & Mythos 5 — Launch Announcement',org:'Anthropic',date:'Jun 9, 2026',url:'https://www.anthropic.com/news/claude-fable-5-mythos-5',desc:'Launch of first Mythos-class model for general use. Benchmarks: SWE-Bench Pro (80.3%), FrontierCode Diamond (29.3%), HLE (59.0%), Terminal-Bench 2.1 (88.0%), HealthBench (66.0%). $10/$50 per M tokens.'},
@@ -1829,6 +1850,9 @@ const MODEL_LINKS = {
   'o3-pro':                 'https://openai.com/index/openai-o3-mini/',
   'o4-mini':                'https://openai.com/index/openai-o3-mini/',
   // Google DeepMind
+  'Gemini 3.6 Flash':       'https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-6-flash-3-5-flash-lite-3-5-flash-cyber/',
+  'Gemini 3.5 Flash-Lite':  'https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-6-flash-3-5-flash-lite-3-5-flash-cyber/',
+  'Gemini 3.5 Flash Cyber': 'https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-6-flash-3-5-flash-lite-3-5-flash-cyber/',
   'Gemini 3.5 Flash':       'https://ai.google.dev/gemini-api/docs/models',
   'Gemini 3.1 Pro':         'https://deepmind.google/technologies/gemini/pro/',
   'Gemini 3.1 Flash Lite':  'https://ai.google.dev/gemini-api/docs/models',
@@ -1902,8 +1926,8 @@ const MODEL_LINKS = {
 const MODEL_PRICES = {
   // OpenAI GPT-5.6
   'GPT-5.6 Sol':               '$5/$30',
-  'GPT-5.6 Terra':             '$2.50/$15',
-  'GPT-5.6 Luna':              '$1/$6',
+  'GPT-5.6 Terra':             '$2/$12',
+  'GPT-5.6 Luna':              '$0.20/$1.20',
   // Anthropic
   'Claude Sonnet 5':           '$2/$10 → $3/$15 (Sep 1)',
   'Claude Fable 5':            '$10/$50',
@@ -1934,6 +1958,9 @@ const MODEL_PRICES = {
   'o3-pro':                    '$20/$80',
   'o4-mini':                   'Deprecated',
   // Google DeepMind
+  'Gemini 3.6 Flash':          '$1.50/$7.50',
+  'Gemini 3.5 Flash-Lite':     '$0.30/$2.50',
+  'Gemini 3.5 Flash Cyber':    'Internal/restricted',
   'Gemini 3.5 Flash':          '$1.50/$9',
   'Gemini 3.1 Pro':            '$2/$12 (>200K: $4/$18)',
   'Gemini 3.1 Flash Lite':     '$0.10/$0.40',
@@ -1976,7 +2003,7 @@ const MODEL_PRICES = {
   'Qwen3.6 27B':               '$0.60/$3.60',
   'Qwen3.6-35B-A3B':           'Open-weight',
   'Qwen3.7 Max':               '$1.25/$3.75',
-  'Qwen3.8-Max':               'Preview (pricing TBD)',
+  'Qwen3.8-Max':               '$2.00/$6.00',
   'Qwen3-235B-A22B':           'Open-weight',
   'Qwen3-30B-A3B':             'Open-weight',
   'Qwen3-VL':                  'Open-weight',
@@ -2052,7 +2079,7 @@ function renderModels() {
     const priceTag = (() => {
       const price = MODEL_PRICES[m.name];
       if (!price) return '';
-      const isSpecial = price === 'Open-weight' || price === 'Deprecated' || price === 'Internal/restricted' || price === 'Preview (pricing TBD)';
+      const isSpecial = price === 'Open-weight' || price === 'Deprecated' || price === 'Internal/restricted';
       const color = isSpecial
         ? 'color:var(--text3);background:var(--surface2);border-color:var(--border2)'
         : 'color:var(--green);background:var(--green-bg);border-color:var(--green)';

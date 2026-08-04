@@ -40,17 +40,17 @@ Each benchmark shows: domain, priority, primary metric, which labs use it, descr
 
 A per-domain, per-lab breakdown of the highest-priority benchmarks (Tier 1 — Critical, Tier 2 — High, Tier 3 — Medium, Tier 4 — Low, and a Watch List), showing each lab's best reported score, headroom to close, and source attribution — used to decide what FoxBrain should be evaluated against next.
 
-### 🤖 Models tab — 84 models across 13 labs
+### 🤖 Models tab — 87 models across 13 labs
 
 Within each lab, models are sorted **newest release first**.
 
 | Lab | Count | Notable models |
 |---|---|---|
 | OpenAI | 17 | GPT-5.6 (Sol/Terra/Luna), GPT-5.5, GPT-5.5 Instant, GPT-5.4 (mini/nano), GPT-5.2, GPT-5.1, GPT-5, GPT-5 mini, gpt-oss-120b, gpt-oss-20b, o3, o3-pro, o4-mini |
-| Google DeepMind | 15 | Gemini 3.5 Flash, 3.1 Pro, 3.1 Flash Lite, 3.1 Flash Image, 3 Pro/Flash/Deep Think, 2.5 Pro, 2.5 Flash Lite, Gemma 4 (31B/26B A4B/12B/E4B/E2B), DiffusionGemma 26B A4B |
+| Google DeepMind | 18 | **Gemini 3.6 Flash, 3.5 Flash-Lite, 3.5 Flash Cyber**, Gemini 3.5 Flash, 3.1 Pro, 3.1 Flash Lite, 3.1 Flash Image, 3 Pro/Flash/Deep Think, 2.5 Pro, 2.5 Flash Lite, Gemma 4 (31B/26B A4B/12B/E4B/E2B), DiffusionGemma 26B A4B |
 | Anthropic | 12 | **Claude Opus 5**, Sonnet 5, Fable 5, Mythos 5, Opus 4.8/4.7/4.6, Sonnet 4.6, Haiku 4.5, Opus 4.5, Sonnet 4.5, Opus 4.1 |
-| DeepSeek | 8 | V4 Pro, V4 Flash, V3.2 Speciale, V3.2, R1-0528, R1, V3, Prover V2 |
-| Alibaba | 8 | **Qwen3.8-Max**, Qwen3.7 Max, Qwen3.5, Qwen3.6-35B-A3B, Qwen3-235B, 30B, VL, Coder |
+| DeepSeek | 8 | V4 Pro, V4 Flash (GA Jul 31), V3.2 Speciale, V3.2, R1-0528, R1, V3, Prover V2 |
+| Alibaba | 8 | **Qwen3.8-Max** (broadly available Aug 3), Qwen3.7 Max, Qwen3.5, Qwen3.6-35B-A3B, Qwen3-235B, 30B, VL, Coder |
 | Mistral AI | 6 | Mistral Medium 3.5, Large 3, Small 3.2, Magistral Medium/Small, Codestral |
 | Meta | 5 | Muse Spark 1.1, Muse Spark, Llama 4 Maverick, Scout, Llama 3.3 70B |
 | xAI | 5 | Grok 4.5, Grok 4.3, Grok 4.20, Grok 4, Grok 2.5 |
@@ -59,17 +59,17 @@ Within each lab, models are sorted **newest release first**.
 | NVIDIA | 1 | Nemotron 3 Ultra 550B |
 | Zhipu AI (Z.AI) | 1 | GLM-5.2 |
 | MiniMax | 1 | MiniMax M3 |
-| **Total** | **84** | Includes deprecated models with flags |
+| **Total** | **87** | Includes deprecated models with flags |
 
 Open-weight models (Gemma 4, DeepSeek, Qwen3, Llama 4, Mistral, MiniMax, GLM-5, Kimi, NVIDIA Nemotron) can run directly on HHRI-AI H100s via vLLM. Deprecated models included for historical reference and reproducibility.
 
-### 💻 Coding tab — 26 models across 2 weight classes
+### 💻 Coding tab — 27 models across 2 weight classes
 
 Sorted newest release first (independent of tier).
 
 | Class | Count | Examples |
 |---|---|---|
-| Closed-weight | 10 | Claude Opus 5, GPT-5.6 (Sol/Terra/Luna), Grok 4.5, Claude Fable 5/Sonnet 5, Claude Opus 4.8, GPT-5.5, Gemini 3.1 Pro |
+| Closed-weight | 11 | Claude Opus 5, GPT-5.6 (Sol/Terra/Luna), Grok 4.5, **Qwen3.8-Max**, Claude Fable 5/Sonnet 5, Claude Opus 4.8, GPT-5.5, Gemini 3.1 Pro |
 | Open-weight | 16 | Kimi K3, DeepSeek V4 Pro/Flash, Kimi K2.6/K2.7 Code, GLM-5.2, MiniMax M3, Qwen3-Coder-480B-A35B, Qwen3-Coder-Next, Qwen3.6-27B, DeepSeek Coder V2, Devstral Small 2, Codestral 25.01, StarCoder2-15B, NVIDIA Nemotron 3 Ultra 550B, IBM Granite Code 34B |
 
 Filterable by tier (closed/open) and specialty (agentic, local/self-host, autocomplete/FIM). Each card shows: specialty, price, context window, license, benchmark scores (SWE-Bench Verified, SWE-Bench Pro, LiveCodeBench, HumanEval) color-coded by performance, H100-runnable badge, and official page link.
@@ -90,13 +90,13 @@ One card per benchmark showing every lab that evaluated it with exact model API 
 
 Cross-check resources: Artificial Analysis, BenchLM, Scale AI Leaderboard, LLM Stats, Papers With Code.
 
-### 📖 Sources tab — 22 reference links
+### 📖 Sources tab — 24 reference links
 
 Technical reports, live leaderboards, and benchmark papers, including:
 - Claude Opus 5 / Fable 5 & Mythos 5 system cards (Anthropic)
 - MAI-Thinking-1 Technical Report §4.1 (Microsoft AI)
-- Gemini 3.1 Pro model card + API changelog, Gemma 4 model card & developer guide (Google DeepMind)
-- Qwen3 Technical Report (Alibaba)
+- Gemini 3.1 Pro model card + API changelog, Gemini 3.6 Flash/3.5 Flash-Lite/3.5 Flash Cyber launch, Gemma 4 model card & developer guide (Google DeepMind)
+- Qwen3 Technical Report, Qwen3.8-Max broad availability (Alibaba)
 - DeepSeek V4 Pro & R1-0528 release (DeepSeek)
 - Llama 4 Technical Report (Meta)
 - xAI Grok 4 & 4.3 release (xAI)
@@ -163,4 +163,4 @@ foxbrain-eval-dashboard/
 
 *Benchmark taxonomy based on MAI-Thinking-1 Technical Report §4.1 (Microsoft AI, June 2026) and additional sources listed in the Sources tab.*
 
-*Last updated: August 2, 2026 — added Qwen3.8-Max (Alibaba, preview) and a Coding tab search bar; fixed the Models/Coding search "✕" clear buttons; Models tab now sorts newest-release-first within each lab. Total: 84 benchmarks across 12 domains, 84 frontier models across 13 labs, 26 coding specialist models, 22 sources.*
+*Last updated: August 4, 2026 — full re-audit across all tabs: Qwen3.8-Max went from closed preview to broad API availability with published scores (Aug 3), added 3 new Google DeepMind models (Gemini 3.6 Flash, 3.5 Flash-Lite, 3.5 Flash Cyber — launched Jul 21, previously missing), GPT-5.6 Terra/Luna price cuts (Jul 30), DeepSeek V4 Flash reached GA (Jul 31). Total: 84 benchmarks across 12 domains, 87 frontier models across 13 labs, 27 coding specialist models, 24 sources.*
