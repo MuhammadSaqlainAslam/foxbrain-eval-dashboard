@@ -738,12 +738,12 @@ tbody td { padding: 12px 16px; vertical-align: top; }
     <div class="hero-text">
       <div class="hero-title">
         FoxBrain EvalHub
-        <span class="badge" style="background:var(--accent-bg);color:var(--accent);border:1px solid var(--accent);border-radius:99px;padding:3px 10px;font-size:11px;font-weight:600">August 4, 2026 &bull; Latest: Claude Opus 5 (Jul 24, Anthropic)</span>
+        <span class="badge" style="background:var(--accent-bg);color:var(--accent);border:1px solid var(--accent);border-radius:99px;padding:3px 10px;font-size:11px;font-weight:600">August 6, 2026 &bull; Latest: Claude Opus 5 (Jul 24, Anthropic)</span>
       </div>
       <p class="hero-desc">Frontier Benchmark &amp; Model Intelligence — HHRI-AI Research<br><span style="font-size:12px;color:var(--text3)">A curated, up-to-date reference of benchmarks and frontier models used by leading AI labs. Use this to select evaluation targets for FoxBrain model assessments across 12 capability domains.</span></p>
       <div class="hero-updated">
         <span class="dot"></span>
-        Last updated: <span id="last-updated-date">August 4, 2026</span> &nbsp;&bull;&nbsp; Full re-audit: Qwen3.8-Max went live (Aug 3), 3 new Gemini models added, GPT-5.6 Terra/Luna price cuts, DeepSeek V4 Flash GA
+        Last updated: <span id="last-updated-date">August 6, 2026</span> &nbsp;&bull;&nbsp; Re-checked all labs — quiet 2-day window; confirmed Claude Opus 4.1's Aug 5 API retirement completed as scheduled
       </div>
     </div>
     <div class="hero-stats">
@@ -910,7 +910,7 @@ tbody td { padding: 12px 16px; vertical-align: top; }
 
 <div class="footer">
   <span>FoxBrain EvalHub &nbsp;&bull;&nbsp; HHRI-AI / Foxconn AI Research Center &nbsp;&bull;&nbsp; <a href="https://muhammadsaqlainaslam.github.io/foxbrain-eval-dashboard/">muhammadsaqlainaslam.github.io/foxbrain-eval-dashboard</a></span>
-  <span id="footer-updated">Updated August 4, 2026</span> &nbsp;&bull;&nbsp; 11 labs &nbsp;&bull;&nbsp; 87 models &nbsp;&bull;&nbsp; 84 benchmarks &nbsp;&bull;&nbsp; 24 sources
+  <span id="footer-updated">Updated August 6, 2026</span> &nbsp;&bull;&nbsp; 11 labs &nbsp;&bull;&nbsp; 87 models &nbsp;&bull;&nbsp; 84 benchmarks &nbsp;&bull;&nbsp; 24 sources
 </div>
 
 <script>
@@ -1062,7 +1062,7 @@ const MODELS = [
   {name:'Claude Haiku 4.5',            org:'Anthropic',       weight:'closed',     released:'Oct 15, 2025',  desc:'Speed/cost tier. $1/$5 per M tokens. Used as tau2-bench user simulator at HHRI-AI via Vertex AI.',                                                                                       runnable:false,benchmarks:'tau2-bench simulator',params:'N/A (undisclosed)', arch:'Dense (transformer)', context:'1M', cutoff:'Apr 2024'},
   {name:'Claude Opus 4.5',             org:'Anthropic',       weight:'closed',     released:'Nov 2025',      desc:'Terminal-Bench 2.0: 65.4%, SWE-Bench Verified: 80.9% (first model to break 80%).',                                                                                                                                    runnable:false,benchmarks:'Terminal-Bench 2.0, SWE-Bench'},
   {name:'Claude Sonnet 4.5',           org:'Anthropic',       weight:'closed',     released:'Sep 2025',      desc:'MRCR v2: 18.5% at 1M context.',                                                                                                                                                            runnable:false,benchmarks:'MRCR v2'},
-  {name:'Claude Opus 4.1',             org:'Anthropic',       weight:'closed',     released:'Aug 2025',      desc:'Deprecated. Hard API retirement Aug 5, 2026.',                                                                                                                                                                               runnable:false,benchmarks:'',deprecated:true},
+  {name:'Claude Opus 4.1',             org:'Anthropic',       weight:'closed',     released:'Aug 2025',      desc:'Deprecated. Retired from the API Aug 5, 2026 as scheduled — recommended replacement is Claude Opus 4.8.',                                                                                                                                                                               runnable:false,benchmarks:'',deprecated:true},
   // ── OpenAI (14) ──────────────────────────────────────────────────
   {name:'GPT-5.6 Sol',                 org:'OpenAI',          weight:'closed',     released:'Jul 9, 2026',   desc:'OpenAI flagship. New SOTA on Agents Last Exam (53.6), BrowseComp (92.2% ultra 4-agent mode; 90.4% single-agent), OSWorld 2.0 (62.6%), Terminal-Bench (88.8%), DeepSWE (72.7%). Programmatic Tool Calling for efficient multi-step workflows. Ultra mode coordinates 4 parallel agents. New "Sol Fast" mode added Jul 30, 2026: $10/$60/MTok, 2.5x throughput at same intelligence.', runnable:false,benchmarks:'Agents Last Exam, BrowseComp, SWE-Bench Pro, DeepSWE, Terminal-Bench 2.1, OSWorld 2.0',isNew:true,params:'N/A (undisclosed)', arch:'Dense (transformer)', context:'256K', cutoff:'Jan 2026',price:'$5/$30'},
   {name:'GPT-5.6 Terra',               org:'OpenAI',          weight:'closed',     released:'Jul 9, 2026',   desc:'Balanced tier. Competitive with GPT-5.5 at lower cost. SWE-Bench Pro: 63.4%, Terminal-Bench: 87.4%, BrowseComp: 87.5%. Good for everyday agentic work. Price cut 20% Jul 30, 2026 (was $2.50/$15).', runnable:false,benchmarks:'SWE-Bench Pro, Terminal-Bench, BrowseComp, GPQA',isNew:true,params:'N/A (undisclosed)', arch:'Dense (transformer)', context:'256K', cutoff:'Jan 2026',price:'$2/$12'},
