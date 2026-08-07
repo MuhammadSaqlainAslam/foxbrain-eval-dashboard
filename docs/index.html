@@ -2362,7 +2362,8 @@ function renderPriority() {
            {lab:'NVIDIA',          model:'Nemotron 3 Ultra (Open weight)',score:'26.7%'},
            {lab:'Google DeepMind', model:'Gemma 4 31B (Open weight)',    score:'26.5%'},
            {lab:'DeepSeek',        model:'V4 Pro (Open weight)',         score:'7.7%'},
-           {lab:'HHRI-AI',         model:'Not yet run',                  score:null},
+           {lab:'HHRI-AI',         model:'gemma-4-31B-it (Open weight)',         score:'11.31%'},
+           {lab:'HHRI-AI',         model:'FoxBrain GovDoc V2 (Open weight)',      score:'10.33%'},
          ]},
 
         {name:'FrontierMath', sota:'89% (T1-3)', headroom:11, priority:'critical', hhri:false,
@@ -2943,6 +2944,8 @@ const LAB_DATA = [
     entries:[
       {bench:'TMMLU+',                   domain:'knowledge',   model:'FoxBrain_v1.2_70B_0630',           api:'N/A (internal)',  score:'N/A',   notes:'Internal eval, vLLM pipeline'},
       {bench:'TMMLU+',                   domain:'knowledge',   model:'FoxBrain_v1.5_20251203',           api:'N/A (internal)',  score:'N/A',   notes:'Internal eval, vLLM pipeline'},
+      {bench:'HLE',                      domain:'reasoning',   model:'FoxBrain_GovDoc_gemma4_V2',       api:'N/A (internal)',  score:'10.33%', notes:'HLE_Total accuracy. exactMatch 8.15%, multipleChoice 17.35%. Based on Gemma4 V2 GovDoc fine-tune.'},
+      {bench:'HLE',                      domain:'reasoning',   model:'gemma-4-31b-it (baseline)',        api:'N/A (internal)',  score:'11.31%', notes:'HLE_Total accuracy. exactMatch 9.48%, multipleChoice 17.15%. Baseline comparison for GovDoc fine-tune.'},
       {bench:'TMMLU+',                   domain:'knowledge',   model:'gemma-4-31b-it',                   api:'gemma-4-31b-it',  score:'N/A',   notes:'vllm_gemma4 conda env, H100'},
       {bench:'TMMLU+',                   domain:'knowledge',   model:'NVIDIA-Nemotron-3-Super-120B-A12B', api:'N/A (vLLM)',     score:'N/A',   notes:'vllm_py312 conda env, H100, patched for Mamba-MoE'},
       {bench:'MRCR v2',                  domain:'longctx',     model:'gemma-4-31b-it',                   api:'gemma-4-31b-it',  score:'66.4%', notes:'256K tokens, vllm_gemma4 env, H100 server'},
