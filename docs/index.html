@@ -2342,7 +2342,7 @@ function renderPriority() {
       id:'reasoning', icon:'🧠', label:'Reasoning & Math', color:'#4f8ef7',
       desc:'Mathematical and scientific reasoning — hardest remaining frontier after coding.',
       benches:[
-        {name:'HLE', sota:'64.7%', headroom:35, priority:'critical', hhri:false,
+        {name:'HLE', sota:'64.7%', headroom:35, priority:'critical', hhri:true,
          why:'Hardest benchmark — 2,500 expert questions. Source: BenchLM Jul 29 2026 (43 models). Official: lastexam.ai. Claude Opus 5 leads at 64.7%, followed by Claude Mythos 5 (64.5%) and Muse Spark 1.1 (62.1%). Note: exact ranking is contested — trackers disagree (llm-stats.com Jul 27 shows Opus 5 tied with "Claude Mythos Preview" at 64.7% with Fable 5 at 64.5% instead of Mythos 5; scores vary by tool-use/effort protocol).',
          url:'https://benchlm.ai/benchmarks/hle',
          labs:[
