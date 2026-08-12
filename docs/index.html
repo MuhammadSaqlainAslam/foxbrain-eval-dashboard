@@ -738,12 +738,12 @@ tbody td { padding: 12px 16px; vertical-align: top; }
     <div class="hero-text">
       <div class="hero-title">
         FoxBrain EvalHub
-        <span class="badge" style="background:var(--accent-bg);color:var(--accent);border:1px solid var(--accent);border-radius:99px;padding:3px 10px;font-size:11px;font-weight:600">August 6, 2026 &bull; Latest: Claude Opus 5 (Jul 24, Anthropic)</span>
+        <span class="badge" style="background:var(--accent-bg);color:var(--accent);border:1px solid var(--accent);border-radius:99px;padding:3px 10px;font-size:11px;font-weight:600">August 11, 2026 &bull; Latest: Claude Opus 5 (Jul 24, Anthropic)</span>
       </div>
       <p class="hero-desc">Frontier Benchmark &amp; Model Intelligence — HHRI-AI Research<br><span style="font-size:12px;color:var(--text3)">A curated, up-to-date reference of benchmarks and frontier models used by leading AI labs. Use this to select evaluation targets for FoxBrain model assessments across 12 capability domains.</span></p>
       <div class="hero-updated">
         <span class="dot"></span>
-        Last updated: <span id="last-updated-date">August 6, 2026</span> &nbsp;&bull;&nbsp; Re-checked all labs — quiet 2-day window; confirmed Claude Opus 4.1's Aug 5 API retirement completed as scheduled
+        Last updated: <span id="last-updated-date">August 11, 2026</span> &nbsp;&bull;&nbsp; Added Muse Spark 1.2 &amp; Muse Glimmer (Meta), GPT-5.6-Cyber, NVIDIA Nemotron 3.5 Lightning; Claude Sonnet 5 pricing made permanent
       </div>
     </div>
     <div class="hero-stats">
@@ -910,7 +910,7 @@ tbody td { padding: 12px 16px; vertical-align: top; }
 
 <div class="footer">
   <span>FoxBrain EvalHub &nbsp;&bull;&nbsp; HHRI-AI / Foxconn AI Research Center &nbsp;&bull;&nbsp; <a href="https://muhammadsaqlainaslam.github.io/foxbrain-eval-dashboard/">muhammadsaqlainaslam.github.io/foxbrain-eval-dashboard</a></span>
-  <span id="footer-updated">Updated August 6, 2026</span> &nbsp;&bull;&nbsp; 11 labs &nbsp;&bull;&nbsp; 87 models &nbsp;&bull;&nbsp; 84 benchmarks &nbsp;&bull;&nbsp; 24 sources
+  <span id="footer-updated">Updated August 11, 2026</span> &nbsp;&bull;&nbsp; 11 labs &nbsp;&bull;&nbsp; 91 models &nbsp;&bull;&nbsp; 84 benchmarks &nbsp;&bull;&nbsp; 27 sources
 </div>
 
 <script>
@@ -1051,7 +1051,7 @@ const BENCHMARKS = [
 const MODELS = [
   // ── Anthropic (10) ───────────────────────────────────────────────
   {name:'Claude Opus 5',              org:'Anthropic',       weight:'closed',     released:'Jul 24, 2026',  desc:'New SOTA on Frontier-Bench v0.1. ARC-AGI 3 score 3x next-best model. OSWorld 2.0: best at any cost. Most aligned Anthropic model to date. Close to Fable 5 at half the cost. API: claude-opus-5.',                                                                                                  runnable:false,  api:'claude-opus-5',  params:'N/A (undisclosed)', arch:'Dense (transformer)', context:'1M', cutoff:'Jan 2026',  price:'$5/$25',  isNew:true,  url:'https://www.anthropic.com/news/claude-opus-5'},
-  {name:'Claude Sonnet 5',             org:'Anthropic',       weight:'closed',     released:'Jun 30, 2026',  desc:'New default model for Free and Pro plans. Most agentic Sonnet yet — closes gap with Opus 4.8. Faster follow-through on multi-step tasks, self-checking output without prompting. Updated tokenizer (1.0–1.35x token multiplier vs Sonnet 4.6). $2/$10 per MTok intro pricing until Aug 31 2026, then $3/$15. API: claude-sonnet-5.',                              runnable:false,benchmarks:'SWE-Bench, BrowseComp, OSWorld-Verified, HLE, GPQA, IFEval, MMLU-Pro',isNew:true,params:'N/A (undisclosed)', arch:'Dense (transformer)', context:'1M', cutoff:'Jan 2026'},
+  {name:'Claude Sonnet 5',             org:'Anthropic',       weight:'closed',     released:'Jun 30, 2026',  desc:'New default model for Free and Pro plans. Most agentic Sonnet yet — closes gap with Opus 4.8. Faster follow-through on multi-step tasks, self-checking output without prompting. Updated tokenizer (1.0–1.35x token multiplier vs Sonnet 4.6). $2/$10 per MTok — originally introductory pricing until Aug 31 2026, made permanent Aug 10 2026 (no increase to $3/$15). API: claude-sonnet-5.',                              runnable:false,benchmarks:'SWE-Bench, BrowseComp, OSWorld-Verified, HLE, GPQA, IFEval, MMLU-Pro',isNew:true,params:'N/A (undisclosed)', arch:'Dense (transformer)', context:'1M', cutoff:'Jan 2026'},
   {name:'Claude Fable 5',              org:'Anthropic',       weight:'closed',     released:'Jun 9, 2026',   desc:'First Mythos-class model for general use. SWE-Bench Pro: 80.3%, HLE: 59.0%, FrontierCode Diamond: 29.3%, Terminal-Bench 2.1: 88.0%. 1M token context. $10/$50 per M tokens. Suspended Jun 12–Jul 1 due to US export controls (now restored globally). Updated safety classifier deployed — blocks reported jailbreak in >99% of cases. Blocked requests route to Opus 4.8.',           runnable:false,benchmarks:'SWE-Bench Pro, FrontierCode, HLE, Terminal-Bench',isNew:true,params:'N/A (undisclosed)', arch:'Dense (transformer)', context:'1M', cutoff:'Jan 2026'},
   {name:'Claude Mythos 5',             org:'Anthropic',       weight:'closed',     released:'Jun 9, 2026',   desc:'Same as Fable 5 with cyber/bio safeguards lifted. Restricted to Project Glasswing partners. ExploitBench: 78.0%. Strongest published cybersecurity capabilities.',                      runnable:false,benchmarks:'ExploitBench, SWE-Bench Pro, HLE',isNew:true,params:'N/A (undisclosed)', arch:'Dense (transformer)', context:'1M', cutoff:'Jan 2026'},
 
@@ -1064,7 +1064,8 @@ const MODELS = [
   {name:'Claude Sonnet 4.5',           org:'Anthropic',       weight:'closed',     released:'Sep 2025',      desc:'MRCR v2: 18.5% at 1M context.',                                                                                                                                                            runnable:false,benchmarks:'MRCR v2'},
   {name:'Claude Opus 4.1',             org:'Anthropic',       weight:'closed',     released:'Aug 2025',      desc:'Deprecated. Retired from the API Aug 5, 2026 as scheduled — recommended replacement is Claude Opus 4.8.',                                                                                                                                                                               runnable:false,benchmarks:'',deprecated:true},
   // ── OpenAI (14) ──────────────────────────────────────────────────
-  {name:'GPT-5.6 Sol',                 org:'OpenAI',          weight:'closed',     released:'Jul 9, 2026',   desc:'OpenAI flagship. New SOTA on Agents Last Exam (53.6), BrowseComp (92.2% ultra 4-agent mode; 90.4% single-agent), OSWorld 2.0 (62.6%), Terminal-Bench (88.8%), DeepSWE (72.7%). Programmatic Tool Calling for efficient multi-step workflows. Ultra mode coordinates 4 parallel agents. New "Sol Fast" mode added Jul 30, 2026: $10/$60/MTok, 2.5x throughput at same intelligence.', runnable:false,benchmarks:'Agents Last Exam, BrowseComp, SWE-Bench Pro, DeepSWE, Terminal-Bench 2.1, OSWorld 2.0',isNew:true,params:'N/A (undisclosed)', arch:'Dense (transformer)', context:'256K', cutoff:'Jan 2026',price:'$5/$30'},
+  {name:'GPT-5.6 Sol',                 org:'OpenAI',          weight:'closed',     released:'Jul 9, 2026',   desc:'OpenAI flagship. New SOTA on Agents Last Exam (53.6), BrowseComp (92.2% ultra 4-agent mode; 90.4% single-agent), OSWorld 2.0 (62.6%), Terminal-Bench (88.8%), DeepSWE (72.7%). Programmatic Tool Calling for efficient multi-step workflows. Ultra mode coordinates 4 parallel agents. New "Sol Fast" mode added Jul 30, 2026: $10/$60/MTok, 2.5x throughput at same intelligence. ChatGPT update Aug 7, 2026 added a "thinking effort" slider; OpenAI claims 68% fewer factual errors in high-risk categories vs GPT-5.5 Instant (no API pricing change).', runnable:false,benchmarks:'Agents Last Exam, BrowseComp, SWE-Bench Pro, DeepSWE, Terminal-Bench 2.1, OSWorld 2.0',isNew:true,params:'N/A (undisclosed)', arch:'Dense (transformer)', context:'256K', cutoff:'Jan 2026',price:'$5/$30'},
+  {name:'GPT-5.6-Cyber',               org:'OpenAI',          weight:'restricted', released:'Aug 10, 2026',  desc:'Purpose-trained cybersecurity model launched alongside two access tiers: Daybreak Blue (GPT-5.6 Sol with cyber guardrails relaxed, answers ~2% of advanced security queries) and Daybreak Red (full model access, ~95% of sensitive security queries). Dual-use — access restricted, not on the general API.', runnable:false,benchmarks:'',isNew:true,params:'N/A (undisclosed)', arch:'Dense (transformer)', context:'256K', cutoff:'Jan 2026'},
   {name:'GPT-5.6 Terra',               org:'OpenAI',          weight:'closed',     released:'Jul 9, 2026',   desc:'Balanced tier. Competitive with GPT-5.5 at lower cost. SWE-Bench Pro: 63.4%, Terminal-Bench: 87.4%, BrowseComp: 87.5%. Good for everyday agentic work. Price cut 20% Jul 30, 2026 (was $2.50/$15).', runnable:false,benchmarks:'SWE-Bench Pro, Terminal-Bench, BrowseComp, GPQA',isNew:true,params:'N/A (undisclosed)', arch:'Dense (transformer)', context:'256K', cutoff:'Jan 2026',price:'$2/$12'},
   {name:'GPT-5.6 Luna',                org:'OpenAI',          weight:'closed',     released:'Jul 9, 2026',   desc:'Most cost-efficient GPT-5.6. SWE-Bench Pro: 62.7%, BrowseComp: 83.3%. Outperforms Claude Opus 4.8 at ~1/4 the estimated cost. Best value in GPT-5.6 family. Price cut 80% Jul 30, 2026 (was $1/$6).', runnable:false,benchmarks:'SWE-Bench Pro, BrowseComp, Terminal-Bench',isNew:true,params:'N/A (undisclosed)', arch:'Dense (transformer)', context:'256K', cutoff:'Jan 2026',price:'$0.20/$1.20'},
   {name:'GPT-5.5',                     org:'OpenAI',          weight:'closed',     released:'May 5, 2026',   desc:'Current ChatGPT default. AIME 2025: 81.2%, SWE-Bench Pro: 58.6%, Terminal-Bench 2.1: 83.4%, GDPval-AA: 1769. 52.5% fewer hallucinations vs GPT-5.3. $5/$30 per M tokens.',              runnable:false,benchmarks:'AIME 2025, SWE-Bench Pro, Terminal-Bench, GDPval-AA',isNew:true,params:'N/A (undisclosed)', arch:'Dense (transformer)', context:'256K', cutoff:'Jan 2026'},
@@ -1101,8 +1102,10 @@ const MODELS = [
   {name:'Gemma 4 E4B IT',              org:'Google DeepMind', weight:'open',       released:'Apr 2026',      desc:'Edge model — 4B parameters. MMMLU: 69.4%. Mobile/IoT deployment. Multimodal with audio support.',                                                                                        runnable:true, benchmarks:'MMMLU, MMMU Pro, MathVista',isNew:true,params:'4B', arch:'Dense (multimodal)', context:'32K', cutoff:'2024',gpu_req:'1× RTX 3090 (8GB)'},
   {name:'Gemma 4 E2B IT',              org:'Google DeepMind', weight:'open',       released:'Apr 2026',      desc:'Smallest Gemma 4 — 2B parameters. MMMLU: 60.0%. Maximum compute efficiency for on-device inference.',                                                                                    runnable:true, benchmarks:'MMMLU, MMMU Pro',isNew:true,params:'2B', arch:'Dense (multimodal)', context:'32K', cutoff:'2024',gpu_req:'1× RTX 3080 (4GB)'},
   {name:'Gemini 2.5 Flash Lite',       org:'Google DeepMind', weight:'closed',     released:'2025',          desc:'$0.10/$0.40 per M tokens. Cheapest powerful LLM. Optimised for high-volume, cost-sensitive applications.',                                                                               runnable:false,benchmarks:''},
-  // ── Meta (5) ─────────────────────────────────────────────────────
-  {name:'Muse Spark 1.1',              org:'Meta',            weight:'closed',     released:'Jul 9, 2026',   desc:'Meta Superintelligence Labs flagship (Alexandr Wang). Departs from the Llama naming convention. Terminal-Bench 2.1: 80.0%, HLE (Meta self-reported, with tools): 62.1% — independent Artificial Analysis testing found ~45%, a large gap worth noting.',                                                                                  runnable:false,benchmarks:'Terminal-Bench, HLE',isNew:true,params:'N/A (undisclosed)', arch:'Dense (transformer)', context:'256K', cutoff:'Jan 2026'},
+  // ── Meta (7) ─────────────────────────────────────────────────────
+  {name:'Muse Glimmer',                org:'Meta',            weight:'open',       released:'Aug 10, 2026',  desc:'Meta\'s first open-weight release since Llama 4 (Apache 2.0) — a reversal from the closed-weight Muse strategy. 29.6B dense transformer + 1.8B ViT-G/14 perception encoder, 120K+ context. SWE-Bench Verified: 76.0%, SWE-Bench Pro: 51.2%, AA-LCR: 80.0%. Weaker on agentic/hallucination metrics (AA-Omniscience 82%, higher is worse). Runs on 24–64GB VRAM depending on quantization.',                                                                                  runnable:true, benchmarks:'SWE-Bench Verified, SWE-Bench Pro, AA-LCR',isNew:true,params:'29.6B dense + 1.8B ViT-G/14', arch:'Dense (multimodal)', context:'120K', cutoff:'2024',gpu_req:'1× RTX 4090 (24GB, quantized)'},
+  {name:'Muse Spark 1.2',              org:'Meta',            weight:'closed',     released:'Aug 5, 2026',   desc:'Coding-focused update to Muse Spark 1.1, co-shipped with the "Muse Code" terminal coding agent. 1M-token context. Artificial Analysis Intelligence Index: 57 (xhigh), #14/193 on the AA coding index — beats GPT-5.6 Terra by 1.1pt on Terminal-Bench 2.1 but trails Terra on DeepSWE v1.1 and Claude Opus 5 by 8.8pt internally. New "contributor" pricing tier at $0.10/$0.20 (grants training-data rights, capped at 60 req/min vs 3,000 standard).',                                                                                  runnable:false,benchmarks:'Terminal-Bench 2.1, DeepSWE v1.1',isNew:true,params:'N/A (undisclosed)', arch:'Dense (transformer)', context:'1M', cutoff:'Jan 2026',price:'$1.25/$4.25'},
+  {name:'Muse Spark 1.1',              org:'Meta',            weight:'closed',     released:'Jul 9, 2026',   desc:'Meta Superintelligence Labs flagship (Alexandr Wang). Departs from the Llama naming convention. Terminal-Bench 2.1: 80.0%, HLE (Meta self-reported, with tools): 62.1% — independent Artificial Analysis testing found ~45%, a large gap worth noting. Superseded by Muse Spark 1.2 (Aug 5, 2026).',                                                                                  runnable:false,benchmarks:'Terminal-Bench, HLE',isNew:true,params:'N/A (undisclosed)', arch:'Dense (transformer)', context:'256K', cutoff:'Jan 2026'},
   {name:'Muse Spark',                  org:'Meta',            weight:'closed',     released:'Apr 8, 2026',   desc:'First Meta Superintelligence Labs model, predecessor to Muse Spark 1.1.',                                                                                                                   runnable:false,benchmarks:''},
   {name:'Llama 4 Maverick',            org:'Meta',            weight:'open',       released:'2025',          desc:'400B MoE, 17B active, 128 experts. MMLU: 85.5%. Apache 2.0. MAI-T1 Table 12. vLLM-compatible on H100.',                                                                                  runnable:true, benchmarks:'MMLU-Pro, GPQA, IFEval, SWE-Bench',params:'400B total / 17B active', arch:'MoE (multimodal)', context:'1M', cutoff:'2024',gpu_req:'4× H100 80GB (FP8) or 8× A100'},
   {name:'Llama 4 Scout',               org:'Meta',            weight:'open',       released:'2025',          desc:'10M token context (effective 5–6.5M). Smaller MoE variant of Llama 4. Ideal for long-document workloads.',                                                                               runnable:true, benchmarks:'MMLU-Pro, GPQA, long-context',params:'109B total / 17B active', arch:'MoE (multimodal)', context:'10M', cutoff:'2024',gpu_req:'2× H100 80GB (FP8)'},
@@ -1146,6 +1149,7 @@ const MODELS = [
 
   {name:'Kimi K3',                   org:'Moonshot AI',     weight:'open',       released:'Jul 16, 2026',  desc:'World first open 3T-class model (2.8T params). Native vision + 1M context. Built on Kimi Delta Attention + Stable LatentMoE (16/896 experts). Trails Fable 5 and GPT-5.6 Sol but outperforms all other tested models. Weights released Jul 27, 2026.',                        runnable:true,  api:'kimi-k3',  params:'2.8T total / ~50B active (MoE)', arch:'MoE + Kimi Delta Attention + AttnRes', context:'1M', cutoff:'2025',  price:'$3.00/$15.00 (cache-hit $0.30)',  gpu_req:'64+ accelerators (supernode recommended)',  isNew:true,  url:'https://www.kimi.com/blog/kimi-k3'},
   {name:'Kimi K2.7 Code',              org:'Moonshot AI',     weight:'open',       released:'Jun 12, 2026',  desc:'Coding-focused Kimi. 4000+ tool-call sequences, 12+ hour runs. Image+video via tools. Improves on K2.6 for coding and MCP benchmarks.',                                                    runnable:true, benchmarks:'SWE-Bench, LiveCodeBench, BrowseComp',isNew:true,params:'~1T total / 32B active', arch:'MoE (transformer)', context:'256K', cutoff:'2024',gpu_req:'8× H100 80GB cluster'},
+  {name:'NVIDIA Nemotron 3.5 Lightning', org:'NVIDIA',          weight:'open',       released:'Aug 11, 2026',  desc:'30B MoE (3B active), distilled from larger Nemotron models for long-running agentic workloads. Up to 4x output speed and 30% faster batch task completion vs comparable-accuracy models. Runs on a single GPU (laptop/desktop-capable). Co-launched with "NeMo Switchyard," a model-routing library claiming ~1/3 the cost of Opus 4.8 alone at similar accuracy.',                                          runnable:true, benchmarks:'',isNew:true,params:'30B total / 3B active', arch:'MoE (distilled)', context:'N/A (undisclosed)', cutoff:'2024',gpu_req:'1× RTX 4090 (24GB)'},
   {name:'NVIDIA Nemotron 3 Ultra 550B',  org:'NVIDIA',          weight:'open',       released:'Jun 4, 2026',   desc:'Hybrid Mamba-2/attention MoE. 550B total 55B active. 1M context. Thinking/non-thinking + tool use. $0.60/$2.60 per MTok via NIM. H100-runnable.',                                          runnable:true, benchmarks:'RULER, SWE-Bench Pro, GPQA, HLE',isNew:true,params:'550B total / 55B active', arch:'Hybrid Mamba-2 + attention MoE', context:'1M', cutoff:'2024',gpu_req:'8× H100 80GB cluster'},
   {name:'MAI-Thinking-1',              org:'Microsoft',       weight:'restricted', released:'Jun 2026',      desc:'Internal Microsoft model. AIME 2025: 97.0%, AIME 2026: 94.5%, LiveCodeBench v6: 87.7%, SWE-Bench Pro: 52.8%. Source for MAI-T1 Tables 11+12.',                                         runnable:false,benchmarks:'AIME 2025/2026, LiveCodeBench, SWE-Bench Pro',isNew:true,params:'N/A (internal)', arch:'Dense + RL reasoning', context:'128K', cutoff:'2024'},
   {name:'Phi-4',                       org:'Microsoft',       weight:'open',       released:'Dec 2024',          desc:'14B small language model. Beats many larger models on reasoning. MIT license.',                                                                                                            runnable:true, benchmarks:'MATH-500, GPQA, MMLU-Pro, HumanEval+',params:'14B', arch:'Dense (transformer)', context:'128K', cutoff:'2024',gpu_req:'1× H100 40GB'},
@@ -1154,7 +1158,39 @@ const MODELS = [
 // ── Dedicated Agentic Coding reference ──────────────────────────────────────
 const CODING_MODELS = [
 
-  // ── TIER 0: Newest releases (Jul 2026) ────────────────
+  // ── TIER 0: Newest releases (Jul-Aug 2026) ────────────
+  {
+    name:'Muse Glimmer',
+    org:'Meta', weight:'open',
+    released:'Aug 10, 2026',
+    specialty:'Agentic (open-weight)',
+    price:'Open-weight',
+    api:'muse-glimmer',
+    context:'120K',
+    license:'Apache 2.0',
+    scores:{swe_verified:'76.0%', swe_pro:'51.2%',
+            livecode:'N/A', humaneval:'N/A',
+            frontiercode:'N/A', terminal:'N/A'},
+    notes:'Meta\'s first open-weight release since Llama 4 — reversal from the closed-weight Muse strategy. 29.6B dense + 1.8B ViT-G/14 perception encoder. Runs on 24-64GB VRAM depending on quantization.',
+    runnable:true,
+    url:'https://ai.meta.com/blog/introducing-muse-spark-meta-model-api/'
+  },
+  {
+    name:'Muse Spark 1.2',
+    org:'Meta', weight:'closed',
+    released:'Aug 5, 2026',
+    specialty:'Agentic coding',
+    price:'$1.25/$4.25',
+    api:'muse-spark-1.2',
+    context:'1M',
+    license:'Proprietary',
+    scores:{swe_verified:'N/A', swe_pro:'N/A',
+            livecode:'N/A', humaneval:'N/A',
+            frontiercode:'N/A', terminal:'N/A'},
+    notes:'Coding-focused update to Muse Spark 1.1, co-shipped with the "Muse Code" terminal coding agent. Beats GPT-5.6 Terra by 1.1pt on Terminal-Bench 2.1 but trails Terra on DeepSWE v1.1 and Claude Opus 5 by 8.8pt internally (Meta/AA self-reported, not yet on tbench.ai).',
+    runnable:false,
+    url:'https://ai.meta.com/blog/introducing-muse-spark-meta-model-api/'
+  },
   {
     name:'Claude Opus 5',
     org:'Anthropic', weight:'closed',
@@ -1290,7 +1326,7 @@ const CODING_MODELS = [
     org:'Anthropic', weight:'closed',
     released:'Jun 30, 2026',
     specialty:'Agentic + cost-efficient',
-    price:'$2/$10 → $3/$15',
+    price:'$2/$10',
     api:'claude-sonnet-5',
     context:'1M',
     license:'Proprietary',
@@ -1602,7 +1638,10 @@ const SOURCES = [
   {title:'GPT-5.6 Launch — Sol, Terra, Luna',org:'OpenAI',date:'Jul 9, 2026',url:'https://openai.com/index/gpt-5-6/',desc:'GPT-5.6 family launch: Sol ($5/$30), Terra ($2.50/$15), Luna ($1/$6). New SOTA scores on third-party benchmarks: Agents Last Exam (53.6, Berkeley RDI/Snorkel AI), DeepSWE (72.7%, Datacurve), OSWorld 2.0 (62.6%, Stanford/xlang-ai), BrowseComp (92.2% ultra 4-agent mode; 90.4% single-agent). New Ultra mode coordinates 4 parallel agents. Programmatic Tool Calling for ZDR-compatible workflows. ARC-AGI-3 (ARC Prize Foundation) scored 7.78% Sol. SEC-Bench Pro, ExploitGym for cybersecurity. GeneBench Pro, LifeSciBench for science/health. Prices cut Jul 30, 2026: Terra to $2/$12 (-20%), Luna to $0.20/$1.20 (-80%); new "Sol Fast" mode added at $10/$60 (2.5x throughput).'},
   {title:'Gemini 3.6 Flash, 3.5 Flash-Lite & 3.5 Flash Cyber Launch',org:'Google DeepMind',date:'Jul 21, 2026',url:'https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-6-flash-3-5-flash-lite-3-5-flash-cyber/',desc:'Three new models: 3.6 Flash ($1.50/$7.50, 17% fewer output tokens than 3.5 Flash, knowledge cutoff advances to Mar 2026), 3.5 Flash-Lite ($0.30/$2.50, high-throughput tier beating Gemini 3 Flash on SWE-Bench Pro despite being smaller/cheaper), and 3.5 Flash Cyber (CodeMender vulnerability-fixing fine-tune, restricted to governments/trusted partners).'},
   {title:'Qwen3.8-Max Broad Availability',org:'Alibaba',date:'Aug 3, 2026',url:'https://qwenlm.github.io/',desc:'Previewed Jul 19 2026 as a closed preview with no published benchmarks; made broadly available via hosted API Aug 3, 2026 at $2.00/$6.00 per MTok with first independent-style scores (Terminal-Bench 2.1 86.6%, SWE-Bench Pro 67.7%, OSWorld-Verified 86.1%). 2.4T total / 95B active param multimodal MoE. Open-weight release (incl. smaller Qwen3.8-27B) promised "next week" as of Aug 3 — not yet shipped.'},
-  {title:'Claude Sonnet 5 — Launch Announcement & System Card',org:'Anthropic',date:'Jun 30, 2026',url:'https://www.anthropic.com/news/claude-sonnet-5',desc:'Launch of Claude Sonnet 5 — new default model for Free/Pro plans. Most agentic Sonnet yet. Introduces BrowseComp and OSWorld-Verified benchmarks with effort-level curves. Corrects Sonnet 4.6 HLE (now 34.6%/46.8%) and OSWorld-Verified (now 78.5%) scores. API: claude-sonnet-5. $2/$10 MTok intro until Aug 31 2026.'},
+  {title:'Claude Sonnet 5 — Launch Announcement & System Card',org:'Anthropic',date:'Jun 30, 2026',url:'https://www.anthropic.com/news/claude-sonnet-5',desc:'Launch of Claude Sonnet 5 — new default model for Free/Pro plans. Most agentic Sonnet yet. Introduces BrowseComp and OSWorld-Verified benchmarks with effort-level curves. Corrects Sonnet 4.6 HLE (now 34.6%/46.8%) and OSWorld-Verified (now 78.5%) scores. API: claude-sonnet-5. $2/$10 MTok pricing, originally introductory until Aug 31 2026, made permanent Aug 10 2026.'},
+  {title:'GPT-5.6-Cyber & Daybreak Blue/Red',org:'OpenAI',date:'Aug 10, 2026',url:'https://openai.com/index/gpt-5-6/',desc:'Purpose-trained cybersecurity model with restricted access tiers: Daybreak Blue (relaxed guardrails on GPT-5.6 Sol) and Daybreak Red (full model access). Dual-use — not on the general API.'},
+  {title:'Muse Spark 1.2 & Muse Glimmer Launch',org:'Meta',date:'Aug 5 / Aug 10, 2026',url:'https://ai.meta.com/blog/introducing-muse-spark-meta-model-api/',desc:'Muse Spark 1.2 (Aug 5): coding-focused update co-shipped with the "Muse Code" terminal agent, AA Intelligence Index 57. Muse Glimmer (Aug 10): Meta\'s first open-weight release since Llama 4 (Apache 2.0), 29.6B dense + 1.8B ViT-G/14, SWE-Bench Verified 76.0%/Pro 51.2% — a reversal from the closed-weight Muse strategy.'},
+  {title:'NVIDIA Nemotron 3.5 Lightning & NeMo Switchyard',org:'NVIDIA',date:'Aug 11, 2026',url:'https://blogs.nvidia.com/blog/nemotron-lightning-switchyard-rtx-dgx',desc:'30B MoE (3B active) distilled for long-running agentic workloads, up to 4x output speed vs comparable-accuracy models, single-GPU capable. Co-launched with NeMo Switchyard, a model-routing library claiming ~1/3 the cost of Opus 4.8 alone at similar accuracy.'},
   {title:'Redeploying Claude Fable 5 — Export Controls & Safety Framework',org:'Anthropic',date:'Jun 30 / Jul 1, 2026',url:'https://www.anthropic.com/news/redeploying-fable-5',desc:'Fable 5 and Mythos 5 suspended Jun 12 due to US export controls after Amazon researchers found a safeguard bypass. Controls lifted Jun 30; models restored Jul 1. New safety classifier deployed blocking reported jailbreak in >99% of cases. Includes new industry jailbreak severity framework (with Amazon, Microsoft, Google). Blocked requests route to Opus 4.8.'},
   {title:'Claude Fable 5 & Mythos 5 — Launch Announcement',org:'Anthropic',date:'Jun 9, 2026',url:'https://www.anthropic.com/news/claude-fable-5-mythos-5',desc:'Launch of first Mythos-class model for general use. Benchmarks: SWE-Bench Pro (80.3%), FrontierCode Diamond (29.3%), HLE (59.0%), Terminal-Bench 2.1 (88.0%), HealthBench (66.0%). $10/$50 per M tokens.'},
   {title:'Gemma 4 Model Card & Developer Guide',org:'Google DeepMind',date:'Apr-Jun 2026',url:'https://deepmind.google/models/gemma/gemma-4/',desc:'Full Gemma 4 family: E2B, E4B, 12B (encoder-free multimodal), 26B MoE, 31B Dense. Benchmarks: Arena ELO (1452), MMMLU (88.4%), MMMU Pro, MATH-500, LiveCodeBench, GPQA. vLLM + llama.cpp + Ollama compatible.'},
@@ -1820,6 +1859,7 @@ function toggleDeprecated(el) {
 const MODEL_LINKS = {
   // OpenAI GPT-5.6
   'GPT-5.6 Sol':            'https://openai.com/index/gpt-5-6/',
+  'GPT-5.6-Cyber':          'https://openai.com/index/gpt-5-6/',
   'GPT-5.6 Terra':          'https://openai.com/index/gpt-5-6/',
   'GPT-5.6 Luna':           'https://openai.com/index/gpt-5-6/',
   // Anthropic
@@ -1876,6 +1916,8 @@ const MODEL_LINKS = {
   'Grok 4':                 'https://x.ai/blog/grok-4',
   'Grok 2.5':               'https://x.ai/news',
   // Meta
+  'Muse Glimmer':           'https://ai.meta.com/blog/introducing-muse-spark-meta-model-api/',
+  'Muse Spark 1.2':         'https://ai.meta.com/blog/introducing-muse-spark-meta-model-api/',
   'Muse Spark 1.1':         'https://ai.meta.com/blog/introducing-muse-spark-meta-model-api/',
   'Muse Spark':             'https://ai.meta.com/blog/introducing-muse-spark-meta-model-api/',
   'Llama 4 Maverick':       'https://ai.meta.com/blog/llama-4-multimodal-models/',
@@ -1908,6 +1950,7 @@ const MODEL_LINKS = {
   'Magistral Small':        'https://mistral.ai/news/magistral/',
   'Codestral':              'https://mistral.ai/news/codestral/',
   // NVIDIA
+  'NVIDIA Nemotron 3.5 Lightning': 'https://build.nvidia.com/',
   'NVIDIA Nemotron 3 Ultra 550B': 'https://huggingface.co/nvidia/Llama-3.1-Nemotron-Ultra-550B-Instruct',
   'NVIDIA Nemotron-3 Super 120B': 'https://huggingface.co/nvidia/Llama-3.1-Nemotron-Super-120B-Instruct',
   'NVIDIA Nemotron-3 Nano 30B': 'https://huggingface.co/nvidia/Llama-3.1-Nemotron-Nano-30B-v1',
@@ -1926,10 +1969,11 @@ const MODEL_LINKS = {
 const MODEL_PRICES = {
   // OpenAI GPT-5.6
   'GPT-5.6 Sol':               '$5/$30',
+  'GPT-5.6-Cyber':             'Internal/restricted',
   'GPT-5.6 Terra':             '$2/$12',
   'GPT-5.6 Luna':              '$0.20/$1.20',
   // Anthropic
-  'Claude Sonnet 5':           '$2/$10 → $3/$15 (Sep 1)',
+  'Claude Sonnet 5':           '$2/$10',
   'Claude Fable 5':            '$10/$50',
   'Claude Mythos 5':           '$10/$50',
   'Claude Opus 5':            '$5/$25',
@@ -1984,6 +2028,8 @@ const MODEL_PRICES = {
   'Grok 4':                    '$3/$15',
   'Grok 2.5':                  'Open-weight',
   // Meta
+  'Muse Glimmer':              'Open-weight',
+  'Muse Spark 1.2':            '$1.25/$4.25',
   'Muse Spark 1.1':            'N/A (API preview)',
   'Muse Spark':                'N/A (API preview)',
   'Llama 4 Maverick':          'Open-weight',
@@ -2016,6 +2062,7 @@ const MODEL_PRICES = {
   'Magistral Small':           '$0.50/$1.50',
   'Codestral':                 '$0.30/$0.90',
   // NVIDIA
+  'NVIDIA Nemotron 3.5 Lightning':'Open-weight',
   'NVIDIA Nemotron 3 Ultra 550B':'$0.60/$2.60',
   'NVIDIA Nemotron-3 Super 120B': 'Open-weight',
   'NVIDIA Nemotron-3 Nano 30B':   'Open-weight',
