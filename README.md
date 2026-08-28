@@ -40,7 +40,7 @@ Each benchmark shows: domain, priority, primary metric, which labs use it, descr
 
 A per-domain, per-lab breakdown of the highest-priority benchmarks (Tier 1 — Critical, Tier 2 — High, Tier 3 — Medium, Tier 4 — Low, and a Watch List), showing each lab's best reported score, headroom to close, and source attribution — used to decide what FoxBrain should be evaluated against next.
 
-### 🤖 Models tab — 96 models across 14 labs
+### 🤖 Models tab — 98 models across 14 labs
 
 Within each lab, models are sorted **newest release first**.
 
@@ -64,7 +64,7 @@ Within each lab, models are sorted **newest release first**.
 
 Open-weight models (Gemma 4, DeepSeek, Qwen3, Llama 4, Mistral, MiniMax, GLM-5, Kimi, NVIDIA Nemotron, Muse Glimmer) can run directly on HHRI-AI H100s via vLLM. Deprecated models included for historical reference and reproducibility.
 
-### 💻 Coding tab — 32 models across 2 weight classes
+### 💻 Coding tab — 33 models across 2 weight classes
 
 Sorted newest release first (independent of tier).
 
@@ -91,7 +91,7 @@ One card per benchmark showing every lab that evaluated it with exact model API 
 
 Cross-check resources: Artificial Analysis, BenchLM, Scale AI Leaderboard, LLM Stats, Papers With Code.
 
-### 📖 Sources tab — 32 reference links
+### 📖 Sources tab — 34 reference links
 
 Technical reports, live leaderboards, and benchmark papers, including:
 - Claude Opus 5 / Fable 5 & Mythos 5 system cards, Claude Sonnet 5 launch (Anthropic)
@@ -168,4 +168,4 @@ foxbrain-eval-dashboard/
 
 *Benchmark taxonomy based on MAI-Thinking-1 Technical Report §4.1 (Microsoft AI, June 2026) and additional sources listed in the Sources tab.*
 
-*Last updated: August 21, 2026 — added Google's Gemini 3.7 Flash (Aug 13, successor to 3.6 Flash, which got a matching price cut to $0.75/$3.75), xAI's Grok 4.6 (Aug 12, post-training refresh of 4.5), Zhipu's GLM-5.3 (Aug 14, open weights delayed to ~Aug 28), Writer's Palmyra X6 (Aug 13, GLM-5.2-derived), and Alibaba's Qwen3.8-27B (Aug 13, new open-weight dense variant); refreshed DeepSeek V4 Pro as V4-Pro-0813 (Aug 13 GA, new peak/off-peak billing Aug 16) and noted Qwen3.8-Max's open weights shipping Aug 12. Confirmed via 5 parallel research agents that Anthropic and Meta had quiet windows in this period, and that "Claude Fable 5.1" remains unconfirmed rumor. Total: 84 benchmarks across 12 domains, 96 frontier models across 14 labs, 32 coding specialist models, 32 sources.*
+*Last updated: August 28, 2026 — added Zhipu's GLM-5.3-Flash open-weight release (Aug 26, "Ox Alpha", 320B-A18B MoE, $0.15/$0.50 API); noted OpenAI's GPT-5.6 Sol price cut (Aug 22: 20% input drop to $4/1M, 33% output drop to $20/1M, promo through Nov 21). Aug 21–28 saw quiet windows for most labs; no new Anthropic, Meta, Google, xAI, Mistral, Alibaba, NVIDIA, or Microsoft releases. Confirmed via comprehensive research that no major model launches or benchmark publication occurred in this window beyond the above. Total: 84 benchmarks across 12 domains, 98 frontier models across 14 labs, 33 coding specialist models, 34 sources.*
