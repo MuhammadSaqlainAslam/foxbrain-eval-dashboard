@@ -738,12 +738,12 @@ tbody td { padding: 12px 16px; vertical-align: top; }
     <div class="hero-text">
       <div class="hero-title">
         FoxBrain EvalHub
-        <span class="badge" style="background:var(--accent-bg);color:var(--accent);border:1px solid var(--accent);border-radius:99px;padding:3px 10px;font-size:11px;font-weight:600">September 1, 2026 &bull; Latest: Qwen3.8-Flash-Next (Aug 26, Alibaba)</span>
+        <span class="badge" style="background:var(--accent-bg);color:var(--accent);border:1px solid var(--accent);border-radius:99px;padding:3px 10px;font-size:11px;font-weight:600">September 1, 2026 &bull; Latest: Claude Fable 5.1 &amp; Mythos 5.1 (Sep 1, Anthropic)</span>
       </div>
       <p class="hero-desc">Frontier Benchmark &amp; Model Intelligence — HHRI-AI Research<br><span style="font-size:12px;color:var(--text3)">A curated, up-to-date reference of benchmarks and frontier models used by leading AI labs. Use this to select evaluation targets for FoxBrain model assessments across 12 capability domains.</span></p>
       <div class="hero-updated">
         <span class="dot"></span>
-        Last updated: <span id="last-updated-date">September 1, 2026</span> &nbsp;&bull;&nbsp; Added DeepSeek V4 Flash Vision (Aug 21), Qwen3.8-Flash-Next (Aug 26), Ant Group's Ling-3.0-Flash &amp; Flash Fin (Aug 7/27) — new lab InclusionAI
+        Last updated: <span id="last-updated-date">September 1, 2026</span> &nbsp;&bull;&nbsp; Added Claude Fable 5.1 &amp; Mythos 5.1 (Sep 1) — new Terminal-Bench 4.0 &amp; Terminal-Bench-Science 0.1 benchmarks, 75% cheaper Fable cache reads
       </div>
     </div>
     <div class="hero-stats">
@@ -910,7 +910,7 @@ tbody td { padding: 12px 16px; vertical-align: top; }
 
 <div class="footer">
   <span>FoxBrain EvalHub &nbsp;&bull;&nbsp; HHRI-AI / Foxconn AI Research Center &nbsp;&bull;&nbsp; <a href="https://muhammadsaqlainaslam.github.io/foxbrain-eval-dashboard/">muhammadsaqlainaslam.github.io/foxbrain-eval-dashboard</a></span>
-  <span id="footer-updated">Updated September 1, 2026</span> &nbsp;&bull;&nbsp; 11 labs &nbsp;&bull;&nbsp; 100 models &nbsp;&bull;&nbsp; 84 benchmarks &nbsp;&bull;&nbsp; 37 sources
+  <span id="footer-updated">Updated September 1, 2026</span> &nbsp;&bull;&nbsp; 11 labs &nbsp;&bull;&nbsp; 102 models &nbsp;&bull;&nbsp; 86 benchmarks &nbsp;&bull;&nbsp; 38 sources
 </div>
 
 <script>
@@ -978,6 +978,8 @@ const BENCHMARKS = [
   {name:'SWE-Bench Pro',domain:'agentic',pri:'high',metric:'resolve_rate',labs:['OpenAI','Anthropic','Microsoft'],desc:'Contamination-resistant multi-language successor. Fable 5: 80.3%, Opus 4.8: 69.2%, GPT-5.5: 58.6%, Gemini 3.1 Pro: 54.2%.',tags:['agentic','harder','multi-lang'],isNew:true},
   {name:'FrontierCode Diamond',domain:'agentic',pri:'high',metric:'pass@1',labs:['Anthropic','OpenAI','Google'],desc:"Cognition's production-grade coding benchmark. Tests mergeability, correctness, scope, style. Source: llm-stats.com. Claude Fable 5 leads at 46.3% (only model tracked). Official: cognition.ai/benchmarks",tags:['coding','production-grade'],isNew:true},
   {name:'Terminal-Bench 2.1',domain:'agentic',pri:'high',metric:'success_rate',labs:['Anthropic','OpenAI','Google'],desc:'Agentic terminal task completion. Fable 5: 88.0%, Opus 4.8: 82.7%, GPT-5.5: 83.4%, Gemini 3.1 Pro: 70.7%.',tags:['agentic','terminal','cli'],isNew:true},
+  {name:'Terminal-Bench 4.0',domain:'agentic',pri:'high',metric:'success_rate',labs:['Anthropic','OpenAI'],desc:'Successor to Terminal-Bench 2.1, introduced in the Fable 5.1 & Mythos 5.1 system card (Sep 1, 2026). Claude Mythos 5.1: 60.9%, Claude Fable 5.1: 55.8% (up from Fable 5\'s 42.0% on this harder revision), Claude Opus 5: 52.3%, GPT-5.6 Sol: 37.3%. Scores not comparable to Terminal-Bench 2.1.',tags:['agentic','terminal','cli'],isNew:true},
+  {name:'Terminal-Bench-Science 0.1',domain:'agentic',pri:'medium',metric:'success_rate',labs:['Anthropic','OpenAI'],desc:'New agentic scientific research benchmark, introduced in the Fable 5.1 & Mythos 5.1 system card (Sep 1, 2026). Claude Fable 5.1: 52.6%, Claude Opus 5: 29.0%, Claude Fable 5: 24.7%, GPT-5.6 Sol: 22.4%.',tags:['agentic','science','research'],isNew:true},
   {name:'Aider Polyglot',domain:'agentic',pri:'high',metric:'pass@1',labs:['Anthropic','OpenAI','Google','Microsoft'],desc:'Code editing across C++, Go, Java, JS, Python, Rust. Tests editing existing code, not just generation.',tags:['code-editing','multi-lang']},
   {name:'CursorBench 3.1',domain:'agentic',pri:'medium',metric:'pass@1',labs:['Anthropic','OpenAI'],desc:"Cursor's real-world IDE coding benchmark. Fable 5: 72.9% at max effort.",tags:['coding','real-world','IDE'],isNew:true},
   {name:'tau-bench',domain:'agentic',pri:'high',metric:'success_rate',labs:['Anthropic','OpenAI','Meta','HHRI-AI'],desc:'Multi-turn tool use in retail + airline domains. Already in your eval suite.',tags:['multi-turn','tool-use']},
@@ -1049,7 +1051,9 @@ const BENCHMARKS = [
 ];
 
 const MODELS = [
-  // ── Anthropic (10) ───────────────────────────────────────────────
+  // ── Anthropic (14) ───────────────────────────────────────────────
+  {name:'Claude Fable 5.1',            org:'Anthropic',       weight:'closed',     released:'Sep 1, 2026',   desc:'Incremental update to the Fable line — matches or beats Fable 5 at low/medium effort, notably stronger at high effort. Terminal-Bench 4.0: 55.8% (Fable 5: 42.0%, Opus 5: 52.3%, GPT-5.6 Sol: 37.3%). Terminal-Bench-Science 0.1: 52.6%. HLE: 60.9% no tools / 65.0% with tools. CursorBench 3.2.0: 73.4%. AutomationBench: 31.4%. OSWorld 2.0 (strict): 41.7%. GDPval-AA v2: 1853. Same $10/$50 per M token pricing as Fable 5, but cache-read cut 75% to $0.25/M (from $1) — ~25-45% effective cost reduction on agentic workloads. Ships with new Enterprise Frontier Safeguards (EFS) architecture and anti-distillation protections; can now be used to identify software vulnerabilities in source code. Known regressions: less consistent parallel tool calling (may issue one call per turn where Fable 5 batched several), narrates less, prefers whole-file rewrites over targeted edits. API: claude-fable-5-1.', runnable:false, api:'claude-fable-5-1', benchmarks:'Terminal-Bench 4.0, Terminal-Bench-Science 0.1, HLE, CursorBench, AutomationBench, OSWorld 2.0', isNew:true, params:'N/A (undisclosed)', arch:'Dense (transformer)', context:'1M', cutoff:'Jan 2026', url:'https://www.anthropic.com/claude-fable-and-mythos-5-1'},
+  {name:'Claude Mythos 5.1',           org:'Anthropic',       weight:'closed',     released:'Sep 1, 2026',   desc:'Same underlying model as Fable 5.1 with cyber/bio safeguards lifted — restricted to Project Glasswing partners. Terminal-Bench 4.0: 60.9% (vs Fable 5.1: 55.8%), the gap reflecting the cost of safeguard interventions. Designed protein binders at ~50% hit rate across 12 targets (vs 10-15% norm) and sped up 7 open-source deep learning models by up to 2.5x via custom GPU kernels. $10/$50 per M tokens. Strongest published cybersecurity capabilities of any Anthropic model to date, though evaluations place it below the next Responsible Scaling Policy risk tier.', runnable:false, benchmarks:'Terminal-Bench 4.0, ExploitBench, protein design', isNew:true, params:'N/A (undisclosed)', arch:'Dense (transformer)', context:'1M', cutoff:'Jan 2026', url:'https://www.anthropic.com/claude-fable-and-mythos-5-1'},
   {name:'Claude Opus 5',              org:'Anthropic',       weight:'closed',     released:'Jul 24, 2026',  desc:'New SOTA on Frontier-Bench v0.1. ARC-AGI 3 score 3x next-best model. OSWorld 2.0: best at any cost. Most aligned Anthropic model to date. Close to Fable 5 at half the cost. API: claude-opus-5.',                                                                                                  runnable:false,  api:'claude-opus-5',  params:'N/A (undisclosed)', arch:'Dense (transformer)', context:'1M', cutoff:'Jan 2026',  price:'$5/$25',  isNew:true,  url:'https://www.anthropic.com/news/claude-opus-5'},
   {name:'Claude Sonnet 5',             org:'Anthropic',       weight:'closed',     released:'Jun 30, 2026',  desc:'New default model for Free and Pro plans. Most agentic Sonnet yet — closes gap with Opus 4.8. Faster follow-through on multi-step tasks, self-checking output without prompting. Updated tokenizer (1.0–1.35x token multiplier vs Sonnet 4.6). $2/$10 per MTok — originally introductory pricing until Aug 31 2026, made permanent Aug 10 2026 (no increase to $3/$15). API: claude-sonnet-5.',                              runnable:false,benchmarks:'SWE-Bench, BrowseComp, OSWorld-Verified, HLE, GPQA, IFEval, MMLU-Pro',isNew:true,params:'N/A (undisclosed)', arch:'Dense (transformer)', context:'1M', cutoff:'Jan 2026'},
   {name:'Claude Fable 5',              org:'Anthropic',       weight:'closed',     released:'Jun 9, 2026',   desc:'First Mythos-class model for general use. SWE-Bench Pro: 80.3%, HLE: 59.0%, FrontierCode Diamond: 29.3%, Terminal-Bench 2.1: 88.0%. 1M token context. $10/$50 per M tokens. Suspended Jun 12–Jul 1 due to US export controls (now restored globally). Updated safety classifier deployed — blocks reported jailbreak in >99% of cases. Blocked requests route to Opus 4.8.',           runnable:false,benchmarks:'SWE-Bench Pro, FrontierCode, HLE, Terminal-Bench',isNew:true,params:'N/A (undisclosed)', arch:'Dense (transformer)', context:'1M', cutoff:'Jan 2026'},
@@ -1167,7 +1171,23 @@ const MODELS = [
 // ── Dedicated Agentic Coding reference ──────────────────────────────────────
 const CODING_MODELS = [
 
-  // ── TIER 0: Newest releases (Jul-Aug 2026) ────────────
+  // ── TIER 0: Newest releases (Jul-Sep 2026) ────────────
+  {
+    name:'Claude Fable 5.1',
+    org:'Anthropic', weight:'closed',
+    released:'Sep 1, 2026',
+    specialty:'Agentic + long-horizon',
+    price:'$10/$50',
+    api:'claude-fable-5-1',
+    context:'1M',
+    license:'Proprietary',
+    scores:{swe_verified:'N/A', swe_pro:'N/A',
+            livecode:'N/A', humaneval:'N/A',
+            frontiercode:'N/A', terminal:'55.8% (TB 4.0)'},
+    notes:'Incremental update to Fable 5 — stronger at high effort, notably on Terminal-Bench 4.0 (55.8% vs Fable 5\'s 42.0%) and the new Terminal-Bench-Science 0.1 (52.6%). Cache-read pricing cut 75% to $0.25/MTok. Some parallel-tool-calling regressions vs Fable 5.',
+    runnable:false,
+    url:'https://www.anthropic.com/claude-fable-and-mythos-5-1'
+  },
   {
     name:'Muse Glimmer',
     org:'Meta', weight:'open',
@@ -1722,6 +1742,7 @@ const CODING_MODELS = [
 ];
 
 const SOURCES = [
+  {title:'Claude Fable 5.1 & Mythos 5.1 — Launch Announcement & System Card',org:'Anthropic',date:'Sep 1, 2026',url:'https://www.anthropic.com/claude-fable-and-mythos-5-1',desc:'Incremental Fable-line update. Terminal-Bench 4.0 (Fable 5.1: 55.8%, Mythos 5.1: 60.9%), new Terminal-Bench-Science 0.1 (52.6%), HLE (60.9%/65.0% w/ tools), CursorBench 3.2.0 (73.4%). Cache-read price cut 75% to $0.25/MTok. New Enterprise Frontier Safeguards architecture, anti-distillation measures. API: claude-fable-5-1.'},
   {title:'DeepSeek V4 Flash Vision (Exp) Launch',org:'DeepSeek',date:'Aug 21, 2026',url:'https://api-docs.deepseek.com/news/news260821/',desc:'Experimental multimodal (vision-language) variant of V4 Flash. Same 284B/13B active MoE, 1M context. Approaches Claude Opus 4.8 on multimodal agent benchmarks. $0.22/$0.66 per MTok.'},
   {title:'Qwen3.8-Flash-Next Launch',org:'Alibaba',date:'Aug 26, 2026',url:'https://www.marktechpost.com/2026/08/26/alibabas-qwen-team-releases-qwen3-8-flash-next-a-125b-multimodal-moe-with-6b-active-parameters-previewing-the-qwen4-architecture/',desc:'Open-weight architecture preview of Qwen4. 125B total/6B active MoE + 51B N-gram embedding + 4B MTP module. Introduces Qwen Sparse Attention. SWE-Bench Pro 62.5%, HLE 35.9%. Closed API sibling "Qwen3.8-Flash" shipped same day.'},
   {title:'Ling-3.0-Flash & Flash Fin Launch',org:'InclusionAI (Ant Group)',date:'Aug 7 / Aug 27, 2026',url:'https://www.kucoin.com/news/flash/ant-group-open-sources-ling-3-0-flash-with-124b-parameters',desc:'Ant Group\'s AI lab open-sources Ling-3.0-Flash (Aug 7): hybrid MoE, 124B total/5.1B active, MIT license, AA Intelligence Index 38. Flash Fin (Aug 27) is a finance-domain fine-tune for investment research/financial analysis, free via OpenRouter at launch.'},
@@ -1962,6 +1983,8 @@ const MODEL_LINKS = {
   'GPT-5.6 Terra':          'https://openai.com/index/gpt-5-6/',
   'GPT-5.6 Luna':           'https://openai.com/index/gpt-5-6/',
   // Anthropic
+  'Claude Fable 5.1':       'https://www.anthropic.com/claude-fable-and-mythos-5-1',
+  'Claude Mythos 5.1':      'https://www.anthropic.com/claude-fable-and-mythos-5-1',
   'Claude Sonnet 5':        'https://www.anthropic.com/news/claude-sonnet-5',
   'Claude Fable 5':         'https://www.anthropic.com/news/claude-fable-5-mythos-5',
   'Claude Mythos 5':        'https://www.anthropic.com/news/claude-fable-5-mythos-5',
@@ -2084,6 +2107,8 @@ const MODEL_PRICES = {
   'GPT-5.6 Luna':              '$0.20/$1.20',
   // Anthropic
   'Claude Sonnet 5':           '$2/$10',
+  'Claude Fable 5.1':          '$10/$50 ($0.25/MTok cache-read)',
+  'Claude Mythos 5.1':         '$10/$50',
   'Claude Fable 5':            '$10/$50',
   'Claude Mythos 5':           '$10/$50',
   'Claude Opus 5':            '$5/$25',
@@ -2881,6 +2906,13 @@ const LAB_DATA = [
   {
     lab:'Anthropic', color:'#cc4b00', emoji:'🔶',
     entries:[
+      {bench:'Terminal-Bench 4.0',       domain:'agentic',     model:'claude-mythos-5-1',    api:'claude-mythos-5-1',             score:'60.9%', notes:'Fable 5.1 & Mythos 5.1 system card, Sep 1 2026'},
+      {bench:'Terminal-Bench 4.0',       domain:'agentic',     model:'claude-fable-5-1',     api:'claude-fable-5-1',              score:'55.8%', notes:'Fable 5.1 & Mythos 5.1 system card; Fable 5 scored 42.0% on this harder revision'},
+      {bench:'Terminal-Bench-Science 0.1', domain:'agentic',   model:'claude-fable-5-1',     api:'claude-fable-5-1',              score:'52.6%', notes:'New benchmark introduced with Fable 5.1'},
+      {bench:'HLE',                      domain:'stem',        model:'claude-fable-5-1',     api:'claude-fable-5-1',              score:'60.9%', notes:'No tools; 65.0% with tools'},
+      {bench:'OSWorld 2.0',              domain:'computer',    model:'claude-fable-5-1',     api:'claude-fable-5-1',              score:'41.7%', notes:'Strict scoring'},
+      {bench:'AutomationBench',          domain:'tool',        model:'claude-fable-5-1',     api:'claude-fable-5-1',              score:'31.4%', notes:''},
+      {bench:'GDPval-AA',                domain:'knowledge',   model:'claude-fable-5-1',     api:'claude-fable-5-1',              score:'1853',  notes:'v2 methodology, score not %'},
       {bench:'SWE-Bench Verified',       domain:'agentic',     model:'claude-fable-5',       api:'claude-fable-5',                score:'95.0%', notes:'Anthropic scaffold, Fable 5 system card'},
       {bench:'SWE-Bench Verified',       domain:'agentic',     model:'claude-opus-4-8',      api:'claude-opus-4-8',               score:'88.6%', notes:'Anthropic scaffold'},
       {bench:'SWE-Bench Verified',       domain:'agentic',     model:'claude-opus-4-6',      api:'claude-opus-4-6',               score:'80.8%', notes:'Anthropic scaffold'},
