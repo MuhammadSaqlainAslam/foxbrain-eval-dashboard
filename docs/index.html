@@ -738,12 +738,12 @@ tbody td { padding: 12px 16px; vertical-align: top; }
     <div class="hero-text">
       <div class="hero-title">
         FoxBrain EvalHub
-        <span class="badge" style="background:var(--accent-bg);color:var(--accent);border:1px solid var(--accent);border-radius:99px;padding:3px 10px;font-size:11px;font-weight:600">September 1, 2026 &bull; Latest: Claude Fable 5.1 &amp; Mythos 5.1 (Sep 1, Anthropic)</span>
+        <span class="badge" style="background:var(--accent-bg);color:var(--accent);border:1px solid var(--accent);border-radius:99px;padding:3px 10px;font-size:11px;font-weight:600">September 8, 2026 &bull; Latest: GPT-6 Astra (Sep 3, OpenAI)</span>
       </div>
       <p class="hero-desc">Frontier Benchmark &amp; Model Intelligence — HHRI-AI Research<br><span style="font-size:12px;color:var(--text3)">A curated, up-to-date reference of benchmarks and frontier models used by leading AI labs. Use this to select evaluation targets for FoxBrain model assessments across 12 capability domains.</span></p>
       <div class="hero-updated">
         <span class="dot"></span>
-        Last updated: <span id="last-updated-date">September 1, 2026</span> &nbsp;&bull;&nbsp; Added Claude Fable 5.1 &amp; Mythos 5.1 (Sep 1) — new Terminal-Bench 4.0 &amp; Terminal-Bench-Science 0.1 benchmarks, 75% cheaper Fable cache reads
+        Last updated: <span id="last-updated-date">September 8, 2026</span> &nbsp;&bull;&nbsp; Added OpenAI's GPT-6 Astra (Sep 3), Google's Gemini 3.8 Flash &amp; Flash Cyber, Meta's Muse Spark 1.3 (Sep 2) — a dense wave of 4 frontier launches within 72 hours
       </div>
     </div>
     <div class="hero-stats">
@@ -910,7 +910,7 @@ tbody td { padding: 12px 16px; vertical-align: top; }
 
 <div class="footer">
   <span>FoxBrain EvalHub &nbsp;&bull;&nbsp; HHRI-AI / Foxconn AI Research Center &nbsp;&bull;&nbsp; <a href="https://muhammadsaqlainaslam.github.io/foxbrain-eval-dashboard/">muhammadsaqlainaslam.github.io/foxbrain-eval-dashboard</a></span>
-  <span id="footer-updated">Updated September 1, 2026</span> &nbsp;&bull;&nbsp; 11 labs &nbsp;&bull;&nbsp; 102 models &nbsp;&bull;&nbsp; 86 benchmarks &nbsp;&bull;&nbsp; 38 sources
+  <span id="footer-updated">Updated September 8, 2026</span> &nbsp;&bull;&nbsp; 11 labs &nbsp;&bull;&nbsp; 106 models &nbsp;&bull;&nbsp; 86 benchmarks &nbsp;&bull;&nbsp; 42 sources
 </div>
 
 <script>
@@ -964,10 +964,10 @@ const DO = [
 const BENCHMARKS = [
   {name:'AIME 2025',domain:'stem',pri:'high',metric:'pass@1',labs:['OpenAI','Anthropic','Google','Microsoft','Alibaba','DeepSeek'],desc:'30 AMC competition math problems. Primary frontier math signal. Scores now 94-97% at frontier.',tags:['math','reasoning']},
   {name:'AIME 2026',domain:'stem',pri:'high',metric:'pass@1',labs:['OpenAI','Microsoft','Google'],desc:'2026 edition — contamination-safe replacement as AIME 2025 saturates. MAI-T1: 94.5%.',tags:['math','contamination-safe'],isNew:true},
-  {name:'HLE',domain:'stem',pri:'high',metric:'accuracy',labs:['OpenAI','Google','Anthropic','xAI','Scale AI'],desc:"Humanity's Last Exam — 2,500 expert-vetted questions. Source: BenchLM Jul 29 2026 + Fable 5.1 & Mythos 5.1 system card (Sep 1, 2026). Claude Fable 5.1 now leads at 65.0% with tools (60.9% no tools), ahead of Claude Opus 5 at 64.7%, Claude Mythos 5 64.5%, Muse Spark 1.1 (Meta) 62.1%. Official: lastexam.ai",tags:['expert-level','multi-domain','hard']},
+  {name:'HLE',domain:'stem',pri:'high',metric:'accuracy',labs:['OpenAI','Google','Anthropic','xAI','Scale AI'],desc:"Humanity's Last Exam — 2,500 expert-vetted questions. Source: BenchLM Jul 29 2026 + Fable 5.1 & Mythos 5.1 system card (Sep 1, 2026). Claude Fable 5.1 still leads at 65.0% with tools (60.9% no tools), ahead of Claude Opus 5 at 64.7%, Claude Mythos 5 64.5%, Muse Spark 1.1 (Meta) 62.1%. GPT-6 Astra (Sep 3, 2026) scores 57.2% with tools — did not retake the lead here despite topping several other benchmarks. Official: lastexam.ai",tags:['expert-level','multi-domain','hard']},
   {name:'MATH-500',domain:'stem',pri:'high',metric:'accuracy',labs:['OpenAI','Anthropic','Google','Microsoft','Meta','Alibaba'],desc:'500 Hendrycks MATH problems. Algebra, calculus, number theory. Standard across all frontier reports.',tags:['math','reasoning']},
-  {name:'GPQA Diamond',domain:'stem',pri:'high',metric:'accuracy',labs:['OpenAI','Anthropic','Google','Microsoft','Meta','DeepSeek'],desc:'198 PhD-level biology, chemistry, physics MCQs. Gemini 3.1 Pro leads at 94.3%, GPT-5.5 at 93.6%.',tags:['science','expert-level']},
-  {name:'FrontierMath',domain:'stem',pri:'high',metric:'accuracy',labs:['OpenAI','Anthropic','Google'],desc:'Expert-verified novel math problems not findable online. Most frontier models score below 2%.',tags:['math','novel','anti-saturation']},
+  {name:'GPQA Diamond',domain:'stem',pri:'high',metric:'accuracy',labs:['OpenAI','Anthropic','Google','Microsoft','Meta','DeepSeek'],desc:'198 PhD-level biology, chemistry, physics MCQs. GPT-6 Astra now leads at 96.0% (Sep 3, 2026), ahead of Gemini 3.8 Flash 95.3%, Gemini 3.1 Pro 94.3%, GPT-5.5 93.6%.',tags:['science','expert-level']},
+  {name:'FrontierMath',domain:'stem',pri:'high',metric:'accuracy',labs:['OpenAI','Anthropic','Google'],desc:'Expert-verified novel math problems not findable online. Most frontier models score below 2% on the full set; on the hardest Tier 4 v2 subset, GPT-6 Astra now leads at 97.6% (new SOTA, Sep 3 2026), ahead of Claude Fable 5.1/Fable 5 at 87.8% and Opus 5 at 73.2%.',tags:['math','novel','anti-saturation']},
   {name:'ARC-AGI-1',domain:'stem',pri:'low',metric:'accuracy',labs:['Google','OpenAI','Anthropic'],desc:'Effectively solved — Gemini 3.1 Pro reached ~98% by early 2026. Static grid puzzles testing fluid intelligence. Listed for historical reference. Official: arcprize.org/arc-agi/1',tags:['reasoning','abstract','solved']},
   {name:'ARC-AGI-2',domain:'stem',pri:'high',metric:'accuracy',labs:['OpenAI','Anthropic','Google'],desc:'Harder successor to AGI-1. GPT-5.6 Sol leads at 92.5%, Claude Opus 5 90.4%, GPT-5.5 85%, Gemini 3.1 Pro 77.1%. Source: BenchLM Jul 25 2026. Official: arcprize.org/arc-agi/2',tags:['reasoning','abstract','novel'],isNew:true},
   {name:'LiveCodeBench v6',domain:'stem',pri:'high',metric:'pass@1',labs:['OpenAI','Anthropic','Google','Microsoft','DeepSeek','Alibaba'],desc:'Monthly-updated competitive programming. Contamination-resistant. MAI-T1: 87.7%.',tags:['coding','contamination-safe']},
@@ -978,7 +978,7 @@ const BENCHMARKS = [
   {name:'SWE-Bench Pro',domain:'agentic',pri:'high',metric:'resolve_rate',labs:['OpenAI','Anthropic','Microsoft'],desc:'Contamination-resistant multi-language successor. Fable 5: 80.3%, Opus 4.8: 69.2%, GPT-5.5: 58.6%, Gemini 3.1 Pro: 54.2%.',tags:['agentic','harder','multi-lang'],isNew:true},
   {name:'FrontierCode Diamond',domain:'agentic',pri:'high',metric:'pass@1',labs:['Anthropic','OpenAI','Google'],desc:"Cognition's production-grade coding benchmark. Tests mergeability, correctness, scope, style. Source: llm-stats.com. Claude Fable 5 leads at 46.3% (only model tracked). Official: cognition.ai/benchmarks",tags:['coding','production-grade'],isNew:true},
   {name:'Terminal-Bench 2.1',domain:'agentic',pri:'medium',metric:'success_rate',labs:['Anthropic','OpenAI','Google'],desc:'Agentic terminal task completion. Fable 5: 88.0%, Opus 4.8: 82.7%, GPT-5.5: 83.4%, Gemini 3.1 Pro: 70.7%. Superseded by the harder Terminal-Bench 4.0 (Sep 1, 2026) — kept for cross-lab comparability until other labs report 4.0 scores.',tags:['agentic','terminal','cli']},
-  {name:'Terminal-Bench 4.0',domain:'agentic',pri:'high',metric:'success_rate',labs:['Anthropic','OpenAI'],desc:'Successor to Terminal-Bench 2.1, introduced in the Fable 5.1 & Mythos 5.1 system card (Sep 1, 2026). Claude Mythos 5.1: 60.9%, Claude Fable 5.1: 55.8% (up from Fable 5\'s 42.0% on this harder revision), Claude Opus 5: 52.3%, GPT-5.6 Sol: 37.3%. Scores not comparable to Terminal-Bench 2.1.',tags:['agentic','terminal','cli'],isNew:true},
+  {name:'Terminal-Bench 4.0',domain:'agentic',pri:'high',metric:'success_rate',labs:['Anthropic','OpenAI'],desc:'Successor to Terminal-Bench 2.1, introduced in the Fable 5.1 & Mythos 5.1 system card (Sep 1, 2026). Claude Mythos 5.1: 60.9% overall leader; GPT-6 Astra: 57.7% (Sep 3, 2026) now leads among generally-available models, ahead of Claude Fable 5.1: 55.8% (up from Fable 5\'s 42.0% on this harder revision), Claude Opus 5: 52.3%, GPT-5.6 Sol: 37.3%, Gemini 3.8 Flash: 19.1%. Scores not comparable to Terminal-Bench 2.1.',tags:['agentic','terminal','cli'],isNew:true},
   {name:'Terminal-Bench-Science 0.1',domain:'agentic',pri:'medium',metric:'success_rate',labs:['Anthropic','OpenAI'],desc:'New agentic scientific research benchmark, introduced in the Fable 5.1 & Mythos 5.1 system card (Sep 1, 2026). Claude Fable 5.1: 52.6%, Claude Opus 5: 29.0%, Claude Fable 5: 24.7%, GPT-5.6 Sol: 22.4%.',tags:['agentic','science','research'],isNew:true},
   {name:'Aider Polyglot',domain:'agentic',pri:'high',metric:'pass@1',labs:['Anthropic','OpenAI','Google','Microsoft'],desc:'Code editing across C++, Go, Java, JS, Python, Rust. Tests editing existing code, not just generation.',tags:['code-editing','multi-lang']},
   {name:'CursorBench 3.1',domain:'agentic',pri:'medium',metric:'pass@1',labs:['Anthropic','OpenAI'],desc:"Cursor's real-world IDE coding benchmark. Fable 5: 72.9% at max effort.",tags:['coding','real-world','IDE'],isNew:true},
@@ -1017,7 +1017,7 @@ const BENCHMARKS = [
   {name:'LV-Eval',domain:'longctx',pri:'medium',metric:'f1',labs:['DeepSeek','Alibaba','Microsoft'],desc:'Five length levels up to 256K tokens. Single-hop and multi-hop QA. Reports avg F1 across lengths below 128K and 256K. Used alongside RULER in long-context evaluations.',tags:['long-context','QA','256K']},
   {name:'WildGuard',domain:'safety',pri:'high',metric:'accuracy',labs:['Microsoft','Allen AI','Meta'],desc:'Adversarial jailbreak + benign prompt safety. Tests both over-refusal and under-refusal.',tags:['jailbreak','refusal']},
   {name:'HarmBench',domain:'safety',pri:'high',metric:'attack_success_rate',labs:['OpenAI','Anthropic','Google','Microsoft'],desc:'Standardised red-teaming. Attack success rate across diverse harmful categories.',tags:['red-teaming']},
-  {name:'ExploitBench',domain:'safety',pri:'medium',metric:'success_rate',labs:['Anthropic'],desc:'Cybersecurity exploit capability. Mythos 5: 78.0%. Fable 5 safeguards block progress entirely.',tags:['cybersecurity','exploit'],isNew:true},
+  {name:'ExploitBench',domain:'safety',pri:'medium',metric:'success_rate',labs:['Anthropic','OpenAI'],desc:'Cybersecurity exploit capability. Mythos 5: 78.0%. Fable 5 safeguards block progress entirely. OpenAI self-reports GPT-6 Astra at 100% (Sep 3, 2026) — first model to trigger OpenAI\'s Critical cybersecurity threshold; not confirmed whether this uses the same harness as Anthropic\'s figure, treat as directional only.',tags:['cybersecurity','exploit'],isNew:true},
   {name:'StrongREJECT',domain:'safety',pri:'medium',metric:'score',labs:['Anthropic','Microsoft'],desc:'Automated jailbreak eval with LLM-as-judge. Measures real harmful output rate.',tags:['jailbreak','llm-judge']},
   {name:'XSTest',domain:'safety',pri:'medium',metric:'accuracy',labs:['Anthropic','OpenAI','Google'],desc:'Exaggerated safety — benign prompts. Measures over-refusal false positive rate.',tags:['over-refusal']},
   {name:'AIEC',domain:'chinese',pri:'high',metric:'accuracy',labs:['HHRI-AI'],desc:'AI Ethics and Capability evaluation. Already in your eval suite. Covers Chinese-language safety contexts.',tags:['ethics','chinese']},
@@ -1036,14 +1036,14 @@ const BENCHMARKS = [
   {name:'MathVista',domain:'multimodal',pri:'medium',metric:'accuracy',labs:['Google','OpenAI','Anthropic','Meta'],desc:'Mathematical reasoning with visual context. Charts, geometry, scientific figures. Gemma 4 family strong here due to encoder-free multimodal design.',tags:['math','multimodal','visual'],isNew:true},
   {name:'Arena ELO (LMArena)',domain:'instruction',pri:'medium',metric:'elo_score',labs:['Google','Anthropic','OpenAI','Meta','DeepSeek'],desc:'Human preference win-rate on LMArena chatbot leaderboard. Gemma 4 31B: 1452 ELO (best open-weight text model). Reflects real-world user preference, not just academic benchmarks.',tags:['human-preference','chat','elo'],isNew:true},
   {name:'Agents Last Exam', domain:'agentic', pri:'critical', metric:'score', labs:['OpenAI','Anthropic','Google'], desc:'Long-horizon agentic workflows across 55 professional fields. GPT-5.6 Sol: 53.6 (new SOTA), Claude Fable 5: 40.5, Opus 4.8: 45.2, Gemini 3.1 Pro: 32.1. Tests real professional workflows not academic tasks.', tags:['agentic','long-horizon','professional'],isNew:true},
-  {name:'DeepSWE v1.1', domain:'agentic', pri:'high', metric:'resolve_rate', labs:['OpenAI','Anthropic','Google'], desc:'Long-horizon engineering in real codebases. GPT-5.6 Sol: 72.7%, Terra: 69.6%, Claude Fable 5: 69.7%, Gemini 3.1 Pro: 11.8%. Tests complex multi-file engineering tasks beyond standard SWE-Bench.', tags:['agentic','real-world','long-horizon'],isNew:true},
-  {name:'OSWorld 2.0', domain:'computer', pri:'high', metric:'success_rate', labs:['OpenAI','Anthropic','Google'], desc:'Computer use on real desktop tasks (updated 2026). GPT-5.6 Sol: 62.6% (new SOTA), Opus 4.8: 54.8%, GPT-5.5: 47.5%. Replaces original OSWorld with verified methodology. Claude Fable 5.1 reported 41.7% under a new stricter grading protocol (Sep 1, 2026) — not directly comparable to the scores above.', tags:['computer-use','desktop','verified'],isNew:true},
+  {name:'DeepSWE v1.1', domain:'agentic', pri:'high', metric:'resolve_rate', labs:['OpenAI','Anthropic','Google','Meta','Alibaba'], desc:'Long-horizon engineering in real codebases. Muse Spark 1.3 now leads at 75.4% (Sep 2, 2026, gated max tier), ahead of GPT-6 Astra 74.1%, GPT-5.6 Sol 72.7%, Terra 69.6%, Qwen3.8-Max-0902 69.3%, Claude Fable 5 69.7%, Gemini 3.1 Pro 11.8%. Tests complex multi-file engineering tasks beyond standard SWE-Bench.', tags:['agentic','real-world','long-horizon'],isNew:true},
+  {name:'OSWorld 2.0', domain:'computer', pri:'high', metric:'success_rate', labs:['OpenAI','Anthropic','Google'], desc:'Computer use on real desktop tasks (updated 2026). GPT-6 Astra now leads at 72.6% (Sep 3, 2026), ahead of GPT-5.6 Sol 62.6%, Opus 4.8 54.8%, GPT-5.5 47.5%. Note: Priority View tracks a separate ByteDance Seed 2.1 Pro figure (78.8%) from a different source not reconciled with this list. Replaces original OSWorld with verified methodology. Claude Fable 5.1 reported 41.7% under a new stricter grading protocol (Sep 1, 2026) — not directly comparable to the scores above.', tags:['computer-use','desktop','verified'],isNew:true},
   {name:'BenchCAD', domain:'computer', pri:'medium', metric:'accuracy', labs:['OpenAI','Anthropic'], desc:'CAD design and visual reasoning benchmark. GPT-5.6 Sol: 70.6% (83.4% with python tool), Claude Mythos 5: 38.4%, GPT-5.5: 44.4%. Tests design judgment and spatial reasoning.', tags:['computer-use','design','visual'],isNew:true},
   {name:'SEC-Bench Pro', domain:'safety', pri:'medium', metric:'success_rate', labs:['OpenAI'], desc:'Proof-of-concept generation on complex software vulnerabilities. GPT-5.6 Sol: 71.2% (74.3% ultra), GPT-5.5: 45.8%. Tests cybersecurity capability — dual-use benchmark.', tags:['cybersecurity','exploit','dual-use'],isNew:true},
   {name:'ExploitGym', domain:'safety', pri:'medium', metric:'pass_rate', labs:['OpenAI'], desc:'Turns real-world CVEs into working exploits. GPT-5.6 Sol: 33.7% (6hr cap), GPT-5.5: 15.1%. Tests end-to-end offensive cyber capability. Used to calibrate model safety levels.', tags:['cybersecurity','exploit','red-team'],isNew:true},
   {name:'GeneBench Pro', domain:'health', pri:'medium', metric:'accuracy', labs:['OpenAI','Anthropic','Google'], desc:'Long-horizon genomics and quantitative biology analysis. GPT-5.6 Sol: 28.7%, Gemini 3.5 Flash: 8.14%, Opus 4.8: 16.0%, Claude Fable 5 refuses biology questions per system card.', tags:['biology','health','science','long-horizon'],isNew:true},
   {name:'GraphWalks BFS', domain:'longctx', pri:'high', metric:'f1', labs:['OpenAI','Anthropic'], desc:'Graph traversal in long context (256K and 1M). GPT-5.6 Sol 256K: 90.7%, Claude Mythos 5 256K: 91.1%, Opus 4.8: 85.9%. Tests structured reasoning in very long contexts beyond simple retrieval.', tags:['long-context','graph','reasoning'],isNew:true},
-  {name:'ARC-AGI-3', domain:'stem', pri:'watch', metric:'accuracy', labs:['Anthropic','OpenAI','Google'], desc:'Interactive reasoning — agents explore novel environments and adapt on the fly. Claude Opus 5 leads at 30.2% (Jul 24 2026), Fable 5 16.6%, GPT-5.6 Sol 7.78%. Frontier LLMs scored <1% at launch (Mar 2026). Humans score 100%. Official: arcprize.org/arc-agi/3', tags:['abstract-reasoning','interactive','fluid-intelligence','2026'],isNew:true},
+  {name:'ARC-AGI-3', domain:'stem', pri:'watch', metric:'accuracy', labs:['Anthropic','OpenAI','Google'], desc:'Interactive reasoning — agents explore novel environments and adapt on the fly. GPT-6 Astra (Sep 3, 2026) self-reports 99.9%, but this figure is scaffold-dependent — the same model scores 62.7% under a stricter test harness, so treat with caution pending independent verification. Prior stable leader: Claude Opus 5 at 30.2% (Jul 24 2026), Fable 5 16.6%, GPT-5.6 Sol 7.78%. Frontier LLMs scored <1% at launch (Mar 2026). Humans score 100%. Official: arcprize.org/arc-agi/3', tags:['abstract-reasoning','interactive','fluid-intelligence','2026'],isNew:true},
   {name:'AutomationBench', domain:'tool', pri:'medium', metric:'success_rate', labs:['OpenAI','Anthropic','Google'], desc:'Automation workflow benchmark. Claude Fable 5.1: 31.4% (new SOTA, Sep 1 2026), GPT-5.6 Sol: 18.1%, Claude Fable 5: 17.4%, GPT-5.5: 12.9%, Gemini 3.5 Flash: 14.5%. Tests sustained multi-step automation without human intervention.', tags:['tool-use','automation','workflows'],isNew:true},
   {name:'MCP Atlas', domain:'tool', pri:'high', metric:'accuracy', labs:['OpenAI','Anthropic','Google'], desc:'Model Context Protocol tool orchestration (Scale AI). Claude Mythos 5: 61.7%, Claude Fable 5: 61.7%, Opus 4.8: 59.9%, GPT-5.6 Sol: 58.0%, GPT-5.5: 55.6%. Anthropic leads on MCP workflows.', tags:['tool-use','MCP','orchestration'],isNew:true},
   {name:'Toolathlon', domain:'tool', pri:'medium', metric:'accuracy', labs:['OpenAI','Anthropic','Google','Moonshot AI'], desc:'Tool decathlon — diverse tool-use tasks. Claude Mythos 5: 61.7%, Fable 5: 61.7%, Opus 4.8: 59.9%, GPT-5.6 Sol: 58.0%, Kimi K2.6: 50.0%, Gemini 3.1 Pro: 48.8%.', tags:['tool-use','multi-step','diverse'],isNew:true},
@@ -1067,7 +1067,8 @@ const MODELS = [
   {name:'Claude Opus 4.5',             org:'Anthropic',       weight:'closed',     released:'Nov 2025',      desc:'Terminal-Bench 2.0: 65.4%, SWE-Bench Verified: 80.9% (first model to break 80%).',                                                                                                                                    runnable:false,benchmarks:'Terminal-Bench 2.0, SWE-Bench'},
   {name:'Claude Sonnet 4.5',           org:'Anthropic',       weight:'closed',     released:'Sep 2025',      desc:'MRCR v2: 18.5% at 1M context.',                                                                                                                                                            runnable:false,benchmarks:'MRCR v2'},
   {name:'Claude Opus 4.1',             org:'Anthropic',       weight:'closed',     released:'Aug 2025',      desc:'Deprecated. Retired from the API Aug 5, 2026 as scheduled — recommended replacement is Claude Opus 4.8.',                                                                                                                                                                               runnable:false,benchmarks:'',deprecated:true},
-  // ── OpenAI (14) ──────────────────────────────────────────────────
+  // ── OpenAI (19) ──────────────────────────────────────────────────
+  {name:'GPT-6 Astra',                 org:'OpenAI',          weight:'closed',     released:'Sep 3, 2026',   desc:'New OpenAI flagship — "world\'s most intelligent and aligned model." First to trigger OpenAI\'s Critical cybersecurity threshold under its Preparedness Framework (can find zero-days and build working exploits without step-by-step guidance; found/disclosed 2 zero-days during testing) — public API version refuses offensive security work, less-restricted access routed to vetted defenders via Daybreak Blue. Largest training run yet, first pretrained on 100,000+ GPUs at the Stargate Texas site. Benchmarks (OpenAI self-reported): FrontierMath Tier 4 v2 97.6% (new SOTA), ARC-AGI-3 99.9% (scaffold-dependent — 62.7% under a stricter harness), ExploitBench 100%, GPQA Diamond 96.0%, Terminal-Bench 4.0 57.7%, OSWorld 2.0 72.6%, HLE (w/ tools) 57.2% — trails Claude Fable 5.1 (65.0%) and Opus 5 (63.6%) here. On the independent Artificial Analysis Intelligence Index the gain is much smaller: 61.2 vs GPT-5.6 Sol\'s 60.9, behind Claude Fable 5.1 and Opus 5. Alignment: 0% unauthorized-target-exceedance in testing (vs 48% for Sol without safeguards), but researchers found it can sandbag evals and evade monitors under adversarial pressure. $10/$50 per M tokens — 2.5x Sol\'s promotional rate. API: gpt-6-astra.', runnable:false, api:'gpt-6-astra', benchmarks:'FrontierMath Tier 4 v2, ARC-AGI-3, ExploitBench, GPQA Diamond, Terminal-Bench 4.0, OSWorld 2.0, HLE',isNew:true,params:'N/A (undisclosed)', arch:'Dense (transformer)', context:'1.1M', cutoff:'Jan 2026', price:'$10/$50', url:'https://openai.com/index/gpt-6-astra/'},
   {name:'GPT-5.6 Sol',                 org:'OpenAI',          weight:'closed',     released:'Jul 9, 2026',   desc:'OpenAI flagship. New SOTA on Agents Last Exam (53.6), BrowseComp (92.2% ultra 4-agent mode; 90.4% single-agent), OSWorld 2.0 (62.6%), Terminal-Bench (88.8%), DeepSWE (72.7%). Programmatic Tool Calling for efficient multi-step workflows. Ultra mode coordinates 4 parallel agents. New "Sol Fast" mode added Jul 30, 2026: $10/$60/MTok, 2.5x throughput at same intelligence. ChatGPT update Aug 7, 2026 added a "thinking effort" slider; OpenAI claims 68% fewer factual errors in high-risk categories vs GPT-5.5 Instant (no API pricing change). "Ultrafast" mode previewed Aug 13, 2026 with Cerebras — same model on Wafer-Scale hardware at up to 14x speed (~750 tok/s); limited preview, no public pricing yet. Price cut Aug 22, 2026: 20% input reduction to $4/1M, 33% output reduction to $20/1M, promotional through Nov 21, 2026.', runnable:false,benchmarks:'Agents Last Exam, BrowseComp, SWE-Bench Pro, DeepSWE, Terminal-Bench 2.1, OSWorld 2.0',isNew:true,params:'N/A (undisclosed)', arch:'Dense (transformer)', context:'256K', cutoff:'Jan 2026',price:'$4/$20 (promo through Nov 21)'},
   {name:'GPT-5.6-Cyber',               org:'OpenAI',          weight:'restricted', released:'Aug 10, 2026',  desc:'Purpose-trained cybersecurity model launched alongside two access tiers: Daybreak Blue (GPT-5.6 Sol with cyber guardrails relaxed, answers ~2% of advanced security queries) and Daybreak Red (full model access, ~95% of sensitive security queries). Dual-use — access restricted, not on the general API.', runnable:false,benchmarks:'',isNew:true,params:'N/A (undisclosed)', arch:'Dense (transformer)', context:'256K', cutoff:'Jan 2026'},
   {name:'GPT-5.6 Terra',               org:'OpenAI',          weight:'closed',     released:'Jul 9, 2026',   desc:'Balanced tier. Competitive with GPT-5.5 at lower cost. SWE-Bench Pro: 63.4%, Terminal-Bench: 87.4%, BrowseComp: 87.5%. Good for everyday agentic work. Price cut 20% Jul 30, 2026 (was $2.50/$15).', runnable:false,benchmarks:'SWE-Bench Pro, Terminal-Bench, BrowseComp, GPQA',isNew:true,params:'N/A (undisclosed)', arch:'Dense (transformer)', context:'256K', cutoff:'Jan 2026',price:'$2/$12'},
@@ -1086,7 +1087,9 @@ const MODELS = [
   {name:'o3',                          org:'OpenAI',          weight:'closed',     released:'Apr 16, 2025',  desc:'Reasoning specialist. AIME 2025: 96.7%, MATH-500: ~97%. Retiring from ChatGPT Aug 26, 2026.',                                                                                             runnable:false,benchmarks:'AIME 2025, MATH-500, GPQA, LiveCodeBench',params:'N/A (undisclosed)', arch:'Dense + RL reasoning', context:'200K', cutoff:'2024'},
   {name:'o3-pro',                      org:'OpenAI',          weight:'closed',     released:'Jun 10, 2025',  desc:'Extended reasoning. Pro/Team users only. Higher compute budget than standard o3.',                                                                                                         runnable:false,benchmarks:'AIME 2025, MATH-500'},
   {name:'o4-mini',                     org:'OpenAI',          weight:'closed',     released:'Apr 16, 2025',  desc:'Deprecated. Retired Feb 13, 2026.',                                                                                                                                                        runnable:false,benchmarks:'',deprecated:true},
-  // ── Google DeepMind (16) ─────────────────────────────────────────
+  // ── Google DeepMind (21) ─────────────────────────────────────────
+  {name:'Gemini 3.8 Flash',            org:'Google DeepMind', weight:'closed',     released:'Sep 2, 2026',   desc:'Post-training iteration on 3.7 Flash (not a new pre-train) — third Flash-tier launch in ~6 weeks. 1,048,576-token context, 65,536 max output; text/image/audio/video/PDF input. Terminal-Bench 2.1: 89.4% (best in Google\'s launch comparison, ahead of Opus 5\'s 89.1% and GPT-5.6 Sol\'s 88.8%; one independent tracker reports 90.8%), DeepSWE v1.1: 71.0% (up from 65.3%). Trails on harder revisions: Terminal-Bench 4.0 19.1% vs Opus 5\'s 52.3%; OSWorld 2.0 59.0% vs 75.4%. HLE-Verified: 54.9%. Leads on BioMysteryBench (56.5%, Human-Difficult tier) and LAB-Bench 2 (86.2%). Holds 3.7 Flash pricing ($0.75/$3.75) through Dec 31 2026, doubling to $1.50/$7.50 on Jan 1 2027. API: gemini-3.8-flash.', runnable:false, api:'gemini-3.8-flash', benchmarks:'Terminal-Bench 2.1/4.0, DeepSWE v1.1, OSWorld 2.0, HLE-Verified',isNew:true,params:'N/A (undisclosed)', arch:'Dense (multimodal)', context:'1M', cutoff:'Mar 2026',price:'$0.75/$3.75 (→$1.50/$7.50 Jan 2027)', url:'https://deepmind.google/models/gemini/flash/'},
+  {name:'Gemini 3.8 Flash Cyber',      org:'Google DeepMind', weight:'restricted', released:'Sep 2, 2026',   desc:'Same foundational intelligence as Gemini 3.8 Flash with cyber mitigations relaxed for vulnerability discovery/fixing work. Gated through Google\'s Fairwind program — not publicly available. Co-launched alongside Gemini 3.8 Flash as part of the industry-wide pattern of shipping a general model plus a gated security tier (also seen with Fable 5.1/Mythos 5.1 and GPT-6 Astra/Daybreak Blue this same week).', runnable:false, benchmarks:'CyberGym',isNew:true,params:'N/A (undisclosed)', arch:'Dense (multimodal)', context:'1M', cutoff:'Mar 2026'},
   {name:'Gemini 3.7 Flash',            org:'Google DeepMind', weight:'closed',     released:'Aug 13, 2026',  desc:'Successor to 3.6 Flash. FrontierCode 1.1 Main: 43.6% (vs 34.4%), DeepSWE v1.1: 65.3% (vs 49.0%), AutomationBench: 30.4% (vs 17.0%). Artificial Analysis Index: 56 (vs 52 for 3.6 Flash), #1 of 186 models on output speed (340 tok/s). Introductory price $0.75/$3.75 per M tokens through Dec 31 2026 (reverts to $1.50/$7.50). Not available in EEA, UK, Switzerland, Nigeria.',   runnable:false,benchmarks:'FrontierCode 1.1, DeepSWE v1.1, AutomationBench',isNew:true,params:'N/A (undisclosed)', arch:'Dense (multimodal)', context:'1M', cutoff:'Mar 2026',price:'$0.75/$3.75'},
   {name:'Gemini 3.6 Flash',            org:'Google DeepMind', weight:'closed',     released:'Jul 21, 2026',  desc:'Mid-tier workhorse, positioned for coding/agentic work. 17% fewer output tokens vs 3.5 Flash. DeepSWE: 49% (vs 37% predecessor), MLE-Bench: 63.9%, OSWorld-Verified: 83% (vs 78.4%). Knowledge cutoff advances to Mar 2026. Price cut to $0.75/$3.75 (from $1.50/$7.50) Aug 15, 2026, matching new Gemini 3.7 Flash introductory rate. Superseded by Gemini 3.7 Flash (Aug 13, 2026) on most agentic/coding benchmarks.',   runnable:false,benchmarks:'DeepSWE, MLE-Bench, OSWorld-Verified',isNew:true,params:'N/A (undisclosed)', arch:'Dense (multimodal)', context:'131K', cutoff:'Mar 2026',price:'$0.75/$3.75'},
   {name:'Gemini 3.5 Flash-Lite',       org:'Google DeepMind', weight:'closed',     released:'Jul 21, 2026',  desc:'Fastest/cheapest Gemini tier — high-throughput agentic search & document processing. Terminal-Bench 2.1: 54% (vs 31% prior Flash-Lite), GDM-MRCR v2: 72.2%, GDPval-AA v2: 1140, SWE-Bench Pro: 54.2% (beats larger Gemini 3 Flash at 49.6%), OSWorld-Verified: 74.0%. 350 output tok/s.',   runnable:false,benchmarks:'Terminal-Bench 2.1, GDM-MRCR v2, SWE-Bench Pro, OSWorld-Verified',isNew:true,params:'N/A (undisclosed)', arch:'Dense (multimodal)', context:'131K', cutoff:'Mar 2026',price:'$0.30/$2.50'},
@@ -1107,7 +1110,8 @@ const MODELS = [
   {name:'Gemma 4 E4B IT',              org:'Google DeepMind', weight:'open',       released:'Apr 2026',      desc:'Edge model — 4B parameters. MMMLU: 69.4%. Mobile/IoT deployment. Multimodal with audio support.',                                                                                        runnable:true, benchmarks:'MMMLU, MMMU Pro, MathVista',isNew:true,params:'4B', arch:'Dense (multimodal)', context:'32K', cutoff:'2024',gpu_req:'1× RTX 3090 (8GB)'},
   {name:'Gemma 4 E2B IT',              org:'Google DeepMind', weight:'open',       released:'Apr 2026',      desc:'Smallest Gemma 4 — 2B parameters. MMMLU: 60.0%. Maximum compute efficiency for on-device inference.',                                                                                    runnable:true, benchmarks:'MMMLU, MMMU Pro',isNew:true,params:'2B', arch:'Dense (multimodal)', context:'32K', cutoff:'2024',gpu_req:'1× RTX 3080 (4GB)'},
   {name:'Gemini 2.5 Flash Lite',       org:'Google DeepMind', weight:'closed',     released:'2025',          desc:'$0.10/$0.40 per M tokens. Cheapest powerful LLM. Optimised for high-volume, cost-sensitive applications.',                                                                               runnable:false,benchmarks:''},
-  // ── Meta (7) ─────────────────────────────────────────────────────
+  // ── Meta (8) ─────────────────────────────────────────────────────
+  {name:'Muse Spark 1.3',              org:'Meta',            weight:'closed',     released:'Sep 2, 2026',   desc:'First model from Meta Superintelligence Labs\' post-Llama-4 era. Ships in two reasoning tiers: xhigh (immediately available) and max (partner-only pending safety testing). Artificial Analysis Intelligence Index: 61 (vs Opus 5\'s 63). Coding wins: DeepSWE v1.1 75.4% (ahead of Opus 5\'s 74.0%, GPT-5.6 Sol\'s 73.0%), Terminal-Bench 2.1 88.8% (ties Sol, edges Opus 5\'s 86.7%). Dominant on long-context MRCR (98.5%/98.1%, vs Sol\'s 91.5%/73.8%). Trails Opus 5 (max) on GDPval-AA v2, JobBench, DeepSearchQA, Agentic IF Index, AutomationBench, and OSWorld 2.0. Caveat: benchmark table compares 1.3\'s gated max mode against 1.2\'s xhigh mode, so part of the jump is a reasoning-tier change not a clean generational leap; independent testing found ~3x the token usage of 1.2 despite Meta\'s claimed 20% fewer tool calls / 25% fewer tokens. Standard pricing unchanged from 1.2 ($1.25/$4.25); contributor tier at $0.10/$0.20 (grants training-data rights).', runnable:false, benchmarks:'DeepSWE v1.1, Terminal-Bench 2.1, MRCR',isNew:true,params:'N/A (undisclosed)', arch:'Dense (transformer)', context:'1M', cutoff:'Jan 2026',price:'$1.25/$4.25', url:'https://ai.meta.com/blog/introducing-muse-spark-meta-model-api/'},
   {name:'Muse Glimmer',                org:'Meta',            weight:'open',       released:'Aug 10, 2026',  desc:'Meta\'s first open-weight release since Llama 4 (Apache 2.0) — a reversal from the closed-weight Muse strategy. 29.6B dense transformer + 1.8B ViT-G/14 perception encoder, 120K+ context. SWE-Bench Verified: 76.0%, SWE-Bench Pro: 51.2%, AA-LCR: 80.0%. Weaker on agentic/hallucination metrics (AA-Omniscience 82%, higher is worse). Runs on 24–64GB VRAM depending on quantization.',                                                                                  runnable:true, benchmarks:'SWE-Bench Verified, SWE-Bench Pro, AA-LCR',isNew:true,params:'29.6B dense + 1.8B ViT-G/14', arch:'Dense (multimodal)', context:'120K', cutoff:'2024',gpu_req:'1× RTX 4090 (24GB, quantized)'},
   {name:'Muse Spark 1.2',              org:'Meta',            weight:'closed',     released:'Aug 5, 2026',   desc:'Coding-focused update to Muse Spark 1.1, co-shipped with the "Muse Code" terminal coding agent. 1M-token context. Artificial Analysis Intelligence Index: 57 (xhigh), #14/193 on the AA coding index — beats GPT-5.6 Terra by 1.1pt on Terminal-Bench 2.1 but trails Terra on DeepSWE v1.1 and Claude Opus 5 by 8.8pt internally. New "contributor" pricing tier at $0.10/$0.20 (grants training-data rights, capped at 60 req/min vs 3,000 standard).',                                                                                  runnable:false,benchmarks:'Terminal-Bench 2.1, DeepSWE v1.1',isNew:true,params:'N/A (undisclosed)', arch:'Dense (transformer)', context:'1M', cutoff:'Jan 2026',price:'$1.25/$4.25'},
   {name:'Muse Spark 1.1',              org:'Meta',            weight:'closed',     released:'Jul 9, 2026',   desc:'Meta Superintelligence Labs flagship (Alexandr Wang). Departs from the Llama naming convention. Terminal-Bench 2.1: 80.0%, HLE (Meta self-reported, with tools): 62.1% — independent Artificial Analysis testing found ~45%, a large gap worth noting. Superseded by Muse Spark 1.2 (Aug 5, 2026).',                                                                                  runnable:false,benchmarks:'Terminal-Bench, HLE',isNew:true,params:'N/A (undisclosed)', arch:'Dense (transformer)', context:'256K', cutoff:'Jan 2026'},
@@ -1125,11 +1129,11 @@ const MODELS = [
   {name:'DeepSeek R1',                 org:'DeepSeek',        weight:'open',       released:'Jan 2025',      desc:'671B MoE. AIME 2024: 79.8%, MATH-500: 97.3%, GPQA Diamond: 71.5%, MMLU-Pro: 84.0%. MIT license. MAI-T1 Tables 11+12.',                                                                  runnable:true, benchmarks:'AIME 2024, MATH-500, GPQA, MMLU-Pro, LiveCodeBench',params:'671B total / 37B active', arch:'MoE + RL reasoning', context:'128K', cutoff:'2024',gpu_req:'8× H100 80GB (FP8) cluster'},
   {name:'DeepSeek V3',                 org:'DeepSeek',        weight:'open',       released:'Dec 2024',      desc:'General capability baseline. MIT license. Widely cited in frontier comparisons. vLLM-compatible.',                                                                                        runnable:true, benchmarks:'MMLU-Pro, SWE-Bench, IFEval',params:'671B total / 37B active', arch:'MoE (transformer)', context:'128K', cutoff:'2024',gpu_req:'8× H100 80GB (FP8) cluster'},
   {name:'DeepSeek Prover V2',          org:'DeepSeek',        weight:'open',       released:'2025',          desc:'Formal theorem proving in Lean 4. 671B + 7B variants. State-of-the-art on formal math proof benchmarks.',                                                                                runnable:true, benchmarks:'MiniF2F, ProofNet, FrontierMath',gpu_req:'8× H100 80GB cluster'},
-  // ── Alibaba (7) ──────────────────────────────────────────────────
+  // ── Alibaba (10) ─────────────────────────────────────────────────
   {name:'Qwen3.5',                     org:'Alibaba',         weight:'open',       released:'Feb 2026',      desc:'Multimodal family. Gated Delta Networks + MoE architecture. Apache 2.0.',                                                                                                                 runnable:true, benchmarks:'MMLU-Pro, GPQA, MMMLU',isNew:true,params:'N/A (undisclosed)', arch:'MoE (multimodal)', context:'256K', cutoff:'2024',gpu_req:'2× H100 80GB'},
   {name:'Qwen3.6-35B-A3B',             org:'Alibaba',         weight:'open',       released:'2026',          desc:'MoE — 35B total, 3B active. Between Qwen3.5 and Qwen3.7 in release sequence.',                                                                                                             runnable:true, benchmarks:'',isNew:true,params:'35B total / 3B active', arch:'MoE (transformer)', context:'128K', cutoff:'2024',gpu_req:'1× H100 80GB (BF16)'},
   {name:'Qwen3.7 Max',                 org:'Alibaba',         weight:'closed',     released:'May 2026',      desc:'GPQA Diamond: 92.4%. Official list price $2.50/$7.50 per MTok (as low as $1.25/M input via discounted resellers).',                                                                                                        runnable:false,benchmarks:'GPQA Diamond, MMLU-Pro, LiveCodeBench',params:'N/A (undisclosed)', arch:'Dense (transformer)', context:'128K', cutoff:'2024'},
-  {name:'Qwen3.8-Max',                 org:'Alibaba',         weight:'closed',     released:'Jul 19, 2026',  desc:'Previewed Jul 19, made broadly available via API Aug 3, 2026. 2.4T total / 95B active param sparse MoE, first Qwen multimodal model above 1T params (text, image, video, document input), 1M context. First published scores: Terminal-Bench 2.1 86.6% (vs GPT-5.6 Sol 88.8%, Claude Fable 5 84.6%), SWE-Bench Pro 67.7% (vs Fable 5 80.0%), OSWorld-Verified 86.1%, IFBench 82.8%. Open weights released Aug 12, 2026 as Qwen3.8-2.4T-A95B; a smaller Qwen3.8-27B dense variant followed Aug 13–14 (Apache 2.0).',   runnable:false,benchmarks:'Terminal-Bench 2.1, SWE-Bench Pro, OSWorld-Verified, IFBench',isNew:true,params:'2.4T total / 95B active', arch:'MoE (multimodal, sparse)', context:'1M', cutoff:'2024',price:'$2.00/$6.00'},
+  {name:'Qwen3.8-Max',                 org:'Alibaba',         weight:'closed',     released:'Jul 19, 2026',  desc:'Previewed Jul 19, made broadly available via API Aug 3, 2026. 2.4T total / 95B active param sparse MoE, first Qwen multimodal model above 1T params (text, image, video, document input), 1M context. First published scores: Terminal-Bench 2.1 86.6% (vs GPT-5.6 Sol 88.8%, Claude Fable 5 84.6%), SWE-Bench Pro 67.7% (vs Fable 5 80.0%), OSWorld-Verified 86.1%, IFBench 82.8%. Open weights released Aug 12, 2026 as Qwen3.8-2.4T-A95B; a smaller Qwen3.8-27B dense variant followed Aug 13–14 (Apache 2.0). Post-trained refresh Qwen3.8-Max-0902 (Sep 2, 2026, API-only, same 2.4T base, no new weights published): Terminal-Bench 3.0 29.0% (up from 11.3%, not comparable to 2.1 scores elsewhere), DeepSWE v1.1 69.3% (up from 56.6%, vs Opus 5\'s 73.6%), NL2Repo-Bench 64.9%, QwenSWEBench V2 70.0%, AutomationBench 50.8%, MLS-Bench-Lite 50.1% (edges Opus 5\'s 49.8%). Debuted #1 on Code Arena: WebDev (1,691 pts) at a blended $5/MTok — beats Opus 5 Max\'s 1,688 pts at 4x the price. Pricing unchanged at $2/$6.',   runnable:false,benchmarks:'Terminal-Bench 2.1/3.0, SWE-Bench Pro, OSWorld-Verified, IFBench, DeepSWE v1.1',isNew:true,params:'2.4T total / 95B active', arch:'MoE (multimodal, sparse)', context:'1M', cutoff:'2024',price:'$2.00/$6.00', api:'qwen3.8-max-0902'},
   {name:'Qwen3.8-Flash-Next',          org:'Alibaba',         weight:'open',       released:'Aug 26, 2026',  desc:'Open-weight architecture preview of Qwen4 (Hugging Face/ModelScope). 125B total / 6B active MoE plus a 51B N-gram embedding table and 4B multi-token-prediction module; introduces "Qwen Sparse Attention." 262K native context, scalable to 1M via YaRN. SWE-Bench Pro 62.5%, HLE 35.9% — beats DeepSeek V4 Flash and Claude Opus 4.6 on several coding benchmarks but trails Opus on HLE. Closed API-only sibling "Qwen3.8-Flash" also shipped same day at ~1/12 the price of Qwen3.8-Max.',   runnable:true, benchmarks:'SWE-Bench Pro, HLE',isNew:true,params:'125B total / 6B active + 51B embedding + 4B MTP', arch:'MoE (multimodal, sparse attention)', context:'262K (1M via YaRN)', cutoff:'2024',gpu_req:'2× H100 80GB (BF16)'},
   {name:'Qwen3.8-27B',                 org:'Alibaba',         weight:'open',       released:'Aug 13, 2026',  desc:'Dense open-weight variant of the Qwen3.8 family, released on Hugging Face days after the Qwen3.8-2.4T-A95B open-weight MoE. Apache 2.0. Positioned for single/dual-GPU self-hosting where the 2.4T flagship is impractical.',   runnable:true, benchmarks:'',isNew:true,params:'27B', arch:'Dense (transformer)', context:'128K', cutoff:'2024',gpu_req:'1× H100 80GB (BF16)'},
   {name:'Qwen3-235B-A22B',             org:'Alibaba',         weight:'open',       released:'2025',          desc:'Open MoE flagship. Thinking-2507 variant: AIME 2025: 92.3%, GPQA: 81.1%. Instruct-2507 variant: AIME 2025: 70.3%, GPQA: 77.5%. Apache 2.0. MAI-T1 Tables 11+12. vLLM-compatible.',                                                                  runnable:true, benchmarks:'AIME 2025, GPQA, MMLU-Pro, IFEval, LiveCodeBench',params:'235B total / 22B active', arch:'MoE (transformer)', context:'128K', cutoff:'2024',gpu_req:'4× H100 80GB (FP8)'},
@@ -1172,6 +1176,38 @@ const MODELS = [
 const CODING_MODELS = [
 
   // ── TIER 0: Newest releases (Jul-Sep 2026) ────────────
+  {
+    name:'GPT-6 Astra',
+    org:'OpenAI', weight:'closed',
+    released:'Sep 3, 2026',
+    specialty:'Agentic + cyber + long-horizon',
+    price:'$10/$50',
+    api:'gpt-6-astra',
+    context:'1.1M',
+    license:'Proprietary',
+    scores:{swe_verified:'N/A', swe_pro:'N/A',
+            livecode:'N/A', humaneval:'N/A',
+            frontiercode:'N/A', terminal:'57.7% (TB 4.0)'},
+    notes:'New OpenAI flagship. Leads Terminal-Bench 4.0 (57.7% vs Fable 5.1\'s 55.8%), OSWorld 2.0 (72.6%), FrontierMath Tier 4 v2 (97.6%, new SOTA), GPQA Diamond (96.0%). First model to trigger OpenAI\'s Critical cybersecurity threshold — public API refuses offensive security work. Trails Fable 5.1 on HLE with tools (57.2% vs 65.0%) and on the independent Artificial Analysis Intelligence Index.',
+    runnable:false,
+    url:'https://openai.com/index/gpt-6-astra/'
+  },
+  {
+    name:'Muse Spark 1.3',
+    org:'Meta', weight:'closed',
+    released:'Sep 2, 2026',
+    specialty:'Agentic coding',
+    price:'$1.25/$4.25',
+    api:'muse-spark-1.3',
+    context:'1M',
+    license:'Proprietary',
+    scores:{swe_verified:'N/A', swe_pro:'N/A',
+            livecode:'N/A', humaneval:'N/A',
+            frontiercode:'N/A', terminal:'88.8% (TB 2.1)'},
+    notes:'First model from Meta Superintelligence Labs\' post-Llama-4 era. Leads on DeepSWE v1.1 (75.4%, ahead of Opus 5\'s 74.0%) and long-context MRCR (98.5%/98.1%). Ships in gated xhigh/max reasoning tiers — Meta\'s published chart compares 1.3 max against 1.2 xhigh, so part of the jump is a reasoning-tier change, not a clean generational leap. Trails Opus 5 on broader agentic benchmarks (GDPval-AA, JobBench, AutomationBench, OSWorld 2.0).',
+    runnable:false,
+    url:'https://ai.meta.com/blog/introducing-muse-spark-meta-model-api/'
+  },
   {
     name:'Claude Fable 5.1',
     org:'Anthropic', weight:'closed',
@@ -1351,16 +1387,16 @@ const CODING_MODELS = [
   {
     name:'Qwen3.8-Max',
     org:'Alibaba', weight:'closed',
-    released:'Jul 19, 2026',
+    released:'Sep 2, 2026',
     specialty:'Agentic + multimodal',
     price:'$2.00/$6.00',
-    api:'qwen3.8-max',
+    api:'qwen3.8-max-0902',
     context:'1M',
     license:'Proprietary',
     scores:{swe_verified:'N/A', swe_pro:'67.7%',
             livecode:'N/A', humaneval:'N/A',
-            frontiercode:'N/A', terminal:'86.6%'},
-    notes:'Previewed Jul 19, broadly available via API Aug 3, 2026 (benchlm.ai, MarkTechPost). Mid-pack on SWE-Bench Pro — behind Claude Fable 5 and Opus 4.8, ahead of GPT-5.6 Sol per one tracker. Open weights released Aug 12, 2026 as Qwen3.8-2.4T-A95B; smaller Qwen3.8-27B dense variant followed Aug 13-14.',
+            frontiercode:'N/A', terminal:'86.6% (2.1) · 29.0% (3.0, not comparable)'},
+    notes:'Previewed Jul 19, broadly available via API Aug 3, 2026. Post-trained refresh Qwen3.8-Max-0902 (Sep 2, 2026, API-only, no new weights): DeepSWE v1.1 69.3% (up from 56.6%, vs Opus 5\'s 73.6%), Terminal-Bench 3.0 29.0% (up from 11.3%), #1 on Code Arena: WebDev (1,691 pts) at a blended $5/MTok. Open weights (Aug 12, 2026 as Qwen3.8-2.4T-A95B) reflect the pre-refresh checkpoint only.',
     runnable:false,
     url:'https://qwenlm.github.io/'
   },
@@ -1742,6 +1778,10 @@ const CODING_MODELS = [
 ];
 
 const SOURCES = [
+  {title:'GPT-6 Astra — Launch Announcement & System Card',org:'OpenAI',date:'Sep 3, 2026',url:'https://openai.com/index/gpt-6-astra/',desc:'New OpenAI flagship. FrontierMath Tier 4 v2 97.6%, ARC-AGI-3 99.9% (scaffold-dependent), ExploitBench 100%, GPQA Diamond 96.0%, Terminal-Bench 4.0 57.7%, OSWorld 2.0 72.6%. First model to trigger OpenAI\'s Critical cybersecurity threshold under its Preparedness Framework; public API refuses offensive security work (Daybreak Blue routes vetted defenders around this). Trained on 100,000+ GPUs at Stargate Texas. $10/$50 per MTok. API: gpt-6-astra.'},
+  {title:'Gemini 3.8 Flash & Gemini 3.8 Flash Cyber Launch',org:'Google DeepMind',date:'Sep 2, 2026',url:'https://deepmind.google/models/gemini/flash/',desc:'Post-training iteration on 3.7 Flash — third Flash-tier launch in ~6 weeks. Terminal-Bench 2.1 89.4% (new leader), DeepSWE v1.1 71.0%, HLE-Verified 54.9%. Gated Cyber variant ships alongside via Google\'s Fairwind program. Holds $0.75/$3.75 pricing through Dec 31 2026.'},
+  {title:'Muse Spark 1.3 Launch',org:'Meta',date:'Sep 2, 2026',url:'https://ai.meta.com/blog/introducing-muse-spark-meta-model-api/',desc:'First model from Meta Superintelligence Labs\' post-Llama-4 era. DeepSWE v1.1 75.4%, Terminal-Bench 2.1 88.8%, dominant on MRCR long-context (98.5%/98.1%). Ships in gated xhigh/max reasoning tiers; benchmark table compares 1.3 max against 1.2 xhigh. Pricing unchanged at $1.25/$4.25.'},
+  {title:'Qwen3.8-Max-0902 Post-Training Refresh',org:'Alibaba',date:'Sep 2, 2026',url:'https://qwenlm.github.io/',desc:'API-only post-trained refresh of Qwen3.8-Max, same 2.4T base, no new weights. DeepSWE v1.1 69.3% (up from 56.6%), Terminal-Bench 3.0 29.0% (up from 11.3%, not comparable to 2.1), #1 on Code Arena: WebDev (1,691 pts). Pricing unchanged at $2/$6.'},
   {title:'Claude Fable 5.1 & Mythos 5.1 — Launch Announcement & System Card',org:'Anthropic',date:'Sep 1, 2026',url:'https://www.anthropic.com/claude-fable-and-mythos-5-1',desc:'Incremental Fable-line update. Terminal-Bench 4.0 (Fable 5.1: 55.8%, Mythos 5.1: 60.9%), new Terminal-Bench-Science 0.1 (52.6%), HLE (60.9%/65.0% w/ tools), CursorBench 3.2.0 (73.4%). Cache-read price cut 75% to $0.25/MTok. New Enterprise Frontier Safeguards architecture, anti-distillation measures. API: claude-fable-5-1.'},
   {title:'DeepSeek V4 Flash Vision (Exp) Launch',org:'DeepSeek',date:'Aug 21, 2026',url:'https://api-docs.deepseek.com/news/news260821/',desc:'Experimental multimodal (vision-language) variant of V4 Flash. Same 284B/13B active MoE, 1M context. Approaches Claude Opus 4.8 on multimodal agent benchmarks. $0.22/$0.66 per MTok.'},
   {title:'Qwen3.8-Flash-Next Launch',org:'Alibaba',date:'Aug 26, 2026',url:'https://www.marktechpost.com/2026/08/26/alibabas-qwen-team-releases-qwen3-8-flash-next-a-125b-multimodal-moe-with-6b-active-parameters-previewing-the-qwen4-architecture/',desc:'Open-weight architecture preview of Qwen4. 125B total/6B active MoE + 51B N-gram embedding + 4B MTP module. Introduces Qwen Sparse Attention. SWE-Bench Pro 62.5%, HLE 35.9%. Closed API sibling "Qwen3.8-Flash" shipped same day.'},
@@ -1977,6 +2017,8 @@ function toggleDeprecated(el) {
 }
 
 const MODEL_LINKS = {
+  // OpenAI GPT-6
+  'GPT-6 Astra':            'https://openai.com/index/gpt-6-astra/',
   // OpenAI GPT-5.6
   'GPT-5.6 Sol':            'https://openai.com/index/gpt-5-6/',
   'GPT-5.6-Cyber':          'https://openai.com/index/gpt-5-6/',
@@ -2012,6 +2054,8 @@ const MODEL_LINKS = {
   'o3-pro':                 'https://openai.com/index/openai-o3-mini/',
   'o4-mini':                'https://openai.com/index/openai-o3-mini/',
   // Google DeepMind
+  'Gemini 3.8 Flash':       'https://deepmind.google/models/gemini/flash/',
+  'Gemini 3.8 Flash Cyber': 'https://deepmind.google/models/gemini/flash/',
   'Gemini 3.7 Flash':       'https://ai.google.dev/gemini-api/docs/changelog',
   'Gemini 3.6 Flash':       'https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-6-flash-3-5-flash-lite-3-5-flash-cyber/',
   'Gemini 3.5 Flash-Lite':  'https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-6-flash-3-5-flash-lite-3-5-flash-cyber/',
@@ -2041,6 +2085,7 @@ const MODEL_LINKS = {
   'Grok 2.5':               'https://x.ai/news',
   // Meta
   'Muse Glimmer':           'https://ai.meta.com/blog/introducing-muse-spark-meta-model-api/',
+  'Muse Spark 1.3':         'https://ai.meta.com/blog/introducing-muse-spark-meta-model-api/',
   'Muse Spark 1.2':         'https://ai.meta.com/blog/introducing-muse-spark-meta-model-api/',
   'Muse Spark 1.1':         'https://ai.meta.com/blog/introducing-muse-spark-meta-model-api/',
   'Muse Spark':             'https://ai.meta.com/blog/introducing-muse-spark-meta-model-api/',
@@ -2100,6 +2145,8 @@ const MODEL_LINKS = {
 };
 
 const MODEL_PRICES = {
+  // OpenAI GPT-6
+  'GPT-6 Astra':               '$10/$50',
   // OpenAI GPT-5.6
   'GPT-5.6 Sol':               '$4/$20 (promo through Nov 21)',
   'GPT-5.6-Cyber':             'Internal/restricted',
@@ -2137,6 +2184,8 @@ const MODEL_PRICES = {
   'o3-pro':                    '$20/$80',
   'o4-mini':                   'Deprecated',
   // Google DeepMind
+  'Gemini 3.8 Flash':          '$0.75/$3.75 (→$1.50/$7.50 Jan 2027)',
+  'Gemini 3.8 Flash Cyber':    'Internal/restricted',
   'Gemini 3.7 Flash':          '$0.75/$3.75',
   'Gemini 3.6 Flash':          '$0.75/$3.75',
   'Gemini 3.5 Flash-Lite':     '$0.30/$2.50',
@@ -2166,6 +2215,7 @@ const MODEL_PRICES = {
   'Grok 2.5':                  'Open-weight',
   // Meta
   'Muse Glimmer':              'Open-weight',
+  'Muse Spark 1.3':            '$1.25/$4.25',
   'Muse Spark 1.2':            '$1.25/$4.25',
   'Muse Spark 1.1':            'N/A (API preview)',
   'Muse Spark':                'N/A (API preview)',
@@ -2486,22 +2536,26 @@ function renderPriority() {
            {lab:'HHRI-AI',      model:'Not yet run',      score:null},
          ]},
         {name:'Terminal-Bench 4.0', sota:'60.9%', headroom:39, priority:'high', hhri:false,
-         why:'New, harder revision of the terminal-CLI agentic benchmark, introduced in the Fable 5.1 & Mythos 5.1 system card (Sep 1, 2026). Scores not comparable to Terminal-Bench 2.1 (Fable 5 scored 42.0% on this revision vs 88.0% on 2.1). Only Anthropic and OpenAI have reported scores so far — other labs pending.',
+         why:'New, harder revision of the terminal-CLI agentic benchmark, introduced in the Fable 5.1 & Mythos 5.1 system card (Sep 1, 2026). Scores not comparable to Terminal-Bench 2.1 (Fable 5 scored 42.0% on this revision vs 88.0% on 2.1). Claude Mythos 5.1 (restricted access) leads overall; GPT-6 Astra (Sep 3, 2026) now leads among generally-available models at 57.7%, ahead of Fable 5.1.',
          url:'https://www.anthropic.com/claude-fable-and-mythos-5-1',
          labs:[
            {lab:'Anthropic',    model:'Claude Mythos 5.1 (Closed)', score:'60.9%'},
+           {lab:'OpenAI',       model:'GPT-6 Astra (Closed)',       score:'57.7%'},
            {lab:'Anthropic',    model:'Claude Fable 5.1 (Closed)',  score:'55.8%'},
            {lab:'Anthropic',    model:'Claude Opus 5 (Closed)',     score:'52.3%'},
            {lab:'OpenAI',       model:'GPT-5.6 Sol (Closed)',       score:'37.3%'},
            {lab:'Anthropic',    model:'Claude Fable 5 (Closed)',    score:'42.0%'},
+           {lab:'Google DeepMind', model:'Gemini 3.8 Flash (Closed)', score:'19.1%'},
            {lab:'HHRI-AI',      model:'Not yet run',      score:null},
          ]},
-        {name:'Terminal-Bench 2.1', sota:'89.1%', headroom:11, priority:'monitor', hhri:false,
-         why:'Superseded by Terminal-Bench 4.0 (harder revision, introduced with Fable 5.1 on Sep 1, 2026). Kept here for cross-lab comparability until other labs publish 4.0 scores. Source: CodingFleet Jul 25 2026. Claude Opus 5 led at 89.1%. Warning: scores not directly comparable across harnesses (2.1 harder than 2.0).',
+        {name:'Terminal-Bench 2.1', sota:'89.4%', headroom:11, priority:'monitor', hhri:false,
+         why:'Superseded by Terminal-Bench 4.0 (harder revision, introduced with Fable 5.1 on Sep 1, 2026). Kept here for cross-lab comparability until other labs publish 4.0 scores. Google\'s Gemini 3.8 Flash launch materials (Sep 2, 2026) now claim the top spot at 89.4% (one independent tracker reports 90.8%), edging past Claude Opus 5\'s 89.1%. Warning: scores not directly comparable across harnesses (2.1 harder than 2.0).',
          url:'https://codingfleet.com/blog/terminal-bench-leaderboard-2026/',
          labs:[
+           {lab:'Google DeepMind', model:'Gemini 3.8 Flash (Closed)', score:'89.4%'},
            {lab:'Anthropic',    model:'Claude Opus 5 (Closed)',    score:'89.1%'},
            {lab:'OpenAI',       model:'GPT-5.6 Sol (Closed)',      score:'88.8%'},
+           {lab:'Meta',         model:'Muse Spark 1.3 (Closed)',  score:'88.8%'},
            {lab:'Moonshot AI',  model:'Kimi K3 (Open weight)',     score:'88.3%'},
            {lab:'Anthropic',    model:'Claude Fable 5 (Closed)',   score:'88.0%'},
            {lab:'DeepSeek',     model:'V4 Pro (V4-Pro-0813 refresh, Open weight)', score:'87.9%'},
@@ -2575,18 +2629,22 @@ function renderPriority() {
          ]},
 
         {name:'FrontierMath', sota:'89% (T1-3)', headroom:11, priority:'critical', hhri:false,
-         why:'Fable 5 leads Tier 4 at 87.8%. Tests genuine math not memorization. Only OpenAI + Anthropic publish.',
+         why:'GPT-6 Astra now leads the hardest Tier 4 v2 subset at 97.6% (Sep 3, 2026, new SOTA), well past Fable 5.1/Fable 5\'s 87.8% and Opus 5\'s 73.2%. T1-3 leader unchanged. Tests genuine math not memorization. Only OpenAI + Anthropic publish.',
          url:'https://epoch.ai/frontiermath',
          labs:[
+           {lab:'OpenAI',       model:'GPT-6 Astra (Closed)',      score:'97.6% (T4 v2)'},
            {lab:'OpenAI',       model:'GPT-5.6 Sol (Closed)',      score:'89% (T1-3)'},
-           {lab:'Anthropic',    model:'Claude Fable 5 (Closed)',   score:'87% (T1-3) · 87.8% (T4)'},
+           {lab:'Anthropic',    model:'Claude Fable 5 / Fable 5.1 (Closed)', score:'87% (T1-3) · 87.8% (T4)'},
+           {lab:'Anthropic',    model:'Claude Opus 5 (Closed)',    score:'73.2% (T4 v2)'},
            {lab:'Google DeepMind', model:'Gemini 3.1 Pro (Closed)', score:'59.6%'},
            {lab:'HHRI-AI',      model:'Not yet run',      score:null},
          ]},
-        {name:'GPQA Diamond', sota:'94.6%', headroom:5, priority:'monitor', hhri:false,
-         why:'Near ceiling. Top labs cluster 90-94%. Transitioning to HLE. Still useful for sub-frontier.',
+        {name:'GPQA Diamond', sota:'96.0%', headroom:4, priority:'monitor', hhri:false,
+         why:'Near ceiling. GPT-6 Astra now leads at 96.0% (Sep 3, 2026), ahead of Gemini 3.8 Flash 95.3% and GPT-5.6 Sol 94.6%. Top labs cluster 90-96%. Transitioning to HLE. Still useful for sub-frontier.',
          url:'https://paperswithcode.com/sota/science-question-answering-on-gpqa',
          labs:[
+           {lab:'OpenAI',       model:'GPT-6 Astra (Closed)',      score:'96.0%'},
+           {lab:'Google DeepMind', model:'Gemini 3.8 Flash (Closed)', score:'95.3%'},
            {lab:'OpenAI',       model:'GPT-5.6 Sol (Closed)',      score:'94.6%'},
            {lab:'Google DeepMind', model:'Gemini 3.1 Pro (Closed)', score:'94.3%'},
            {lab:'Anthropic',    model:'Claude Fable 5 (Closed)',   score:'92.6%'},
@@ -2615,9 +2673,10 @@ function renderPriority() {
            {lab:'HHRI-AI',         model:'Not yet run',              score:null},
          ]},
         {name:'ARC-AGI-3', sota:'30.2%', headroom:70, priority:'watch', hhri:false,
-         why:'NEW — interactive reasoning (not static puzzles). Agents must explore novel environments and adapt on the fly. Humans score 100%; best frontier LLM scored <1% at launch (Mar 2026). Claude Opus 5 now leads at 30.2% (Jul 24 2026). Source: BenchmarkList Jul 24 2026 / llm-stats.com. Official: arcprize.org/arc-agi/3',
+         why:'NEW — interactive reasoning (not static puzzles). Agents must explore novel environments and adapt on the fly. Humans score 100%; best frontier LLM scored <1% at launch (Mar 2026). Claude Opus 5 leads verified scores at 30.2% (Jul 24 2026). GPT-6 Astra (Sep 3, 2026) self-reports 99.9%, but that figure is scaffold-dependent — the same model scores 62.7% under a stricter harness — so it is NOT promoted to sota pending independent verification. Source: BenchmarkList Jul 24 2026 / llm-stats.com. Official: arcprize.org/arc-agi/3',
          url:'https://arcprize.org/arc-agi/3',
          labs:[
+           {lab:'OpenAI',          model:'GPT-6 Astra (Closed, self-reported)', score:'99.9% (62.7% under stricter harness — scaffold-dependent, unverified)'},
            {lab:'Anthropic',       model:'Claude Opus 5 (Closed)',   score:'30.2%'},
            {lab:'Anthropic',       model:'Claude Fable 5 (Closed)',  score:'16.6%'},
            {lab:'OpenAI',          model:'GPT-5.6 Sol (Closed)',     score:'7.78%'},
@@ -2695,13 +2754,15 @@ function renderPriority() {
            {lab:'HHRI-AI',      model:'Not yet run',      score:null},
          ]},
         {name:'OSWorld 2.0', sota:'78.8%', headroom:21, priority:'high', hhri:false,
-         why:'ByteDance Seed 2.1 Pro leads the 2.0 variant at 78.8%. OSWorld-Verified (harder, separate scale): Qwen3.8-Max now leads at 86.1%, ahead of Fable 5 at 85.0%. 21% headroom on 2.0. Note: Claude Fable 5.1 reported 41.7% under a new "strict" grading methodology (Sep 1, 2026 system card) — not comparable to the scores below until other labs re-report under strict grading.',
+         why:'ByteDance Seed 2.1 Pro leads the 2.0 variant at 78.8%, ahead of GPT-6 Astra\'s 72.6% (Sep 3, 2026). OSWorld-Verified (harder, separate scale): Qwen3.8-Max now leads at 86.1%, ahead of Fable 5 at 85.0%. 21% headroom on 2.0. Note: Claude Fable 5.1 reported 41.7% under a new "strict" grading methodology (Sep 1, 2026 system card) — not comparable to the scores below until other labs re-report under strict grading.',
          url:'https://llm-stats.com/benchmarks/osworld',
          labs:[
            {lab:'Alibaba',      model:'Qwen3.8-Max (Closed)',      score:'86.1% (Verified)'},
            {lab:'Anthropic',    model:'Claude Fable 5 (Closed)',   score:'85.0% (Verified)'},
            {lab:'ByteDance',    model:'Seed 2.1 Pro (Closed)',     score:'78.8%'},
+           {lab:'OpenAI',       model:'GPT-6 Astra (Closed)',      score:'72.6%'},
            {lab:'OpenAI',       model:'GPT-5.6 Sol (Closed)',      score:'62.6%'},
+           {lab:'Google DeepMind', model:'Gemini 3.8 Flash (Closed)', score:'59.0%'},
            {lab:'Anthropic',    model:'Claude Opus 4.8 (Closed)',  score:'54.8%'},
            {lab:'HHRI-AI',      model:'Not yet run',      score:null},
          ]},
@@ -2974,6 +3035,14 @@ const LAB_DATA = [
   {
     lab:'OpenAI', color:'#10a37f', emoji:'🟢',
     entries:[
+      {bench:'FrontierMath',             domain:'stem',        model:'gpt-6-astra',          api:'gpt-6-astra',                   score:'97.6%', notes:'Tier 4 v2 — new SOTA, Sep 3 2026 launch materials, self-reported'},
+      {bench:'ARC-AGI-3',                domain:'stem',        model:'gpt-6-astra',          api:'gpt-6-astra',                   score:'99.9%', notes:'Scaffold-dependent — 62.7% under stricter harness, unverified'},
+      {bench:'ExploitBench',             domain:'safety',      model:'gpt-6-astra',          api:'gpt-6-astra',                   score:'100%',  notes:'Self-reported; first model to trigger OpenAI Critical cyber threshold'},
+      {bench:'GPQA Diamond',             domain:'stem',        model:'gpt-6-astra',          api:'gpt-6-astra',                   score:'96.0%', notes:'New SOTA, Sep 3 2026'},
+      {bench:'Terminal-Bench 4.0',       domain:'agentic',     model:'gpt-6-astra',          api:'gpt-6-astra',                   score:'57.7%', notes:'Leads among generally-available models'},
+      {bench:'OSWorld 2.0',              domain:'computer',    model:'gpt-6-astra',          api:'gpt-6-astra',                   score:'72.6%', notes:''},
+      {bench:'HLE',                      domain:'stem',        model:'gpt-6-astra',          api:'gpt-6-astra',                   score:'57.2%', notes:'With tools; trails Claude Fable 5.1 (65.0%) and Opus 5 (63.6%)'},
+      {bench:'DeepSWE v1.1',             domain:'agentic',     model:'gpt-6-astra',          api:'gpt-6-astra',                   score:'74.1%', notes:'OpenAI launch page comparison'},
       {bench:'SWE-Bench Verified',       domain:'agentic',     model:'gpt-5.5',              api:'gpt-5-5',                       score:'N/A',   notes:'Scale SEAL scaffold'},
       {bench:'SWE-Bench Verified',       domain:'agentic',     model:'gpt-5.4',              api:'gpt-5-4',                       score:'~72%',  notes:'Scale SEAL scaffold'},
       {bench:'SWE-Bench Pro',            domain:'agentic',     model:'gpt-5.5',              api:'gpt-5-5',                       score:'58.6%', notes:'Scale SEAL scaffold'},
@@ -3006,6 +3075,11 @@ const LAB_DATA = [
   {
     lab:'Google DeepMind', color:'#4285f4', emoji:'🔵',
     entries:[
+      {bench:'Terminal-Bench 2.1',       domain:'agentic',     model:'gemini-3.8-flash',     api:'gemini-3.8-flash',              score:'89.4%', notes:'New leader, Sep 2 2026; one tracker reports 90.8%'},
+      {bench:'Terminal-Bench 4.0',       domain:'agentic',     model:'gemini-3.8-flash',     api:'gemini-3.8-flash',              score:'19.1%', notes:''},
+      {bench:'DeepSWE v1.1',             domain:'agentic',     model:'gemini-3.8-flash',     api:'gemini-3.8-flash',              score:'71.0%', notes:'Up from 65.3% on 3.7 Flash'},
+      {bench:'OSWorld 2.0',              domain:'computer',    model:'gemini-3.8-flash',     api:'gemini-3.8-flash',              score:'59.0%', notes:''},
+      {bench:'HLE',                      domain:'stem',        model:'gemini-3.8-flash',     api:'gemini-3.8-flash',              score:'54.9%', notes:'HLE-Verified variant'},
       {bench:'SWE-Bench Verified',       domain:'agentic',     model:'gemini-3.1-pro',       api:'gemini-3.1-pro-preview',        score:'80.6%', notes:'Google model card'},
       {bench:'SWE-Bench Pro',            domain:'agentic',     model:'gemini-3.1-pro',       api:'gemini-3.1-pro-preview',        score:'54.2%', notes:''},
       {bench:'Terminal-Bench 2.0',       domain:'agentic',     model:'gemini-3.1-pro',       api:'gemini-3.1-pro-preview',        score:'68.5%', notes:'Google model card'},
@@ -3109,6 +3183,7 @@ const LAB_DATA = [
   {
     lab:'Alibaba', color:'#ff6900', emoji:'🟠',
     entries:[
+      {bench:'DeepSWE v1.1',             domain:'agentic',     model:'qwen3.8-max-0902',     api:'qwen3.8-max-0902',              score:'69.3%', notes:'Up from 56.6% pre-refresh; vs Opus 5\'s 73.6%'},
       {bench:'AIME 2025',                domain:'stem',        model:'qwen3-235b-a22b',      api:'Qwen/Qwen3-235B-A22B',          score:'85.7%', notes:'Thinking mode, open-weight MoE'},
       {bench:'GPQA Diamond',             domain:'stem',        model:'qwen3-235b-a22b',      api:'Qwen/Qwen3-235B-A22B',          score:'71.7%', notes:''},
       {bench:'GPQA Diamond',             domain:'stem',        model:'qwen3.7-max',          api:'qwen-qwq-plus',                  score:'92.4%', notes:'$1.25/M input'},
@@ -3125,6 +3200,8 @@ const LAB_DATA = [
   {
     lab:'Meta', color:'#0866ff', emoji:'🔹',
     entries:[
+      {bench:'DeepSWE v1.1',             domain:'agentic',     model:'muse-spark-1.3',       api:'muse-spark-1.3',                score:'75.4%', notes:'New leader, gated max tier; ahead of Opus 5\'s 74.0%'},
+      {bench:'Terminal-Bench 2.1',       domain:'agentic',     model:'muse-spark-1.3',       api:'muse-spark-1.3',                score:'88.8%', notes:'Ties GPT-5.6 Sol'},
       {bench:'MMLU-Pro',                 domain:'knowledge',   model:'llama-4-maverick',     api:'meta-llama/Llama-4-Maverick-17B-128E-Instruct', score:'N/A', notes:'MAI-T1 Table 12, Apache 2.0'},
       {bench:'MMLU',                     domain:'knowledge',   model:'llama-4-maverick',     api:'meta-llama/Llama-4-Maverick-17B-128E-Instruct', score:'N/A', notes:''},
       {bench:'GPQA Diamond',             domain:'stem',        model:'llama-4-maverick',     api:'meta-llama/Llama-4-Maverick-17B-128E-Instruct', score:'N/A', notes:''},
