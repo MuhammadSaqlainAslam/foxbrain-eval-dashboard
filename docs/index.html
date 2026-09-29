@@ -743,7 +743,7 @@ tbody td { padding: 12px 16px; vertical-align: top; }
       <p class="hero-desc">Frontier Benchmark &amp; Model Intelligence — HHRI-AI Research<br><span style="font-size:12px;color:var(--text3)">A curated, up-to-date reference of benchmarks and frontier models used by leading AI labs. Use this to select evaluation targets for FoxBrain model assessments across 12 capability domains.</span></p>
       <div class="hero-updated">
         <span class="dot"></span>
-        Last updated: <span id="last-updated-date">September 29, 2026</span> &nbsp;&bull;&nbsp; Added Claude Opus 5.5 &amp; Sonnet 5.5, GPT-6 Sol &amp; Luna, Grok 4.7, Qwen3.8-Omni-Flash, GLM-5.3-FlashX — plus new lab Xiaomi (MiMo-V2.6) — three weeks of frontier launches (Sep 8–28)
+        Last updated: <span id="last-updated-date">September 29, 2026</span> &nbsp;&bull;&nbsp; Reorganized Priority View around 7 FoxBrain-usage domains (Coding, Reasoning &amp; Math, Knowledge &amp; Language, Data &amp; ML, Multimodal, Long Context, Agents &amp; Tool Use); added Claude Opus 5.5 &amp; Sonnet 5.5, GPT-6 Sol &amp; Luna, Grok 4.7, Qwen3.8-Omni-Flash, GLM-5.3-FlashX, new lab Xiaomi (MiMo-V2.6)
       </div>
     </div>
     <div class="hero-stats">
@@ -910,7 +910,7 @@ tbody td { padding: 12px 16px; vertical-align: top; }
 
 <div class="footer">
   <span>FoxBrain EvalHub &nbsp;&bull;&nbsp; HHRI-AI / Foxconn AI Research Center &nbsp;&bull;&nbsp; <a href="https://muhammadsaqlainaslam.github.io/foxbrain-eval-dashboard/">muhammadsaqlainaslam.github.io/foxbrain-eval-dashboard</a></span>
-  <span id="footer-updated">Updated September 29, 2026</span> &nbsp;&bull;&nbsp; 12 labs &nbsp;&bull;&nbsp; 116 models &nbsp;&bull;&nbsp; 87 benchmarks &nbsp;&bull;&nbsp; 49 sources
+  <span id="footer-updated">Updated September 29, 2026</span> &nbsp;&bull;&nbsp; 12 labs &nbsp;&bull;&nbsp; 116 models &nbsp;&bull;&nbsp; 98 benchmarks &nbsp;&bull;&nbsp; 49 sources
 </div>
 
 <script>
@@ -990,6 +990,7 @@ const BENCHMARKS = [
   {name:'Cybench',domain:'agentic',pri:'medium',metric:'accuracy',labs:['Microsoft','OpenAI'],desc:'CTF cybersecurity challenges requiring multi-step agentic reasoning.',tags:['cybersecurity','agentic']},
   {name:'BigCodeBench',domain:'agentic',pri:'high',metric:'pass@1',labs:['Google','Anthropic','OpenAI','Alibaba'],desc:'Practical software engineering challenges. 1140 tasks requiring diverse library calls and real-world APIs. Harder than HumanEval — tests function composition across real Python libraries. Complete and Instruct variants.',tags:['coding','real-world','library-calls'],isNew:false},
   {name:'LiveCodeBench Pro',domain:'stem',pri:'high',metric:'pass@1',labs:['Google','Anthropic','OpenAI','DeepSeek'],desc:'Harder competitive programming variant of LiveCodeBench. Drawn from contest problems rated 2000+ on Codeforces/AtCoder. Contamination-resistant via continuous updates.',tags:['coding','competitive','contamination-safe'],isNew:true},
+  {name:'SciCode',domain:'stem',pri:'medium',metric:'pass@1',labs:[],desc:'Research-coding benchmark curated by working scientists — implements real subproblems from research code in physics, biology, chemistry, and math. Source: scicode-bench.github.io (EMNLP 2024/2025). Directly relevant to FoxBrain research-coding/scientific-reasoning use cases. No frontier-model scores verified in this registry yet.',tags:['coding','science','research'],isNew:true},
   {name:'SWE-Bench Multilingual',domain:'agentic',pri:'high',metric:'resolve_rate',labs:['Moonshot AI','Microsoft','OpenAI'],desc:'SWE-Bench extended beyond Python to Java, TypeScript, Go, Rust, C++. Kimi K2.6: 76.7%. Tests real-world agentic coding across diverse language codebases.',tags:['agentic','multilingual','multi-language'],isNew:true},
   {name:'Devbench',domain:'agentic',pri:'medium',metric:'success_rate',labs:['Microsoft','OpenAI'],desc:'End-to-end software development lifecycle benchmark. Covers requirements → design → code → test → documentation. Tests sustained multi-step agentic development.',tags:['agentic','end-to-end','software-lifecycle']},
   {name:'Multi-SWE-Bench',domain:'agentic',pri:'medium',metric:'resolve_rate',labs:['Anthropic','OpenAI','Google'],desc:'Multi-file, multi-PR software engineering tasks. Harder than SWE-Bench Verified — requires coordinating changes across multiple files and pull requests simultaneously.',tags:['agentic','multi-file','multi-PR'],isNew:true},
@@ -1002,6 +1003,8 @@ const BENCHMARKS = [
   {name:'DROP',domain:'knowledge',pri:'medium',metric:'f1',labs:['OpenAI','Anthropic','Google','Meta'],desc:'Discrete reasoning over paragraphs — numerical ops, counting, sorting.',tags:['reading-comprehension','numerical']},
   {name:'GDPval-AA',domain:'knowledge',pri:'medium',metric:'score',labs:['Anthropic','OpenAI','Google'],desc:'Advanced analytical knowledge work. v1 scores: Fable 5: 1932, Opus 4.8: 1890, GPT-5.5: 1769. Later revisions use an Elo-like scale under similar methodology: v2 (Fable 5.1: 1853), v2.1 (Claude Opus 5.5: 1,846, Claude Sonnet 5.5: 1,844) — versions likely comparable to each other but track carefully against v1.',tags:['knowledge-work','analytical'],isNew:true},
   {name:'TMMLU+',domain:'chinese',pri:'high',metric:'accuracy',labs:['HHRI-AI'],desc:'Traditional Chinese + Taiwan-specific knowledge benchmark. HHRI-AI flagship eval. Unique differentiation — no Western frontier lab benchmarks against this.',tags:['chinese','taiwan','multilingual']},
+  {name:'TW-LegalBench',domain:'chinese',pri:'high',metric:'accuracy',labs:['HHRI-AI'],desc:'16K+ MCQs across 18 Taiwan legal domains, plus 117 essays and 14K judgment-prediction items. Source: arXiv:2606.18699 (Jun 2026). Zero Western frontier-lab competition — an HHRI-AI opportunity benchmark, not yet run by any lab tracked here.',tags:['chinese','taiwan','legal'],isNew:true},
+  {name:'DRCD',domain:'chinese',pri:'medium',metric:'f1',labs:[],desc:'Delta Reading Comprehension Dataset — Traditional Chinese span-extraction reading comprehension, modeled on SQuAD. Source: arXiv:1806.00920 (Delta Research Center). No frontier-model scores verified in this registry yet; added as a candidate Traditional Chinese benchmark pending evaluation.',tags:['chinese','taiwan','reading-comprehension'],isNew:true},
   {name:'BigBenchHard',domain:'knowledge',pri:'medium',metric:'accuracy',labs:['Google','Anthropic','OpenAI'],desc:'Hard BIG-Bench subset requiring multi-step reasoning. Already in your eval suite.',tags:['reasoning','multi-step']},
   {name:'IFEval',domain:'instruction',pri:'high',metric:'accuracy',labs:['OpenAI','Anthropic','Google','Microsoft','Meta','DeepSeek','Alibaba'],desc:'Verifiable instruction constraints — word count, format, structure. Most universally reported IF benchmark.',tags:['verifiable','format-constraint']},
   {name:'Multi-IF',domain:'instruction',pri:'high',metric:'accuracy',labs:['Microsoft','OpenAI'],desc:'Multiple simultaneous constraints. Harder than IFEval. Used in MAI-T1.',tags:['multi-constraint']},
@@ -1030,14 +1033,22 @@ const BENCHMARKS = [
   {name:'JAMA Clinical',domain:'health',pri:'medium',metric:'accuracy',labs:['Microsoft','OpenAI'],desc:'Real clinical cases from JAMA. Multi-step diagnostic reasoning.',tags:['clinical-reasoning']},
   {name:'ClinConsensus',domain:'chinese',pri:'medium',metric:'accuracy',labs:['Google','Anthropic','DeepSeek','Alibaba','xAI'],desc:'Chinese medical benchmark evaluated by 22 frontier models. Directly relevant to HHRI.',tags:['medical','chinese','22-models']},
   {name:'BFCL v3',domain:'tool',pri:'high',metric:'accuracy',labs:['OpenAI','Anthropic','Google','Meta','Mistral','Cohere'],desc:'Berkeley Function Calling Leaderboard v3. Multi-turn + parallel tool calls. The standard tool-calling leaderboard.',tags:['function-call','JSON','multi-turn']},
+  {name:'BFCL v4',domain:'tool',pri:'high',metric:'accuracy',labs:['OpenAI','Anthropic','Google'],desc:'Latest Berkeley Function Calling Leaderboard revision. No frontier-model scores verified in this registry yet — tracked as a placeholder pending official v4 data; use BFCL v3 for current comparisons.',tags:['function-call','JSON','multi-turn'],isNew:true},
   {name:'tau-bench tool',domain:'tool',pri:'high',metric:'success_rate',labs:['Anthropic','OpenAI'],desc:'Tool-use sub-dimension of tau-bench. Planning + tool selection in realistic environments.',tags:['multi-step','real-APIs']},
   {name:'API-Bank',domain:'tool',pri:'medium',metric:'accuracy',labs:['Microsoft','OpenAI'],desc:'Multi-step real API tool use. Chained function calls across 73 real-world APIs.',tags:['real-world-APIs']},
   {name:'MMMLU',domain:'multimodal',pri:'high',metric:'accuracy',labs:['Google','HHRI-AI','Alibaba','Meta'],desc:'Multilingual MMLU across 14 languages. Gemma 4 31B: 88.4%, Gemma 4 26B MoE: 86.3%. Critical for HHRI-AI multilingual evaluation including Traditional Chinese.',tags:['multilingual','knowledge','14-languages'],isNew:true},
   {name:'MMMU Pro',domain:'multimodal',pri:'medium',metric:'accuracy',labs:['Google','OpenAI','Anthropic'],desc:'Multimodal understanding benchmark. Tests visual reasoning with text. Used in Gemma 4 model card. Requires image+text input.',tags:['multimodal','visual-reasoning','university-level'],isNew:true},
   {name:'MathVista',domain:'multimodal',pri:'medium',metric:'accuracy',labs:['Google','OpenAI','Anthropic','Meta'],desc:'Mathematical reasoning with visual context. Charts, geometry, scientific figures. Gemma 4 family strong here due to encoder-free multimodal design.',tags:['math','multimodal','visual'],isNew:true},
+  {name:'CharXiv',domain:'multimodal',pri:'medium',metric:'accuracy',labs:[],desc:'Chart-understanding benchmark using real, unedited charts from arXiv papers (descriptive + reasoning question sets) — tests genuine chart reading vs. the more templated MathVista chart subset. Source: arXiv:2406.18521 (Princeton NLP). No frontier-model scores verified in this registry yet.',tags:['multimodal','charts','visual-reasoning'],isNew:true},
+  {name:'DocVQA',domain:'multimodal',pri:'medium',metric:'anls',labs:[],desc:'Document visual question answering on real scanned/rendered documents (forms, invoices, reports) — a long-standing standard for document-image understanding. Source: docvqa.org (Mathew et al., WACV 2021). No frontier-model scores verified in this registry yet.',tags:['multimodal','document','ocr'],isNew:true},
+  {name:'MathVision',domain:'multimodal',pri:'medium',metric:'accuracy',labs:[],desc:'Competition-sourced math problems requiring visual diagram comprehension (geometry, graphs) — harder and less saturated than MathVista. Source: arXiv:2402.14804. No frontier-model scores verified in this registry yet.',tags:['math','multimodal','visual','competition'],isNew:true},
   {name:'Arena ELO (LMArena)',domain:'instruction',pri:'medium',metric:'elo_score',labs:['Google','Anthropic','OpenAI','Meta','DeepSeek'],desc:'Human preference win-rate on LMArena chatbot leaderboard. Gemma 4 31B: 1452 ELO (best open-weight text model). Reflects real-world user preference, not just academic benchmarks.',tags:['human-preference','chat','elo'],isNew:true},
   {name:'Agents Last Exam', domain:'agentic', pri:'critical', metric:'score', labs:['OpenAI','Anthropic','Google'], desc:'Long-horizon agentic workflows across 55 professional fields. GPT-5.6 Sol: 53.6 (new SOTA), Claude Fable 5: 40.5, Opus 4.8: 45.2, Gemini 3.1 Pro: 32.1. Tests real professional workflows not academic tasks.', tags:['agentic','long-horizon','professional'],isNew:true},
   {name:'DeepSWE v1.1', domain:'agentic', pri:'high', metric:'resolve_rate', labs:['OpenAI','Anthropic','Google','Meta','Alibaba','Xiaomi'], desc:'Long-horizon engineering in real codebases. Muse Spark 1.3 still leads at 75.4% (Sep 2, 2026, gated max tier), ahead of Xiaomi MiMo-V2.6-Pro 71.9% (Sep 22, 2026, new best open-weight), GPT-6 Astra 74.1%, GPT-5.6 Sol 72.7%, GPT-6 Sol 68.8% (max effort, ~80% cheaper than Fable 5), GPT-6 Luna 66.6%, Terra 69.6%, Qwen3.8-Max-0902 69.3%, Claude Fable 5 69.7%, Gemini 3.1 Pro 11.8%. Tests complex multi-file engineering tasks beyond standard SWE-Bench.', tags:['agentic','real-world','long-horizon'],isNew:true},
+  {name:'MLE-Bench', domain:'agentic', pri:'high', metric:'accuracy', labs:['OpenAI','Google'], desc:'OpenAI\'s machine-learning-engineering agent benchmark — Kaggle-style ML competitions (data prep, modeling, submission). Source: arXiv:2410.07095, github.com/openai/mle-bench. Gemini 3.6 Flash: 63.9% (from its Google model card). Directly relevant to FoxBrain data-science/ML-workflow use cases.', tags:['data-science','ml-engineering','agentic'],isNew:true},
+  {name:'DSBench', domain:'agentic', pri:'high', metric:'accuracy', labs:[], desc:'"How Far Are Data Science Agents from Becoming Data Science Experts?" — realistic data analysis and modeling tasks (data cleaning, transformation, analysis) drawn from Kaggle/ModelOff. Source: arXiv:2409.07703. Also referred to as "DS-Bench" in some trackers — treated as the same benchmark here to avoid duplication. No frontier-model scores verified in this registry yet.', tags:['data-science','data-analysis','agentic'],isNew:true},
+  {name:'SpreadsheetBench', domain:'agentic', pri:'medium', metric:'accuracy', labs:[], desc:'Real-world spreadsheet manipulation tasks sourced from actual Excel forums — more realistic than prior spreadsheet benchmarks. Source: arXiv:2406.14991 (NeurIPS 2024). Requested as "SpreadsheetBench V2" — only the original SpreadsheetBench could be verified; a V2 revision was not confirmed. No frontier-model scores verified in this registry yet.', tags:['data-science','spreadsheet','office-work'],isNew:true},
+  {name:'APEX-Agents', domain:'agentic', pri:'medium', metric:'score', labs:['xAI'], desc:'xAI agentic-work benchmark, introduced alongside Grok 4.6 (Aug 12, 2026): "+10.4 APEX-Agents vs. Grok 4.5." Only the delta vs. Grok 4.5 has been published on primary trackers — absolute scores are not yet available.', tags:['agentic','xai'],isNew:true},
   {name:'OSWorld 2.0', domain:'computer', pri:'high', metric:'success_rate', labs:['OpenAI','Anthropic','Google'], desc:'Computer use on real desktop tasks (updated 2026). GPT-6 Astra still leads at 72.6% (Sep 3, 2026), ahead of GPT-6 Sol 60.5% (xhigh effort, Sep 22, 2026, ~80% cheaper per task than Opus 5), GPT-5.6 Sol 62.6%, Opus 4.8 54.8%, GPT-5.5 47.5%. Note: Priority View tracks a separate ByteDance Seed 2.1 Pro figure (78.8%) from a different source not reconciled with this list. Replaces original OSWorld with verified methodology. Claude Fable 5.1 reported 41.7% under a new stricter grading protocol (Sep 1, 2026) — not directly comparable to the scores above.', tags:['computer-use','desktop','verified'],isNew:true},
   {name:'BenchCAD', domain:'computer', pri:'medium', metric:'accuracy', labs:['OpenAI','Anthropic'], desc:'CAD design and visual reasoning benchmark. GPT-5.6 Sol: 70.6% (83.4% with python tool), Claude Mythos 5: 38.4%, GPT-5.5: 44.4%. Tests design judgment and spatial reasoning.', tags:['computer-use','design','visual'],isNew:true},
   {name:'SEC-Bench Pro', domain:'safety', pri:'medium', metric:'success_rate', labs:['OpenAI'], desc:'Proof-of-concept generation on complex software vulnerabilities. GPT-5.6 Sol: 71.2% (74.3% ultra), GPT-5.5: 45.8%. Tests cybersecurity capability — dual-use benchmark.', tags:['cybersecurity','exploit','dual-use'],isNew:true},
@@ -2635,14 +2646,14 @@ function renderPriority() {
     'Xiaomi':          {logo:gfav('xiaomi.com'),         emoji:'🟧', color:'#ff6900'},
     'HHRI-AI':         {logo:'https://www.foxconn.com/favicon.ico', emoji:'🦊', color:'#7c3aed'},
   };
-  const PC = {critical:'#dc2626',high:'#d97706',monitor:'#4f8ef7',retired:'#6b7280'};
-  const PL = {critical:'🔴 Critical',high:'🟡 High',monitor:'🔵 Monitor',retired:'⚫ Retiring'};
+  const PC = {critical:'#dc2626',high:'#d97706',medium:'#a855f7',monitor:'#4f8ef7',watch:'#22c55e',retired:'#6b7280'};
+  const PL = {critical:'🔴 Critical',high:'🟡 High',medium:'🟣 Medium',monitor:'🔵 Monitor',watch:'🟢 Watch',retired:'⚫ Retiring'};
 
   const DOMAINS = [
     { id:'all', label:'All' },
     {
-      id:'coding', icon:'⚡', label:'Coding & Agents', color:'#2dd4a0',
-      desc:'Where all top labs are racing — autonomous coding agents are the #1 investment in 2026.',
+      id:'coding', icon:'⚡', label:'Coding', color:'#2dd4a0',
+      desc:'Where all top labs are racing — autonomous coding agents are the #1 investment in 2026. Pure code-generation/software-engineering benchmarks; agentic web/tool/computer-use work now lives under Agents & Tool Use.',
       benches:[
         {name:'SWE-Bench Pro', sota:'80.3%', headroom:20, priority:'critical', hhri:false,
          why:'Primary agentic coding signal for 2026-2027. Source: BenchLM Jul 19 2026 (51 models). Note: OpenAI Jul 2026 audit found ~30% of public tasks broken — use as directional signal. ',
@@ -2670,6 +2681,13 @@ function renderPriority() {
            {lab:'OpenAI',       model:'GPT-5.6 Sol (Closed)',      score:'96.2%'},
            {lab:'DeepSeek',     model:'V4 Pro (Open weight)',           score:'80.6%'},
            {lab:'HHRI-AI',      model:'Not yet run',      score:null},
+         ]},
+        {name:'SWE-Bench Multilingual', sota:'76.7%', headroom:23, priority:'high', hhri:false,
+         why:'SWE-Bench extended beyond Python to Java, TypeScript, Go, Rust, C++ — tests agentic coding across diverse language codebases, not just Python. Only one verified score currently tracked.',
+         url:'https://llm-stats.com/benchmarks/swe-bench-verified',
+         labs:[
+           {lab:'Moonshot AI', model:'Kimi K2.6 (Open weight)', score:'76.7%'},
+           {lab:'HHRI-AI',     model:'Not yet run',             score:null},
          ]},
         {name:'Terminal-Bench 4.0', sota:'70.6%', headroom:29, priority:'critical', hhri:false,
          why:'New, harder revision of the terminal-CLI agentic benchmark, introduced in the Fable 5.1 & Mythos 5.1 system card (Sep 1, 2026). Scores not comparable to Terminal-Bench 2.1 (Fable 5 scored 42.0% on this revision vs 88.0% on 2.1). Surprise new leader: Claude Sonnet 5.5 at 70.6% (Sep 28, 2026) — a Sonnet-tier model beating every Opus/Mythos-tier model tracked, including its own sibling Opus 5.5 (66.4%). Grok 4.7\'s self-reported 38.0% drops to just 26% under independent Artificial Analysis testing — the largest vendor-vs-independent gap seen on this benchmark.',
@@ -2703,6 +2721,46 @@ function renderPriority() {
            {lab:'Anthropic',    model:'Claude Opus 4.8 (Closed)', score:'78.9%'},
            {lab:'HHRI-AI',      model:'Not yet run',      score:null},
          ]},
+        {name:'LiveCodeBench v6', sota:'87.7%', headroom:12, priority:'high', hhri:false,
+         why:'Monthly-updated competitive programming — contamination-resistant since problems postdate model training cutoffs. Only one verified score tracked so far.',
+         url:'https://livecodebench.github.io/',
+         labs:[
+           {lab:'Microsoft', model:'MAI-Thinking-1 (Closed)', score:'87.7%'},
+           {lab:'HHRI-AI',   model:'Not yet run',             score:null},
+         ]},
+        {name:'LiveCodeBench Pro', sota:'N/A', headroom:null, priority:'medium', hhri:false,
+         why:'Harder competitive-programming variant drawn from Codeforces/AtCoder problems rated 2000+. No verified frontier scores in this registry yet.',
+         url:'https://livecodebench.github.io/',
+         labs:[
+           {lab:'HHRI-AI', model:'Not yet run', score:null},
+         ]},
+        {name:'BigCodeBench', sota:'N/A', headroom:null, priority:'medium', hhri:false,
+         why:'1,140 practical software-engineering tasks requiring diverse real-world library calls — harder than HumanEval. No verified frontier scores in this registry yet.',
+         url:'https://bigcode-bench.github.io/',
+         labs:[
+           {lab:'HHRI-AI', model:'Not yet run', score:null},
+         ]},
+        {name:'SciCode', sota:'N/A', headroom:null, priority:'medium', hhri:false,
+         why:'Research-coding benchmark curated by working scientists — real subproblems from physics/biology/chemistry/math research code. Directly relevant to FoxBrain research-coding use cases. No verified frontier scores in this registry yet.',
+         url:'https://scicode-bench.github.io/',
+         labs:[
+           {lab:'HHRI-AI', model:'Not yet run', score:null},
+         ]},
+        {name:'DeepSWE v1.1', sota:'75.4%', headroom:25, priority:'high', hhri:false,
+         why:'Long-horizon multi-file engineering in real codebases, harder than standard SWE-Bench. Muse Spark 1.3 leads (75.4%, gated max tier), ahead of Xiaomi MiMo-V2.6-Pro (71.9%, best open-weight) and GPT-6 Astra (74.1%).',
+         url:'https://deepswe.ai/',
+         labs:[
+           {lab:'Meta',            model:'Muse Spark 1.3 (Closed, gated max tier)', score:'75.4%'},
+           {lab:'Xiaomi',          model:'MiMo-V2.6-Pro (Open weight)',             score:'71.9%'},
+           {lab:'OpenAI',          model:'GPT-6 Astra (Closed)',                    score:'74.1%'},
+           {lab:'OpenAI',          model:'GPT-5.6 Sol (Closed)',                    score:'72.7%'},
+           {lab:'OpenAI',          model:'GPT-6 Sol (Closed, max effort)',          score:'68.8%'},
+           {lab:'OpenAI',          model:'GPT-6 Luna (Closed)',                     score:'66.6%'},
+           {lab:'Alibaba',         model:'Qwen3.8-Max-0902 (Closed)',               score:'69.3%'},
+           {lab:'Anthropic',       model:'Claude Fable 5 (Closed)',                 score:'69.7%'},
+           {lab:'Google DeepMind', model:'Gemini 3.1 Pro (Closed)',                 score:'11.8%'},
+           {lab:'HHRI-AI',         model:'Not yet run',                             score:null},
+         ]},
         {name:'FrontierCode Diamond', sota:'46.3%', headroom:54, priority:'critical', hhri:false,
          why:'Production-grade coding — mergeability, correctness, scope, style. Source: llm-stats.com Jun 2026. Only 1 model tracked so far on this exact "Diamond" cut. Official: cognition.ai/benchmarks. Note: newer coverage (Opus 5.5 54.4%, Sonnet 5.5, GPT-6 Sol) references "FrontierCode v1.1 Main" — likely a related but distinct subset of Cognition\'s suite; not merged into this leaderboard until the naming is confirmed equivalent.',
          url:'https://llm-stats.com/benchmarks/frontiercode',
@@ -2710,32 +2768,6 @@ function renderPriority() {
            {lab:'Anthropic', model:'Claude Fable 5 (Closed)', score:'46.3%'},
            {lab:'Anthropic', model:'Claude Opus 5.5 (Closed, v1.1 Main — not directly comparable)', score:'54.4%'},
            {lab:'HHRI-AI',   model:'Not yet run',             score:null},
-         ]},
-        {name:'tau3-bench', sota:'97.7%', headroom:null, priority:'critical', hhri:true,
-         why:'HHRI-AI running. Qwen3.5-9B: retail 73.7%, airline 74.0%. Grok 4.3 leads frontier at 97.7%.',
-         url:'https://github.com/sierra-research/tau-bench',
-         labs:[
-           {lab:'xAI',          model:'Grok 4.3 (Closed)',         score:'97.7%'},
-           {lab:'HHRI-AI',      model:'Qwen3.5-9B (Open weight)',       score:'retail 73.7% · airline 74.0%'},
-         ]},
-        {name:'Agents Last Exam', sota:'53.6', headroom:46, priority:'critical', hhri:false,
-         why:'OpenAI flagship Jul 2026. Long-horizon professional workflows. 46% headroom — very early.',
-         url:'https://agents-last-exam.org/',
-         labs:[
-           {lab:'OpenAI',       model:'GPT-5.6 Sol (Closed)',      score:'53.6'},
-           {lab:'Anthropic',    model:'Claude Opus 4.8 (Closed)',  score:'45.2'},
-           {lab:'Google DeepMind', model:'Gemini 3.1 Pro (Closed)', score:'32.1'},
-           {lab:'HHRI-AI',      model:'Not yet run',      score:null},
-         ]},
-        {name:'BrowseComp', sota:'91.2%', headroom:9, priority:'high', hhri:false,
-         why:'Agentic web search. Kimi K3 leads (91.2% w/compaction), OpenAI Sol at 90.4% single-agent (92.2% in 4-agent "ultra" mode — not directly comparable, different harness). Near ceiling for frontier.',
-         url:'https://openai.com/browsecomp',
-         labs:[
-           {lab:'Moonshot AI',  model:'Kimi K3 (Open weight)',          score:'91.2%'},
-           {lab:'OpenAI',       model:'GPT-5.6 Sol (Closed)',      score:'90.4%'},
-           {lab:'Anthropic',    model:'Claude Fable 5 (Closed)',   score:'85.9%'},
-           {lab:'Google DeepMind', model:'Gemini 3.1 Pro (Closed)', score:'85.9%'},
-           {lab:'HHRI-AI',      model:'Not yet run',      score:null},
          ]},
       ]
     },
@@ -2827,11 +2859,42 @@ function renderPriority() {
            {lab:'Google DeepMind', model:'Gemini 3.1 Pro (Closed)',  score:'0.43%'},
            {lab:'HHRI-AI',         model:'Not yet run',              score:null},
          ]},
+        {name:'AIME 2025', sota:'~97%', headroom:3, priority:'high', hhri:false,
+         why:'30 AMC competition math problems — primary frontier math signal, though now saturating (94-97% at frontier). Grok 4 self-reported 91.7% at launch (Jul 2025); most current frontier labs report scores in the 94-97% band without full per-lab breakdowns published in the sources tracked here.',
+         url:'https://artificialanalysis.ai/evaluations/aime-2025',
+         labs:[
+           {lab:'xAI',     model:'Grok 4 (Closed)', score:'91.7%'},
+           {lab:'HHRI-AI', model:'Not yet run',      score:null},
+         ]},
+        {name:'AIME 2026', sota:'94.5%', headroom:6, priority:'high', hhri:false,
+         why:'2026 edition — contamination-safe replacement as AIME 2025 saturates. MAI-Thinking-1 currently the only verified score tracked.',
+         url:'https://artificialanalysis.ai/evaluations/aime-2026',
+         labs:[
+           {lab:'Microsoft', model:'MAI-Thinking-1 (Closed)', score:'94.5%'},
+           {lab:'HHRI-AI',   model:'Not yet run',             score:null},
+         ]},
+        {name:'MATH-500', sota:'99.0%', headroom:1, priority:'medium', hhri:false,
+         why:'500 Hendrycks MATH problems — standard across all frontier reports, largely saturated. Grok 4 self-reported 99.0% at launch (Jul 2025).',
+         url:'https://x.ai/blog/grok-4',
+         labs:[
+           {lab:'xAI',     model:'Grok 4 (Closed)', score:'99.0%'},
+           {lab:'HHRI-AI', model:'Not yet run',      score:null},
+         ]},
+        {name:'MMLU-Pro', sota:'91.5%', headroom:9, priority:'monitor', hhri:false,
+         why:'Harder MMLU (10-choice, 14 domains) — near ceiling for frontier models. Reclassified here from Knowledge & Language: it is primarily a reasoning/knowledge-application benchmark, not a language/localization one. Use MMMLU for multilingual signal instead.',
+         url:'https://paperswithcode.com/sota/multi-task-language-understanding-on-mmlu-1',
+         labs:[
+           {lab:'Anthropic',    model:'Claude Fable 5 (Closed)',   score:'91.5%'},
+           {lab:'Google DeepMind', model:'Gemini 3.1 Pro (Closed)', score:'91.0%'},
+           {lab:'xAI',          model:'Grok 4 (Closed)',           score:'86.6%'},
+           {lab:'DeepSeek',     model:'DeepSeek R1 (Open weight)',      score:'84.0%'},
+           {lab:'HHRI-AI',      model:'Not yet run',      score:null},
+         ]},
       ]
     },
     {
       id:'knowledge', icon:'📚', label:'Knowledge & Language', color:'#9c88ff',
-      desc:'HHRI-AI unique edge — Traditional Chinese benchmarks no Western lab covers.',
+      desc:'HHRI-AI unique edge — Traditional Chinese benchmarks no Western lab covers. MMLU-Pro moved to Reasoning & Math (Sep 2026 reorg) since it is a reasoning-application benchmark, not a language one.',
       benches:[
         {name:'TMMLU+', sota:'88.60 avg', headroom:null, priority:'critical', hhri:true,
          why:'66 subjects, 20K+ questions in Traditional Chinese. Source: ikala/tmmluplus on HuggingFace (0-shot direct). HHRI-AI FoxBrain_v1.2 scores 68.44 avg. No Western frontier lab runs this consistently.',
@@ -2867,24 +2930,82 @@ function renderPriority() {
          labs:[
            {lab:'HHRI-AI',      model:'FoxBrain family (Open weight)',  score:'Running ✓'},
          ]},
-        {name:'MMLU-Pro', sota:'91.5%', headroom:9, priority:'monitor', hhri:false,
-         why:'Near ceiling for frontier models. Use MMMLU for multilingual signal instead.',
-         url:'https://paperswithcode.com/sota/multi-task-language-understanding-on-mmlu-1',
+        {name:'GDPval-AA', sota:'1932', headroom:null, priority:'high', hhri:false,
+         why:'Advanced analytical knowledge work — directly relevant to FoxBrain research/analysis use cases. v1: Fable 5 leads at 1932. Later revisions (v2, v2.1) use a related Elo-like scale — track versions separately (v2: Fable 5.1 1853; v2.1: Opus 5.5 1846, Sonnet 5.5 1844).',
+         url:'https://llm-stats.com/benchmarks/gdpval',
          labs:[
-           {lab:'Anthropic',    model:'Claude Fable 5 (Closed)',   score:'91.5%'},
-           {lab:'Google DeepMind', model:'Gemini 3.1 Pro (Closed)', score:'91.0%'},
-           {lab:'xAI',          model:'Grok 4 (Closed)',           score:'86.6%'},
-           {lab:'DeepSeek',     model:'DeepSeek R1 (Open weight)',      score:'84.0%'},
-           {lab:'HHRI-AI',      model:'Not yet run',      score:null},
+           {lab:'Anthropic', model:'Claude Fable 5 (Closed)',    score:'1932 (v1)'},
+           {lab:'Anthropic', model:'Claude Opus 4.8 (Closed)',   score:'1890 (v1)'},
+           {lab:'OpenAI',    model:'GPT-5.5 (Closed)',           score:'1769 (v1)'},
+           {lab:'Anthropic', model:'Claude Fable 5.1 (Closed)',  score:'1853 (v2)'},
+           {lab:'Anthropic', model:'Claude Opus 5.5 (Closed)',   score:'1846 (v2.1)'},
+           {lab:'Anthropic', model:'Claude Sonnet 5.5 (Closed)', score:'1844 (v2.1)'},
+           {lab:'HHRI-AI',   model:'Not yet run',                score:null},
+         ]},
+        {name:'IFBench', sota:'81.3%', headroom:19, priority:'medium', hhri:false,
+         why:'Instruction-following benchmark used in the Artificial Analysis Intelligence Index — multi-constraint compliance. Only one verified score currently tracked.',
+         url:'https://artificialanalysis.ai/',
+         labs:[
+           {lab:'xAI',     model:'Grok 4.3 (Closed)', score:'81.3%'},
+           {lab:'HHRI-AI', model:'Not yet run',        score:null},
+         ]},
+        {name:'IFEval', sota:'N/A', headroom:null, priority:'high', hhri:false,
+         why:'Verifiable instruction constraints (word count, format, structure) — the most universally reported instruction-following benchmark. No per-lab scores verified in this registry yet, but its ubiquity makes it worth adding to the HHRI-AI eval suite.',
+         url:'https://arxiv.org/abs/2311.07911',
+         labs:[
+           {lab:'HHRI-AI', model:'Not yet run', score:null},
+         ]},
+        {name:'Multi-IF', sota:'N/A', headroom:null, priority:'medium', hhri:false,
+         why:'Multiple simultaneous instruction constraints — harder than IFEval, used in MAI-T1. No verified frontier scores in this registry yet.',
+         url:'https://arxiv.org/abs/2410.15553',
+         labs:[
+           {lab:'HHRI-AI', model:'Not yet run', score:null},
+         ]},
+        {name:'SimpleQA', sota:'N/A', headroom:null, priority:'medium', hhri:false,
+         why:'Unambiguous factual short-answer QA — tests factual precision without hallucination. No verified frontier scores in this registry yet.',
+         url:'https://openai.com/index/introducing-simpleqa/',
+         labs:[
+           {lab:'HHRI-AI', model:'Not yet run', score:null},
+         ]},
+        {name:'DRCD', sota:'N/A', headroom:null, priority:'medium', hhri:false,
+         why:'Traditional Chinese span-extraction reading comprehension (SQuAD-style), from Delta Research Center. Complements TMMLU+ with a reading-comprehension signal rather than multiple-choice knowledge. No verified frontier scores in this registry yet — an HHRI-AI opportunity benchmark.',
+         url:'https://arxiv.org/abs/1806.00920',
+         labs:[
+           {lab:'HHRI-AI', model:'Not yet run', score:null},
+         ]},
+      ]
+    },
+    {
+      id:'data', icon:'📊', label:'Data & ML', color:'#eab308',
+      desc:'New domain (Sep 2026 reorg) — data cleaning, transformation, analysis, and ML/data-science agent workflows, central to FoxBrain\'s practical daily usage.',
+      benches:[
+        {name:'MLE-Bench', sota:'63.9%', headroom:36, priority:'high', hhri:false,
+         why:'OpenAI\'s machine-learning-engineering agent benchmark — Kaggle-style ML competitions (data prep, modeling, submission). Only one verified score currently tracked.',
+         url:'https://github.com/openai/mle-bench',
+         labs:[
+           {lab:'Google DeepMind', model:'Gemini 3.6 Flash (Closed)', score:'63.9%'},
+           {lab:'HHRI-AI',         model:'Not yet run',               score:null},
+         ]},
+        {name:'DSBench', sota:'N/A', headroom:null, priority:'high', hhri:false,
+         why:'"How Far Are Data Science Agents from Becoming Data Science Experts?" — realistic data cleaning/transformation/analysis/modeling tasks from Kaggle/ModelOff. Also referred to as "DS-Bench" in some trackers — treated as the same benchmark to avoid duplication. No verified frontier scores in this registry yet.',
+         url:'https://arxiv.org/abs/2409.07703',
+         labs:[
+           {lab:'HHRI-AI', model:'Not yet run', score:null},
+         ]},
+        {name:'SpreadsheetBench', sota:'N/A', headroom:null, priority:'medium', hhri:false,
+         why:'Real-world spreadsheet manipulation tasks sourced from actual Excel forums. Requested as "SpreadsheetBench V2" — only the original SpreadsheetBench (NeurIPS 2024) could be verified; a V2 revision was not confirmed. No verified frontier scores in this registry yet.',
+         url:'https://arxiv.org/abs/2406.14991',
+         labs:[
+           {lab:'HHRI-AI', model:'Not yet run', score:null},
          ]},
       ]
     },
     {
       id:'multimodal', icon:'🖼', label:'Multimodal', color:'#f87171',
-      desc:'Vision + action becoming standard. 2026 is the year multimodal goes frontier.',
+      desc:'Vision + action becoming standard. 2026 is the year multimodal goes frontier. OSWorld 2.0/Verified moved to Agents & Tool Use (Sep 2026 reorg) — they measure computer-use agency, not visual perception per se.',
       benches:[
         {name:'MMMU-Pro', sota:'94%', headroom:6, priority:'high', hhri:false,
-         why:'GPT-5.4 Pro leads at 94%, Mythos 5 + Fable 5 at 92.7%. Top 3 within 1.3pt — approaching ceiling.',
+         why:'GPT-5.4 Pro leads at 94%, Mythos 5 + Fable 5 at 92.7%. Top 3 within 1.3pt — approaching ceiling. Note: registered in the Benchmark Registry tab as "MMMU Pro" (no hyphen) — same benchmark, naming inconsistency flagged for future cleanup.',
          url:'https://benchlm.ai/benchmarks/mmmuPro',
          labs:[
            {lab:'OpenAI',       model:'GPT-5.4 Pro (Closed)',      score:'94%'},
@@ -2892,20 +3013,6 @@ function renderPriority() {
            {lab:'Anthropic',    model:'Claude Fable 5 (Closed)',   score:'92.7%'},
            {lab:'Google DeepMind', model:'Gemini 3.5 Flash (Closed)', score:'83.6%'},
            {lab:'OpenAI',       model:'GPT-5.6 Sol (Closed)',      score:'83%'},
-           {lab:'HHRI-AI',      model:'Not yet run',      score:null},
-         ]},
-        {name:'OSWorld 2.0', sota:'78.8%', headroom:21, priority:'high', hhri:false,
-         why:'ByteDance Seed 2.1 Pro leads the 2.0 variant at 78.8%, ahead of GPT-6 Astra\'s 72.6% (Sep 3, 2026). OSWorld-Verified (harder, separate scale): Qwen3.8-Max now leads at 86.1%, ahead of Fable 5 at 85.0%. 21% headroom on 2.0. Note: Claude Fable 5.1 reported 41.7% under a new "strict" grading methodology (Sep 1, 2026 system card) — not comparable to the scores below until other labs re-report under strict grading.',
-         url:'https://llm-stats.com/benchmarks/osworld',
-         labs:[
-           {lab:'Alibaba',      model:'Qwen3.8-Max (Closed)',      score:'86.1% (Verified)'},
-           {lab:'Anthropic',    model:'Claude Fable 5 (Closed)',   score:'85.0% (Verified)'},
-           {lab:'ByteDance',    model:'Seed 2.1 Pro (Closed)',     score:'78.8%'},
-           {lab:'OpenAI',       model:'GPT-6 Astra (Closed)',      score:'72.6%'},
-           {lab:'OpenAI',       model:'GPT-6 Sol (Closed)',        score:'60.5% (xhigh)'},
-           {lab:'OpenAI',       model:'GPT-5.6 Sol (Closed)',      score:'62.6%'},
-           {lab:'Google DeepMind', model:'Gemini 3.8 Flash (Closed)', score:'59.0%'},
-           {lab:'Anthropic',    model:'Claude Opus 4.8 (Closed)',  score:'54.8%'},
            {lab:'HHRI-AI',      model:'Not yet run',      score:null},
          ]},
         {name:'MathVista', sota:'86.8%', headroom:13, priority:'high', hhri:true,
@@ -2917,6 +3024,24 @@ function renderPriority() {
            {lab:'Google DeepMind', model:'Gemini 3.1 Pro (Closed)',   score:'N/A'},
            {lab:'HHRI-AI',      model:'gpt-oss-20b (Open weight)',          score:'4.3% ⚠'},
            {lab:'HHRI-AI',      model:'FoxBrain_v1.5 (Open weight)',        score:'3.7% ⚠'},
+         ]},
+        {name:'CharXiv', sota:'N/A', headroom:null, priority:'medium', hhri:false,
+         why:'Chart-understanding using real, unedited charts from arXiv papers — tests genuine chart reading beyond MathVista\'s more templated chart subset. No verified frontier scores in this registry yet.',
+         url:'https://charxiv.github.io/',
+         labs:[
+           {lab:'HHRI-AI', model:'Not yet run', score:null},
+         ]},
+        {name:'DocVQA', sota:'N/A', headroom:null, priority:'medium', hhri:false,
+         why:'Document visual question answering on real scanned/rendered documents (forms, invoices, reports) — a long-standing standard for document-image understanding. No verified frontier scores in this registry yet.',
+         url:'https://www.docvqa.org/',
+         labs:[
+           {lab:'HHRI-AI', model:'Not yet run', score:null},
+         ]},
+        {name:'MathVision', sota:'N/A', headroom:null, priority:'medium', hhri:false,
+         why:'Competition-sourced math problems requiring visual diagram comprehension — harder and less saturated than MathVista. No verified frontier scores in this registry yet.',
+         url:'https://mathvision-cuhk.github.io/',
+         labs:[
+           {lab:'HHRI-AI', model:'Not yet run', score:null},
          ]},
       ]
     },
@@ -2954,11 +3079,24 @@ function renderPriority() {
            {lab:'Meta',            model:'Gemini 2.0 Flash (eff. 4K) (Closed)', score:'89.4% base · 41.0% @32K'},
            {lab:'HHRI-AI',         model:'Not yet run',              score:null},
          ]},
+        {name:'RULER', sota:'N/A', headroom:null, priority:'high', hhri:false,
+         why:'NVIDIA\'s 13-task long-context suite (NIAH, multi-key retrieval, variable tracking, CWE, FWE, QA) evaluated at 4K-128K, aggregated as wAvg. No per-lab frontier scores verified in this registry yet.',
+         url:'https://github.com/NVIDIA/RULER',
+         labs:[
+           {lab:'NVIDIA',  model:'Llama-3.1-Nemotron-70B-Instruct (Open weight)', score:'N/A'},
+           {lab:'HHRI-AI', model:'Not yet run',                                    score:null},
+         ]},
+        {name:'LongBench v2', sota:'N/A', headroom:null, priority:'medium', hhri:false,
+         why:'Real-world long-document tasks — multi-doc QA, summarization. No frontier scores verified in this registry yet.',
+         url:'https://longbench2.github.io/',
+         labs:[
+           {lab:'HHRI-AI', model:'Not yet run', score:null},
+         ]},
       ]
     },
     {
-      id:'tool', icon:'🔧', label:'Tool Use & Agents', color:'#f59e0b',
-      desc:'Anthropic leads with MCP. All top labs investing heavily - tool use bridges reasoning and real-world agentic deployment.',
+      id:'tool', icon:'🔧', label:'Agents & Tool Use', color:'#f59e0b',
+      desc:'Anthropic leads with MCP. All top labs investing heavily — tool use bridges reasoning and real-world agentic deployment. Consolidated (Sep 2026 reorg) with the agentic/computer-use benchmarks formerly split across Coding & Agents and Multimodal.',
       benches:[
         {name:'MCP Atlas', sota:'61.7%', headroom:38, priority:'critical', hhri:false,
          why:'Tool orchestration via Model Context Protocol. Anthropic leads (61.7%) over OpenAI (58.0%) and Google (48.8%). Directly relevant for HHRI-AI eval pipeline.',
@@ -2980,21 +3118,68 @@ function renderPriority() {
            {lab:'Google DeepMind', model:'Gemini 3.1 Pro (Closed)',            score:'48.8%'},
            {lab:'HHRI-AI',         model:'Not yet run',               score:null},
          ]},
-        {name:'tau3-bench', sota:'97.7%', headroom:null, priority:'critical', hhri:true,
-         why:'HHRI-AI running. Fundamentally a tool-use benchmark - agents call retail/airline APIs. Qwen3.5-9B: retail 73.7%, airline 74.0%. Gap vs Grok 4.3 (97.7%) = ~24pp.',
+        {name:'tau2-bench', sota:'97.7%', headroom:null, priority:'critical', hhri:true,
+         why:'DEDUPLICATED (Sep 2026 reorg): this domain previously carried two copies of an entry labeled "tau3-bench" (in both Coding & Agents and Tool Use & Agents) with scores identical to tau2-bench\'s own verified Grok 4.3 figure (97.7%, same sierra-research/tau-bench source) — almost certainly a naming slip for tau2-bench rather than a real third-generation benchmark, since no independent "tau3-bench" has been verified anywhere else in this registry. Merged into this single tau2-bench entry pending confirmation. Flag for review: the HHRI-AI retail+airline dual-domain score below actually matches the ORIGINAL tau-bench\'s scope (retail+airline) rather than tau2-bench\'s documented retail-only scope — kept as-is rather than discarded, but the domain mismatch is unresolved.',
          url:'https://github.com/sierra-research/tau-bench',
          labs:[
            {lab:'xAI',     model:'Grok 4.3 (Closed)',   score:'97.7%'},
-           {lab:'HHRI-AI', model:'Qwen3.5-9B (Open weight)', score:'retail 73.7% · airline 74.0% ✓'},
+           {lab:'HHRI-AI', model:'Qwen3.5-9B (Open weight)', score:'retail 73.7% · airline 74.0% ✓ (scope matches tau-bench, not tau2-bench — see why)'},
+         ]},
+        {name:'Agents Last Exam', sota:'53.6', headroom:46, priority:'critical', hhri:false,
+         why:'OpenAI flagship Jul 2026. Long-horizon professional workflows across 55 fields. 46% headroom — very early. Moved here from Coding & Agents (Sep 2026 reorg) — it is agentic professional-workflow breadth, not a coding benchmark.',
+         url:'https://agents-last-exam.org/',
+         labs:[
+           {lab:'OpenAI',       model:'GPT-5.6 Sol (Closed)',      score:'53.6'},
+           {lab:'Anthropic',    model:'Claude Opus 4.8 (Closed)',  score:'45.2'},
+           {lab:'Google DeepMind', model:'Gemini 3.1 Pro (Closed)', score:'32.1'},
+           {lab:'HHRI-AI',      model:'Not yet run',      score:null},
+         ]},
+        {name:'BrowseComp', sota:'91.2%', headroom:9, priority:'high', hhri:false,
+         why:'Agentic web search — multi-step information retrieval requiring sustained browsing. Kimi K3 leads (91.2% w/compaction), OpenAI Sol at 90.4% single-agent (92.2% in 4-agent "ultra" mode — not directly comparable, different harness). Near ceiling for frontier. Moved here from Coding & Agents (Sep 2026 reorg) — it is a web-agent benchmark, not a coding one.',
+         url:'https://openai.com/browsecomp',
+         labs:[
+           {lab:'Moonshot AI',  model:'Kimi K3 (Open weight)',          score:'91.2%'},
+           {lab:'OpenAI',       model:'GPT-5.6 Sol (Closed)',      score:'90.4%'},
+           {lab:'Anthropic',    model:'Claude Fable 5 (Closed)',   score:'85.9%'},
+           {lab:'Google DeepMind', model:'Gemini 3.1 Pro (Closed)', score:'85.9%'},
+           {lab:'HHRI-AI',      model:'Not yet run',      score:null},
+         ]},
+        {name:'OSWorld 2.0', sota:'78.8%', headroom:21, priority:'high', hhri:false,
+         why:'Computer-use agent benchmark on real desktop tasks. Moved here from Multimodal (Sep 2026 reorg) — it measures agentic task completion, not visual perception. ByteDance Seed 2.1 Pro leads at 78.8%, ahead of GPT-6 Astra\'s 72.6% (Sep 3, 2026). "(Verified)"-scale scores previously mixed into this entry were split out into the separate OSWorld-Verified entry below — see that entry for Qwen3.8-Max/Fable 5\'s Verified-scale figures. Claude Fable 5.1 reported 41.7% under a new "strict" grading methodology (Sep 1, 2026 system card) — not comparable to the scores below until other labs re-report under strict grading.',
+         url:'https://llm-stats.com/benchmarks/osworld',
+         labs:[
+           {lab:'ByteDance',    model:'Seed 2.1 Pro (Closed)',     score:'78.8%'},
+           {lab:'OpenAI',       model:'GPT-6 Astra (Closed)',      score:'72.6%'},
+           {lab:'OpenAI',       model:'GPT-6 Sol (Closed)',        score:'60.5% (xhigh)'},
+           {lab:'OpenAI',       model:'GPT-5.6 Sol (Closed)',      score:'62.6%'},
+           {lab:'Google DeepMind', model:'Gemini 3.8 Flash (Closed)', score:'59.0%'},
+           {lab:'Anthropic',    model:'Claude Opus 4.8 (Closed)',  score:'54.8%'},
+           {lab:'HHRI-AI',      model:'Not yet run',      score:null},
+         ]},
+        {name:'OSWorld-Verified', sota:'86.1%', headroom:14, priority:'high', hhri:false,
+         why:'Harder, separately-scaled variant of OSWorld — split out (Sep 2026 reorg) from the OSWorld 2.0 entry above, where these "(Verified)"-tagged scores had been mixed in with the 2.0-scale scores. Qwen3.8-Max leads at 86.1%, ahead of Fable 5 at 85.0%. Not directly comparable to OSWorld 2.0 scores.',
+         url:'https://llm-stats.com/benchmarks/osworld',
+         labs:[
+           {lab:'Alibaba',      model:'Qwen3.8-Max (Closed)',      score:'86.1%'},
+           {lab:'Anthropic',    model:'Claude Fable 5 (Closed)',   score:'85.0%'},
+           {lab:'Anthropic',    model:'Claude Sonnet 4.6 (Closed)', score:'78.5% (corrected methodology)'},
+           {lab:'HHRI-AI',      model:'Not yet run',      score:null},
          ]},
         {name:'BFCL v4', sota:'N/A', headroom:null, priority:'high', hhri:false,
-         why:'Berkeley Function Calling Leaderboard - multi-turn parallel tool calls. Standard adopted by all top labs. Consider adding to HHRI-AI suite.',
+         why:'Berkeley Function Calling Leaderboard - multi-turn parallel tool calls. Standard adopted by all top labs. Consider adding to HHRI-AI suite. No verified v4 scores yet — see BFCL v3 in the Benchmark Registry for current comparisons.',
          url:'https://gorilla.cs.berkeley.edu/leaderboard.html',
          labs:[
            {lab:'Anthropic',       model:'Claude Fable 5 (Closed)', score:'N/A'},
            {lab:'OpenAI',          model:'GPT-5.6 Sol (Closed)',    score:'N/A'},
            {lab:'Google DeepMind', model:'Gemini 3.1 Pro (Closed)', score:'N/A'},
            {lab:'HHRI-AI',         model:'Not yet run',    score:null},
+         ]},
+        {name:'APEX-Agents', sota:'N/A', headroom:null, priority:'medium', hhri:false,
+         why:'xAI agentic-work benchmark, introduced alongside Grok 4.6 (Aug 12, 2026): "+10.4 APEX-Agents vs. Grok 4.5." Only the delta has been published — absolute scores are not yet available from primary trackers.',
+         url:'https://x.ai/news/grok-4-6',
+         labs:[
+           {lab:'xAI',     model:'Grok 4.6 (Closed)', score:'+10.4 vs Grok 4.5 (delta only, absolute score unpublished)'},
+           {lab:'HHRI-AI', model:'Not yet run',        score:null},
          ]},
       ]
     }
@@ -3468,6 +3653,17 @@ const BENCHMARK_LINKS = {
   'MedQA (USMLE)':            'https://paperswithcode.com/sota/question-answering-on-medqa-usmle',
   'MMMLU':                    'https://huggingface.co/datasets/openai/MMMLU',
   'BigBenchHard':             'https://github.com/suzgunmirac/BIG-Bench-Hard',
+  'TW-LegalBench':            'https://benchmarklist.com/benchmarks/tw_legalbench_measuring_taiwanese_legal_understanding/',
+  'DRCD':                     'https://arxiv.org/abs/1806.00920',
+  'MLE-Bench':                'https://github.com/openai/mle-bench',
+  'DSBench':                  'https://arxiv.org/abs/2409.07703',
+  'SpreadsheetBench':         'https://arxiv.org/abs/2406.14991',
+  'APEX-Agents':              'https://x.ai/news/grok-4-6',
+  'SciCode':                  'https://scicode-bench.github.io/',
+  'CharXiv':                  'https://charxiv.github.io/',
+  'DocVQA':                   'https://www.docvqa.org/',
+  'MathVision':               'https://mathvision-cuhk.github.io/',
+  'BFCL v4':                  'https://gorilla.cs.berkeley.edu/leaderboard.html',
 };
 
 const LAB_SOURCE_LINKS = {

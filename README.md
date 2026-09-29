@@ -15,22 +15,22 @@
 
 The dashboard has 7 tabs: **Benchmark Registry**, **Priority View**, **Models**, **Coding**, **By Lab**, **By Benchmark**, and **Sources**. The Benchmark Registry, Models, and Coding tabs each include a live search box (with a clear/"✕" button) for filtering by name, org, or description.
 
-### 📊 Benchmark Registry tab — 87 benchmarks across 12 domains
+### 📊 Benchmark Registry tab — 98 benchmarks across 12 domains
 
 | Domain | Key benchmarks |
 |---|---|
-| STEM Reasoning | AIME 2025/2026, HLE, MATH-500, GPQA Diamond, FrontierMath, ARC-AGI-1/2/3, LiveCodeBench v6/Pro, OlympiadBench, HumanEval+, MBPP+, ProgramBench |
-| Agentic Coding | SWE-Bench Verified/Pro/Multilingual, Multi-SWE-Bench, FrontierCode Diamond, Terminal-Bench 2.1/4.0, Terminal-Bench-Science 0.1, Aider Polyglot, CursorBench 3.1/4.0, τ-bench, τ²-bench, Cybench, BigCodeBench, DevBench, VIBE-Pro, Agents Last Exam, DeepSWE v1.1 |
+| STEM Reasoning | AIME 2025/2026, HLE, MATH-500, GPQA Diamond, FrontierMath, ARC-AGI-1/2/3, LiveCodeBench v6/Pro, OlympiadBench, HumanEval+, MBPP+, ProgramBench, SciCode |
+| Agentic Coding | SWE-Bench Verified/Pro/Multilingual, Multi-SWE-Bench, FrontierCode Diamond, Terminal-Bench 2.1/4.0, Terminal-Bench-Science 0.1, Aider Polyglot, CursorBench 3.1/4.0, τ-bench, τ²-bench, Cybench, BigCodeBench, DevBench, VIBE-Pro, Agents Last Exam, DeepSWE v1.1, MLE-Bench, DSBench, SpreadsheetBench, APEX-Agents |
 | Computer Use | BrowseComp, OSWorld-Verified, OSWorld 2.0, BenchCAD |
 | Knowledge & Language | MMLU-Pro, MMLU, SimpleQA, FRAMES, DROP, GDPval-AA, BigBenchHard |
 | Instruction | IFEval, Multi-IF, IFBench, AlpacaEval 2.0, MT-Bench, Arena ELO (LMArena) |
-| Multimodal | MMMLU, MMMU Pro, MathVista |
+| Multimodal | MMMLU, MMMU Pro, MathVista, CharXiv, DocVQA, MathVision |
 | Long Context | MRCR v2/v1, RULER, LOFT, LongBench v2, NoLiMa, InfiniteBench, LV-Eval, GraphWalks BFS |
-| Tool Use | BFCL v3, τ-bench tool, API-Bank, AutomationBench, MCP Atlas, Toolathlon |
+| Tool Use | BFCL v3/v4, τ-bench tool, API-Bank, AutomationBench, MCP Atlas, Toolathlon |
 | Safety & Cyber | WildGuard, HarmBench, ExploitBench, StrongREJECT, XSTest, SEC-Bench Pro, ExploitGym |
 | Health & Science | MedQA (USMLE), HealthBench Professional, JAMA Clinical, GeneBench Pro, LifeSciBench |
 | Honesty | SycophancyEval, TruthfulQA |
-| Chinese/HHRI-AI | TMMLU+, AIEC, MedBench, ClinConsensus |
+| Chinese/HHRI-AI | TMMLU+, AIEC, MedBench, ClinConsensus, TW-LegalBench, DRCD |
 
 Each benchmark shows: domain, priority, primary metric, which labs use it, description, and a **Verify scores ↗** link to the authoritative leaderboard.
 
@@ -38,7 +38,7 @@ Each benchmark shows: domain, priority, primary metric, which labs use it, descr
 
 ### 🔴 Priority View tab
 
-A per-domain, per-lab breakdown of the highest-priority benchmarks (Tier 1 — Critical, Tier 2 — High, Tier 3 — Medium, Tier 4 — Low, and a Watch List), showing each lab's best reported score, headroom to close, and source attribution — used to decide what FoxBrain should be evaluated against next.
+A curated FoxBrain evaluation roadmap — reorganized (Sep 2026) around 7 domains matched to HHRI-AI's actual usage rather than generic lab categories: **⚡ Coding, 🧠 Reasoning & Math, 📚 Knowledge & Language, 📊 Data & ML, 🖼 Multimodal, 📏 Long Context, 🔧 Agents & Tool Use**. Each domain shows a per-lab breakdown of its highest-priority benchmarks (Critical/High/Medium/Monitor/Watch), each lab's best reported score, headroom to close, and source attribution. This is a curated subset, not a replacement for the Benchmark Registry — every Priority View entry traces back to (and reuses) a full Benchmark Registry entry; nothing here is scored independently.
 
 ### 🤖 Models tab — 116 models across 16 labs
 
@@ -172,4 +172,4 @@ foxbrain-eval-dashboard/
 
 *Benchmark taxonomy based on MAI-Thinking-1 Technical Report §4.1 (Microsoft AI, June 2026) and additional sources listed in the Sources tab.*
 
-*Last updated: September 29, 2026 — three weeks of dense frontier activity (Sep 8–28), capped by near-simultaneous flagship drops from Anthropic and OpenAI. **Claude Opus 5.5** (Sep 22) and **Claude Sonnet 5.5** (Sep 28) — the new Claude 5.5 family — take over as new HLE leader (Opus 5.5: 67.7% w/ tools) and, more surprisingly, new Terminal-Bench 4.0 leader (Sonnet 5.5: 70.6%, beating every Opus/Mythos-tier model tracked including its own sibling Opus 5.5 at 66.4%). **GPT-6 Sol & Luna** (Sep 22) followed Astra with ~50% API price cuts and a new AutomationBench SOTA (Sol: 33.2%) and price floor (Luna: $0.10/$0.50). **Grok 4.7** (Sep 21) showed the largest vendor-vs-independent gap seen yet — self-reported Terminal-Bench 4.0 of 38.0% drops to 26% under independent Artificial Analysis testing. **Qwen3.8-Omni-Flash** (Sep 18, Alibaba) is the first omni-modal agentic Qwen model. **GLM-5.3-FlashX** (Sep 18, Zhipu) is a same-weights, faster-serving sibling of GLM-5.3-Flash. New lab: **Xiaomi** joined with the MiMo-V2.6 series (Sep 22) — MiMo-V2.6-Pro is the #1 open-weight model in the world on the independent Artificial Analysis Intelligence Index, ahead of Grok 4.6 and Gemini 3.8 Flash. Added CursorBench 4.0 as a new benchmark. Reconciled affected SOTA claims across the Benchmark Registry and Priority View tabs (Terminal-Bench 2.1/4.0, Terminal-Bench-Science 0.1, HLE, AutomationBench, GDPval-AA, DeepSWE v1.1, OSWorld 2.0, FrontierCode Diamond) rather than just adding model cards. Total: 87 benchmarks across 12 domains, 116 frontier models across 16 labs, 43 coding specialist models, 49 sources.*
+*Last updated: September 29, 2026 — reorganized the Priority View tab around 7 domains matched to actual FoxBrain/HHRI-AI usage (Coding, Reasoning & Math, Knowledge & Language, new Data & ML, Multimodal, Long Context, Agents & Tool Use), replacing the old lab-centric "Coding & Agents"/"Tool Use & Agents" split. Found and fixed a real duplicate in the process: "tau3-bench" had been entered twice (once per old domain) with a score identical to the existing tau2-bench entry — merged into one, flagged for review rather than silently deleted. Also split an OSWorld 2.0 entry that had OSWorld-Verified-scale scores mixed into it back into the two separate existing registry benchmarks. Added 11 new Benchmark Registry entries for genuinely-missing benchmarks relevant to FoxBrain's practical use cases (MLE-Bench, DSBench, SpreadsheetBench, SciCode, CharXiv, DocVQA, MathVision, TW-LegalBench, DRCD, APEX-Agents, BFCL v4) — metadata and citations only, no fabricated scores where none exist yet. No existing benchmark, score, or source was deleted. Total: 98 benchmarks across 12 domains, 116 frontier models across 16 labs, 43 coding specialist models, 49 sources.*
