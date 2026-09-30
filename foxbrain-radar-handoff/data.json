@@ -1,0 +1,379 @@
+{
+  "domains": [
+    {
+      "label": "Reasoning\n& Math",
+      "color": "E85D4A",
+      "span": 1.8,
+      "benchmarks": [
+        {
+          "name": "HLE",
+          "ring": 1,
+          "done": true,
+          "idx": 1
+        },
+        {
+          "name": "FrontierMath",
+          "ring": 1,
+          "done": false,
+          "idx": 2
+        },
+        {
+          "name": "AIME 2025",
+          "ring": 2,
+          "done": false,
+          "idx": 3
+        },
+        {
+          "name": "AIME 2026",
+          "ring": 2,
+          "done": false,
+          "idx": 4
+        },
+        {
+          "name": "ARC-AGI-2",
+          "ring": 2,
+          "done": false,
+          "idx": 5
+        },
+        {
+          "name": "MATH-500",
+          "ring": 3,
+          "done": false,
+          "idx": 6
+        },
+        {
+          "name": "GPQA Diamond",
+          "ring": 4,
+          "done": false,
+          "idx": 7
+        },
+        {
+          "name": "MMLU-Pro",
+          "ring": 4,
+          "done": false,
+          "idx": 8
+        }
+      ]
+    },
+    {
+      "label": "Coding\n& SWE",
+      "color": "4A90D9",
+      "span": 1.8,
+      "benchmarks": [
+        {
+          "name": "SWE-Bench Pro",
+          "ring": 1,
+          "done": false,
+          "idx": 1
+        },
+        {
+          "name": "Terminal-Bench 4.0",
+          "ring": 1,
+          "done": false,
+          "idx": 2
+        },
+        {
+          "name": "FrontierCode Diamond",
+          "ring": 1,
+          "done": false,
+          "idx": 3
+        },
+        {
+          "name": "LiveCodeBench v6",
+          "ring": 2,
+          "done": false,
+          "idx": 4
+        },
+        {
+          "name": "DeepSWE v1.1",
+          "ring": 2,
+          "done": false,
+          "idx": 5
+        },
+        {
+          "name": "SWE-Bench Multilingual",
+          "ring": 2,
+          "done": false,
+          "idx": 6
+        },
+        {
+          "name": "BigCodeBench",
+          "ring": 3,
+          "done": false,
+          "idx": 7
+        },
+        {
+          "name": "SciCode",
+          "ring": 3,
+          "done": false,
+          "idx": 8
+        }
+      ]
+    },
+    {
+      "label": "Long\nContext",
+      "color": "7B68EE",
+      "span": 0.9,
+      "benchmarks": [
+        {
+          "name": "MRCR v2",
+          "ring": 1,
+          "done": true,
+          "idx": 1
+        },
+        {
+          "name": "GraphWalks BFS",
+          "ring": 2,
+          "done": false,
+          "idx": 2
+        },
+        {
+          "name": "NoLiMa",
+          "ring": 2,
+          "done": false,
+          "idx": 3
+        },
+        {
+          "name": "RULER",
+          "ring": 2,
+          "done": false,
+          "idx": 4
+        },
+        {
+          "name": "LongBench v2",
+          "ring": 3,
+          "done": false,
+          "idx": 5
+        }
+      ]
+    },
+    {
+      "label": "Multimodal",
+      "color": "F0A500",
+      "span": 1.8,
+      "benchmarks": [
+        {
+          "name": "MathVista",
+          "ring": 2,
+          "done": true,
+          "idx": 1
+        },
+        {
+          "name": "MMMU-Pro",
+          "ring": 2,
+          "done": false,
+          "idx": 2
+        },
+        {
+          "name": "CharXiv",
+          "ring": 3,
+          "done": false,
+          "idx": 3
+        },
+        {
+          "name": "CharXiv-R",
+          "ring": 3,
+          "done": false,
+          "idx": 4
+        },
+        {
+          "name": "DocVQA",
+          "ring": 3,
+          "done": false,
+          "idx": 5
+        },
+        {
+          "name": "MathVision",
+          "ring": 3,
+          "done": false,
+          "idx": 6
+        },
+        {
+          "name": "MMVU",
+          "ring": 3,
+          "done": false,
+          "idx": 7
+        },
+        {
+          "name": "Chartography",
+          "ring": 3,
+          "done": false,
+          "idx": 8
+        }
+      ]
+    },
+    {
+      "label": "Agents\n& Tools",
+      "color": "3DAA6E",
+      "span": 1.5,
+      "benchmarks": [
+        {
+          "name": "MCP Atlas",
+          "ring": 1,
+          "done": false,
+          "idx": 1
+        },
+        {
+          "name": "tau2-bench",
+          "ring": 1,
+          "done": true,
+          "idx": 2
+        },
+        {
+          "name": "Agents Last Exam",
+          "ring": 1,
+          "done": false,
+          "idx": 3
+        },
+        {
+          "name": "BrowseComp",
+          "ring": 2,
+          "done": false,
+          "idx": 4
+        },
+        {
+          "name": "OSWorld 2.0",
+          "ring": 2,
+          "done": false,
+          "idx": 5
+        },
+        {
+          "name": "BFCL v4",
+          "ring": 2,
+          "done": false,
+          "idx": 6
+        },
+        {
+          "name": "Toolathlon",
+          "ring": 2,
+          "done": false,
+          "idx": 7
+        },
+        {
+          "name": "APEX-Agents",
+          "ring": 3,
+          "done": false,
+          "idx": 8
+        }
+      ]
+    },
+    {
+      "label": "Knowledge\n& Language",
+      "color": "9B59B6",
+      "span": 1.2,
+      "benchmarks": [
+        {
+          "name": "TMMLU+",
+          "ring": 1,
+          "done": true,
+          "idx": 1
+        },
+        {
+          "name": "TW-LegalBench",
+          "ring": 1,
+          "done": false,
+          "idx": 2
+        },
+        {
+          "name": "AIEC",
+          "ring": 1,
+          "done": true,
+          "idx": 3
+        },
+        {
+          "name": "MMMLU",
+          "ring": 2,
+          "done": false,
+          "idx": 4
+        },
+        {
+          "name": "GDPval-AA",
+          "ring": 2,
+          "done": false,
+          "idx": 5
+        },
+        {
+          "name": "IFEval",
+          "ring": 2,
+          "done": false,
+          "idx": 6
+        },
+        {
+          "name": "SimpleQA",
+          "ring": 3,
+          "done": false,
+          "idx": 7
+        },
+        {
+          "name": "DRCD",
+          "ring": 3,
+          "done": false,
+          "idx": 8
+        }
+      ]
+    },
+    {
+      "label": "Data\n& ML",
+      "color": "E8A020",
+      "span": 0.8,
+      "benchmarks": [
+        {
+          "name": "MLE-Bench",
+          "ring": 2,
+          "done": false,
+          "idx": 1
+        },
+        {
+          "name": "DSBench",
+          "ring": 2,
+          "done": false,
+          "idx": 2
+        },
+        {
+          "name": "SpreadsheetBench",
+          "ring": 3,
+          "done": false,
+          "idx": 3
+        }
+      ]
+    }
+  ],
+  "rings": [
+    {
+      "id": 1,
+      "label": "CRITICAL",
+      "r": 0.82,
+      "bg": "CC3322",
+      "bgAlpha": 88,
+      "textColor": "FF9088",
+      "dotDefault": "FF9088"
+    },
+    {
+      "id": 2,
+      "label": "HIGH",
+      "r": 1.58,
+      "bg": "B8860B",
+      "bgAlpha": 78,
+      "textColor": "FFD060",
+      "dotDefault": "FFD060"
+    },
+    {
+      "id": 3,
+      "label": "MEDIUM",
+      "r": 2.3,
+      "bg": "1A3E5A",
+      "bgAlpha": 78,
+      "textColor": "70B8E8",
+      "dotDefault": "70B8E8"
+    },
+    {
+      "id": 4,
+      "label": "MONITOR",
+      "r": 3,
+      "bg": "111A28",
+      "bgAlpha": 65,
+      "textColor": "A8A8E8",
+      "dotDefault": "A8A8E8"
+    }
+  ]
+}
