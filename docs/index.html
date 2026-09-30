@@ -2648,6 +2648,8 @@ function renderPriority() {
     'Moonshot AI':     {logo:gfav('moonshot.cn'),      emoji:'🌙', color:'#a855f7'},
     'ByteDance':       {logo:gfav('seed.bytedance.com'), emoji:'🎵', color:'#000000'},
     'Xiaomi':          {logo:gfav('xiaomi.com'),         emoji:'🟧', color:'#ff6900'},
+    'Z.AI':            {logo:gfav('z.ai'),              emoji:'⚡', color:'#6366f1'},
+    'Other':           {logo:'',                         emoji:'•',  color:'#6b7280'},
     'HHRI-AI':         {logo:'https://www.foxconn.com/favicon.ico', emoji:'🦊', color:'#7c3aed'},
   };
   const PC = {critical:'#dc2626',high:'#d97706',medium:'#a855f7',monitor:'#4f8ef7',watch:'#22c55e',retired:'#6b7280'};
@@ -3049,6 +3051,18 @@ function renderPriority() {
            {lab:'Alibaba',    model:'Qwen3.8 Max (Closed)',      score:'95.2%'},
            {lab:'Moonshot AI', model:'Kimi K3 (Open weight)',    score:'94.3%'},
            {lab:'HHRI-AI',    model:'Not yet run',               score:null},
+         ]},
+        {name:'Chartography', sota:'90.2% (w/ tools)', headroom:10, priority:'medium', hhri:false,
+         why:'arXiv:2608.10677. 100 specialized professional chart types with expert-set answer tolerances. Two variants: no-tools (pure vision understanding, SOTA 64.4%) and with-tools (container + standard libs + image cropping, SOTA 90.2%). Anthropic models dominate — Claude Sonnet 5.5 leads with-tools at 90.2%, Opus 5.5 second at 89.0%; Claude Opus 5 drops sharply to 29.6% no-tools vs 83.0% with-tools, showing the benchmark rewards tool-augmented chart reasoning. GLM-5.3-Flash (Z.AI) 78.0% with-tools suggests non-Anthropic models can compete at the cost-optimized tier. BenchLM Sep 29 2026 — provider self-report only, not independently verified.',
+         url:'https://benchlm.ai/benchmarks/chartography',
+         labs:[
+           {lab:'Anthropic',  model:'Claude Sonnet 5.5 (Closed, w/ tools)',  score:'90.2%'},
+           {lab:'Anthropic',  model:'Claude Opus 5.5 (Closed, w/ tools)',    score:'89.0%'},
+           {lab:'Anthropic',  model:'Claude Opus 5 (Closed, w/ tools)',      score:'83.0%'},
+           {lab:'DeepSeek',   model:'DeepSeek V4.1 Flash (w/ tools)',        score:'78.9%'},
+           {lab:'Z.AI',       model:'GLM-5.3-Flash (w/ tools)',              score:'78.0%'},
+           {lab:'Anthropic',  model:'Claude Opus 5.5 (Closed, no tools)',    score:'64.4%'},
+           {lab:'HHRI-AI',    model:'Not yet run',                           score:null},
          ]},
       ]
     },
