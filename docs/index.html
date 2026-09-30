@@ -6,7 +6,7 @@
 <meta http-equiv="cache-control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="expires" content="0">
-<!-- build: 2026-09-30T09:20Z v104 -->
+<!-- build: 2026-09-30T10:45Z v105 -->
 <title>FoxBrain EvalHub — Frontier Benchmark &amp; Model Intelligence</title>
 <style>
 /* ── Theme variables ───────────────────────────────────────────── */
@@ -3033,10 +3033,23 @@ function renderPriority() {
            {lab:'HHRI-AI',      model:'FoxBrain_v1.5 (Open weight)',        score:'3.7% ⚠'},
          ]},
         {name:'CharXiv', sota:'93.5%', headroom:7, priority:'medium', hhri:false,
-         why:'Chart-understanding using real, unedited arXiv charts — tests genuine reading beyond MathVista\'s templated subset. Qwen3.8 Max and Claude Mythos 5 tied at 93.5% (BenchLM Sep 2026). Top 3 within 2.1pt — approaching saturation.',
+         why:'Chart-understanding using real, unedited arXiv charts — tests genuine reading beyond MathVista\'s templated subset. Qwen3.8 Max and Claude Mythos 5 tied at 93.5% (BenchLM Sep 2026). Top 3 within 2.1pt — approaching saturation. See also CharXiv-R (reasoning sub-task) below.',
          url:'https://charxiv.github.io/',
          labs:[
            {lab:'HHRI-AI', model:'Not yet run', score:null},
+         ]},
+        {name:'CharXiv-R', sota:'93.2%', headroom:7, priority:'medium', hhri:false,
+         why:'Reasoning sub-task of CharXiv (arXiv:2406.18521). 2,323 arXiv charts; reasoning questions require synthesizing trends, relationships, and data across chart components — harder than CharXiv-D (descriptive). Claude Mythos Preview leads at 93.2%, Kimi K3 OSS at 91.3%, Claude Opus 4.7 at 91.0%, Qwen3.8 Flash at 90.6%, Claude Opus 4.8 at 89.9%, GLM-5.3-Flash 89.4%, Gemini 3.7 Flash 88.7% (AnotherWrapper Sep 30 2026 — tracker data, provider self-reports not independently verified). No single authoritative leaderboard; charxiv.github.io is under reconstruction.',
+         url:'https://charxiv.github.io/',
+         labs:[
+           {lab:'Anthropic',  model:'Claude Mythos Preview (Closed)', score:'93.2%'},
+           {lab:'Moonshot AI', model:'Kimi K3 OSS (Open weight)',     score:'91.3%'},
+           {lab:'Anthropic',  model:'Claude Opus 4.7 (Closed)',       score:'91.0%'},
+           {lab:'Alibaba',    model:'Qwen3.8 Flash (Closed)',         score:'90.6%'},
+           {lab:'Anthropic',  model:'Claude Opus 4.8 (Closed)',       score:'89.9%'},
+           {lab:'Z.AI',       model:'GLM-5.3-Flash (Open weight)',    score:'89.4%'},
+           {lab:'Google DeepMind', model:'Gemini 3.7 Flash (Closed)', score:'88.7%'},
+           {lab:'HHRI-AI',    model:'Not yet run',                    score:null},
          ]},
         {name:'DocVQA', sota:'96.4%', headroom:4, priority:'medium', hhri:false,
          why:'Document visual question answering on real scanned/rendered documents (forms, invoices, reports). Qwen2.5 VL 72B Instruct leads at 96.4% (anotherwrapper.com Sep 2026). Near-ceiling — use mainly for cross-lab comparability.',
@@ -3051,6 +3064,15 @@ function renderPriority() {
            {lab:'Alibaba',    model:'Qwen3.8 Max (Closed)',      score:'95.2%'},
            {lab:'Moonshot AI', model:'Kimi K3 (Open weight)',    score:'94.3%'},
            {lab:'HHRI-AI',    model:'Not yet run',               score:null},
+         ]},
+        {name:'MMVU', sota:'82.4%', headroom:18, priority:'medium', hhri:false,
+         why:'Massive Multi-discipline Video Understanding (arXiv:2501.12380, CVPR 2025, Yale NLP). 3,000 expert-annotated questions across 27 disciplines from 1,529 videos — science, engineering, medicine, law, arts. Requires deep subject knowledge, not just visual recognition. Qwen3.8 Max leads at 82.4%, GLM-5.3-Flash 80.5%, Kimi K2.5 80.4% (BenchLM Sep 2026 — tracker data, provider self-reports, official leaderboard at mmvu-benchmark.github.io not yet populated for 2026 frontier models).',
+         url:'https://mmvu-benchmark.github.io/',
+         labs:[
+           {lab:'Alibaba',    model:'Qwen3.8 Max (Closed)',    score:'82.4%'},
+           {lab:'Z.AI',       model:'GLM-5.3-Flash (Open weight)', score:'80.5%'},
+           {lab:'Moonshot AI', model:'Kimi K2.5 (Closed)',     score:'80.4%'},
+           {lab:'HHRI-AI',    model:'Not yet run',             score:null},
          ]},
         {name:'Chartography', sota:'90.2% (w/ tools)', headroom:10, priority:'medium', hhri:false,
          why:'arXiv:2608.10677. 100 specialized professional chart types with expert-set answer tolerances. Two variants: no-tools (pure vision understanding, SOTA 64.4%) and with-tools (container + standard libs + image cropping, SOTA 90.2%). Anthropic models dominate — Claude Sonnet 5.5 leads with-tools at 90.2%, Opus 5.5 second at 89.0%; Claude Opus 5 drops sharply to 29.6% no-tools vs 83.0% with-tools, showing the benchmark rewards tool-augmented chart reasoning. GLM-5.3-Flash (Z.AI) 78.0% with-tools suggests non-Anthropic models can compete at the cost-optimized tier. BenchLM Sep 29 2026 — provider self-report only, not independently verified.',
